@@ -1,0 +1,22 @@
+body{
+    width: 100%;
+    background-color: var(--color-beige);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+}
+
+.form-control{
+    border-radius: 2rem;
+    border: 1px ;
+}
+
+.form-title{
+    font-size: 3rem;
+    font-weight: 900;
+    margin: 2rem;
+    text-align: center;
+}
+
+.form-help{
+    text-align: center;
+}
