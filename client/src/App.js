@@ -7,8 +7,7 @@ function App() {
 
   return (
     <div>
-      <RegisterForm></RegisterForm>
-      <LoginForm></LoginForm>
+      
     </div>
 
   );
