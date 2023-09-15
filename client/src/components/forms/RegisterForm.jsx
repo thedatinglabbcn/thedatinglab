@@ -35,7 +35,7 @@ const RegistrationForm = () => {
 
     return (
         <div className="container">
-          <h1 className='form-title'>Formulario de Registro</h1>
+          <h1 className='form-title'>¿Quieres conocer a tu pareja ideal?</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="nombreApellido" className="form-label">
@@ -228,10 +228,11 @@ const RegistrationForm = () => {
               />
               <label htmlFor="recibirInformacion">Quiero recibir información sobre noticias y eventos</label>
             </div>
-            <button type="submit" className="btn btn-primary">
+            
+            <button type="submit" className="button-send">
               Enviar
             </button>
-            <button type="button" className="btn btn-secondary">
+            <button type="button" className="button-cancel">
               Cancelar
             </button>
           </form>

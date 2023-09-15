@@ -59,7 +59,7 @@ const LoginForm = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="button-send">
             Ingresar
           </button>
         </form>

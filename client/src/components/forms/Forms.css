@@ -5,18 +5,42 @@ body{
     font-weight: 700;
 }
 
+.container{
+    width: 90%;
+}
 .form-control{
     border-radius: 2rem;
-    border: 1px ;
+    border: 2px var(--color-borders) solid;
 }
 
 .form-title{
-    font-size: 3rem;
+    font-size: 1.7rem;
     font-weight: 900;
-    margin: 2rem;
+    margin: 3rem;
     text-align: center;
 }
 
 .form-help{
     text-align: center;
+}
+
+.form-buttons{
+    gap: 3rem;
+}
+
+.button-send{
+    background-color: var(--color-submit);
+    color: white;
+    border-radius: 2rem;
+    border: none;
+    padding: 0.5rem 2rem;
+    margin-right: 1rem;
+}
+
+.button-cancel{
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 2rem;
+    border: none;
+    padding: 0.5rem 2rem;
 }
