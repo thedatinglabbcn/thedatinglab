@@ -6,7 +6,7 @@ import '../footer/Footer.css';
 
 function Footer() {
   return (
-    <div class="container">
+    <div class="container px-0 mx-0 w-100">
   <footer className="footer">
     <p class="text-center h2 py-1">The Dating Lab</p>
     <ul class="nav justify-content-center pb-3 mb-3">
