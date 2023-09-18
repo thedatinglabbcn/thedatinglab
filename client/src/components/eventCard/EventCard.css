@@ -1,0 +1,58 @@
+
+.event-card {
+    margin: 0 auto;
+    border: 2px solid var(--color-borders) !important;
+    background-color: var(--color-beige) !important;
+    width: 80% !important;
+    border-radius: 25px !important;
+    margin-top: 1rem;
+}
+.card-body {
+    font-family: Nunito, sans-serif;
+}
+
+.card-img-top {
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 25px !important;
+}
+
+.card-date {
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 13px;
+    padding-bottom: 10px;
+}
+
+.card-title {
+    font-weight: 900;
+    font-size: 2rem;
+}
+
+
+
+.card-text {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.card-location {
+    font-size: 14px;
+}
+
+.location-icon {
+    color: var(--color-primary);
+}
+
+.attend-button {
+    border-radius: 25px !important;
+    width: 80px;
+    height: 25px;
+    font-size: 13px !important;
+    font-weight: bolder !important;
+    color: var(--color-beige) !important;
+    background-color: var(--color-submit) !important;
+    border:none !important;
+    margin: 20px;
+    padding: 5px;
+}
