@@ -5,7 +5,7 @@
     background-color: var(--color-beige) !important;
     width: 80% !important;
     border-radius: 25px !important;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 .card-body {
     font-family: Nunito, sans-serif;
@@ -26,7 +26,7 @@
 
 .card-title {
     font-weight: 900;
-    font-size: 2rem;
+    font-size: rem;
 }
 
 
@@ -46,13 +46,11 @@
 
 .attend-button {
     border-radius: 25px !important;
-    width: 80px;
-    height: 25px;
-    font-size: 13px !important;
+    font-size: 1.3rem !important;
     font-weight: bolder !important;
     color: var(--color-beige) !important;
     background-color: var(--color-submit) !important;
     border:none !important;
-    margin: 20px;
-    padding: 5px;
+    margin: 2rem 0 2rem 0;
+    padding: 0.5rem 2rem;
 }
