@@ -15,14 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('lastname');
-            $table->integer('age');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-           // $table->string('image');
-           //$table->boolean('quieresHijos')->nullable();
-           // $table->boolean('fumas')->nullable();
-            $table->rememberToken();
+            $table->string('image')->nullable();
+            $table->boolean('acceptsTerms');
+            $table->boolean('wantsInfo')->default(false);
             $table->timestamps();
         });
     }

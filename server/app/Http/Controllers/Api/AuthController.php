@@ -18,37 +18,38 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'lastname' => 'required',
-            'age' => 'required',
-            'email' => 'required|email',
-            'password' =>'required',
-            //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            //'quieresHijos' => 'required',
-            //'fumas' => 'required',
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' =>'required|min:6',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'acceptsTerms' => 'required|boolean',
+            'wantsInfo' => 'required|boolean'
         ]);
         
-       
-        $user = new User();
-        $user->name = $request->name;
-        $user->lastname = $request->lastname;
-        $user->age = $request->age;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        //$user->quieresHijos = $request->input('quieresHijos');
-        //$user->fumas = $request->input('fumas');
-        $user->save();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/', $imageName);
+        } else {
+            $imageName = null;
+        }
 
-        // if ($request->hasFile('image')) {
-        //     $image = $request->file('image');
-        //     $imageName = time() . '.' . $image->getClientOriginalExtension();
-        //     $image->storeAs('public/images/', $imageName);
-        //     $user['image'] = ('images/' . $imageName);
+        $user = new User([
+            'name' => $request->input('name'),
+            'lastname' => $request->input('lastname'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'image' => $imageName, // Assign the image name here
+            'acceptsTerms' => $request->input('acceptsTerms'),
+            'wantsInfo' => $request->input('wantsInfo', false),
+        ]);
+
+        $user->save();
         
         return response()->json([
             'message' => 'Usuario creado correctamente',
             'user' => $user,
-            //'image_url' => Storage::url('public/images/' . $imageName)
         ], 201);
         }
 
