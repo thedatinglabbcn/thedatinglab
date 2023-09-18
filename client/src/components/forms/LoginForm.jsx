@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
 import Swal from 'sweetalert2';
+import auth from '../../utils/PrivateRoutes';
 
 
 const LoginForm = () => {
+
     const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -42,12 +44,23 @@ const LoginForm = () => {
         });
         console.log(err);
       });
-
-
-
-      // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor para la autenticación.
+  
       console.log(formData);
     };
+
+    const handleLogout = async (e) => {
+      e.preventDefault();
+      const auth = AuthService();
+      try {
+          const response = await auth.logout();
+          if (response.status === 200) {
+              localStorage.removeItem('token'); 
+          }
+      } catch (error) {
+          console.error(error);
+      }
+  };
+  
   
     return (
       <div className="container">
@@ -87,6 +100,9 @@ const LoginForm = () => {
             Ingresar
           </button>
         </form>
+        <button type="submit" onClick={handleLogout} className="button-send">
+           Logout
+          </button>
         <p className='form-help'>
           ¿Has olvidado la contraseña? <a href="#">Toca aquí</a>
         </p>

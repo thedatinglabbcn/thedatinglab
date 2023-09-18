@@ -32,7 +32,7 @@ export const AuthService = () => {
         const res = axios.post(urnLogout);
         return res;
     }
-
+    
     return {
         register, login, logout
     }
