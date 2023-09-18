@@ -7,11 +7,11 @@ use Spatie\Permission\Models\Permission;
 $adminRole = Role::create(['name' => 'admin']);
 
 // Create permissions
-$viewEventsPermission = Permission::create(['name' => 'view events']);
+$viewEventsPermission = Permission::get(['name' => 'view events']);
 $createEventsPermission = Permission::create(['name' => 'create events']);
-$storeEventsPermission = Permission::create(['name' => 'store events']);
-$editEventsPermission = Permission::create(['name' => 'edit events']);
-$deleteEventsPermission = Permission::create(['name' => 'delete events']);
+$storeEventsPermission = Permission::store(['name' => 'store events']);
+$editEventsPermission = Permission::update(['name' => 'edit events']);
+$deleteEventsPermission = Permission::destroy(['name' => 'delete events']);
 
 // Assign permissions to roles
 $adminRole->givePermissionTo([$viewEventsPermission, $storeEventsPermission,$createEventsPermission, $editEventsPermission, $deleteEventsPermission]);
