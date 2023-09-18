@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('preferences', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('lastname')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->date('birthdate');
+            $table->enum('quieresHijos', ['Si', 'No', 'Algún día']);
+            $table->enum('fumas', ['Si', 'No', 'Socialmente']);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('preferences');
     }
 };

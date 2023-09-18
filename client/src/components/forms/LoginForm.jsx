@@ -11,7 +11,9 @@ const LoginForm = () => {
       email: '',
       password: '',
     });
+
     const auth = AuthService();
+    
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData({
@@ -23,11 +25,8 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       auth.login(formData).then(res => {
-        const { token } = res.data;
 
-        localStorage.setItem('token', token);
-        
-
+        localStorage.setItem('auth_token', res.data.token);
         Swal.fire({
           title: '¡Inicio de sesión exitoso!',
           text: '¡Bienvenido!',

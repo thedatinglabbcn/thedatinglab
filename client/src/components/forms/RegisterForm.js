@@ -42,12 +42,12 @@ const RegistrationForm = () => {
       console.log(formData);
     };
 
-    // const handleImageChange = (event) => {
-    //   setFormData({
-    //     ...formData,
-    //     image: event.target.files[0],
-    //   });
-    // };
+    const handleImageChange = (event) => {
+      setFormData({
+        ...formData,
+        image: event.target.files[0],
+      });
+    };
 
     return (
         <div className="container">
@@ -83,7 +83,7 @@ const RegistrationForm = () => {
                 required
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label htmlFor="edad" className="form-label">
                 Edad
               </label>
@@ -97,7 +97,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
-            </div>
+            </div> */}
             <div className="mb-4">
               <label htmlFor="email" className="form-label">
                 Email
@@ -128,7 +128,7 @@ const RegistrationForm = () => {
                 required
               />
             </div>
-            {/* <div className="mb-4">
+            { <div className="mb-4">
               <label htmlFor="imagen" className="form-label">
                 Subir imagen
               </label>
@@ -142,9 +142,10 @@ const RegistrationForm = () => {
                 required
                 onChange={handleImageChange}
               />
-                    </label>
+              </label>
                    
             </div>
+            /*
             <div className="mb-4">
               <label className="form-label">¿Quieres tener hijos?</label>
               <div>
