@@ -79,18 +79,11 @@ class AuthController extends Controller
         ], 200)->withCookie($cookie);
     }
 
-    /**
-     * Logout user (Revoke the token).
-     */
-    public function logout(Request $request){
-
-        $request->user()->token()->revoke();
-
-        $cookie = Cookie::forget('token');
-
-        return response()->json([
-            'msg' => 'Usuario desconectado exitosamente'
+        public function logout(Request $request)
+        {
+            $request->user()->currentAccessToken()->delete();
+            return response()->json([
+            'msg' => 'Se ha cerrado la sesión'	
         ], 200);
-    }
-
-    }
+    }  
+}
