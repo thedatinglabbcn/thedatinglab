@@ -20,7 +20,7 @@ class AuthTest extends TestCase
         $this->postJson('api/register', [
             'name' => 'Denise',
             'lastname' => 'Garcia',
-            'age' => '23',
+            'age' => '25',
             'email' => 'denise@email.com',
             'password' => Hash::make('123456789')
         ]);
