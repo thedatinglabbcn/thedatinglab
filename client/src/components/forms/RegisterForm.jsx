@@ -10,7 +10,7 @@ const RegistrationForm = () => {
     const [formData, setFormData] = useState({
       name: '',
       lastname: '',
-      age: '',
+      birthday: '',
       email: '',
       password: '',
       image: '',
@@ -19,9 +19,8 @@ const RegistrationForm = () => {
     const auth = AuthService();
     const handleOnChange = (e) => {
       e.persist();
-      const { name, value, type, checked, files } = e.target;
-      //const newValue = type === 'checkbox' ? checked : files ? files[0] : value;
-      setFormData({
+      const { name, value } = e.target;
+       setFormData({
         ...formData,
         [name]: value,
       });
@@ -29,6 +28,13 @@ const RegistrationForm = () => {
    //console.log('formData', formData);
     const handleSubmit = (e) => {
       e.preventDefault();
+      const { name, image, lastname, birthday, email} = e.target;
+      const formData = new FormData();
+        formData.append('name', name);
+        formData.append('image', image);
+        formData.append('lastname', lastname);
+        formData.append('birthday', birthday);
+        formData.append('email', email);
       auth.register(formData).then(res => {
         Swal.fire({
           title: '¡Registro exitoso!',
@@ -42,17 +48,17 @@ const RegistrationForm = () => {
       console.log(formData);
     };
 
-    // const handleImageChange = (event) => {
-    //   setFormData({
-    //     ...formData,
-    //     image: event.target.files[0],
-    //   });
-    // };
+    const handleImageChange = (event) => {
+      setFormData({
+        ...formData,
+        image: event.target.files[0],
+      });
+    };
 
     return (
         <div className="container">
           <h1 className='form-title'>¿Quieres conocer a tu pareja ideal?</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} encType="multipart/form-data" >
             <div className="mb-4">
               <label htmlFor="nombreApellido" className="form-label">
                 Nombre 
@@ -85,15 +91,15 @@ const RegistrationForm = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="edad" className="form-label">
-                Edad
+                Fecha de nacimiento
               </label>
               <input
-                type="number"
+                type="date"
                 className="form-control"
-                id="age"
-                name="age"
+                id="birthday"
+                name="birthday"
                 placeholder="Ingresa tu edad"
-                value={formData.age}
+                value={formData.birthday}
                 onChange={handleOnChange}
                 required
               />
@@ -128,11 +134,9 @@ const RegistrationForm = () => {
                 required
               />
             </div>
-            {/* <div className="mb-4">
+             <div className="mb-4">
               <label htmlFor="imagen" className="form-label">
                 Subir imagen
-              </label>
-              <label>
               <input
                 type="file"
                 className="form-control"
@@ -143,8 +147,9 @@ const RegistrationForm = () => {
                 onChange={handleImageChange}
               />
                     </label>
-                   
+                  
             </div>
+            {/* }
             <div className="mb-4">
               <label className="form-label">¿Quieres tener hijos?</label>
               <div>
