@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 // import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
-
+import { AuthService } from '../../service/AuthService';
+import Swal from 'sweetalert2';
 
 
 const LoginForm = () => {
@@ -10,7 +11,7 @@ const LoginForm = () => {
       email: '',
       password: '',
     });
-  
+    const auth = AuthService();
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData({
@@ -21,6 +22,29 @@ const LoginForm = () => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
+      auth.login(formData).then(res => {
+        const { token } = res.data;
+
+        localStorage.setItem('token', token);
+        
+
+        Swal.fire({
+          title: '¡Inicio de sesión exitoso!',
+          text: '¡Bienvenido!',
+          icon: 'success',
+        });
+        console.log(res);
+      }).catch(err => {
+        Swal.fire({
+          title: '¡Error!',
+          text: '¡Usuario o contraseña incorrectos!',
+          icon: 'error',
+        });
+        console.log(err);
+      });
+
+
+
       // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor para la autenticación.
       console.log(formData);
     };

@@ -2,36 +2,52 @@ import React, { useState } from 'react';
 // import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
+import { AuthService } from '../../service/AuthService';
+import Swal from 'sweetalert2';
 
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
-      nombreApellido: '',
-      edad: '',
+      name: '',
+      lastname: '',
+      age: '',
       email: '',
       password: '',
-      imagen: null,
-      quieresHijos: '',
-      fumas: '',
-      mayorEdad: false,
-      aceptoTerminos: false,
-      recibirInformacion: false,
+      image: '',
     });
-  
-    const handleChange = (e) => {
+    
+    const auth = AuthService();
+    const handleOnChange = (e) => {
+      e.persist();
       const { name, value, type, checked, files } = e.target;
-      const newValue = type === 'checkbox' ? checked : files ? files[0] : value;
+      //const newValue = type === 'checkbox' ? checked : files ? files[0] : value;
       setFormData({
         ...formData,
-        [name]: newValue,
+        [name]: value,
       });
     };
-  
+   //console.log('formData', formData);
     const handleSubmit = (e) => {
       e.preventDefault();
+      auth.register(formData).then(res => {
+        Swal.fire({
+          title: '¡Registro exitoso!',
+          text: 'Tu cuenta ha sido creada correctamente.',
+          icon: 'success',
+        });
+        
+        console.log(res);
+      }).catch(err => console.log(err));
       // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor.
       console.log(formData);
     };
+
+    // const handleImageChange = (event) => {
+    //   setFormData({
+    //     ...formData,
+    //     image: event.target.files[0],
+    //   });
+    // };
 
     return (
         <div className="container">
@@ -39,16 +55,31 @@ const RegistrationForm = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="nombreApellido" className="form-label">
-                Nombre y Apellido
+                Nombre 
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="nombreApellido"
-                name="nombreApellido"
-                placeholder="Ingresa tu nombre y apellido"
-                value={formData.nombreApellido}
-                onChange={handleChange}
+                id="name"
+                name="name"
+                placeholder="Ingresa tu nombre"
+                value={formData.name}
+                onChange={handleOnChange}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="nombre" className="form-label">
+                Apellido
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="lastname"
+                name="lastname"
+                placeholder="Ingresa tu apellido"
+                value={formData.lastname}
+                onChange={handleOnChange}
                 required
               />
             </div>
@@ -59,11 +90,11 @@ const RegistrationForm = () => {
               <input
                 type="number"
                 className="form-control"
-                id="edad"
-                name="edad"
+                id="age"
+                name="age"
                 placeholder="Ingresa tu edad"
-                value={formData.edad}
-                onChange={handleChange}
+                value={formData.age}
+                onChange={handleOnChange}
                 required
               />
             </div>
@@ -78,7 +109,7 @@ const RegistrationForm = () => {
                 name="email"
                 placeholder="Ingresa tu email"
                 value={formData.email}
-                onChange={handleChange}
+                onChange={handleOnChange}
                 required
               />
             </div>
@@ -93,22 +124,26 @@ const RegistrationForm = () => {
                 name="password"
                 placeholder="Ingresa tu contraseña"
                 value={formData.password}
-                onChange={handleChange}
+                onChange={handleOnChange}
                 required
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label htmlFor="imagen" className="form-label">
                 Subir imagen
               </label>
+              <label>
               <input
                 type="file"
                 className="form-control"
-                id="imagen"
-                name="imagen"
+                id="image"
+                name="image"
                 accept="image/*"
-                onChange={handleChange}
+                required
+                onChange={handleImageChange}
               />
+                    </label>
+                   
             </div>
             <div className="mb-4">
               <label className="form-label">¿Quieres tener hijos?</label>
@@ -119,7 +154,7 @@ const RegistrationForm = () => {
                   id="siHijos"
                   name="quieresHijos"
                   value="Si"
-                  onChange={handleChange}
+                  onChange={handleOnChange}
                   checked={formData.quieresHijos === 'Si'}
                 />
                 <label className="form-label" htmlFor="siHijos">Si</label>
@@ -131,7 +166,7 @@ const RegistrationForm = () => {
                   id="noHijos"
                   name="quieresHijos"
                   value="No"
-                  onChange={handleChange}
+                  onChange={handleOnChange}
                   checked={formData.quieresHijos === 'No'}
                 />
                 <label className="form-label" htmlFor="noHijos">No</label>
@@ -143,7 +178,7 @@ const RegistrationForm = () => {
                   id="algundiaHijos"
                   name="quieresHijos"
                   value="Algún día"
-                  onChange={handleChange}
+                  onChange={handleOnChange}
                   checked={formData.quieresHijos === 'Algún día'}
                 />
                 <label className="form-label" htmlFor="algundiaHijos">Algún día</label>
@@ -158,7 +193,7 @@ const RegistrationForm = () => {
                   id="siFumas"
                   name="fumas"
                   value="Si"
-                  onChange={handleChange}
+                  onChange={handleOnChange}
                   checked={formData.fumas === 'Si'}
                 />
                 <label className="form-label" htmlFor="siFumas">Si</label>
@@ -170,7 +205,7 @@ const RegistrationForm = () => {
                   id="noFumas"
                   name="fumas"
                   value="No"
-                  onChange={handleChange}
+                  onChange={handleOnChange}
                   checked={formData.fumas === 'No'}
                 />
                 <label className="form-label" htmlFor="noFumas">No</label>
@@ -182,7 +217,7 @@ const RegistrationForm = () => {
                   id="socialmenteFumas"
                   name="fumas"
                   value="Socialmente"
-                  onChange={handleChange}
+                  onChange={handleOnChange}
                   checked={formData.fumas === 'Socialmente'}
                 />
                 <label className="form-label" htmlFor="socialmenteFumas">Socialmente</label>
@@ -200,8 +235,8 @@ const RegistrationForm = () => {
                 id="mayorEdad"
                 name="mayorEdad"
                 checked={formData.mayorEdad}
-                onChange={handleChange}
-                required
+                onChange={handleOnChange}
+                //required
               />
               <label className="form-label" htmlFor="mayorEdad">Confirmo que soy mayor de edad</label>
             </div>
@@ -212,8 +247,8 @@ const RegistrationForm = () => {
                 id="aceptoTerminos"
                 name="aceptoTerminos"
                 checked={formData.aceptoTerminos}
-                onChange={handleChange}
-                required
+                onChange={handleOnChange}
+                //required
               />
               <label className="form-label" htmlFor="aceptoTerminos">He leído y acepto los términos y condiciones de uso</label>
             </div>
@@ -224,11 +259,11 @@ const RegistrationForm = () => {
                 id="recibirInformacion"
                 name="recibirInformacion"
                 checked={formData.recibirInformacion}
-                onChange={handleChange}
+                onChange={handleOnChange}
               />
               <label htmlFor="recibirInformacion">Quiero recibir información sobre noticias y eventos</label>
             </div>
-            
+             */}
             <button type="submit" className="button-send">
               Enviar
             </button>
