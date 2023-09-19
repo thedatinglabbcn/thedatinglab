@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\Storage;
+
+
 
 
 class EventController extends Controller
@@ -92,8 +95,12 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Event $event)
     {
-        //
+        if ($event->image) {
+            Storage::disk('public')->delete($event->image);
+        }
+        $event->delete();
+        return response()->json(['message' => 'Event deleted successfully']);
     }
 }
