@@ -84,7 +84,7 @@ class AuthController extends Controller
         {
             $request->user()->currentAccessToken()->delete();
             return response()->json([
-            'msg' => 'Se ha cerrado la sesión'	
+            'msg' => 'Usuario desconectado exitosamente'	
         ], 200);
     }  
 }

@@ -49,6 +49,17 @@ const LoginForm = () => {
       console.log(formData);
     };
   
+  const handleLogout = (e) => {
+      e.preventDefault();
+      const auth = AuthService();
+      auth.logout().then(res => {
+        localStorage.removeItem('auth_token');
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      });
+  };
+
     return (
       <div className="container">
         <h1 className='form-title'>Iniciar Sesión</h1>
@@ -87,6 +98,9 @@ const LoginForm = () => {
             Ingresar
           </button>
         </form>
+        <button onClick={handleLogout} className="button-send">
+            logout
+          </button>
         <p className='form-help'>
           ¿Has olvidado la contraseña? <a href="#">Toca aquí</a>
         </p>
