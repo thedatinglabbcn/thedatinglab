@@ -27,7 +27,7 @@ const LoginForm = () => {
       auth.login(formData).then(res => {
         const { token } = res.data;
 
-        localStorage.setItem('token', token);
+        localStorage.setItem('auth_token', token);
         
 
         Swal.fire({
@@ -48,17 +48,15 @@ const LoginForm = () => {
       console.log(formData);
     };
 
-    const handleLogout = async (e) => {
+    const handleLogout = (e) => {
       e.preventDefault();
       const auth = AuthService();
-      try {
-          const response = await auth.logout();
-          if (response.status === 200) {
-              localStorage.removeItem('token'); 
-          }
-      } catch (error) {
-          console.error(error);
-      }
+      auth.logout().then(res => {
+        localStorage.removeItem('auth_token');
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      });
   };
   
   
@@ -100,7 +98,7 @@ const LoginForm = () => {
             Ingresar
           </button>
         </form>
-        <button type="submit" onClick={handleLogout} className="button-send">
+        <button onClick={handleLogout} className="button-send">
            Logout
           </button>
         <p className='form-help'>
