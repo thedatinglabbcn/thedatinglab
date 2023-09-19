@@ -10,7 +10,7 @@ class PreferencesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'birthday' => 'required|date',
+            'birthday' => 'nullable|date',
             'wantsChildren' => 'required|in:Sí,No,Algún día',
             'smokes' => 'required|in:Sí,No,Socialmente',
         ]);
