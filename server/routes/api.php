@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\PreferencesController;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EventController;
@@ -26,6 +29,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/events', [EventController::class, 'index']);
 Route::post('/event', [EventController::class, 'store']);
-Route::post('/events/{event_id}', [EventController::class, 'update']);
+Route::post('/event/{event}', [EventController::class, 'update']);
+Route::delete('event/{event}', [EventController::class, 'destroy']);
 
 
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register-preferences', [PreferencesController::class, 'store']);
+Route::post('/login', [AuthController::class, 'login']);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
