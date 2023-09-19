@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EventController;
+use Spatie\Permission\Middleware\RoleMiddleware;
 
 
 /*
@@ -15,6 +16,9 @@ use App\Http\Controllers\Api\EventController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [EventController::class, 'dashboard']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

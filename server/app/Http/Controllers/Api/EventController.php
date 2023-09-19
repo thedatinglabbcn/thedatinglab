@@ -10,11 +10,7 @@ use App\Models\Event;
 class EventController extends Controller
 {
 
-//     public function __construct()
-// {
-//     // Aplicar el middleware 'role' para proteger los métodos deseados
-//     $this->middleware('role:admin')->only(['create', 'store', 'update', 'destroy', 'show']);
-// }
+//    
     /**
      * Display a listing of the resource.
      */
