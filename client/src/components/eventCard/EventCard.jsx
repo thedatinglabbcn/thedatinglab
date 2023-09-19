@@ -1,5 +1,4 @@
 import React from 'react';
-// import wineGlass from '../../assets/images/wineglass.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import './EventCard.css';
@@ -7,7 +6,7 @@ import './EventCard.css';
 function EventCard({event}) {
   return (
     <div className="card event-card" style={{ width: '15rem' }}>
-            <img className="card-img-top" src="{wineGlass}" alt="Foto del evento" />
+       <img className="card-img-top" src= {`http://localhost:8000/storage/${event.image}`} alt="sdsad" />
         <div className="card-body">
         <div className="card-date">{event.date} {event.time}</div>
         <h5 className="card-title">{event.title}</h5>

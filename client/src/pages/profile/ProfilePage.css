@@ -1,0 +1,20 @@
+@import url('../../index.css');
+
+img {
+    
+    height: 150px;
+    width: 150px;
+    position: relative;
+}
+
+.card {
+    background-color: var(--color-beige);
+}
+
+.editpic {
+    position: absolute;
+    top: 133px;
+    right: 83px;
+    height: 30px;
+    width: 30px;
+}
