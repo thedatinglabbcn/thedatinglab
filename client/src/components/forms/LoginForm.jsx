@@ -4,11 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
 import Swal from 'sweetalert2';
-import auth from '../../utils/PrivateRoutes';
 
 
 const LoginForm = () => {
-
     const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -35,6 +33,7 @@ const LoginForm = () => {
           text: '¡Bienvenido!',
           icon: 'success',
         });
+        
         console.log(res);
       }).catch(err => {
         Swal.fire({
@@ -53,8 +52,19 @@ const LoginForm = () => {
       const auth = AuthService();
       auth.logout().then(res => {
         localStorage.removeItem('auth_token');
+        Swal.fire({
+          title: '¡Cierre de sesión exitoso!',
+          text: '¡Hasta pronto!',
+          icon: 'success',
+        });
+        
         console.log(res);
       }).catch(err => {
+        Swal.fire({
+          title: '¡Error!',
+          text: '¡No se pudo cerrar sesión!',
+          icon: 'error',
+        });
         console.log(err);
       });
   };

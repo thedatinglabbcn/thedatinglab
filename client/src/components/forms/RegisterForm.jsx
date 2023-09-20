@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
 import Swal from 'sweetalert2';
+import { Navigate } from 'react-router-dom';
 
 
 const RegistrationForm = () => {
@@ -35,7 +36,7 @@ const RegistrationForm = () => {
           text: 'Tu cuenta ha sido creada correctamente.',
           icon: 'success',
         });
-        
+        Navigate('/login');
         console.log(res);
       }).catch(err => console.log(err));
       // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor.
@@ -264,10 +265,10 @@ const RegistrationForm = () => {
               <label htmlFor="recibirInformacion">Quiero recibir información sobre noticias y eventos</label>
             </div>
              */}
-            <button type="submit" className="button-send">
+            <button type="submit"  className="button-send">
               Enviar
             </button>
-            <button type="button" className="button-cancel">
+            <button type="button" className="button-cancel" onClick={() => window.location.href = '/'}>
               Cancelar
             </button>
           </form>
