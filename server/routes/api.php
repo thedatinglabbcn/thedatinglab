@@ -19,8 +19,10 @@ use Spatie\Permission\Middleware\RoleMiddleware;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [EventController::class, 'dashboard']);
+Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
+    Route::post('/event', [EventController::class, 'store']);
+    Route::post('/event/{event}', [EventController::class, 'update']);
+    Route::delete('event/{event}', [EventController::class, 'destroy']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -28,11 +30,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/events', [EventController::class, 'index']);
-Route::post('/event', [EventController::class, 'store']);
-Route::post('/event/{event}', [EventController::class, 'update']);
-Route::delete('event/{event}', [EventController::class, 'destroy']);
-
-
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/register-preferences', [PreferencesController::class, 'store']);

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Storage;
 class EventController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('role:admin')->except('index');
+    }
 //    
     /**
      * Display a listing of the resource.
