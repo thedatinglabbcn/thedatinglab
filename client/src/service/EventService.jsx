@@ -20,20 +20,34 @@ axios.interceptors.request.use(function (res){
 export const EventService =  () => {
   
   const urlEvents = '/api/events';
+  const urlEventsAdmin = '/api/admin/event';
   
   const getAllEvents = () => {
     const res =  axios.get(urlEvents);
     return res;
   }
 
-//   const createDates = (date) => {
-//     const response = axios.post (`${url}/create`, date);
-//     return response
+const createEvent = (date) => {
+const response = axios.post (`${urlEventsAdmin}`, date);
+return response
   
-//   }
+}
+const updateEvent = (eventId, eventData) => {
+  return axios.put(`${urlEventsAdmin}/${eventId}`, eventData);
+}
 
+const destroyEvent = (eventId) => {
+  return axios.delete(`${urlEventsAdmin}/${eventId}`);
+}
 
-  return {
-    getAllEvents
+return {
+  getAllEvents,
+  createEvent,
+  updateEvent,
+  destroyEvent,
 }
 }
+
+
+
+

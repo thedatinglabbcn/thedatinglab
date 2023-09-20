@@ -1,57 +1,44 @@
-import './Navbar.css'
-
-// function Navbar() {
-//     return (
-//         <div>
-//             <nav class="navbar navbar-expand-lg">
-//                 <div class="container-fluid">
-//                     <a class="navbar-brand" href="#"><img src="tu-logo.png" alt="Logo" /></a>
-//                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-//                         <span class="navbar-toggler-icon"></span>
-//                     </button>
-                   
-//                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-//                         <div class="navbar-nav">
-//                             <a class="nav-link" href="#">Register</a>
-//                             <hr />
-//                             <a class="nav-link" href="#">Login</a>
-//                             <hr />
-//                             <a class="nav-link" href="#">Events</a>
-//                             <hr />
-//                             <a class="nav-link" href="#">Contact us</a>
-
-//                         </div>
-//                     </div>
-//                 </div>
-//             </nav>
-//             <div id="menu" class="collapse" />
-//         </div>
-//     );
-// }
-// export default Navbar;
 import React, { useState } from 'react';
-
+import './Navbar.css';
+import Swal from 'sweetalert2';
+import { AuthService } from '../../service/AuthService';
+import Logo from '../../assets/images/Capa_1.png';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const auth = AuthService();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    auth.logout().then(res => {
+      localStorage.removeItem('auth_token');
+      Swal.fire({
+        title: '¡Sesión cerrada!',
+        text: '¡Hasta pronto!',
+        icon: 'success',
+      });
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
+};
+  const authToken = localStorage.getItem('auth_token');
+  const isLoggedIn = !!authToken;
   return (
     <div className='navbar'>
-        <div className='nav_logo'><img src="tu-logo.png" alt="Logo" /></div>
+        <div><img className='nav_logo' src={Logo} alt="Logo" /></div>
         <div className={`nav_items ${isOpen && "open"}`}>
-            <a href="#">Registrate</a>
-            <span></span>
-            <a href="#">Login</a>
-            <span></span>
-            <a href="#">Contáctanos</a>
-            <span></span>
-            <a href="#">Eventos</a>
+            <a href="/register">Registrate</a>
+            <a href="/login">Login</a>
+            <a href="/events">Eventos</a>
+            {isLoggedIn && (
+            <a href="/" onClick={handleLogout}>Logout</a>
+            )}
         </div>
         <div className={`nav_toggle ${isOpen && "open"}`} onClick={ () => setIsOpen(!isOpen)}>
             <span></span>
             <span></span>
             <span></span>
-        </div> 
+        </div>
     </div>
   );
 }
-
 export default Navbar;
