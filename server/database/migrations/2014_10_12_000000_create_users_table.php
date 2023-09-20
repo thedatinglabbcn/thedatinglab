@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('lastname');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('image')->nullable();
-            $table->boolean('acceptsTerms');
-            $table->boolean('wantsInfo')->default(false);
+            $table->string('image');
+            // $table->boolean('acceptsTerms');
+            // $table->boolean('wantsInfo');
             $table->timestamps();
         });
     }

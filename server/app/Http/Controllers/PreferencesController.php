@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Preference;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PreferencesController extends Controller
 {
@@ -15,20 +17,22 @@ class PreferencesController extends Controller
             'smokes' => 'required|in:Sí,No,Socialmente',
         ]);
 
+        $user = Auth::user();
         $preference = new Preference([
             'birthday' => $request->input('birthday'),
             'wantsChildren' => $request->input('wantsChildren'),
             'smokes' => $request->input('smokes'),
+            'user_id' => $user->id
         ]);
 
         $preference->save();
 
-        $preferences = Preference::where('wantsChildren', $preference->wantsChildren)
-            ->where('smokes', $preference->smokes)
-            ->where('birthday', $preference->birthday)
-            ->where('id', '!=', $preference->id)
-            ->select('id', 'birthday', 'smokes', 'wantsChildren')
-            ->get();
+        // $preferences = Preference::where('wantsChildren', $preference->wantsChildren)
+        //     ->where('smokes', $preference->smokes)
+        //     ->where('birthday', $preference->birthday)
+        //     ->where('id', '!=', $preference->id)
+        //     ->select('id', 'birthday', 'smokes', 'wantsChildren')
+        //     ->get();
 
         return response()->json([
             'message' => 'Preferencia creada correctamente'
