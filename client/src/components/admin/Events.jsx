@@ -1,21 +1,48 @@
 import React from 'react';
+import './Events.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faFilePen } from '@fortawesome/free-solid-svg-icons';
+
 
 function Events({event}) {
   return (
-    <div className="card event-card" style={{ width: '15rem' }}>
-       <img className="card-img-top" src= {`http://localhost:8000/storage/${event.image}`} alt="sdsad" />
-        <div className="card-body">
-        <div className="card-date">{event.date} {event.time}</div>
-        <h5 className="card-title">{event.title}</h5>
-        <p className="card-text">{event.description}</p>
-        <div className="card-location">
-          <FontAwesomeIcon icon={faMapMarkerAlt} className='location-icon' /> Barcelona
-        </div>
-        <a href="/" className="btn btn-primary attend-button">Asistir</a>
-         </div>
-    </div>
+    <>
+    <table className='dashboard-table'>
+    <thead>
+        <tr className='dashboard-row'>
+          <th>ID</th>
+          <th>Imagen</th>
+          <th>Título</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+          <tr className='dashboard-row' key={event.id}>
+            <td>{event.id}</td>
+            <td>
+              <img
+                className="dashboard-image"
+                src={`http://localhost:8000/storage/${event.image}`}
+                alt={event.title}
+              />
+            </td>
+            <td>{event.title}</td>
+            <td className='dashboard-actions'>
+              <button className="dashboard-edit">
+              <FontAwesomeIcon icon={faFilePen}/>
+                </button>
+              <button className="dashboard-delete">
+              <FontAwesomeIcon icon={faTrash} />
+              </button>
+            </td>
+          </tr>
+        
+      </tbody>
+    </table>
+    
+    </>
   )
 };
 

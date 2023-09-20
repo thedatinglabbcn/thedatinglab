@@ -5,7 +5,8 @@ import Events from "../../components/admin/Events";
 
 function Dashboard() {
 
-  const [events, setEvents] = useState ([]); 
+  const [events, setEvents] = useState([]);
+  const [showHeader, setShowHeader] = useState(true);
   
 
 useEffect(() =>{
