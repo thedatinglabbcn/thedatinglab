@@ -52,11 +52,21 @@ class AuthController extends Controller
 
         $user->preferences()->save($preference);
 
-    return response()->json([
-        'message' => 'Usuario y preferencia creados correctamente',
-        'user' => $user,
-        'preference' => $preference,
-    ], 201);
+        
+        $matchingUsers = User::whereHas('preferences', function ($query) use ($request) {
+            $query->where('smokes', $request->input('smokes'))
+                ->where('wantsChildren', $request->input('wantsChildren'));
+        })->where('id', '!=', $user->id)->get();
+
+        \Illuminate\Support\Facades\Log::info('Contenido de $preference:', ['preference' => $preference]);
+        \Illuminate\Support\Facades\Log::info('Contenido de $matchingUsers:', ['matchingUsers' => $matchingUsers]);
+    
+        return response()->json([
+            'message' => 'Usuario y preferencia creados correctamente',
+            'user' => $user,
+            'preference' => $preference,
+            'matchingUsers' => $matchingUsers,
+        ], 201);
         }
 
     /**

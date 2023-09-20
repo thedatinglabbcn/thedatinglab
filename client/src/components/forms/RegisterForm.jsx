@@ -22,7 +22,8 @@ const RegistrationForm = () => {
       // acceptsTerms: false,
       // wantsInfo: false,
     });
-    
+    const [matchingUsers, setMatchingUsers] = useState([]);
+
       const handleSubmit = async (e) => {
       e.preventDefault();
 
@@ -54,6 +55,9 @@ const RegistrationForm = () => {
                   icon: 'success',
                 });
           }
+          const { matchingUsers } = response.data;
+          setMatchingUsers(matchingUsers);
+
         } catch (error) {
           console.error('Error al enviar el formulario:', error.response);
         }
@@ -286,6 +290,20 @@ const RegistrationForm = () => {
               Cancelar
             </button>
           </form>
+          <div>
+          {matchingUsers.length > 0 && (
+        <div>
+          <h2>Usuarios coincidentes:</h2>
+          <ul>
+            {matchingUsers.map((user) => (
+              <li key={user.id}>
+                Nombre: {user.name}, Apellido: {user.lastname}, Email: {user.email}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+          </div>
         </div>
       );
     };
