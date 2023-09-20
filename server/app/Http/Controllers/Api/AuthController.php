@@ -28,6 +28,8 @@ class AuthController extends Controller
         'birthday' => 'nullable|date',
         'smokes' => 'required|in:Sí,No,Socialmente',
         'wantsChildren' => 'required|in:Sí,No,Algún día',
+        'wantsInfo' => 'required|boolean',
+        'acceptsTerms' => 'required|boolean',
     ]);
 
         $imageName = Str::random(32).".".$request->image->getClientOriginalExtension();
@@ -38,6 +40,8 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'image' => $imageName,
+            'wantsInfo' => $request->input('wantsInfo'),
+            'acceptsTerms' => $request->input('acceptsTerms'),
         ]);
 
         Storage::disk('public')->put($imageName, file_get_contents($request->image));
@@ -48,6 +52,7 @@ class AuthController extends Controller
             'birthday' => $request->input('birthday'),
             'smokes' => $request->input('smokes'),
             'wantsChildren' => $request->input('wantsChildren'),
+           
         ]);
 
         $user->preferences()->save($preference);

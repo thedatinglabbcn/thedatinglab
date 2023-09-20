@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 
 const RegistrationForm = () => {
-
+  const auth = AuthService();
   const [errors, setErrors] = useState([]);
   const [formDataState, setFormDataState] = useState({
       name: '',
@@ -19,14 +19,14 @@ const RegistrationForm = () => {
       image: '',
       wantsChildren: '',
       smokes: '',
-      // acceptsTerms: false,
-      // wantsInfo: false,
+      acceptsTerms: '',
+      wantsInfo: '',
     });
     
       const handleSubmit = async (e) => {
       e.preventDefault();
 
-      const { name, lastname, birthday, email, password, image, wantsChildren, smokes } = formDataState;
+      const { name, lastname, birthday, email, password, image, wantsChildren, smokes, acceptsTerms, wantsInfo } = formDataState;
 
       const formData = new FormData();
         formData.append('name', name);
@@ -37,8 +37,8 @@ const RegistrationForm = () => {
         formData.append('image', image);
         formData.append('wantsChildren', wantsChildren);
         formData.append('smokes', smokes);
-        // formData.append('acceptsTerms', acceptsTerms);
-        // formData.append('wantsInfo', wantsInfo);
+        formData.append('acceptsTerms', acceptsTerms);
+        formData.append('wantsInfo', wantsInfo);
       
         try {
           const response = await axios.post('http://127.0.0.1:8000/api/register', formData, {
@@ -62,8 +62,13 @@ const RegistrationForm = () => {
     const handleOnChange = (e) => {
       e.persist();
       const { name, value, type, checked } = e.target;
-      const newValue = type === 'checkbox' ? checked : value;
-
+      let newValue;
+    
+      if (type === 'checkbox') {
+        newValue = checked; // Asigna el valor booleano directamente
+      } else {
+        newValue = value;
+      }
       setFormDataState({
       ...formDataState,
       [name]: newValue,
@@ -256,13 +261,13 @@ const RegistrationForm = () => {
               comunidad. Te invitamos a abonar 50 euros para acceder a tres eventos de tu elección. Tu contribución nos
               ayuda a mantener la calidad de nuestros eventos y nuestra comunidad activa. ¡Únete a nosotros!
             </p>
-            {/* <div className="mb-3">
+            <div className="mb-3">
               <input
                 type="checkbox"
                 className='form-checkbox'
                 id="aceptoTerminos"
                 name="acceptsTerms"
-                // checked={formDataState.acceptsTerms}
+                checked={formDataState.acceptsTerms}
                 onChange={handleOnChange}
                 //required
               />
@@ -274,11 +279,11 @@ const RegistrationForm = () => {
                 className='form-checkbox'
                 id="recibirInformacion"
                 name="wantsInfo"
-                // checked={formDataState.wantsInfo}
+                checked={formDataState.wantsInfo}
                 onChange={handleOnChange}
               />
               <label htmlFor="recibirInformacion">Quiero recibir información sobre noticias y eventos</label>
-            </div> */}
+            </div>
             <button type="submit" className="button-send">
               Enviar
             </button>

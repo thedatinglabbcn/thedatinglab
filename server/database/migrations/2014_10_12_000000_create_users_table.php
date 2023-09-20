@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image');
-            // $table->boolean('acceptsTerms');
-            // $table->boolean('wantsInfo');
+            $table->boolean('acceptsTerms');
+            $table->boolean('wantsInfo');
             $table->timestamps();
         });
     }
