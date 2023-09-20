@@ -13,6 +13,21 @@ class AddAdminUser extends Migration
 
         $adminRole = Role::create(['name' => 'admin']);
 
+        $permissions = [
+            'view events',
+            'create events',
+            'store events',
+            'edit events',
+            'delete events',
+        ];
+
+        foreach ($permissions as $permissionName) {
+            Permission::create(['name' => $permissionName]);
+        }
+
+    
+        $adminRole->givePermissionTo($permissions);
+
         $adminUser = DB::table('users')->insertGetId([
             'name' => 'Admin',
             'lastname' => 'Admin',

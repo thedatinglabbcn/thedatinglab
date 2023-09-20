@@ -40,7 +40,7 @@ class EventController extends Controller
             'date' => 'required|date',
             'time' => 'required|date_format:H:i:s',
             'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Adjust image validation as needed
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $imagePath = null;
@@ -55,6 +55,10 @@ class EventController extends Controller
             'description' => $validatedData['description'],
             'image' => $imagePath,
         ]);
+
+        $adminUser = Auth::user();
+        $event->user()->associate($adminUser);
+        $event->save();
 
         return response()->json(['message' => 'Event created successfully', 'event' => $event]);
     }
