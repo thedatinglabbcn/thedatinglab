@@ -31,7 +31,7 @@ Route::delete('event/{event}', [EventController::class, 'destroy']);
 
 
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/register-preferences', [PreferencesController::class, 'store']);
+// Route::post('/register-preferences', [PreferencesController::class, 'store']);
 Route::post('/login', [AuthController::class, 'login']);
 
 

@@ -44,3 +44,9 @@ body{
     border: none;
     padding: 0.5rem 2rem;
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+  }

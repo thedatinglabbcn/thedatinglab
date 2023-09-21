@@ -25,7 +25,8 @@ const LoginForm = () => {
         const { token } = res.data;
 
         localStorage.setItem('auth_token', token);
-      
+        
+
         Swal.fire({
           title: '¡Inicio de sesión exitoso!',
           text: '¡Bienvenido!',
