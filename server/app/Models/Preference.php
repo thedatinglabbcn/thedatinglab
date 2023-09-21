@@ -20,6 +20,7 @@ class Preference extends Model
         'birthday',
         'smokes',
         'wantsChildren',
+        'user_id'
     ];
 
     protected $hidden = [

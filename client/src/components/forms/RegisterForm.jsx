@@ -1,60 +1,121 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
 import Swal from 'sweetalert2';
-
+import { useMatchingUsers } from '../../contexts/MatchingUsersContext';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
-    const [formData, setFormData] = useState({
+
+  const [errors, setErrors] = useState({});
+  const [formDataState, setFormDataState] = useState({
       name: '',
       lastname: '',
-      age: '',
+      birthday: '',
       email: '',
       password: '',
       image: '',
+      wantsChildren: '',
+      smokes: '',
+      // acceptsTerms: false,
+      // wantsInfo: false,
     });
-    
-    const auth = AuthService();
-    const handleOnChange = (e) => {
-      e.persist();
-      const { name, value, type, checked, files } = e.target;
-      //const newValue = type === 'checkbox' ? checked : files ? files[0] : value;
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    };
-   //console.log('formData', formData);
-    const handleSubmit = (e) => {
+    const { setMatchingUsers } = useMatchingUsers();
+    const navigate = useNavigate();
+
+      const handleSubmit = async (e) => {
       e.preventDefault();
-      auth.register(formData).then(res => {
-        Swal.fire({
-          title: '¡Registro exitoso!',
-          text: 'Tu cuenta ha sido creada correctamente.',
-          icon: 'success',
-        });
-        
-        console.log(res);
-      }).catch(err => console.log(err));
-      // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor.
-      console.log(formData);
+
+      const { name, lastname, birthday, email, password, image, wantsChildren, smokes } = formDataState;
+
+      const formData = new FormData();
+        formData.append('name', name);
+        formData.append('lastname', lastname);
+        formData.append('birthday', birthday);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('image', image);
+        formData.append('wantsChildren', wantsChildren);
+        formData.append('smokes', smokes);
+        // formData.append('acceptsTerms', acceptsTerms);
+        // formData.append('wantsInfo', wantsInfo);
+      
+        try {
+          const response = await axios.post('http://127.0.0.1:8000/api/register', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+          
+          const { matchingUsers } = response.data;
+          setMatchingUsers(matchingUsers);
+
+          if (response.status === 201) {
+            Swal.fire({
+                  title: '¡Registro exitoso!',
+                  text: 'Tu cuenta ha sido creada correctamente.',
+                  icon: 'success',
+                }).then(() => {
+                  // Redirige a la página deseada
+                  navigate('/matches');
+                });
+          }
+
+        } catch (error) {
+          console.error('Error al enviar el formulario:', error.response);
+        }
     };
 
-    // const handleImageChange = (event) => {
-    //   setFormData({
-    //     ...formData,
-    //     image: event.target.files[0],
-    //   });
-    // };
+    const handleOnChange = (e) => {
+      e.persist();
+      const { name, value, type, checked } = e.target;
+      const newValue = type === 'checkbox' ? checked : value;
+
+      if (name === 'name' && newValue.trim() === '') {
+        setErrors({ ...errors, [name]: 'Este campo es obligatorio' });
+      } else if (name === 'lastname' && newValue.trim() === '') {
+        setErrors({ ...errors, [name]: 'Este campo es obligatorio' });
+      } else if (name === 'email' && !isValidEmail(newValue)) {
+        setErrors({ ...errors, [name]: 'El correo electrónico no es válido' });
+      } else if (name === 'password' && newValue.length < 8) {
+        setErrors({ ...errors, [name]: 'La contraseña debe tener al menos 8 caracteres' });
+      } else if (name === 'birthday' && newValue.length === '') {
+        setErrors({ ...errors, [name]: 'Este campo es obligatorio' });
+      }
+      else {
+        setErrors({ ...errors, [name]: '' }); // Limpia el error si el campo es válido
+      }
+
+      setFormDataState({
+      ...formDataState,
+      [name]: newValue,
+      });
+    };
+
+    const isValidEmail = (email) => {
+      const re = /\S+@\S+\.\S+/;
+      return re.test(email);
+    }
+
+    const handleImageChange = (e) => {
+      setFormDataState({
+        ...formDataState,
+        image: e.target.files[0],
+      });
+    };
 
     return (
         <div className="container">
           <h1 className='form-title'>¿Quieres conocer a tu pareja ideal?</h1>
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={handleSubmit}
+            className="create-dest"
+            encType="multipart/form-data"
+            required>
             <div className="mb-4">
-              <label htmlFor="nombreApellido" className="form-label">
+              <label htmlFor="name" className="form-label">
                 Nombre 
               </label>
               <input
@@ -63,14 +124,14 @@ const RegistrationForm = () => {
                 id="name"
                 name="name"
                 placeholder="Ingresa tu nombre"
-                value={formData.name}
                 onChange={handleOnChange}
                 required
               />
+              {errors.name && <p className="error-message">{errors.name}</p>}
             </div>
             <div className="mb-4">
-              <label htmlFor="nombre" className="form-label">
-                Apellido
+              <label htmlFor="lastname" className="form-label">
+                Apellidos 
               </label>
               <input
                 type="text"
@@ -78,25 +139,25 @@ const RegistrationForm = () => {
                 id="lastname"
                 name="lastname"
                 placeholder="Ingresa tu apellido"
-                value={formData.lastname}
                 onChange={handleOnChange}
                 required
               />
+              {errors.lastname && <p className="error-message">{errors.lastname}</p>}
             </div>
             <div className="mb-4">
-              <label htmlFor="edad" className="form-label">
-                Edad
+              <label htmlFor="birthday" className="form-label">
+                Fecha de nacimiento
               </label>
               <input
-                type="number"
+                type="date"
                 className="form-control"
-                id="age"
-                name="age"
-                placeholder="Ingresa tu edad"
-                value={formData.age}
+                id="birthday"
+                name="birthday"
+                placeholder="Ingresa tu fecha de nacimiento"
                 onChange={handleOnChange}
-                required
+                // required
               />
+              {errors.birthday && <p className="error-message">{errors.birthday}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="email" className="form-label">
@@ -108,10 +169,10 @@ const RegistrationForm = () => {
                 id="email"
                 name="email"
                 placeholder="Ingresa tu email"
-                value={formData.email}
                 onChange={handleOnChange}
                 required
               />
+              {errors.email && <p className="error-message">{errors.email}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="password" className="form-label">
@@ -123,16 +184,15 @@ const RegistrationForm = () => {
                 id="password"
                 name="password"
                 placeholder="Ingresa tu contraseña"
-                value={formData.password}
                 onChange={handleOnChange}
                 required
               />
             </div>
-            {/* <div className="mb-4">
-              <label htmlFor="imagen" className="form-label">
+            <div className="mb-4">
+              <label htmlFor="image" className="form-label">
                 Subir imagen
               </label>
-              <label>
+              
               <input
                 type="file"
                 className="form-control"
@@ -142,7 +202,7 @@ const RegistrationForm = () => {
                 required
                 onChange={handleImageChange}
               />
-                    </label>
+              
                    
             </div>
             <div className="mb-4">
@@ -152,22 +212,22 @@ const RegistrationForm = () => {
                   type="radio"
                   className='form-radio'
                   id="siHijos"
-                  name="quieresHijos"
-                  value="Si"
+                  name="wantsChildren"
+                  value="Sí"
                   onChange={handleOnChange}
-                  checked={formData.quieresHijos === 'Si'}
+                  // checked={formDataState.wantsChildren === 'Sí'}
                 />
-                <label className="form-label" htmlFor="siHijos">Si</label>
+                <label className="form-label" htmlFor="siHijos">Sí</label>
               </div>
               <div>
                 <input
                   type="radio"
                   className='form-radio'
                   id="noHijos"
-                  name="quieresHijos"
+                  name="wantsChildren"
                   value="No"
                   onChange={handleOnChange}
-                  checked={formData.quieresHijos === 'No'}
+                  // checked={formDataState.wantsChildren === 'No'}
                 />
                 <label className="form-label" htmlFor="noHijos">No</label>
               </div>
@@ -176,10 +236,10 @@ const RegistrationForm = () => {
                   type="radio"
                   className='form-radio'
                   id="algundiaHijos"
-                  name="quieresHijos"
+                  name="wantsChildren"
                   value="Algún día"
                   onChange={handleOnChange}
-                  checked={formData.quieresHijos === 'Algún día'}
+                  // checked={formDataState.wantsChildren === 'Algún día'}
                 />
                 <label className="form-label" htmlFor="algundiaHijos">Algún día</label>
               </div>
@@ -191,22 +251,22 @@ const RegistrationForm = () => {
                   type="radio"
                   className='form-radio'
                   id="siFumas"
-                  name="fumas"
-                  value="Si"
+                  name="smokes"
+                  value="Sí"
                   onChange={handleOnChange}
-                  checked={formData.fumas === 'Si'}
+                  // checked={formDataState.smokes === 'Si'}
                 />
-                <label className="form-label" htmlFor="siFumas">Si</label>
+                <label className="form-label" htmlFor="siFumas">Sí</label>
               </div>
               <div>
                 <input
                   type="radio"
                   className='form-radio'
                   id="noFumas"
-                  name="fumas"
+                  name="smokes"
                   value="No"
                   onChange={handleOnChange}
-                  checked={formData.fumas === 'No'}
+                  // checked={formDataState.smokes === 'No'}
                 />
                 <label className="form-label" htmlFor="noFumas">No</label>
               </div>
@@ -215,10 +275,10 @@ const RegistrationForm = () => {
                   type="radio"
                   className='form-radio'
                   id="socialmenteFumas"
-                  name="fumas"
+                  name="smokes"
                   value="Socialmente"
                   onChange={handleOnChange}
-                  checked={formData.fumas === 'Socialmente'}
+                  // checked={formDataState.smokes === 'Socialmente'}
                 />
                 <label className="form-label" htmlFor="socialmenteFumas">Socialmente</label>
               </div>
@@ -228,25 +288,13 @@ const RegistrationForm = () => {
               comunidad. Te invitamos a abonar 50 euros para acceder a tres eventos de tu elección. Tu contribución nos
               ayuda a mantener la calidad de nuestros eventos y nuestra comunidad activa. ¡Únete a nosotros!
             </p>
-            <div className="mb-3">
-              <input
-                type="checkbox"
-                className='form-checkbox'
-                id="mayorEdad"
-                name="mayorEdad"
-                checked={formData.mayorEdad}
-                onChange={handleOnChange}
-                //required
-              />
-              <label className="form-label" htmlFor="mayorEdad">Confirmo que soy mayor de edad</label>
-            </div>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <input
                 type="checkbox"
                 className='form-checkbox'
                 id="aceptoTerminos"
-                name="aceptoTerminos"
-                checked={formData.aceptoTerminos}
+                name="acceptsTerms"
+                // checked={formDataState.acceptsTerms}
                 onChange={handleOnChange}
                 //required
               />
@@ -257,13 +305,12 @@ const RegistrationForm = () => {
                 type="checkbox"
                 className='form-checkbox'
                 id="recibirInformacion"
-                name="recibirInformacion"
-                checked={formData.recibirInformacion}
+                name="wantsInfo"
+                // checked={formDataState.wantsInfo}
                 onChange={handleOnChange}
               />
               <label htmlFor="recibirInformacion">Quiero recibir información sobre noticias y eventos</label>
-            </div>
-             */}
+            </div> */}
             <button type="submit" className="button-send">
               Enviar
             </button>
@@ -271,6 +318,20 @@ const RegistrationForm = () => {
               Cancelar
             </button>
           </form>
+          <div>
+          {/* {matchingUsers.length > 0 && (
+        <div>
+          <h2>Usuarios coincidentes:</h2>
+          <ul>
+            {matchingUsers.map((matchingUser) => (
+              <li key={matchingUser.id}>
+                Nombre: {matchingUser.name}, Apellido: {matchingUser.lastname}, Edad: {matchingUser.birthday}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )} */}
+          </div>
         </div>
       );
     };

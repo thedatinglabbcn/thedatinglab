@@ -31,7 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/events', [EventController::class, 'index']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/register-preferences', [PreferencesController::class, 'store']);
+// Route::post('/register-preferences', [PreferencesController::class, 'store']);
 Route::post('/login', [AuthController::class, 'login']);
 
 

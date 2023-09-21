@@ -24,8 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
-        'acceptsTerms',
-        'wantsInfo',
+        // 'acceptsTerms',
+        // 'wantsInfo',
     ];
 
     /**

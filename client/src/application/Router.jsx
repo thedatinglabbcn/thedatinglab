@@ -4,6 +4,7 @@ import RegisterPage from '../pages/register/RegisterPage';
 import LoginPage from '../pages/login/LoginPage';
 import CreateForm from '../components/forms/CreateForm';
 import EditForm from '../components/forms/EditForm';
+import MatchCard from '../components/matchCard/MatchCard';
 
 const router = createBrowserRouter([
   { 
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <RegisterPage />
+  },
+  {
+    path: '/matches',
+    element: <MatchCard />
   },
   {
     path: '/login',
