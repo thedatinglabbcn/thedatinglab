@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
 
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const [formDataState, setFormDataState] = useState({
       name: '',
       lastname: '',
@@ -73,13 +73,32 @@ const RegistrationForm = () => {
       const { name, value, type, checked } = e.target;
       const newValue = type === 'checkbox' ? checked : value;
 
+      if (name === 'name' && newValue.trim() === '') {
+        setErrors({ ...errors, [name]: 'Este campo es obligatorio' });
+      } else if (name === 'lastname' && newValue.trim() === '') {
+        setErrors({ ...errors, [name]: 'Este campo es obligatorio' });
+      } else if (name === 'email' && !isValidEmail(newValue)) {
+        setErrors({ ...errors, [name]: 'El correo electrónico no es válido' });
+      } else if (name === 'password' && newValue.length < 8) {
+        setErrors({ ...errors, [name]: 'La contraseña debe tener al menos 8 caracteres' });
+      } else if (name === 'birthday' && newValue.length === '') {
+        setErrors({ ...errors, [name]: 'Este campo es obligatorio' });
+      }
+      else {
+        setErrors({ ...errors, [name]: '' }); // Limpia el error si el campo es válido
+      }
+
       setFormDataState({
       ...formDataState,
       [name]: newValue,
       });
     };
 
-    
+    const isValidEmail = (email) => {
+      const re = /\S+@\S+\.\S+/;
+      return re.test(email);
+    }
+
     const handleImageChange = (e) => {
       setFormDataState({
         ...formDataState,
@@ -108,6 +127,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+              {errors.name && <p className="error-message">{errors.name}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="lastname" className="form-label">
@@ -122,6 +142,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+              {errors.lastname && <p className="error-message">{errors.lastname}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="birthday" className="form-label">
@@ -136,6 +157,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 // required
               />
+              {errors.birthday && <p className="error-message">{errors.birthday}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="email" className="form-label">
@@ -150,6 +172,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+              {errors.email && <p className="error-message">{errors.email}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="password" className="form-label">
