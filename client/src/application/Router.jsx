@@ -3,6 +3,7 @@ import HomePage from '../pages/home/HomePage';
 import RegisterPage from '../pages/register/RegisterPage';
 import LoginPage from '../pages/login/LoginPage';
 import CreateForm from '../components/forms/CreateForm';
+import EditForm from '../components/forms/EditForm';
 
 const router = createBrowserRouter([
   { 
@@ -20,7 +21,12 @@ const router = createBrowserRouter([
   {
     path: '/dashboard/create',
     element: <CreateForm />
+  },
+  {
+    path: '/dashboard/edit',
+    element: <EditForm />
   }
+
 ])
 
 export default router;
