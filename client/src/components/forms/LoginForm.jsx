@@ -48,6 +48,7 @@ const LoginForm = () => {
     };
  
     return (
+      <div className='body-login'>
       <div className="container">
         <h1 className='form-title'>Iniciar Sesión</h1>
         <form onSubmit={handleSubmit}>
@@ -81,17 +82,21 @@ const LoginForm = () => {
               required
             />
           </div>
+          <div className='login-buttons'>
           <button type="submit" className="button-send">
             Ingresar
           </button>
+          <button type="button" className="button-cancel"  onClick={() => window.location.href = '/'}>Cancelar</button>
+          </div>
         </form>
         
         <p className='form-help'>
           ¿Has olvidado la contraseña? <a href="#">Toca aquí</a>
         </p>
         <p className='form-help'>
-          ¿No tienes una cuenta? <a href="#">Regístrate</a>
+          ¿No tienes una cuenta? <a onClick={() => window.location.href = '/register'} href="#">Regístrate</a>
         </p>
+      </div>
       </div>
     );
   };

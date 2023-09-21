@@ -107,6 +107,7 @@ const RegistrationForm = () => {
     };
 
     return (
+      <div className='body-registration'>
         <div className="container">
           <h1 className='form-title'>¿Quieres conocer a tu pareja ideal?</h1>
           <form
@@ -311,12 +312,10 @@ const RegistrationForm = () => {
               />
               <label htmlFor="recibirInformacion">Quiero recibir información sobre noticias y eventos</label>
             </div> */}
-            <button type="submit" className="button-send">
+            <button type="submit" className="button-send" >
               Enviar
             </button>
-            <button type="button" className="button-cancel">
-              Cancelar
-            </button>
+            <button type="button" className="button-cancel"  onClick={() => window.location.href = '/'}>Cancelar</button>
           </form>
           <div>
           {/* {matchingUsers.length > 0 && (
@@ -332,6 +331,7 @@ const RegistrationForm = () => {
         </div>
       )} */}
           </div>
+        </div>
         </div>
       );
     };

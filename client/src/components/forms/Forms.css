@@ -1,11 +1,17 @@
-body{
+.body-login{
+background-color: var(--color-beige);
+}
+
+.body-registration{
     width: 100%;
+    background-color: var(--color-beige);
     
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
 }
 
 .container{
+    padding: 3rem 0;;
     width: 90%;
 }
 .form-control{
@@ -22,10 +28,17 @@ body{
 
 .form-help{
     text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+
 }
 
 .form-buttons{
     gap: 3rem;
+}
+
+.login-buttons{
+    margin: 3rem 0;
 }
 
 .button-send{

@@ -10,7 +10,7 @@ body {
     background-size: cover;
     color:var(--color-white);
     text-align: left;
-    padding: 100px 20px;
+    padding: 100px 30px;
 }
 
 .hero-content {
@@ -19,12 +19,14 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-h1 {
-    font-size: 36px;
+.home-title {
+    font-size: 2.3rem;
+    font-weight: 900;
 }
 
 p {
-    font-size: 18px;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 .button-start{
     background-color: var(--color-primary);
@@ -32,6 +34,9 @@ p {
     border-radius: 2rem;
     border: none;
     padding: 0.5rem 2rem;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin: 2rem 0;
 }
 
 .button-start:hover {
@@ -52,15 +57,16 @@ p {
     margin: 0 auto;
 }
 
-h2 {
-    font-size: 28px;
-    margin-bottom: 40px;
+.home-subtitle {
+    font-size: 2.5rem;
+    margin: 3rem 0;
     text-align: center;
+    font-weight:900;
 }
 
 li {
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 .title-Events{
