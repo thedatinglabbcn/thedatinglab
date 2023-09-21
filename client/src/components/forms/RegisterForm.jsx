@@ -4,12 +4,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const RegistrationForm = () => {
-  const auth = AuthService();
-  const [errors, setErrors] = useState([]);
+  const { setUser } = AuthService();
+  const [nameError, setNameError] = React.useState('');
+  const [lastnameError, setLastnameError] = React.useState('');
+  const [birthdayError, setBirthdayError] = React.useState('');
+  const [emailError, setEmailError] = React.useState('');
+  const [passwordError, setPasswordError] = React.useState('');
+  const [imageError, setImageError] = React.useState('');
+  const [wantsChildrenError, setWantsChildrenError] = React.useState('');
+  //const navigate = useNavigate();
+  
   const [formDataState, setFormDataState] = useState({
       name: '',
       lastname: '',
@@ -53,11 +62,41 @@ const RegistrationForm = () => {
                   text: 'Tu cuenta ha sido creada correctamente.',
                   icon: 'success',
                 });
-          }
+          //navigate('/login');
+              }
         } catch (error) {
-          console.error('Error al enviar el formulario:', error.response);
-        }
+          if (error.response.data.errors.name) {
+            setNameError(error.response.data.errors.name[0]);
+          } else {
+            setNameError('');
+          }
+          if (error.response.data.errors.lastname) {
+            setLastnameError(error.response.data.errors.lastname[0]);
+          } else {
+            setLastnameError('');
+          }
+          if (error.response.data.errors.birthday) {
+            setBirthdayError(error.response.data.errors.birthday[0]);
+          } else {
+            setBirthdayError('');
+          }
+          if (error.response.data.errors.email) {
+            setEmailError(error.response.data.errors.email[0]);
+          } else {
+            setEmailError('');
+          }
+          if (error.response.data.errors.password) {
+            setPasswordError(error.response.data.errors.password[0]);
+          } else {
+            setPasswordError('');
+          }
+          if (error.response.data.errors.image) {
+            setImageError(error.response.data.errors.image[0]);
+          } else {
+            setImageError('');
+          }
     };
+  };
 
     const handleOnChange = (e) => {
       e.persist();
@@ -104,6 +143,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+               {nameError && <p className="error-message">{nameError}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="lastname" className="form-label">
@@ -118,6 +158,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+              {lastnameError && <p>{lastnameError}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="birthday" className="form-label">
@@ -132,6 +173,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 // required
               />
+              {birthdayError && <p>{birthdayError}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="email" className="form-label">
@@ -146,6 +188,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+              {emailError && <p>{emailError}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="password" className="form-label">
@@ -160,6 +203,7 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+              {passwordError && <p>{passwordError}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="image" className="form-label">
@@ -175,8 +219,7 @@ const RegistrationForm = () => {
                 required
                 onChange={handleImageChange}
               />
-              
-                   
+              {imageError && <p>{imageError}</p>} 
             </div>
             <div className="mb-4">
               <label className="form-label">¿Quieres tener hijos?</label>
@@ -290,6 +333,7 @@ const RegistrationForm = () => {
             <button type="button" className="button-cancel">
               Cancelar
             </button>
+            <a href="/login" className="link-login">¿Ya tienes una cuenta? Inicia sesión</a>
           </form>
         </div>
       );
