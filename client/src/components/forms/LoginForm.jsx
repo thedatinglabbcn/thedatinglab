@@ -83,7 +83,7 @@ const LoginForm = () => {
             />
           </div>
           <div className='login-buttons'>
-          <button type="submit" className="button-send">
+          <button type="submit" className="button-send" onClick={() => window.location.href = '/marches'}>
             Ingresar
           </button>
           <button type="button" className="button-cancel"  onClick={() => window.location.href = '/'}>Cancelar</button>

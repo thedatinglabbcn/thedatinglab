@@ -7,7 +7,7 @@
 }
 
 
-.card-body{
+.match-body{
     margin-top: 5rem;
     
 }
@@ -26,4 +26,8 @@
 
 .match-profile{
     Margin-top: 3rem;
+    }
+
+    .how-it-works{
+        width: 100%;
     }
