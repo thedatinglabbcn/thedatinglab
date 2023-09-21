@@ -25,7 +25,7 @@ const LoginForm = () => {
       auth.login(formData).then(res => {
         const { token } = res.data;
 
-        localStorage.setItem('token', token);
+        localStorage.setItem('auth_token', token);
         
 
         Swal.fire({
