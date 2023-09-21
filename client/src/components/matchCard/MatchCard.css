@@ -5,3 +5,25 @@
     height: 150px;
     width: 150px;
 }
+
+
+.card-body{
+    margin-top: 5rem;
+    
+}
+
+.match-container{
+    background-color: var(--color-beige);
+    padding: 3rem;
+}
+
+.match-title{
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.match-profile{
+    Margin-top: 3rem;
+    }
