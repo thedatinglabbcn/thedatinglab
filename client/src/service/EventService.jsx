@@ -19,21 +19,35 @@ axios.interceptors.request.use(function (res){
 
 export const EventService =  () => {
   
-  const urlEvents = '/api/events';
+  const urlEvents = '/api/event';
+  // const urlEventsAdmin = '/api/admin/event';
   
   const getAllEvents = () => {
     const res =  axios.get(urlEvents);
     return res;
   }
 
-//   const createDates = (date) => {
-//     const response = axios.post (`${url}/create`, date);
-//     return response
+const createEvent = (date) => {
+const response = axios.post (`${urlEvents}`, date);
+return response
   
-//   }
+}
+const updateEvent = (eventId, eventData) => {
+  return axios.put(`${urlEvents}/${eventId}`, eventData);
+}
 
+const destroyEvent = (eventId) => {
+  return axios.delete(`${urlEvents}/${eventId}`);
+}
 
-  return {
-    getAllEvents
+return {
+  getAllEvents,
+  createEvent,
+  updateEvent,
+  destroyEvent,
 }
 }
+
+
+
+

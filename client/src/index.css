@@ -26,4 +26,8 @@ body {
   --color-buttoncancel:#ff3366;
 }
 
+a{
+  text-decoration: none;
+  background-color: transparent;
+}
 

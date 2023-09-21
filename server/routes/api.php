@@ -23,10 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/events', [EventController::class, 'index']);
+Route::get('/event', [EventController::class, 'index']);
 Route::post('/event', [EventController::class, 'store']);
 Route::post('/event/{event}', [EventController::class, 'update']);
-Route::delete('event/{event}', [EventController::class, 'destroy']);
+Route::delete('/event/{event}', [EventController::class, 'destroy']);
 
 
 

@@ -4,7 +4,10 @@ import './Navbar.css';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../service/AuthService';
 import Logo from '../../assets/images/Capa_1.png';
-
+import './Navbar.css';
+import Swal from 'sweetalert2';
+import { AuthService } from '../../service/AuthService';
+import Logo from '../../assets/images/Capa_1.png';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const auth = AuthService();
@@ -42,9 +45,8 @@ const Navbar = () => {
             <span></span>
             <span></span>
             <span></span>
-        </div> 
+        </div>
     </div>
   );
 }
-
 export default Navbar;
