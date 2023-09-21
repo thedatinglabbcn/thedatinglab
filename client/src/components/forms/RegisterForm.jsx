@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
 import Swal from 'sweetalert2';
-
-
+import { useMatchingUsers } from '../../contexts/MatchingUsersContext';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
 
@@ -22,7 +22,8 @@ const RegistrationForm = () => {
       // acceptsTerms: false,
       // wantsInfo: false,
     });
-    const [matchingUsers, setMatchingUsers] = useState([]);
+    const { setMatchingUsers } = useMatchingUsers();
+    const navigate = useNavigate();
 
       const handleSubmit = async (e) => {
       e.preventDefault();
@@ -48,15 +49,19 @@ const RegistrationForm = () => {
             },
           });
           
+          const { matchingUsers } = response.data;
+          setMatchingUsers(matchingUsers);
+
           if (response.status === 201) {
             Swal.fire({
                   title: '¡Registro exitoso!',
                   text: 'Tu cuenta ha sido creada correctamente.',
                   icon: 'success',
+                }).then(() => {
+                  // Redirige a la página deseada
+                  navigate('/matches');
                 });
           }
-          const { matchingUsers } = response.data;
-          setMatchingUsers(matchingUsers);
 
         } catch (error) {
           console.error('Error al enviar el formulario:', error.response);
@@ -291,18 +296,18 @@ const RegistrationForm = () => {
             </button>
           </form>
           <div>
-          {matchingUsers.length > 0 && (
+          {/* {matchingUsers.length > 0 && (
         <div>
           <h2>Usuarios coincidentes:</h2>
           <ul>
-            {matchingUsers.map((user) => (
-              <li key={user.id}>
-                Nombre: {user.name}, Apellido: {user.lastname}, Email: {user.email}
+            {matchingUsers.map((matchingUser) => (
+              <li key={matchingUser.id}>
+                Nombre: {matchingUser.name}, Apellido: {matchingUser.lastname}, Edad: {matchingUser.birthday}
               </li>
             ))}
           </ul>
         </div>
-      )}
+      )} */}
           </div>
         </div>
       );

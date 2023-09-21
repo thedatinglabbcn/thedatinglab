@@ -7,11 +7,15 @@ import 'bootstrap/dist/js/bootstrap.bundle.js';
 import { RouterProvider } from 'react-router-dom';
 import router from './application/Router';
 // import '@fortawesome/fontawesome-free/css/all.min.css';
+import { MatchingUsersProvider } from './contexts/MatchingUsersContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <MatchingUsersProvider>
+      <RouterProvider router={router}/>
+    </MatchingUsersProvider>
   </React.StrictMode>
 );
 
