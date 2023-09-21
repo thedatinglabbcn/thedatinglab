@@ -5,10 +5,13 @@ import { faTrash, faFilePen } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 
-function Events({event}) {
+function Events({event, onDelete}) {
+  const handleDeleteClick = () => {
+    onDelete(event.id);
+  };
   return (
     <>
-
+<table className='dashboard-table'>
       <tbody>
           <tr className='dashboard-row' key={event.id}>
             <td>{event.id}</td>
@@ -20,6 +23,7 @@ function Events({event}) {
               />
             </td>
             <td>{event.title}</td>
+            
 
             <td className='dashboard-actions'>
             <Link to="/dashboard/edit">
@@ -27,8 +31,8 @@ function Events({event}) {
               <FontAwesomeIcon icon={faFilePen} /> {/* Agrega el icono dentro del botón */}
             </button>
             </Link>
-            <Link to="/dashboard/edit">
-            <button className="delete-button">
+            <Link to="/dashboard/events">
+            <button className="delete-button" onClick={handleDeleteClick}>
               <FontAwesomeIcon icon={faTrash} /> {/* Agrega el icono dentro del botón */}
             </button>
             </Link>
@@ -36,6 +40,7 @@ function Events({event}) {
           </tr>
         
       </tbody>
+      </table>
       <hr />
   
     

@@ -111,7 +111,17 @@
 
   }
 
-  .dashboard-links {
+  .dashboard-buttons{
+    display: flex;
+    justify-content: center;
+    border: 1px solid var(--color-borders);
+    border-radius: 1rem;
+    background-color: var(--color-beige);
     padding: 2rem 3rem;
  
+   }
+
+   .dashboard-links{
+    text-decoration: none;
+    color: black;
    }

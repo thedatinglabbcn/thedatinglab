@@ -23,20 +23,19 @@ useEffect(() =>{
 
 }, []);
 
-const handleDeleteEvent = async (eventId) => {
-    try {
-      const api = EventService();
-      await api.destroyEvent(eventId);
-      // Actualiza la lista de eventos después de eliminar uno
-      api.getAllEvents().then(res => {
-        setEvents(res.data);
-      });
-    } catch (error) {
-      console.error('Error al eliminar evento:', error);
-    }
-  };
- 
- 
+const handleDeleteEvent = async ($eventId) => {
+  console.log('Eliminar evento con ID:', $eventId);
+  try {
+    const api = EventService();
+    await api.destroyEvent($eventId);
+    console.log('Evento eliminado con éxito');
+    // Recarga la página una vez que se elimina el evento
+    window.location.reload();
+  } catch (error) {
+    console.error('Error al eliminar evento:', error);
+  }
+};
+
 
   return (
     <>
@@ -64,7 +63,9 @@ const handleDeleteEvent = async (eventId) => {
     
       {
         events.map((event, index) => (
-        <Events key={index} event = {event}/>
+        <Events key={index} 
+        event = {event}
+        onDelete={handleDeleteEvent}/>
         ))
       }
 
