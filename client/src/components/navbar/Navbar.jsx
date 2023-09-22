@@ -4,12 +4,12 @@ import './Navbar.css';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../service/AuthService';
 import Logo from '../../assets/images/Capa_1.png';
-
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const auth = AuthService();
-
+   const navigate = useNavigate();
   const handleLogout = (e) => {
     e.preventDefault();
     
@@ -19,8 +19,11 @@ const Navbar = () => {
         title: '¡Sesión cerrada!',
         text: '¡Hasta pronto!',
         icon: 'success',
+      }).then(() => {
+        // Redirige a la página deseada
+        navigate('/');
       });
-      
+
       console.log(res);
     }).catch(err => {
       console.log(err);
