@@ -1,5 +1,5 @@
-# The dating lab
-En el bootcamp de FemCoders de fullstack que estamos realizando, se nos brindó la oportunidad de trabajar en un emocionante proyecto junto a un cliente real. Nuestra misión es desarrollar una plataforma web que permitiera a las personas conectarse a través de sus sentidos, explorar eventos y descubrir afinidades compartidas.
+# The Dating Lab
+En el bootcamp de fullstack que estamos realizando en FemCoders , se nos brindó la oportunidad de trabajar en un emocionante proyecto junto a un cliente real. Nuestra misión es desarrollar una plataforma web que permitiera a las personas conectarse a través de sus sentidos, explorar eventos y descubrir afinidades compartidas.
 
 ## Sobre este proyecto
 Al acceder a la página, los usuarios son recibidos con una intrigante introducción centrada en la búsqueda de su pareja ideal a través de la conexión sensorial. El primer paso es completar un formulario que evalúa la compatibilidad con otros usuarios, proporcionando valiosas recomendaciones de coincidencias. Luego, se les brinda la emocionante oportunidad de asistir a eventos sensoriales exclusivos, donde pueden conocer en persona a sus posibles coincidencias y vivir una experiencia única. Para acceder a estos eventos, los usuarios tienen la opción de pagar por eventos individuales o suscribirse a una membresía mensual a esta experiencia sensorial única.
