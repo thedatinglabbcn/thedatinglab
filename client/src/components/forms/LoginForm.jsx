@@ -3,9 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
 import Swal from 'sweetalert2';
-
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -23,7 +24,7 @@ const LoginForm = () => {
       e.preventDefault();
       auth.login(formData).then(res => {
         const { token } = res.data;
-
+         
         localStorage.setItem('auth_token', token);
         
 
@@ -31,6 +32,9 @@ const LoginForm = () => {
           title: '¡Inicio de sesión exitoso!',
           text: '¡Bienvenido!',
           icon: 'success',
+        })  .then(() => {
+          // Redirige a la página deseada
+          navigate('/matches');
         });
 
         
@@ -41,7 +45,6 @@ const LoginForm = () => {
           text: '¡Usuario o contraseña incorrectos!',
           icon: 'error',
         });
-        console.log(err);
       });
 
       //console.log(formData);
