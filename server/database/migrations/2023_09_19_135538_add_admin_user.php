@@ -33,9 +33,7 @@ class AddAdminUser extends Migration
             'lastname' => 'Admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('onlyadmin1234'),
-            'image' => null,
-            'acceptsTerms' => true,
-            'wantsInfo' => false,
+            'image' => '',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { EventService } from '../../service/EventService';
+import axios from 'axios';
 import Swal from 'sweetalert2';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Forms.css';
 
 function CreateForm() {
   const [eventData, setEventData] = useState({
@@ -10,6 +8,7 @@ function CreateForm() {
     date: '',
     time: '',
     description: '',
+    image: null,
   });
 
   const handleInputChange = (e) => {
@@ -20,26 +19,51 @@ function CreateForm() {
     });
   };
 
-  const auth = EventService();
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setEventData({
+      ...eventData,
+      image: file,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    auth.createEvent(eventData)
-    .then(res => {
+
+    const formData = new FormData();
+    formData.append('title', eventData.title);
+    formData.append('date', eventData.date);
+    formData.append('time', eventData.time);
+    formData.append('description', eventData.description);
+    formData.append('image', eventData.image);
+
+    try {
+      const response = await axios.post('/api/admin/event', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.status === 200) {
         Swal.fire({
           title: '¡Creación exitosa!',
           text: 'Tu evento ha sido creado correctamente.',
           icon: 'success',
         });
-        console.log(res);
-      })
-      .catch(err => console.log(err));
-      console.log(eventData);
+        
+        console.log('Evento creado exitosamente');
+      } else {
+      }
+    } catch (error) {
+      console.error('Error al crear el evento:', error);
+      // Manejar errores si es necesario
+    }
   };
-  
+
   return (
     <div>
       <h2>Crear Evento</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
           <label htmlFor="title">Título</label>
           <input
@@ -65,6 +89,7 @@ function CreateForm() {
           <input
             type="time"
             name="time"
+            step="1"
             value={eventData.time}
             onChange={handleInputChange}
             required
@@ -78,6 +103,16 @@ function CreateForm() {
             onChange={handleInputChange}
             required
           ></textarea>
+        </div>
+        <div>
+          <label htmlFor="image">Imagen</label>
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleFileChange}
+            required
+          />
         </div>
         <button type="submit">Crear Evento</button>
       </form>
