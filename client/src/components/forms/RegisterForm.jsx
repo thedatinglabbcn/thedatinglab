@@ -59,7 +59,7 @@ const RegistrationForm = () => {
                   icon: 'success',
                 }).then(() => {
                   // Redirige a la página deseada
-                  navigate('/matches');
+                  navigate('/login');
                 });
           }
 
