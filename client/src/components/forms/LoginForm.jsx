@@ -6,11 +6,13 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
       email: '',
       password: '',
     });
+
     const auth = AuthService();
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -42,7 +44,7 @@ const LoginForm = () => {
       }).catch(err => {
         Swal.fire({
           title: '¡Error!',
-          text: '¡Usuario o contraseña incorrectos!',
+          text: '¡Error al enviar el formulario!',
           icon: 'error',
         });
       });
@@ -54,7 +56,7 @@ const LoginForm = () => {
       <div className='body-login'>
       <div className="container">
         <h1 className='form-title'>Iniciar Sesión</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="mb-4">
             <label htmlFor="email" className="form-label">
               Email

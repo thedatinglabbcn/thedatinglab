@@ -5,6 +5,8 @@ import LoginPage from '../pages/login/LoginPage'
 import Dashboard from '../pages/admin/Dashboard';
 import DashboardEvents from '../pages/admin/DashboardEvents';
 import MatchCard from '../components/matchCard/MatchCard';
+import PreferencesForm from '../components/forms/PreferencesForm';
+import ProfileForm from '../components/forms/ProfileForm';
 
 const router = createBrowserRouter([
   { 
@@ -14,6 +16,14 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <RegisterPage />
+  },
+  {
+    path: '/preferences',
+    element: <PreferencesForm />
+  },
+  {
+    path: '/profile-form',
+    element: <ProfileForm />
   },
   {
     path: '/matches',
