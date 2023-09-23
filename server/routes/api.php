@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\PreferencesController;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\PreferencesController;
 
 
 /*
@@ -31,10 +32,11 @@ Route::delete('/event/{event}', [EventController::class, 'destroy']);
 
 
 Route::post('/register', [AuthController::class, 'register']);
-// Route::post('/register-preferences', [PreferencesController::class, 'store']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/preferences', [PreferencesController::class, 'store']);
+    Route::post('/profile', [ProfileController::class, 'store']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

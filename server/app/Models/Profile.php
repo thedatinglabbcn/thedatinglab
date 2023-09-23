@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Preference extends Model
+class Profile extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,12 +17,9 @@ class Preference extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'gender',
-        'looksFor',
-        'preferences1',
-        'preferences2',
-        'catsDogs',
-        'user_id',
+        'image',
+        'description',
+        'user_id'
     ];
 
     protected $hidden = [

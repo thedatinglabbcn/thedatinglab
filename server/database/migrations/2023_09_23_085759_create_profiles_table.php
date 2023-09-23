@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('preferences', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->enum('gender', ['Hombre', 'Mujer', 'Otro']);
-            $table->enum('looksFor', ['Hombre', 'Mujer', 'Otro']);
-            $table->enum('preferences1', ['Netflix', 'Eventos', 'Deporte', 'Escapadas', 'Todas', 'Otras']);
-            $table->enum('preferences2', ['Alcohol','Infusiones','NoAlcohol','Según','Ninguna']);
-            $table->enum('catsDogs', ['Gatos', 'Perros', 'Todos', 'DeAmigos']);
+            $table->string('image');
+            $table->text('description');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('preferences');
+        Schema::dropIfExists('profiles');
     }
 };

@@ -19,12 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'lastname',
         'email',
-        'password',
-        'image',
-        // 'acceptsTerms',
-        // 'wantsInfo',
+        'password'
     ];
 
     /**
@@ -51,6 +47,10 @@ class User extends Authenticatable
 
     public function preferences() {
         return $this->hasMany(Preference::class);
+    }
+
+    public function profiles() {
+        return $this->hasOne(Profile::class);
     }
     
 }
