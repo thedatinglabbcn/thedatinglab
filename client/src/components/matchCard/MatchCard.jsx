@@ -34,7 +34,7 @@ function MatchCard() {
     <div>
       <Navbar />
       <div className='match-container'>
-        <h1 className='match-title'>Tus match!</h1>
+        <h1 className='match-title'>¡Tus matches!</h1>
         <center>
         {matchingUsers.map((user) => (
             <div className="match-profile" style={{ width: '18rem'}} key={user.id}>
