@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -13,61 +14,73 @@ class AuthController extends Controller
      * Register a new user.
      */
     public function register(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:6',
-    ]);
-
-        $user = new User([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
         ]);
 
-        $user->save();
-        $token = $user->createToken('auth_token')->plainTextToken;
+        if ($validator->fails()) {
+            return response()->json([
+                'validation_errors' => $validator->messages(),
+            ], 422);
+        } else {    
+            $user = new User([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')), // Asegúrate de almacenar la contraseña con Hash
+            ]);
 
-        return response()->json([
-            'message' => 'Usuario y preferencia creados correctamente',
-            'user' => $user,
-            'token' => $token,
-        ], 201);
+            $user->save();
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Usuario creado correctamente',
+                'user' => $user,
+                'token' => $token,
+            ], 201);
         }
+    } // Cierra el método register
 
     /**
      * Login user and create token.
      */
     public function login(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' =>'required'
         ]);
 
-       $user = User::where('email', $request->email)->first();
-       if (!$user || !Hash::check($request->password, $user->password)) {
+        if ($validator->fails()) {
             return response()->json([
-                'msg' => 'Usuario o contraseña incorrectos'
-            ], 401);
+                'validation_errors' => $validator->messages(),
+            ], 422);
+        } else {    
+            $user = User::where('email', $request->email)->first();
+            if (!$user || !Hash::check($request->password, $user->password)) {
+                return response()->json([
+                    'msg' => 'Usuario o contraseña incorrectos'
+                ], 401);
+            }
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            $cookie = cookie('token', $token, 60 * 24);
+
+            return response()->json([
+                'msg' => 'Usuario conectado exitosamente',
+                'token' => $token
+            ], 200)->withCookie($cookie);
         }
+    } // Cierra el método login
 
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        $cookie = cookie('token', $token, 60 * 24);
-
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
         return response()->json([
-            'msg' => 'Usuario conectado exitosamente',
-            'token' => $token
-        ], 200)->withCookie($cookie);
-    }
-
-        public function logout(Request $request)
-        {
-            $request->user()->currentAccessToken()->delete();
-            return response()->json([
             'msg' => 'Usuario desconectado exitosamente'	
         ], 200);
-    } 
-} 
+    } // Cierra el método logout
+}

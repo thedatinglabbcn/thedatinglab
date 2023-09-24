@@ -41,7 +41,6 @@ function ProfileForm() {
         console.error(err);
         if (err.response && err.response.status === 422) {
           const errors = err.response.data.validation_errors;
-          // Establecer los errores en el estado
           setValidationErrors(errors);
         } else {
           Swal.fire({
@@ -61,8 +60,10 @@ function ProfileForm() {
       [name]: value,
     });
     
-    // Limpiar los errores cuando cambia el valor de un campo
-    setValidationErrors({});
+    setValidationErrors({
+      ...validationErrors,
+      [name]: '',
+    });
   };
 
   const handleImageChange = (e) => {
@@ -71,7 +72,6 @@ function ProfileForm() {
       image: e.target.files[0],
     });
     
-    // Limpiar los errores cuando cambia el valor de un campo
     setValidationErrors({});
   };
 

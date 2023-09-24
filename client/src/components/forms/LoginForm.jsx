@@ -13,12 +13,20 @@ const LoginForm = () => {
       password: '',
     });
 
+    const [validationErrors, setValidationErrors] = useState({
+    });
+
     const auth = AuthService();
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData({
         ...formData,
         [name]: value,
+      });
+
+      setValidationErrors({
+        ...validationErrors,
+        [name]: '',
       });
     };
   
@@ -39,17 +47,20 @@ const LoginForm = () => {
           navigate('/matches');
         });
 
-        
-        //console.log(res);
-      }).catch(err => {
-        Swal.fire({
-          title: '¡Error!',
-          text: '¡Error al enviar el formulario!',
-          icon: 'error',
-        });
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.response && err.response.status === 422) {
+          const errors = err.response.data.validation_errors;
+          setValidationErrors(errors);
+        } else {
+          Swal.fire({
+            title: '¡Error!',
+            text: '¡Los datos no son correctos!',
+            icon: 'error',
+          });
+        }
       });
-
-      //console.log(formData);
     };
  
     return (
@@ -71,6 +82,9 @@ const LoginForm = () => {
               onChange={handleChange}
               required
             />
+            {validationErrors.email && (
+              <div className="text-danger">{validationErrors.email.join(', ')}</div>
+            )}
           </div>
           <div className="mb-4">
             <label htmlFor="password" className="form-label">
@@ -86,8 +100,11 @@ const LoginForm = () => {
               onChange={handleChange}
               required
             />
+            {validationErrors.password && (
+              <div className="text-danger">{validationErrors.password.join(', ')}</div>
+            )}
           </div>
-          <div className='login-buttons'>
+          <div className='login-buttons'> 
           <button type="submit" className="button-send">
             Ingresar
           </button>

@@ -147,6 +147,11 @@ return [
     */
 
     'attributes' => [
+        'name' => 'nombre',
+        'password' => 'contraseña',
+        'preferences1' => '',
+        'preferences2' => '',
+        'catsDogs' => '',
         'image' => 'imagen',
         'title' => 'título',
         'location' => 'ubicación',

@@ -14,6 +14,8 @@ const RegistrationForm = () => {
       password: '',
     });
 
+const [validationErrors, setValidationErrors] = useState({});
+
     const auth = AuthService();
     const handleOnChange = (e) => {
       const { name, value } = e.target;
@@ -21,7 +23,14 @@ const RegistrationForm = () => {
         ...formData,
         [name]: value,
       });
-    };
+    
+      setValidationErrors({
+        ...validationErrors,
+        [name]: '',
+    });
+  };
+
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,15 +46,21 @@ const RegistrationForm = () => {
           })  .then(() => {
             navigate('/preferences');
           });
-  
-        }).catch(err => {
-          Swal.fire({
-            title: '¡Error!',
-            text: '¡Usuario o contraseña incorrectos!',
-            icon: 'error',
-          });
-        });  
-};
+        })
+        .catch((err) => {
+          console.error(err);
+          if (err.response && err.response.status === 422) {
+            const errors = err.response.data.validation_errors;
+            setValidationErrors(errors);
+          } else {
+            Swal.fire({
+              title: '¡Error!',
+              text: '¡Usuario o contraseña incorrectos!',
+              icon: 'error',
+            });
+          }
+        });
+    };
 
     return (
       <div className='body-registration'>
@@ -67,6 +82,9 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+              {validationErrors.name && (
+              <div className="text-danger">{validationErrors.name.join(', ')}</div>
+            )}
             </div>
             <div className="mb-4">
               <label htmlFor="email" className="form-label">
@@ -81,6 +99,9 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+              {validationErrors.email && (
+              <div className="text-danger">{validationErrors.email.join(', ')}</div>
+            )}
             </div>
             <div className="mb-4">
               <label htmlFor="password" className="form-label">
@@ -95,6 +116,9 @@ const RegistrationForm = () => {
                 onChange={handleOnChange}
                 required
               />
+              {validationErrors.password && (
+              <div className="text-danger">{validationErrors.password.join(', ')}</div>
+            )}
             </div>
             <button type="submit" className="button-send" >
               Enviar
