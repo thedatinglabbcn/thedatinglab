@@ -6,40 +6,59 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Preference;
 use App\Models\Profile;
+use Illuminate\Database\Eloquent\Builder;
 
 class MatchingController extends Controller
 {
     public function getMatches()
     {
-        // Obtén el usuario autenticado
         $user = auth()->user();
 
-        // Obtén las preferencias del usuario autenticado
         $userPreferences = $user->preferences;
 
-        // Si el usuario no tiene preferencias, puedes manejar este caso como desees
-        if (!$userPreferences) {
-            return response()->json(['message' => 'El usuario no tiene preferencias.']);
-        }
-
-        // Realiza la consulta para encontrar coincidencias basadas en las preferencias
         $matches = User::whereHas('preferences', function ($query) use ($userPreferences) {
             $query->where('looksFor', $userPreferences->gender);
         })->get();
 
-        // Preparar la respuesta con los datos requeridos (name, description, image)
         $response = [];
+
         foreach ($matches as $match) {
+            $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreferences, $match->preferences));
+
             $response[] = [
                 'name' => $match->name,
                 'description' => $match->profile->description,
                 'image' => $match->profile->image,
+                'matchingPercentage' => $matchingPercentage,
             ];
         }
 
         return response()->json(['matches' => $response]);
     }
+
+    private function calculateMatchingPercentage($userPreferences, $matchPreferences)
+    {
+        $totalFields = 3; // Total de campos para comparar
+        $matchingFields = 0; // Campos coincidentes
+
+        // Compara cada campo y suma 1 por cada coincidencia
+        if ($userPreferences->preferences1 === $matchPreferences->preferences1) {
+            $matchingFields++;
+        }
+        if ($userPreferences->preferences2 === $matchPreferences->preferences2) {
+            $matchingFields++;
+        }
+        if ($userPreferences->catsDogs === $matchPreferences->catsDogs) {
+            $matchingFields++;
+        }
+
+        // Calcula el porcentaje de coincidencia
+        $matchingPercentage = ($matchingFields / $totalFields) * 100;
+
+        return $matchingPercentage;
+    }
 }
+
 
 
 // {

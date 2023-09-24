@@ -39,11 +39,11 @@ function MatchCard() {
         {matchingUsers.map((user) => (
             <div className="match-profile" style={{ width: '18rem'}} key={user.id}>
               <div className="card-img-top">    
-                <center><img src={`http://localhost:8000/storage/${user.image}`} className="rounded-circle" alt={`La persona con quien se ha hecho match - ${user.name}`} /></center>
+                <center><img src={`http://localhost:8000/storage/${user.image}`} className="rounded-circle" alt={`Tu match: ${user.name}`} /></center>
               </div>
               <div className="match-body">
                 <h5 className="card-title text-center">{user.name}</h5>
-                <h6 className="card-text text-center">Porcentaje:</h6>
+                <h6 className="card-text text-center">Porcentaje: {user.matchingPercentage}%</h6>
                 <p className="card-text text-center">{user.description}</p>
               </div>
             </div>
