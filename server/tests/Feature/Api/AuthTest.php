@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
+use Illuminate\Http\UploadedFile;
 
 use Tests\TestCase;
 
@@ -20,9 +21,12 @@ class AuthTest extends TestCase
         $this->postJson('api/register', [
             'name' => 'Denise',
             'lastname' => 'Garcia',
-            'age' => '23',
             'email' => 'denise@email.com',
-            'password' => Hash::make('123456789')
+            'email_verified_at' => '2021-10-12 00:00:00',
+            'password' => Hash::make('123456789'),
+            'image' => UploadedFile::fake()->image('denise.jpg'),
+            'smokes' => 'No',
+            'wantsChildren' => 'Sí',
         ]);
         
         $this->assertCount(1, User::all());

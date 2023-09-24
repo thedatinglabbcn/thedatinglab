@@ -51,7 +51,7 @@ class AuthController extends Controller
         ]);
 
         $user->preferences()->save($preference);
-
+        $token = $user->createToken('auth_token')->plainTextToken;
         
         $matchingUsers = User::whereHas('preferences', function ($query) use ($request) {
             $query->where('smokes', $request->input('smokes'))
@@ -60,10 +60,11 @@ class AuthController extends Controller
 
         \Illuminate\Support\Facades\Log::info('Contenido de $preference:', ['preference' => $preference]);
         \Illuminate\Support\Facades\Log::info('Contenido de $matchingUsers:', ['matchingUsers' => $matchingUsers]);
-    
+        
         return response()->json([
             'message' => 'Usuario y preferencia creados correctamente',
             'user' => $user,
+            'token' => $token,
             'preference' => $preference,
             'matchingUsers' => $matchingUsers,
         ], 201);
@@ -83,7 +84,7 @@ class AuthController extends Controller
        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'msg' => 'Usuario o contraseña incorrectos'
-            ],);
+            ], 401);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;

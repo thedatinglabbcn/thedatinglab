@@ -20,7 +20,7 @@ class EventTest extends TestCase
 
      Event::factory()->create();
 
-     $response = $this->getJson('api/events');
+     $response = $this->getJson('api/event');
 
      $response->assertStatus(200)
      ->assertJsonCount(1);

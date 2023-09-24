@@ -3,9 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
 import Swal from 'sweetalert2';
-
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -23,7 +24,7 @@ const LoginForm = () => {
       e.preventDefault();
       auth.login(formData).then(res => {
         const { token } = res.data;
-
+         
         localStorage.setItem('auth_token', token);
         
 
@@ -31,6 +32,9 @@ const LoginForm = () => {
           title: '¡Inicio de sesión exitoso!',
           text: '¡Bienvenido!',
           icon: 'success',
+        })  .then(() => {
+          // Redirige a la página deseada
+          navigate('/matches');
         });
 
         
@@ -41,13 +45,13 @@ const LoginForm = () => {
           text: '¡Usuario o contraseña incorrectos!',
           icon: 'error',
         });
-        console.log(err);
       });
 
       //console.log(formData);
     };
  
     return (
+      <div className='body-login'>
       <div className="container">
         <h1 className='form-title'>Iniciar Sesión</h1>
         <form onSubmit={handleSubmit}>
@@ -81,17 +85,21 @@ const LoginForm = () => {
               required
             />
           </div>
+          <div className='login-buttons'>
           <button type="submit" className="button-send">
             Ingresar
           </button>
+          <button type="button" className="button-cancel"  onClick={() => window.location.href = '/'}>Cancelar</button>
+          </div>
         </form>
         
         <p className='form-help'>
           ¿Has olvidado la contraseña? <a href="#">Toca aquí</a>
         </p>
         <p className='form-help'>
-          ¿No tienes una cuenta? <a href="#">Regístrate</a>
+          ¿No tienes una cuenta? <a onClick={() => window.location.href = '/register'} href="#">Regístrate</a>
         </p>
+      </div>
       </div>
     );
   };

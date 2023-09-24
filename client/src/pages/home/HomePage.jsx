@@ -2,6 +2,7 @@ import { EventService } from '../../service/EventService';
 import React, { useState, useEffect } from 'react';
 import EventCard from "../../components/eventCard/EventCard";
 import Navbar from '../../components/navbar/Navbar';
+import Footer from '../../components/footer/Footer';
 import './HomePage.css';
 
 
@@ -25,9 +26,9 @@ useEffect(() =>{
       <Navbar />
       <section className="hero">
         <div className="hero-content">
-          <h1>Donde los sentidos encuentran el amor</h1>
+          <h1 className='home-title'>Donde los sentidos encuentran el amor</h1>
           <p>Creemos en la compatibilidad emocional como la base de relaciones sólidas.</p>
-          <button type="button" className="button-start"  onClick={() => window.location.href = '/'}>
+          <button type="button" className="button-start"  onClick={() => window.location.href = '/register'}>
               ¿Te apuntas?
             </button>
         </div>
@@ -35,7 +36,7 @@ useEffect(() =>{
 
       <section className="how-it-works">
         <div className="how-it-works-content">
-          <h2>¿Cómo funciona?</h2>
+          <h2 className='home-subtitle'>¿Cómo funciona?</h2>
           <ol>
             <li>Completa el formulario de compatibilidad emocional.</li>
             <li>Recibe tus match personalizados.</li>
@@ -49,12 +50,13 @@ useEffect(() =>{
         </div>
       </section>
       <section id="event-section">
-        <h1 className='title-Events'>Experiencias</h1>
+        <h1 className='home-subtitle'>Experiencias</h1>
       { events.map((event, index) => (
         <EventCard key={index} event = {event}/>
         ))
       }
       </section>
+    <Footer/>
     </>
   )
 } 

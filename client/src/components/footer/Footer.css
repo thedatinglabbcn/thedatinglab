@@ -3,4 +3,18 @@
 .footer {
     background-color: var(--color-text);
     color: var(--color-primary);
+    padding-top: 3rem 0;
+}
+
+.footer-logo{
+    text-align: center;
+    padding: 2rem 0 1rem;
+}
+
+.footer-links{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3rem;
+    gap: 2rem;
+    width: 100%;
 }
