@@ -33,6 +33,11 @@ function ProfileForm() {
           title: 'Perfil creado',
           text: '¡Ya estás dentro!',
           icon: 'success',
+          confirmButtonColor: '#ED696B',
+          customClass: {
+          popup: 'custom-swal-background',
+          confirmButton: 'custom-swal-button',
+          }
         }).then(() => {
           navigate('/matches');
         });
@@ -47,6 +52,11 @@ function ProfileForm() {
             title: '¡Error!',
             text: '¡Ha habido un error!',
             icon: 'error',
+            confirmButtonColor: '#ED696B',
+            customClass: {
+            popup: 'custom-swal-background',
+            confirmButton: 'custom-swal-button',
+          }
           });
         }
       });

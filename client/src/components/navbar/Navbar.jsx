@@ -19,6 +19,11 @@ const Navbar = () => {
         title: '¡Sesión cerrada!',
         text: '¡Hasta pronto!',
         icon: 'success',
+        confirmButtonColor: '#ED696B',
+        customClass: {
+        popup: 'custom-swal-background',
+        confirmButton: 'custom-swal-button',
+          }
       }).then(() => {
         // Redirige a la página deseada
         navigate('/');

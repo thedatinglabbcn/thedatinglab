@@ -42,8 +42,12 @@ const LoginForm = () => {
           title: '¡Inicio de sesión exitoso!',
           text: '¡Bienvenido!',
           icon: 'success',
+          confirmButtonColor: '#ED696B',
+          customClass: {
+            popup: 'custom-swal-background',
+            confirmButton: 'custom-swal-button',
+          }
         })  .then(() => {
-          // Redirige a la página deseada
           navigate('/matches');
         });
 
@@ -58,6 +62,11 @@ const LoginForm = () => {
             title: '¡Error!',
             text: '¡Los datos no son correctos!',
             icon: 'error',
+            confirmButtonColor: '#ED696B',
+            customClass: {
+            popup: 'custom-swal-background',
+            confirmButton: 'custom-swal-button',
+          }
           });
         }
       });

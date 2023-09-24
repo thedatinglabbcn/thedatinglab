@@ -53,6 +53,11 @@ const PreferencesForm = () => {
           title: '¡Error!',
           text: '¡Ha habido un error!',
           icon: 'error',
+          confirmButtonColor: '#ED696B',
+          customClass: {
+          popup: 'custom-swal-background',
+          confirmButton: 'custom-swal-button',
+          }
         });
       }
     });

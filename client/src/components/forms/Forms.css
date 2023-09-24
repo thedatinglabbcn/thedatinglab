@@ -63,3 +63,19 @@ background-color: var(--color-beige);
     font-size: 14px;
     margin-top: 4px;
   }
+
+  .custom-swal-background {
+    background-color: var(--color-beige);
+  }
+
+  .custom-swal-button {
+    border: none !important;
+    outline: none !important; 
+    box-shadow: none !important;
+  }
+  
+  
+  
+  
+  
+  

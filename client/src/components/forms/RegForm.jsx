@@ -43,6 +43,11 @@ const [validationErrors, setValidationErrors] = useState({});
             title: 'Tu cuenta ha sido creada correctamente.',
             text: '¡Bienvenid@!',
             icon: 'success',
+            confirmButtonColor: '#ED696B',
+            customClass: {
+            popup: 'custom-swal-background',
+            confirmButton: 'custom-swal-button',
+          }
           })  .then(() => {
             navigate('/preferences');
           });
@@ -57,6 +62,11 @@ const [validationErrors, setValidationErrors] = useState({});
               title: '¡Error!',
               text: '¡Usuario o contraseña incorrectos!',
               icon: 'error',
+              confirmButtonColor: '#ED696B',
+              customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+          }
             });
           }
         });
