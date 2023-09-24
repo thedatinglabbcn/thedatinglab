@@ -16,12 +16,19 @@ const PreferencesForm = () => {
         catsDogs: '',
     });
 
+    const [validationErrors, setValidationErrors] = useState({});
+
     const preferences = PreferencesService();
 
     const handleOnChange = (e) => {
         const { name, value, type, checked } = e.target;
         const newValue = type === 'checkbox' ? checked : value;
-    
+   
+    setValidationErrors({
+        ...validationErrors,
+        [name]: '', // Limpia el error del campo específico
+    });    
+
     setFormData({
         ...formData,
         [name]: newValue,
@@ -34,14 +41,22 @@ const PreferencesForm = () => {
 
     preferences.createPreferences(formData).then(res => {
         navigate('/profile-form');
-    }).catch(err => {
-      Swal.fire({
-        title: '¡Error!',
-        text: '¡Ha habido un error!',
-        icon: 'error',
-      });
+    })
+    .catch((err) => {
+      console.error(err);
+      if (err.response && err.response.status === 422) {
+        const errors = err.response.data.validation_errors;
+        // Establecer los errores en el estado
+        setValidationErrors(errors);
+      } else {
+        Swal.fire({
+          title: '¡Error!',
+          text: '¡Ha habido un error!',
+          icon: 'error',
+        });
+      }
     });
-  };
+};
 
   return (
     <div className='body-registration'>
@@ -86,6 +101,9 @@ const PreferencesForm = () => {
               />
               <label className="btn btn-outline-danger" htmlFor="otro">Otro</label>
             </div>
+            {validationErrors.gender && (
+              <div className='text-danger'>{validationErrors.gender.join(', ')}</div>
+            )}
           </div>
           <div className="mb-4">
             <label className="form-label">Buscas...</label>
@@ -122,6 +140,9 @@ const PreferencesForm = () => {
               />
               <label className="btn btn-outline-danger" htmlFor="buscaOtro">Otro</label>
             </div>
+            {validationErrors.looksFor && (
+              <div className='text-danger'>{validationErrors.looksFor.join(', ')}</div>
+            )}
           </div>
           <div className="mb-4">
             <label>Eres más de...</label>
@@ -191,6 +212,9 @@ const PreferencesForm = () => {
               />
               <label className="btn btn-outline-danger" htmlFor="otras">Otras que te invito a descubrir</label>
             </div>
+            {validationErrors.preferences1 && (
+              <div className='text-danger'>{validationErrors.preferences1.join(', ')}</div>
+            )}
           </div>
           <div className="mb-4">
             <label>Eres más de...</label>
@@ -249,6 +273,9 @@ const PreferencesForm = () => {
               />
               <label className="btn btn-outline-danger" htmlFor="ninguna">Ninguna, no ingiero líquidos</label>
             </div>
+            {validationErrors.preferences2 && (
+              <div className='text-danger'>{validationErrors.preferences2.join(', ')}</div>
+            )}
           </div>
           <div className="mb-4">
             <label className="form-label">¿Prefieres los gatos o perros?</label>
@@ -296,6 +323,9 @@ const PreferencesForm = () => {
               />
               <label className="btn btn-outline-danger" htmlFor="deAmigos">Me gustan los de mis amig@s</label>
             </div>
+            {validationErrors.catsDogs && (
+              <div className='text-danger'>{validationErrors.catsDogs.join(', ')}</div>
+            )}
           </div>
           <p className='form-text'>
             Al completar el formulario, aseguramos la compatibilidad con otros usuarios y su compromiso con nuestra comunidad. Te invitamos a abonar 50 euros para acceder a tres eventos de tu elección. Tu contribución nos ayuda a mantener la calidad de nuestros eventos y nuestra comunidad activa. ¡Únete a nosotros!

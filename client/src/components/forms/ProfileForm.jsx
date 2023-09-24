@@ -6,11 +6,14 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
 function ProfileForm() {
+
   const navigate = useNavigate();
   const [formDataState, setFormDataState] = useState({
     image: '',
     description: '',
   });
+  
+  const [validationErrors, setValidationErrors] = useState({});
 
   const profile = ProfileService();
 
@@ -36,12 +39,18 @@ function ProfileForm() {
       })
       .catch((err) => {
         console.error(err);
-        Swal.fire({
-          title: '¡Error!',
-          text: '¡Ha habido un error!',
-          icon: 'error',
-        });
-    });
+        if (err.response && err.response.status === 422) {
+          const errors = err.response.data.validation_errors;
+          // Establecer los errores en el estado
+          setValidationErrors(errors);
+        } else {
+          Swal.fire({
+            title: '¡Error!',
+            text: '¡Ha habido un error!',
+            icon: 'error',
+          });
+        }
+      });
   };
 
   const handleOnChange = (e) => {
@@ -51,6 +60,9 @@ function ProfileForm() {
       ...formDataState,
       [name]: value,
     });
+    
+    // Limpiar los errores cuando cambia el valor de un campo
+    setValidationErrors({});
   };
 
   const handleImageChange = (e) => {
@@ -58,6 +70,9 @@ function ProfileForm() {
       ...formDataState,
       image: e.target.files[0],
     });
+    
+    // Limpiar los errores cuando cambia el valor de un campo
+    setValidationErrors({});
   };
 
   return (
@@ -81,6 +96,9 @@ function ProfileForm() {
               required
               onChange={handleImageChange}
             />
+            {validationErrors.image && (
+              <div className="text-danger">{validationErrors.image.join(', ')}</div>
+            )}
           </div>
           <div className="mb-4">
             <label htmlFor="description" className="form-label">
@@ -94,6 +112,9 @@ function ProfileForm() {
               onChange={handleOnChange}
               required
             />
+            {validationErrors.description && (
+              <div className="text-danger">{validationErrors.description.join(', ')}</div>
+            )}
           </div>
           <div className='login-buttons'>
             <button type="submit" className="button-send">

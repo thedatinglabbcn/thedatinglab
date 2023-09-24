@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Preference;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PreferencesController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'gender' => ['required', 'in:Hombre,Mujer,Otro'],
             'looksFor' => ['required', 'in:Hombre,Mujer,Otro'],
             'preferences1' => ['required', 'in:Netflix,Eventos,Deporte,Escapadas,Todas,Otras'],
@@ -18,6 +19,11 @@ class PreferencesController extends Controller
             'catsDogs' => ['required', 'in:Gatos,Perros,Todos,DeAmigos'],
         ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'validation_errors' => $validator->messages(),
+            ], 422);
+        } else {
         $user = Auth::user();
         $preference = new Preference([
             'gender' => $request->input('gender'),
@@ -34,7 +40,7 @@ class PreferencesController extends Controller
             'message' => 'Preferencia creada correctamente'
         ], 201);
     }
-
+}
     // public function index()
     // {
     //    $preferences = Preference::all();
