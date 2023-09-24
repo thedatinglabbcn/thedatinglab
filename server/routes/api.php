@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\MatchingController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\PreferencesController;
 
@@ -38,5 +39,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/preferences', [PreferencesController::class, 'store']);
     Route::post('/profile', [ProfileController::class, 'store']);
+    Route::get('/matching-users', [MatchingController::class, 'getMatches']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
