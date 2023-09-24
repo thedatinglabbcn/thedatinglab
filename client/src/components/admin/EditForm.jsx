@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import { EventService } from '../../service/EventService';
 import Swal from 'sweetalert2';
+import '../../components/forms/Forms.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function CreateForm() {
+function EditForm() {
+  const navigate = useNavigate();
+  const { eventId } = useParams();
   const [eventData, setEventData] = useState({
     title: '',
     date: '',
@@ -27,7 +32,7 @@ function CreateForm() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -37,58 +42,57 @@ function CreateForm() {
     formData.append('description', eventData.description);
     formData.append('image', eventData.image);
 
-    try {
-      const response = await axios.post('/api/admin/event', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+    EventService.updateEvent(eventId, formData)
+      .then((response) => {
+        if (response.status === 200) {
+          Swal.fire({
+            title: '¡Actualización exitosa!',
+            text: 'La información del evento ha sido actualizada correctamente.',
+            icon: 'success',
+          });
 
-      if (response.status === 200) {
-        Swal.fire({
-          title: '¡Creación exitosa!',
-          text: 'Tu evento ha sido creado correctamente.',
-          icon: 'success',
-        });
-        
-        console.log('Evento creado exitosamente');
-      } else {
-      }
-    } catch (error) {
-      console.error('Error al crear el evento:', error);
-      // Manejar errores si es necesario
-    }
+          navigate('/dashboard');
+        } else {
+          console.log('El servidor respondió con un estado diferente de 200:', response.status);
+        }
+      })
+      .catch((error) => {
+        console.error('Error al actualizar el evento:', error);
+      });
   };
 
   return (
-    <div>
-      <h2>Crear Evento</h2>
+    <div className='container'>
+      <h2 className='form-title'>Editar Evento</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
-          <label htmlFor="title">Título</label>
+          <label  className='form-label' htmlFor="title">Título</label>
           <input
             type="text"
             name="title"
+            className="form-control"
             value={eventData.title}
             onChange={handleInputChange}
             required
           />
         </div>
         <div>
-          <label htmlFor="date">Fecha</label>
+          <label className='form-label' htmlFor="date">Fecha</label>
           <input
             type="date"
             name="date"
+            className="form-control"
             value={eventData.date}
             onChange={handleInputChange}
             required
           />
         </div>
         <div>
-          <label htmlFor="time">Hora</label>
+          <label className='form-label' htmlFor="time">Hora</label>
           <input
             type="time"
             name="time"
+            className="form-control"
             step="1"
             value={eventData.time}
             onChange={handleInputChange}
@@ -96,28 +100,30 @@ function CreateForm() {
           />
         </div>
         <div>
-          <label htmlFor="description">Descripción</label>
+          <label className='form-label' htmlFor="description">Descripción</label>
           <textarea
             name="description"
+            className="form-control"
             value={eventData.description}
             onChange={handleInputChange}
             required
           ></textarea>
         </div>
         <div>
-          <label htmlFor="image">Imagen</label>
+          <label className='form-label' htmlFor="image">Imagen</label>
           <input
             type="file"
             name="image"
+            className="form-control"
             accept="image/*"
             onChange={handleFileChange}
-            required
           />
         </div>
-        <button type="submit">Crear Evento</button>
+        <button className='button-send' type="submit">Aceptar</button>
+        <button className='button-cancel' type="submit">Cancelar</button>
       </form>
     </div>
   );
 }
 
-export default CreateForm;
+export default EditForm;

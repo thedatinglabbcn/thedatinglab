@@ -2,8 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from '../pages/home/HomePage';
 import RegisterPage from '../pages/register/RegisterPage';
 import LoginPage from '../pages/login/LoginPage';
-import CreateForm from '../components/forms/CreateForm';
-import EditForm from '../components/forms/EditForm';
+import CreateForm from '../components/admin/CreateForm';
+import EditForm from '../components/admin/EditForm';
 import MatchCard from '../components/matchCard/MatchCard';
 
 const router = createBrowserRouter([
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     element: <CreateForm />
   },
   {
-    path: '/dashboard/edit',
+    path: '/dashboard/edit/:eventId',
     element: <EditForm />
   }
 
