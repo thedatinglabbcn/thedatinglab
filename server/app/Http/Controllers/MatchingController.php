@@ -15,18 +15,15 @@ class MatchingController extends Controller
     public function getMatches()
     {
         try {
-            // Obtener el usuario autenticado
             $user = auth()->user();
 
-            // Validar si el usuario no está autenticado
             if (!$user) {
                 throw new \Exception('Usuario no autenticado', 401);
             }
 
-            // Obtener las preferencias del usuario
             $userPreferences = $user->preferences;
 
-            // Validar si no se encuentran preferencias para el usuario
+
             if (!$userPreferences) {
                 throw new ModelNotFoundException('No se encontraron preferencias para el usuario', 404);
             }
@@ -59,6 +56,7 @@ class MatchingController extends Controller
             }
 
             return response()->json(['matches' => $response], 200);
+            
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], $e->getCode());
         }
