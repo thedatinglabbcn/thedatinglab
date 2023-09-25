@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { EventService } from '../../service/EventService';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import '../../components/forms/Forms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -52,14 +53,13 @@ function CreateForm() {
 
         console.log('Evento creado exitosamente');
         
-        navigate('/dashboard');
+        navigate('/dashboard/events');
       } else {
-        // Manejar otros estados de respuesta si es necesario
       }
     })
     .catch((error) => {
       console.error('Error al crear el evento:', error);
-      // Manejar errores si es necesario
+
     });
   };
 
@@ -123,7 +123,9 @@ function CreateForm() {
           />
         </div>
         <button className='button-send' type="submit">Aceptar</button>
+        <Link to="/dashboard/events">
         <button className='button-cancel' type="submit">Cancelar</button>
+        </Link>
       </form>
     </div>
   );

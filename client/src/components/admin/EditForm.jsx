@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import '../../components/forms/Forms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -51,7 +52,7 @@ function EditForm() {
             icon: 'success',
           });
 
-          navigate('/dashboard');
+          navigate('/dashboard/events');
         } else {
           console.log('El servidor respondió con un estado diferente de 200:', response.status);
         }
@@ -120,7 +121,9 @@ function EditForm() {
           />
         </div>
         <button className='button-send' type="submit">Aceptar</button>
+        <Link to="/dashboard/events">
         <button className='button-cancel' type="submit">Cancelar</button>
+        </Link>
       </form>
     </div>
   );

@@ -3,7 +3,7 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:8000/';
 axios.defaults.headers.post['Accept'] = 'application/json';
 
-const urlEvents = '/api/events';
+const urlEvents = '/api/event';
 const urlEventsAdmin = '/api/admin/event';
 
 export const EventService = {

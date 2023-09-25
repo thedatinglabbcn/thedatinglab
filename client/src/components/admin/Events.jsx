@@ -3,11 +3,26 @@ import './Events.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faFilePen } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 function Events({event, onDelete}) {
   const handleDeleteClick = () => {
-    onDelete(event.id);
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el evento permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onDelete(event.id);
+        Swal.fire('Eliminado', 'El evento ha sido eliminado con éxito', 'success');
+      }
+    });
   };
   return (
     <>
@@ -26,14 +41,14 @@ function Events({event, onDelete}) {
             
 
             <td className='dashboard-actions'>
-            <Link to="/dashboard/edit">
+            <Link to={`/dashboard/edit/${event.id}`}>
             <button className="edit-button">
-              <FontAwesomeIcon icon={faFilePen} /> {/* Agrega el icono dentro del botón */}
+              <FontAwesomeIcon icon={faFilePen} />
             </button>
             </Link>
             <Link to="/dashboard/events">
             <button className="delete-button" onClick={handleDeleteClick}>
-              <FontAwesomeIcon icon={faTrash} /> {/* Agrega el icono dentro del botón */}
+              <FontAwesomeIcon icon={faTrash} />
             </button>
             </Link>
             </td>
