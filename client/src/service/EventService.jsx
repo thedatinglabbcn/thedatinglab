@@ -1,34 +1,33 @@
-// import axios from 'axios';
-// axios.defaults.baseURL = 'http://localhost:8000/';
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
-// axios.defaults.headers.post['Accept'] = 'application/json';
-// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+import axios from 'axios';
 
-// axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://localhost:8000/';
+axios.defaults.headers.post['Accept'] = 'application/json';
 
+const urlEvents = '/api/event';
+const urlEventsAdmin = '/api/admin/event';
 
-// axios.interceptors.request.use(function (res){
-//     const token = localStorage.getItem('auth_token');
-//     res.headers.Authorization = token ? `Bearer ${token}`: '';
-//         return res
-// }
-// );
+export const EventService = {
+  getAllEvents: () => {
+    return axios.get(urlEvents);
+  },
 
+  createEvent: (formData) => {
+    return axios.post(urlEventsAdmin, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
 
-// export const DateService =  () => {
-//   const url = '/api';
-  
-//   const getAllDates = () => {
-//     const response =  axios.get(url)
-//     return response
-//   }
+  updateEvent: (eventId, eventData) => {
+    return axios.post(`${urlEventsAdmin}/${eventId}`, eventData, {
+      headers: {
+      'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
 
-//   const createDates = (date) => {
-//     const response = axios.post (`${url}/create`, date);
-//     return response
-  
-//   }
-
-
-//   return {getAllDates, createDates};
-// }
+  destroyEvent: (eventId) => {
+    return axios.delete(`${urlEventsAdmin}/${eventId}`);
+  },
+};

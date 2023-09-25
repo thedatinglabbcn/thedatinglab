@@ -1,0 +1,77 @@
+/* Estilo general */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+.hero {
+    background-image: url('../../assets/images/Slider.png'); 
+    background-size: cover;
+    color:var(--color-white);
+    text-align: left;
+    padding: 100px 30px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.home-title {
+    font-size: 2.3rem;
+    font-weight: 900;
+}
+
+p {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.button-start{
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 2rem;
+    border: none;
+    padding: 0.5rem 2rem;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin: 2rem 0;
+}
+
+.button-start:hover {
+    background-color: #cc0044;
+}
+
+
+.how-it-works {
+    /* background-color: #8a4fff;  */
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    text-align: left;
+    padding: 50px 20px;
+}
+
+.how-it-works-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.home-subtitle {
+    font-size: 2.5rem;
+    margin: 3rem 0;
+    text-align: center;
+    font-weight:900;
+}
+
+li {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.title-Events{
+    text-align: center;
+    margin: 50px;
+    
+}
+

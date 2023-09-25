@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\PreferencesController;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\EventController;
+use Spatie\Permission\Middleware\RoleMiddleware;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +19,22 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
+    Route::post('/event', [EventController::class, 'store']);
+    Route::post('/event/{event}', [EventController::class, 'update']);
+    Route::delete('event/{event}', [EventController::class, 'destroy']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/event', [EventController::class, 'index']);
+Route::post('/register', [AuthController::class, 'register']);
+// Route::post('/register-preferences', [PreferencesController::class, 'store']);
+Route::post('/login', [AuthController::class, 'login']);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
