@@ -89,8 +89,8 @@ function ProfileForm() {
     <div className='body-login'>
       <div className="container">
         <h1 className='form-title'>¡Ya casi hemos terminado!</h1>
-        <p>
-          Para terminar, sube una foto de perfil y explícanos brevemente quién eres y qué buscas (p.ej., ¿En qué estado se encuentra tu corazón actualmente?, ¿Qué tipo de relación sexoafectiva te gustaría tener?, ¿Momento vital en el que estás?)
+        <p className="">
+          Para terminar, sube una foto y cuéntanos algo sobre ti.
         </p>
         <form onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
           <div className="mb-4">
@@ -112,7 +112,7 @@ function ProfileForm() {
           </div>
           <div className="mb-4">
             <label htmlFor="description" className="form-label">
-              Descríbete
+            ¿En qué estado se encuentra tu corazón? ¿Qué tipo de relación te gustaría tener? ¿En qué momento vital estás? ¡Cuéntanos!
             </label>
             <textarea
               className="form-control"
