@@ -25,7 +25,7 @@ class MatchingController extends Controller
 
 
             if (!$userPreferences) {
-                return response()->json(['message' => 'Debes completar el formulario para poder ver tus matches.', 'type' => 'preferences'], 404);
+                return response()->json(['type' => 'preferences'], 404);
             }
 
             $userGender = $userPreferences->gender;
@@ -41,7 +41,7 @@ class MatchingController extends Controller
             $response = [];
 
             if ($matches->isEmpty()) {
-                return response()->json(['message' => 'Vaya, no se encontraron coincidencias...', 'type' => 'matches'], 404);
+                return response()->json(['type' => 'matches'], 404);
             }
 
             foreach ($matches as $match) {

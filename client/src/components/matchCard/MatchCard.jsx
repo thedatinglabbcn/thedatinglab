@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 function MatchCard() {
   const [matchingUsers, setMatchingUsers] = useState([]);
   const [error, setError] = useState(null);
+  const [noPreferencesError, setNoPreferencesError] = useState(false);
+  const [noMatchesError, setNoMatchesError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +18,7 @@ function MatchCard() {
         const matches = MatchingService();
         const response = await matches.getAllMatches();
         console.log(response.data);
-
+  
         if (Array.isArray(response.data.matches)) {
           setMatchingUsers(response.data.matches);
         } else {
@@ -24,7 +26,13 @@ function MatchCard() {
         }
       } catch (error) {
         console.log(error);
-        setError(error.response.data.message);
+        if (error.response.status === 404 && error.response.data.type === 'preferences') {
+          setNoPreferencesError(true);
+        } else if (error.response.status === 404 && error.response.data.type === 'matches') {
+          setNoMatchesError(true);
+        } else {
+          setError(error.response.data.message);
+        }
       }
     };
 
@@ -37,7 +45,33 @@ function MatchCard() {
       <div className='match-container'>
         <h1 className='match-title'>¡Tus matches!</h1>
         <center>
-          {error && <p className="card-text text-center text-danger">{error} <button type="button" className="button-cancel" style={{ marginTop: '10px' }} onClick={() => navigate('/preferences')}>Formulario</button></p>}
+        {noPreferencesError && (
+  <p className="card-text text-center text-danger">
+    Debes completar el formulario para poder ver tus matches.
+    <p><button
+      type="button"
+      className="button-cancel"
+      style={{ marginTop: '10px' }}
+      onClick={() => navigate('/preferences')}
+    >
+      Formulario
+    </button></p>
+  </p>
+)}
+
+{noMatchesError && (
+  <p className="card-text text-center text-danger">
+    Sin coincidencias por ahora... ¡Vuelve a comprobarlo más tarde!
+    <p><button
+      type="button"
+      className="button-cancel"
+      style={{ marginTop: '10px' }}
+      onClick={() => navigate('/')}
+    >
+      Eventos
+    </button></p>
+  </p>
+)}
           {matchingUsers.map((user) => (
             <div className="match-profile" style={{ width: '18rem'}} key={user.id}>
               <div className="card-img-top">    
