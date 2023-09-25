@@ -2,11 +2,12 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from '../pages/home/HomePage';
 import RegisterPage from '../pages/register/RegisterPage';
 import LoginPage from '../pages/login/LoginPage'
+import ProfileFormPage from '../pages/register/ProfileFormPage';
 import PreferencesPage from '../pages/register/PreferencesPage';
 import Dashboard from '../pages/admin/Dashboard';
 import DashboardEvents from '../pages/admin/DashboardEvents';
 import MatchCard from '../components/matchCard/MatchCard';
-import ProfileForm from '../components/forms/ProfileForm';
+
 
 const router = createBrowserRouter([
   { 
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/profile-form',
-    element: <ProfileForm />
+    element: <ProfileFormPage />
   },
   {
     path: '/matches',

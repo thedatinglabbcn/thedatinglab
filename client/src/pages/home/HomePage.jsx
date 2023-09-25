@@ -4,12 +4,12 @@ import EventCard from "../../components/eventCard/EventCard";
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
 import './HomePage.css';
-
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
 
   const [events, setEvents] = useState ([]); 
-  
+  const navigate = useNavigate();
 
 useEffect(() =>{
   const api = EventService();
@@ -28,7 +28,7 @@ useEffect(() =>{
         <div className="hero-content">
           <h1 className='home-title'>Donde los sentidos encuentran el amor</h1>
           <p>Creemos en la compatibilidad emocional como la base de relaciones sólidas.</p>
-          <button type="button" className="button-start"  onClick={() => window.location.href = '/register'}>
+          <button type="button" className="button-start"  onClick={() => navigate('/register')}>
               ¿Te apuntas?
             </button>
         </div>
@@ -44,7 +44,7 @@ useEffect(() =>{
             <li>Pagarás por asistir a los eventos y así conocer a tus match.</li>
             <li>Disfruta de citas significativas y experiencias sensoriales.</li>
           </ol>
-          <button type="button" className="button-start"  onClick={() => window.location.href = '/register'}>
+          <button type="button" className="button-start"  onClick={() => navigate('/register')}>
               Empezar ahora
             </button>
         </div>

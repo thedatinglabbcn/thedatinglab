@@ -135,6 +135,10 @@ const [validationErrors, setValidationErrors] = useState({});
             </button>
             <button type="button" className="button-cancel"  onClick={() => navigate('/')}>Cancelar</button>
           </form>
+          <p></p>
+          <p className='form-help'>
+          ¿Ya tienes una cuenta? <a onClick={() => navigate('/login')} href="#">Inicia sesión</a>
+        </p>
         </div>
         </div>
       );

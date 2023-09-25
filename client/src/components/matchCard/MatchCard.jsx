@@ -3,20 +3,20 @@ import './MatchCard.css';
 import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
 import { MatchingService } from '../../service/MatchingService';
+import { useNavigate } from 'react-router-dom';
 
 function MatchCard() {
   const [matchingUsers, setMatchingUsers] = useState([]);
-  const [error, setError] = useState(null); // Estado para almacenar errores
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Llama al servicio en useEffect
     const fetchData = async () => {
       try {
         const matches = MatchingService();
         const response = await matches.getAllMatches();
         console.log(response.data);
 
-        // Verifica si la respuesta tiene la propiedad matching_users y es un arreglo
         if (Array.isArray(response.data.matches)) {
           setMatchingUsers(response.data.matches);
         } else {
@@ -37,7 +37,7 @@ function MatchCard() {
       <div className='match-container'>
         <h1 className='match-title'>¡Tus matches!</h1>
         <center>
-          {error && <p className="card-text text-center text-danger">{error}</p>}
+          {error && <p className="card-text text-center text-danger">{error} <button type="button" className="button-cancel" style={{ marginTop: '10px' }} onClick={() => navigate('/preferences')}>Formulario</button></p>}
           {matchingUsers.map((user) => (
             <div className="match-profile" style={{ width: '18rem'}} key={user.id}>
               <div className="card-img-top">    

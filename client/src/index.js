@@ -13,9 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
   <React.StrictMode>
-    <MatchingUsersProvider>
       <RouterProvider router={router}/>
-    </MatchingUsersProvider>
   </React.StrictMode>
 );
 

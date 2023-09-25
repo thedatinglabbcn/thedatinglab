@@ -25,7 +25,7 @@ class MatchingController extends Controller
 
 
             if (!$userPreferences) {
-                throw new ModelNotFoundException('No se encontraron preferencias para el usuario', 404);
+                return response()->json(['message' => 'Debes completar el formulario para poder ver tus matches.', 'type' => 'preferences'], 404);
             }
 
             $userGender = $userPreferences->gender;
@@ -41,7 +41,7 @@ class MatchingController extends Controller
             $response = [];
 
             if ($matches->isEmpty()) {
-                return response()->json(['message' => 'Vaya, no se encontraron coincidencias...'], 404);
+                return response()->json(['message' => 'Vaya, no se encontraron coincidencias...', 'type' => 'matches'], 404);
             }
 
             foreach ($matches as $match) {
@@ -56,7 +56,7 @@ class MatchingController extends Controller
             }
 
             return response()->json(['matches' => $response], 200);
-            
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], $e->getCode());
         }

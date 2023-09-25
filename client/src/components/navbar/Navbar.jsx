@@ -25,7 +25,6 @@ const Navbar = () => {
           confirmButton: 'custom-swal-button',
         }
       }).then(() => {
-        // Redirige a la página deseada
         navigate('/');
       });
 

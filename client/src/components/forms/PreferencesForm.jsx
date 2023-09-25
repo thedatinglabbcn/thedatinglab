@@ -65,9 +65,9 @@ const PreferencesForm = () => {
 
   return (
     <div className='body-registration'>
-      <div className="container">
+      <div className="container" style={{ paddingTop: '12px' }}>
         <h1 className='form-title'>¿Quieres conocer a tu pareja ideal?</h1>
-        <p>Rellena este formulario para conocer a tus matches</p>
+        <p>¡Completa este formulario para conocer a tus matches!</p>
         <form
           onSubmit={handleSubmit}
           noValidate>
