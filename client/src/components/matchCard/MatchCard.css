@@ -24,8 +24,12 @@
     margin-top: 1rem;
 }
 
+.card-text{
+    font-size: 1.3rem;
+}
+
 .match-profile{
-    Margin-top: 3rem;
+    Margin-top: 2.5rem;
     }
 
     .how-it-works{

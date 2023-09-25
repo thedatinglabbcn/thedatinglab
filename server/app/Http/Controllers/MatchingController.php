@@ -7,33 +7,61 @@ use App\Models\User;
 use App\Models\Preference;
 use App\Models\Profile;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class MatchingController extends Controller
 {
     public function getMatches()
     {
-        $user = auth()->user();
+        try {
+            // Obtener el usuario autenticado
+            $user = auth()->user();
 
-        $userPreferences = $user->preferences;
+            // Validar si el usuario no está autenticado
+            if (!$user) {
+                throw new \Exception('Usuario no autenticado', 401);
+            }
 
-        $matches = User::whereHas('preferences', function ($query) use ($userPreferences) {
-            $query->where('looksFor', $userPreferences->gender);
-        })->get();
+            // Obtener las preferencias del usuario
+            $userPreferences = $user->preferences;
 
-        $response = [];
+            // Validar si no se encuentran preferencias para el usuario
+            if (!$userPreferences) {
+                throw new ModelNotFoundException('No se encontraron preferencias para el usuario', 404);
+            }
 
-        foreach ($matches as $match) {
-            $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreferences, $match->preferences));
+            $userGender = $userPreferences->gender;
+            $userLooksFor = $userPreferences->looksFor;
 
-            $response[] = [
-                'name' => $match->name,
-                'description' => $match->profile->description,
-                'image' => $match->profile->image,
-                'matchingPercentage' => $matchingPercentage,
-            ];
+            $matches = User::whereHas('preferences', function ($query) use ($userGender, $userLooksFor) {
+                $query->where('gender', $userLooksFor)
+                    ->where('looksFor', $userGender);
+            })
+                ->where('id', '!=', $user->id)
+                ->get();
+
+            $response = [];
+
+            if ($matches->isEmpty()) {
+                return response()->json(['message' => 'Vaya, no se encontraron coincidencias...'], 404);
+            }
+
+            foreach ($matches as $match) {
+                $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreferences, $match->preferences));
+
+                $response[] = [
+                    'name' => $match->name,
+                    'description' => $match->profile->description,
+                    'image' => $match->profile->image,
+                    'matchingPercentage' => $matchingPercentage,
+                ];
+            }
+
+            return response()->json(['matches' => $response], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], $e->getCode());
         }
-
-        return response()->json(['matches' => $response]);
     }
 
     private function calculateMatchingPercentage($userPreferences, $matchPreferences)
@@ -58,69 +86,3 @@ class MatchingController extends Controller
         return $matchingPercentage;
     }
 }
-
-
-
-// {
-//     public function findMatchingUsers(Request $request)
-//     {
-//         $user = Auth::user();
-//         $userPreferences = $user->preferences;
-
-//         $matchingUsers = [];
-
-//         $otherUsers = User::where('id', '!=', $user->id)->get();
-
-//         foreach ($otherUsers as $otherUser) {
-//             $otherUserPreferences = $otherUser->preferences;
-
-//             $matchingPercentage = $this->calculateMatchingPercentage($userPreferences, $otherUserPreferences);
-
-//             if ($matchingPercentage >= 70) {
-//                 // Obtener la relación profile del usuario
-//                 $profile = $otherUser->profile;
-
-//                 if ($profile) {
-//                     $matchingUsers[] = [
-//                         'name' => $otherUser->name, // Nombre del usuario
-//                         'image' => $profile->image,  // Imagen de la tabla profiles
-//                         'description' => $profile->description, // Descripción de la tabla profiles
-//                         'matching_percentage' => $matchingPercentage,
-//                     ];
-//                 }
-//             }
-//         }
-
-//         return response()->json([
-//             'matching_users' => $matchingUsers,
-//         ], 200);
-//     }
-
-
-//     private function calculateMatchingPercentage($userPreferences, $otherUserPreferences)
-//     {
-//         $totalPreferences = count($userPreferences);
-//         $matchingCount = 0;
-
-//         foreach ($userPreferences as $userPreference) {
-//             foreach ($otherUserPreferences as $otherUserPreference) {
-//                 if ($userPreference->gender == $otherUserPreference->gender &&
-//                     $userPreference->looksFor == $otherUserPreference->looksFor &&
-//                     $userPreference->preferences1 == $otherUserPreference->preferences1 &&
-//                     $userPreference->preferences2 == $otherUserPreference->preferences2 &&
-//                     $userPreference->catsDogs == $otherUserPreference->catsDogs) {
-//                     $matchingCount++;
-//                     break;
-//                 }
-//             }
-//         }
-
-//         if ($totalPreferences > 0) {
-//             $matchingPercentage = ($matchingCount / $totalPreferences) * 100;
-//         } else {
-//             $matchingPercentage = 0;
-//         }
-
-//         return $matchingPercentage;
-//     }
-// }
