@@ -12,7 +12,7 @@ function HomePage() {
   
 
 useEffect(() =>{
-  const api = EventService();
+  const api = EventService;
    api.getAllEvents().then(res => {
       setEvents(res.data);
    })
