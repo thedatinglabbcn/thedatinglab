@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('image');
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->time('time');
             $table->string('title');
             $table->string('description');
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
             $table->enum('privacy', ['public', 'private'])->default('public');
             $table->timestamps();
         });

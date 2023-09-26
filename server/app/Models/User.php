@@ -52,5 +52,13 @@ class User extends Authenticatable
     public function preferences() {
         return $this->hasMany(Preference::class);
     }
+
+    public function events() {
+        return $this->hasMany(Event::class);
+    }
+    
+    public function isAttendant() {
+        return $this->belongsToMany(Event::class);
+    }
     
 }

@@ -52,6 +52,7 @@ class EventController extends Controller
             'time' => $validatedData['time'],
             'description' => $validatedData['description'],
             'image' => $imagePath,
+            //'user_id' => auth()->user()->id,
         ]);
 
         return response()->json(['message' => 'Event created successfully', 'event' => $event]);

@@ -36,10 +36,10 @@ const Navbar = () => {
         <div><a href="/"><img className='nav_logo' src={Logo} alt="Logo" /></a></div>
         <div className={`nav_items ${isOpen && "open"}`}>
             <a href="/register">Registrate</a>
-            <a href="/login">Login</a>
+            {!isLoggedIn && <a href="/login">Login</a>} 
             <a href="/#event-section">Nuestros Eventos</a>
             {isLoggedIn && (
-            <a href="/" onClick={handleLogout}>Logout</a>
+              <a href="/" onClick={handleLogout}>Logout</a>
             )}
         </div>
         <div className={`nav_toggle ${isOpen && "open"}`} onClick={ () => setIsOpen(!isOpen)}>

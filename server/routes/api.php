@@ -27,6 +27,9 @@ Route::get('/event', [EventController::class, 'index']);
 Route::post('/event', [EventController::class, 'store']);
 Route::post('/event/{event}', [EventController::class, 'update']);
 Route::delete('/event/{event}', [EventController::class, 'destroy']);
+Route::post('/event/attend/{id}', [EventController::class, 'attendEvent']);
+Route::post('/events/attend/payment/{id}', [EventController::class, 'showPaymentOptions']);
+
 
 
 

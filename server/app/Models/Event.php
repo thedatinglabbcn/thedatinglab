@@ -15,7 +15,7 @@ class Event extends Model
         'time',
         'title',
         'description',
-
+        'user_id',
     
     ];
 
@@ -23,4 +23,16 @@ class Event extends Model
         'created_at',
         'updated_at',
     ];
+   
+public function user()
+{
+    return $this->belongsTo(User::class);
 }
+
+    public function isAttendant()
+{
+    return $this->belongsToMany(User::class);
+}
+
+}
+
