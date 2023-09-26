@@ -17,8 +17,15 @@ export const AuthService = () => {
     }
 
     const logout = () => {
-        const res = axios.post(urnLogout);
-        return res;
+        return axios.post(urnLogout)
+    .then((res) => {
+      localStorage.removeItem('auth_token');
+      return res;
+    })
+    .catch((error) => {
+      console.error('Error al hacer logout:', error);
+      throw error;
+    });
     }
 
     return {

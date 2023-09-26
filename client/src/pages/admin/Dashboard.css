@@ -14,7 +14,7 @@
     
 }
 
-.create-button{
+.create-button, .back-button, .logout-button{
     width: 2rem;
     height: 2rem;
     margin-right: 1.5rem;

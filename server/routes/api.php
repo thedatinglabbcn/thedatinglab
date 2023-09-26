@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\MatchingController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\PreferencesController;
+use Spatie\Permission\Middleware\RoleMiddleware;
 
 
 /*
@@ -20,18 +21,17 @@ use App\Http\Controllers\PreferencesController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
+    Route::post('/event', [EventController::class, 'store']);
+    Route::post('/event/{event}', [EventController::class, 'update']);
+    Route::delete('event/{event}', [EventController::class, 'destroy']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::get('/event', [EventController::class, 'index']);
-Route::post('/event', [EventController::class, 'store']);
-Route::post('/event/{event}', [EventController::class, 'update']);
-Route::delete('/event/{event}', [EventController::class, 'destroy']);
-
-
-
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 

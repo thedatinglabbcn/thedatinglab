@@ -12,7 +12,7 @@ function HomePage() {
   const navigate = useNavigate();
 
 useEffect(() =>{
-  const api = EventService();
+  const api = EventService;
    api.getAllEvents().then(res => {
       setEvents(res.data);
    })
