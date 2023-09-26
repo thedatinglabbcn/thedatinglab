@@ -42,4 +42,72 @@ class ProfileController extends Controller
             ], 200);
         }
     }
+
+    public function show(string $id)
+    {
+        $profile = Profile::find($id);
+
+        if (!$profile) {
+            return response()->json([
+            'message' => 'Perfil no encontrado',
+            ], 404);
+        }
+
+        $userName = $profile->user->name;
+
+    return response()->json([
+        'profile' => $profile,
+        'userName' => $userName
+    ], 200);
+    }
+
+    public function update(Request $request, string $id)
+    {
+    
+        $validator = Validator::make($request->all(), [
+            'description' => 'sometimes|string|max:500',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'validation_errors' => $validator->messages(),
+            ], 422);
+    }
+
+        $profile = Profile::find($id);
+
+        if (!$profile) {
+            return response()->json([
+                'message' => 'Perfil no encontrado',
+            ], 404);
+        }
+
+    
+        $user = Auth::user();
+        if ($profile->user_id !== $user->id) {
+            return response()->json([
+                'message' => 'No tienes permiso para editar este perfil',
+            ], 403);
+        }
+
+    
+        if ($request->has('description')) {
+            $profile->description = $request->input('description');
+        }
+
+        
+        if ($request->hasFile('image')) {
+            $imageName = Str::random(32) . "." . $request->file('image')->getClientOriginalExtension();
+            Storage::disk('public')->put($imageName, file_get_contents($request->file('image')));
+            $profile->image = $imageName;
+        }
+
+        $profile->save();
+
+        return response()->json([
+            'message' => 'Perfil actualizado con éxito',
+        ], 200);
+    }
+
 }

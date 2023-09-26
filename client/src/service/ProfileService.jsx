@@ -16,8 +16,19 @@ export const ProfileService =  () => {
         return response   
     }
   
+    const getProfile = async (profileId) => {
+        const response = await axios.get(`${urlProfile}/${profileId}`);
+        return response.data;
+    };
+
+
     const updateProfile = (profileId, profileData) => {
-        return axios.put(`${urlProfile}/${profileId}`, profileData);
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+        return axios.put(`${urlProfile}/${profileId}`, profileData, config);
     }
   
     const destroyProfile = (profileId) => {
@@ -26,6 +37,7 @@ export const ProfileService =  () => {
   
   return {
     createProfile,
+    getProfile,
     updateProfile,
     destroyProfile,
   }

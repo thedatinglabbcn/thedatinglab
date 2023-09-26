@@ -39,6 +39,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/preferences', [PreferencesController::class, 'store']);
     Route::post('/profile', [ProfileController::class, 'store']);
+    Route::get('/profile/{id}', [ProfileController::class, 'show']);
+    Route::put('/profile/{id}', [ProfileController::class, 'update']);
     Route::get('/matching-users', [MatchingController::class, 'getMatches']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

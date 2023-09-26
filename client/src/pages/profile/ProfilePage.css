@@ -1,20 +1,37 @@
 @import url('../../index.css');
 
-img {
+.rounded-circle {
     
     height: 150px;
     width: 150px;
-    position: relative;
 }
 
-.card {
+
+.match-body{
+    margin-top: 1rem;
+    
+}
+
+.match-container{
     background-color: var(--color-beige);
+    padding: 3rem;
 }
 
-.editpic {
-    position: absolute;
-    top: 133px;
-    right: 83px;
-    height: 30px;
-    width: 30px;
+.match-title{
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 1rem;
 }
+
+.card-text{
+    font-size: 1.3rem;
+}
+
+.match-profile{
+    Margin-top: 2.5rem;
+    }
+
+    .how-it-works{
+        width: 100%;
+    }

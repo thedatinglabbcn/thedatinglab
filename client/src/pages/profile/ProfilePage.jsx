@@ -1,28 +1,56 @@
-import React from 'react'
-import ProfilePicture from '../../assets/images/ProfilePicture.jpg';
-import EditPic from '../../assets/images/EditPic.svg';
-import './ProfilePage.css'; 
-import Button from '../../components/button/Button'
-import Footer from '../../components/footer/Footer'
+import React, { useEffect, useState } from 'react';
+import './ProfilePage.css';
+import Navbar from '../../components/navbar/Navbar';
+import Footer from '../../components/footer/Footer';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { ProfileService } from '../../service/ProfileService';
 
 function ProfilePage() {
+  
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+  const { id } = useParams();
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const profileService = ProfileService();
+        const response = await profileService.getProfile(id);
+        console.log(response);
+        setProfile(response.profile);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+  
+  // Obtener el nombre del usuario o una cadena vacía si no existe
+  const userName = profile && profile.user ? profile.user.name : '';
+
   return (
     <div>
+      <Navbar />
+      <div className='match-container'>
+        <h1 className='match-title'>¡Hola, {userName}!</h1>
         <center>
-            <div className="card border-0 pt-3 pb-3" style={{ width: '18rem'}}>
-                <div className="card-img-top">    
-                    <center><img src={ProfilePicture} className="rounded-circle" alt="la persona con quien se ha hecho match"></img></center>
-                    <span><img className="editpic" src={EditPic} alt="icono para editar"></img></span>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title text-center">Nombre del match, edad</h5>
-                    <p className="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-                <center><Button backgroundColorClass="bttn-primary" text="Editar" /></center>    
+          <div className="match-profile" style={{ width: '18rem'}}>
+            <div className="card-img-top">
+              <center><img src={`http://localhost:8000/storage/${profile && profile.image}`} className="rounded-circle" alt={`Tu foto de perfil`} /></center>
             </div>
+            <div className="match-body">
+              <p className="card-text text-center"><small>{profile && profile.description}</small></p>
+            </div>
+          </div>
         </center>
+        <center>
+        <button type="button" className="button-cancel" onClick={() => navigate(`/profile/${id}/edit`)}>Editar</button>
+        </center>
+      </div>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default ProfilePage
+export default ProfilePage;
