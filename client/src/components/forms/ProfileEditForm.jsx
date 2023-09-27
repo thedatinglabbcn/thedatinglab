@@ -1,43 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { ProfileService } from '../../service/ProfileService';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
-function ProfileEditForm() {
+function ProfileEditForm({ profile, id, setIsEditing }) {
   
-    const navigate = useNavigate();
-    const { profileId } = useParams();
-    const [validationErrors, setValidationErrors] = useState({});
-    const [formDataState, setFormDataState] = useState({
-        image: '',
-        description: '',
+  const navigate = useNavigate();
+  const [validationErrors, setValidationErrors] = useState({});
+  const [formDataState, setFormDataState] = useState({
+    image: '',
+    description: profile ? profile.description : '',
+  });
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setFormDataState({
+      ...formDataState,
+      [name]: value,
     });
-  
-    const handleOnChange = (e) => {
-      const { name, value } = e.target;
-      setFormDataState({
-        ...formDataState,
-        [name]: value,
-      });
-  
-      setValidationErrors({
-        ...validationErrors,
-        [name]: '',
-      });
-    };
-  
-    const handleImageChange = (e) => {
-      setFormDataState({
-        ...formDataState,
-        image: e.target.files[0],
-      });
-  
-      setValidationErrors({});
-    };
 
-  const profile = ProfileService();
+    setValidationErrors({
+      ...validationErrors,
+      [name]: '',
+    });
+  };
+
+  const handleImageChange = (e) => {
+    setFormDataState({
+      ...formDataState,
+      image: e.target.files[0],
+    });
+
+    setValidationErrors({});
+  };
+
+  const profileService = ProfileService();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,11 +45,12 @@ function ProfileEditForm() {
     formData.append('image', formDataState.image);
     formData.append('description', formDataState.description);
 
-    profile
-      .updateProfile(profileId, formData)
+    profileService
+      .updateProfile(id, formData)
       .then((res) => {
-        navigate(`/profile/${profileId}`);
-        console.log(res)
+        setIsEditing(false);
+        window.location.reload();
+        console.log(res);
       })
       .catch((err) => {
         console.error(err);
@@ -71,8 +71,6 @@ function ProfileEditForm() {
         }
       });
   };
-
-  
 
   return (
     <div className='body-login'>
@@ -120,8 +118,8 @@ function ProfileEditForm() {
             <button type="submit" className="button-send">
               Enviar
             </button>
-            <button type="button" className="button-cancel" onClick={() => navigate(`/profile/${profileId}`)}>
-              Atrás
+            <button type="button" className="button-cancel" onClick={() => setIsEditing(false)}>
+              Cancelar
             </button>
           </div>
         </form>
@@ -131,4 +129,3 @@ function ProfileEditForm() {
 }
 
 export default ProfileEditForm;
-

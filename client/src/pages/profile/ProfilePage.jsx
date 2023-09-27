@@ -4,13 +4,15 @@ import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { ProfileService } from '../../service/ProfileService';
+import Swal from 'sweetalert2';
+import ProfileEditForm from '../../components/forms/ProfileEditForm';
 
 function ProfilePage() {
-  
   const navigate = useNavigate();
-  const [profile, setProfile] = useState(null);
   const { id } = useParams();
-  
+  const [profile, setProfile] = useState(null);
+  const [isEditing, setIsEditing] = useState(false); // Estado para controlar la visibilidad del formulario
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,7 +27,7 @@ function ProfilePage() {
 
     fetchData();
   }, [id]);
-  
+
   // Obtener el nombre del usuario o una cadena vacía si no existe
   const userName = profile && profile.user ? profile.user.name : '';
 
@@ -45,9 +47,16 @@ function ProfilePage() {
           </div>
         </center>
         <center>
-        <button type="button" className="button-cancel" onClick={() => navigate(`/profile/${profile.id}/edit`)}>Editar</button>
+          {/* Botón para mostrar u ocultar el formulario de edición */}
+          <button type="button" className="button-cancel" onClick={() => setIsEditing(!isEditing)}>
+            {isEditing ? 'Cancelar' : 'Editar'}
+          </button>
         </center>
-        
+
+        {/* Mostrar el formulario de edición si isEditing es true */}
+        {isEditing && (
+          <ProfileEditForm profile={profile} id={id} setIsEditing={setIsEditing} />
+        )}
       </div>
       <Footer />
     </div>

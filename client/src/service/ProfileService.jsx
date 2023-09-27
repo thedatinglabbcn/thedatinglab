@@ -28,7 +28,7 @@ export const ProfileService =  () => {
           'Content-Type': 'multipart/form-data',
         },
       };
-        return axios.put(`${urlProfile}/${profileId}`, profileData, config);
+        return axios.post(`${urlProfile}/${profileId}`, profileData, config);
     }
   
     const destroyProfile = (profileId) => {
