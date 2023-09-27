@@ -62,7 +62,7 @@ class ProfileController extends Controller
     ], 200);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
     
         $validator = Validator::make($request->all(), [
