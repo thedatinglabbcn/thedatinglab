@@ -8,47 +8,48 @@ import Swal from 'sweetalert2';
 function ProfileEditForm() {
   
     const navigate = useNavigate();
+    const { profileId } = useParams();
+    const [validationErrors, setValidationErrors] = useState({});
     const [formDataState, setFormDataState] = useState({
         image: '',
         description: '',
     });
-    const [validationErrors, setValidationErrors] = useState({});
-    const { id } = useParams();
-
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        const profileService = ProfileService();
-        const response = await profileService.getProfile(id);
-        const { image, description } = response.profile;
-
-        setFormDataState({
-          image: image || '',
-          description: description || '',
-        });
-      } catch (error) {
-        console.error(error);
-      }
+  
+    const handleOnChange = (e) => {
+      const { name, value } = e.target;
+      setFormDataState({
+        ...formDataState,
+        [name]: value,
+      });
+  
+      setValidationErrors({
+        ...validationErrors,
+        [name]: '',
+      });
     };
-
-    fetchProfileData();
-  }, [id]);
+  
+    const handleImageChange = (e) => {
+      setFormDataState({
+        ...formDataState,
+        image: e.target.files[0],
+      });
+  
+      setValidationErrors({});
+    };
 
   const profile = ProfileService();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { image, description } = formDataState;
-
     const formData = new FormData();
-    formData.append('image', image);
-    formData.append('description', description);
+    formData.append('image', formDataState.image);
+    formData.append('description', formDataState.description);
 
     profile
-      .updateProfile(id, formData)
+      .updateProfile(profileId, formData)
       .then((res) => {
-        // navigate(`/profile/${id}`);
+        navigate(`/profile/${profileId}`);
         console.log(res)
       })
       .catch((err) => {
@@ -71,28 +72,7 @@ function ProfileEditForm() {
       });
   };
 
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormDataState({
-      ...formDataState,
-      [name]: value,
-    });
-
-    setValidationErrors({
-      ...validationErrors,
-      [name]: '',
-    });
-  };
-
-  const handleImageChange = (e) => {
-    setFormDataState({
-      ...formDataState,
-      image: e.target.files[0],
-    });
-
-    setValidationErrors({});
-  };
+  
 
   return (
     <div className='body-login'>
@@ -140,7 +120,7 @@ function ProfileEditForm() {
             <button type="submit" className="button-send">
               Enviar
             </button>
-            <button type="button" className="button-cancel" onClick={() => navigate('/preference-edit')}>
+            <button type="button" className="button-cancel" onClick={() => navigate(`/profile/${profileId}`)}>
               Atrás
             </button>
           </div>

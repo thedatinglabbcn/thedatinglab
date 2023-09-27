@@ -45,8 +45,9 @@ function ProfilePage() {
           </div>
         </center>
         <center>
-        <button type="button" className="button-cancel" onClick={() => navigate(`/profile/${id}/edit`)}>Editar</button>
+        <button type="button" className="button-cancel" onClick={() => navigate(`/profile/${profile.id}/edit`)}>Editar</button>
         </center>
+        
       </div>
       <Footer />
     </div>

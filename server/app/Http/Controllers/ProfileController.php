@@ -39,6 +39,7 @@ class ProfileController extends Controller
 
             return response()->json([
                 'message' => 'Perfil creado con éxito',
+                'profile_id' => $profile->id
             ], 200);
         }
     }

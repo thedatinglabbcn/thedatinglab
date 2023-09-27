@@ -29,6 +29,7 @@ function ProfileForm() {
     profile
       .createProfile(formData)
       .then((res) => {
+        const profileId = res.data.profile_id;
         Swal.fire({
           title: 'Perfil creado',
           text: '¡Ya estás dentro!',
@@ -39,7 +40,7 @@ function ProfileForm() {
           confirmButton: 'custom-swal-button',
           }
         }).then(() => {
-          navigate('/matches');
+          navigate(`/profile/${profileId}`);
         });
       })
       .catch((err) => {
