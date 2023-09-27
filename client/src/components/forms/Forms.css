@@ -15,15 +15,21 @@ background-color: var(--color-beige);
     width: 90%;
 }
 .form-control{
-    border-radius: 2rem;
-    border: 2px var(--color-borders) solid;
+    border-radius: 0.5rem;
+    border: 1px var(--color-borders) solid;
+    margin-bottom: 1rem;
 }
 
 .form-title{
     font-size: 1.7rem;
     font-weight: 900;
-    margin: 3rem;
+    margin: 2rem;
     text-align: center;
+}
+
+.link-help{
+    color:var(--color-primary);
+    font-weight: 900;
 }
 
 .form-help{
@@ -34,28 +40,38 @@ background-color: var(--color-beige);
 }
 
 .form-buttons{
-    gap: 3rem;
+  display: flex;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  margin: 3rem 0;
+
 }
 
 .login-buttons{
     margin: 3rem 0;
+    gap: 1rem;
 }
 
 .button-send{
     background-color: var(--color-submit);
     color: white;
-    border-radius: 2rem;
     border: none;
     padding: 0.5rem 2rem;
-    margin-right: 1rem;
+    border-radius: 0.5rem;
+   
 }
 
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+}
 .button-cancel{
     background-color: var(--color-primary);
     color: white;
-    border-radius: 2rem;
     border: none;
+    border-radius: 0.5rem;
     padding: 0.5rem 2rem;
+
 }
 
 .error-message {
@@ -78,9 +94,46 @@ background-color: var(--color-beige);
     font-size: 1rem;
   }
   
-  .input-options{
-    display:flex;
-    flex-direction: row;
+
+.match-text{
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+  .input-options {
+    display: inline-flex;
+    max-width: calc(33.33% - 10px); /* Limita el ancho máximo de cada opción para mostrar 3 en una fila */
+    margin-right: 0.5rem; 
+    margin-bottom: 0.8rem; 
+}
+  
+  .mb-3{
+    text-align: center;
+  }
+
+  .form-label-form {
+   display: block;
+   margin: 2rem 0;
+   font-size: 1.4em;
+   text-align: center;
+  }
+ 
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    text-align: center;
   }
   
- 
+  .button-cancel {
+    flex: 1;
+    margin-right: 10px; 
+  }
+  
+  .button-send {
+    flex: 2;
+    margin-right: 0;
+    
+  }

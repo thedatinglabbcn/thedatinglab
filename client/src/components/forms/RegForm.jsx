@@ -113,7 +113,7 @@ const [validationErrors, setValidationErrors] = useState({});
               <div className="text-danger">{validationErrors.email.join(', ')}</div>
             )}
             </div>
-            <div className="mb-4">
+            <div className="mb-5">
               <label htmlFor="password" className="form-label">
                 Contraseña
               </label>
@@ -130,14 +130,16 @@ const [validationErrors, setValidationErrors] = useState({});
               <div className="text-danger">{validationErrors.password.join(', ')}</div>
             )}
             </div>
+            <div className='form-buttons'>
             <button type="submit" className="button-send" >
               Enviar
             </button>
             <button type="button" className="button-cancel"  onClick={() => navigate('/')}>Cancelar</button>
+            </div>
           </form>
           <p></p>
           <p className='form-help'>
-          ¿Ya tienes una cuenta? <a onClick={() => navigate('/login')} href="#">Inicia sesión</a>
+          ¿Ya tienes una cuenta? <a onClick={() => navigate('/login')} className="link-help" href="#">Inicia sesión</a>
         </p>
         </div>
         </div>

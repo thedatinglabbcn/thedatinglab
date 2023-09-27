@@ -113,7 +113,7 @@ const LoginForm = () => {
               <div className="text-danger">{validationErrors.password.join(', ')}</div>
             )}
           </div>
-          <div className='login-buttons'> 
+          <div className='form-buttons'> 
           <button type="submit" className="button-send">
             Ingresar
           </button>
@@ -122,10 +122,10 @@ const LoginForm = () => {
         </form>
         
         <p className='form-help'>
-          ¿Has olvidado la contraseña? <a href="#">Toca aquí</a>
+          ¿Has olvidado la contraseña? <a  className="link-help" href="#">Toca aquí</a>
         </p>
         <p className='form-help'>
-          ¿No tienes una cuenta? <a onClick={() => navigate('/register')} href="#">Regístrate</a>
+          ¿No tienes una cuenta? <a onClick={() => navigate('/register')} className="link-help" href="#">Regístrate</a>
         </p>
       </div>
       </div>

@@ -4,6 +4,8 @@ import './Forms.css';
 import { PreferencesService } from '../../service/PreferencesService';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const PreferencesForm = () => {
   const navigate = useNavigate();
@@ -69,11 +71,11 @@ const PreferencesForm = () => {
     <div className='body-registration'>
       <div className="container" style={{ paddingTop: '12px' }}>
         <h1 className='form-title'>¿Quieres conocer a tu pareja ideal?</h1>
-        <p>¡Completa este formulario para conocer a tus matches!</p>
+        <p className='match-text'>¡Completa este formulario para conocer a tus matches!</p>
 
         <form noValidate>
-          <div className="mb-4">
-            <label className="form-label">{questions[currentStep].question}</label>
+          <div className="mb-3">
+            <label className="form-label-form">{questions[currentStep].question}</label>
             {questions[currentStep].options.map((option) => (
               <div className="input-options" key={option}>
                 <input
@@ -93,15 +95,18 @@ const PreferencesForm = () => {
 
           <div className='text-danger'>{validationErrors[questions[currentStep].name]}</div>
 
-          <button type="button" className="button-send" onClick={handleNext}>
-            {currentStep < questions.length - 1 ? 'Siguiente' : 'Enviar'}
-          </button>
+          <div className="button-group">
+            {currentStep > 0 && (
+              <button type="button" className="button-cancel" onClick={() => setCurrentStep(currentStep - 1)}>
+                <FontAwesomeIcon icon={faArrowLeft} /> Atrás
+              </button>
+            )}
 
-          {currentStep > 0 && (
-            <button type="button" className="button-cancel" onClick={() => setCurrentStep(currentStep - 1)}>
-              Atrás
+            <button type="button" className="button-send" onClick={handleNext}>
+              Siguiente <FontAwesomeIcon icon={faArrowRight} />
             </button>
-          )}
+          </div>
+
         </form>
       </div>
     </div>

@@ -312,10 +312,12 @@ const RegistrationForm = () => {
               />
               <label htmlFor="recibirInformacion">Quiero recibir información sobre noticias y eventos</label>
             </div> */}
+            <div className='form-buttons'>
             <button type="submit" className="button-send" >
               Enviar
             </button>
             <button type="button" className="button-cancel"  onClick={() => window.location.href = '/'}>Cancelar</button>
+            </div>
           </form>
           <div>
           {/* {matchingUsers.length > 0 && (
