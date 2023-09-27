@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './MatchCard.css';
 import Navbar from '../navbar/Navbar';
+import NavbarLogin from '../navbar/NavbarLogin';
 import Footer from '../footer/Footer';
 import { MatchingService } from '../../service/MatchingService';
 import { useNavigate } from 'react-router-dom';
@@ -86,6 +87,7 @@ function MatchCard() {
           ))}
         </center>
       </div>
+      <NavbarLogin />
       <Footer/>
     </div>
   )
