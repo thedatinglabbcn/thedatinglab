@@ -75,9 +75,8 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
   return (
     <div className='body-login'>
       <div className="container">
-        <h1 className='form-title'>Edición</h1>
         <p className="">
-          Edita tu imagen, descripción o ambos.
+          Edita tus datos:.
         </p>
         <form onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
           <div className="mb-4">

@@ -11,7 +11,7 @@ function ProfilePage() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
-  const [isEditing, setIsEditing] = useState(false); // Estado para controlar la visibilidad del formulario
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,8 +28,7 @@ function ProfilePage() {
     fetchData();
   }, [id]);
 
-  // Obtener el nombre del usuario o una cadena vacía si no existe
-  const userName = profile && profile.user ? profile.user.name : '';
+const userName = profile && profile.user ? profile.user.name : '';
 
   return (
     <div>
@@ -47,13 +46,10 @@ function ProfilePage() {
           </div>
         </center>
         <center>
-          {/* Botón para mostrar u ocultar el formulario de edición */}
           <button type="button" className="button-cancel" onClick={() => setIsEditing(!isEditing)}>
             {isEditing ? 'Cancelar' : 'Editar'}
           </button>
         </center>
-
-        {/* Mostrar el formulario de edición si isEditing es true */}
         {isEditing && (
           <ProfileEditForm profile={profile} id={id} setIsEditing={setIsEditing} />
         )}
