@@ -22,7 +22,7 @@ function PaymentPage() {
       .post(`api/event/attendance/${eventId}`, { option: selectedOption })
       .then((response) => {
         Swal.fire({
-          title: 'Pago realizado y asistencia confirmada',
+          title: 'Solicitud exitosa! Ahora debes hacer una transferencia de pago para que tu asistencia sea confirmada.',
           text: response.data.message,
           icon: 'success',
           confirmButtonText: 'Ok'

@@ -126,7 +126,6 @@ class EventController extends Controller
         
         return response()->json([
             'res' => true,
-            'message' => 'Asistencia confirmada',
             'confirmedDate' => $confirmedDate,
         ]);
     }
