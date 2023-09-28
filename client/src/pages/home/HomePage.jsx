@@ -7,7 +7,7 @@ import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
-
+  const [loadingEvents, setLoadingEvents] = useState(true);
   const [events, setEvents] = useState ([]); 
   const navigate = useNavigate();
 
@@ -15,11 +15,14 @@ useEffect(() =>{
   const api = EventService;
    api.getAllEvents().then(res => {
       setEvents(res.data);
-   })
+      setLoadingEvents(false); 
+      })
+      .catch(error => {
+        console.error('Error al cargar eventos:', error);
+        setLoadingEvents(false); 
+      });
 
 }, []);
- 
- 
 
   return (
     <>
@@ -51,10 +54,15 @@ useEffect(() =>{
       </section>
       <section id="event-section">
         <h1 className='home-subtitle'>Experiencias</h1>
-      { events.map((event, index) => (
-        <EventCard key={index} event = {event}/>
-        ))
-      }
+        {loadingEvents ? ( 
+          <p>Cargando experiencias...</p>
+        ) : (
+          <div>
+            {events.map((event, index) => (
+              <EventCard key={index} event={event} />
+            ))}
+          </div>
+        )}
       </section>
     <Footer/>
     </>

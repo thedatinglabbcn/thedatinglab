@@ -48,7 +48,7 @@ const Navbar = () => {
       <div className={`nav_items ${isOpen && "open"}`}>
         {isLoggedIn ? (
           <>
-            <a href="#event-section" onClick={closeMenu}>Nuestros eventos</a>
+            <a href="/event" onClick={closeMenu}>Nuestros eventos</a>
             <a href="/" onClick={handleLogout}>Cerrar sesión</a>
           </>
         ) : (

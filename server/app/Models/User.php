@@ -54,4 +54,9 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
     
+    public function confirmAttendance()
+{
+    return $this->belongsToMany(Event::class);
+}
+
 }
