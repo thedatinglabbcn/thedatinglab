@@ -6,7 +6,7 @@ const RequireAuth = ({ allowedRoles }) => {
   const { auth } = useAuth();
   const location = useLocation();
 
-  // Verifica si el usuario tiene el rol "admin"
+ 
   const isAdmin = auth?.roles?.includes("admin");
 
   console.log("auth:", auth);
@@ -21,7 +21,7 @@ const RequireAuth = ({ allowedRoles }) => {
     <Outlet />
   ) : auth?.user ? (
     <Navigate to="/admin-login" state={{ from: location }} replace />
-  ) : null; // Agrega un manejo de caso adicional si es necesario
+  ) : null; 
 };
 
 export default RequireAuth;

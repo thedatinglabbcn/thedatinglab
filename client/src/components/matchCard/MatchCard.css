@@ -1,14 +1,16 @@
 @import url('../../index.css');
 
 .rounded-circle {
-    
     height: 150px;
     width: 150px;
 }
 
 .match-container{
-    background-color: var(--color-beige);
     padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .match-title{
@@ -33,6 +35,7 @@
     /* Slider */
 
 .match-carousel {
+        width: 60%;
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
@@ -40,12 +43,25 @@
         transition: transform 0.3s ease-in-out;
 }
       
+.porcentage-match{
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 1rem 0;
+}
 .match-card {
-        flex: 0 0 auto;
+       flex: 0 0 auto;
         width: 100%;
         padding: 1rem;
         scroll-snap-align: start;
       }
+
+.matches-text{
+  color: var(--color-primary);
+  font-weight: 700px;
+  font-size: 1.5rem;
+  padding: 0;
+}
       
 .match-navigation {
     display: flex;

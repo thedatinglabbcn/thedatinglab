@@ -32,7 +32,7 @@ function ProfilePage() {
 const userName = profile && profile.user ? profile.user.name : '';
 
   return (
-    <div>
+    <div className='profile-container'>
       <Navbar />
       <div className='match-container'>
         <h1 className='match-title'>¡Hola, {userName}!</h1>
@@ -42,7 +42,7 @@ const userName = profile && profile.user ? profile.user.name : '';
               <center><img src={`http://localhost:8000/storage/${profile && profile.image}`} className="rounded-circle" alt={`Tu foto de perfil`} /></center>
             </div>
             <div className="match-body">
-              <p className="card-text text-center"><small>{profile && profile.description}</small></p>
+              <p className="preference-text"><small>{profile && profile.description}</small></p>
             </div>
           </div>
         </center>
@@ -56,7 +56,7 @@ const userName = profile && profile.user ? profile.user.name : '';
         )}
       </div>
       <NavbarLogin />
-      <Footer />
+     
     </div>
   );
 }

@@ -26,11 +26,12 @@ useEffect(() =>{
 }, []);
 
   return (
-    <>
+    <div className='home-body'>
       <Navbar />
       <section className="hero">
         <div className="hero-content">
-          <h1 className='home-title'>Donde los sentidos encuentran el amor</h1>
+          
+          <h1 className='home-title'>Donde los <span className='home-bold'>sentidos</span> encuentran el <span className='home-bold'>amor</span></h1>
           <p>Creemos en la compatibilidad emocional como la base de relaciones sólidas.</p>
           <button type="button" className="button-start"  onClick={() => navigate('/register')}>
               ¿Te apuntas?
@@ -53,12 +54,12 @@ useEffect(() =>{
             </button>
         </div>
       </section>
-      <section id="event-section">
+      <section className="event-container" id="event-section">
         <h1 className='home-subtitle'>Experiencias</h1>
         {loadingEvents ? ( 
           <p>Cargando experiencias...</p>
         ) : (
-          <div>
+          <div className='event-space'>
             {events.map((event, index) => (
               <EventCard key={index} event={event} />
             ))}
@@ -66,8 +67,8 @@ useEffect(() =>{
         )}
       </section>
       <NavbarLogin />
-    <Footer/>
-    </>
+
+    </div>
   )
 } 
 

@@ -1,0 +1,30 @@
+.detail-body{
+    width: 100%;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.detail-img-top{
+    width: 100%;
+}
+.detail-date{
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    font-weight: 700;
+}
+.detail-title{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.detail-text{
+    color: black;
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.detail-location{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}

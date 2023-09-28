@@ -36,7 +36,7 @@ function EventsPage() {
         )}
       </section>
       <NavbarLogin/>
-      <Footer/>
+  
     </div>
   );
 }

@@ -64,10 +64,10 @@ class MatchingController extends Controller
 
     private function calculateMatchingPercentage($userPreferences, $matchPreferences)
     {
-        $totalFields = 3; // Total de campos para comparar
-        $matchingFields = 0; // Campos coincidentes
+        $totalFields = 3; 
+        $matchingFields = 0; 
 
-        // Compara cada campo y suma 1 por cada coincidencia
+      
         if ($userPreferences->preferences1 === $matchPreferences->preferences1) {
             $matchingFields++;
         }
@@ -78,7 +78,6 @@ class MatchingController extends Controller
             $matchingFields++;
         }
 
-        // Calcula el porcentaje de coincidencia
         $matchingPercentage = ($matchingFields / $totalFields) * 100;
 
         return $matchingPercentage;

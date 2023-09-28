@@ -6,6 +6,9 @@
     width: 150px;
 }
 
+.profile-container{
+    margin-bottom: 7rem;
+}
 
 .match-body{
     margin-top: 1rem;
@@ -13,7 +16,7 @@
 }
 
 .match-container{
-    background-color: var(--color-beige);
+    
     padding: 3rem;
 }
 

@@ -7,7 +7,7 @@ const ProfileFormPage = () => {
     <div>
       <Navbar />
       <ProfileForm />
-      <Footer />
+    
     </div>
   );
 }

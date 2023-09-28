@@ -29,7 +29,7 @@ class AuthController extends Controller
             $user = new User([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')), // Asegúrate de almacenar la contraseña con Hash
+                'password' => Hash::make($request->input('password')), 
             ]);
 
             $user->save();
@@ -41,11 +41,8 @@ class AuthController extends Controller
                 'token' => $token,
             ], 201);
         }
-    } // Cierra el método register
+    } 
 
-    /**
-     * Login user and create token.
-     */
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -74,7 +71,7 @@ class AuthController extends Controller
                 'token' => $token
             ], 200)->withCookie($cookie);
         }
-    } // Cierra el método login
+    } 
 
     public function logout(Request $request)
     {
@@ -82,5 +79,5 @@ class AuthController extends Controller
         return response()->json([
             'msg' => 'Usuario desconectado exitosamente'	
         ], 200);
-    } // Cierra el método logout
+    }
 }

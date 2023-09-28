@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
 import Swal from 'sweetalert2';
+import './EventDetail.css';
+import Navbar from '../../components/navbar/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import './../../components/eventCard/EventCard.css';
@@ -45,17 +47,18 @@ function EventDetail() {
 
   return (
     <div>
+        <Navbar/>
       {eventDetails ? (
-        <div className="card event-card" style={{ width: '15rem' }}>
-          <img className="card-img-top" src={`http://localhost:8000/storage/${eventDetails.image}`} alt="sdsad" />
-          <div className="card-body">
-            <div className="card-date">{eventDetails.date} {eventDetails.time}</div>
-            <h5 className="card-title">{eventDetails.title}</h5>
-            <p className="card-text">{eventDetails.description}</p>
-            <div className="card-location">
+        <div className="event-detail">
+          <img className="detail-img-top" src={`http://localhost:8000/storage/${eventDetails.image}`} alt="sdsad" />
+          <div className="detail-body">
+            <div className="detail-date">{eventDetails.date} {eventDetails.time}</div>
+            <h5 className="detail-title">{eventDetails.title}</h5>
+            <p className="detail-text">{eventDetails.description}</p>
+            <div className="detail-location">
               <FontAwesomeIcon icon={faMapMarkerAlt} className='location-icon' /> Barcelona
             </div>
-            <a onClick={handleAttendClick} className="btn btn-primary attend-button">Asistir</a>
+            <a onClick={handleAttendClick} className="detail-button">Quiero Asistir</a>
           </div>
         </div>
       ) : (

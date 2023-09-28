@@ -41,17 +41,5 @@ class PreferencesController extends Controller
         ], 201);
     }
 }
-    // public function index()
-    // {
-    //    $preferences = Preference::all();
-    //     return response()->json($preferences);
-    // }
-    
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
+
 }

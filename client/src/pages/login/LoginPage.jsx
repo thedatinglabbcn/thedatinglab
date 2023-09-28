@@ -8,7 +8,7 @@ const LoginPage = () => {
     <div>
       <Navbar />
       <LoginForm />
-      <Footer />
+     
     </div>
   );
 }
