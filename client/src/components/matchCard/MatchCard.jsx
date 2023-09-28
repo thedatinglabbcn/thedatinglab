@@ -37,7 +37,7 @@ function MatchCard() {
     }
   };
 
-  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= 70);
+  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= 50);
 
   const navigateToPreviousMatch = () => {
     if (currentMatchIndex > 0) {
