@@ -65,17 +65,6 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
     
-        $validator = Validator::make($request->all(), [
-            'description' => 'sometimes|string|max:500',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-    
-        if ($validator->fails()) {
-            return response()->json([
-                'validation_errors' => $validator->messages(),
-            ], 422);
-    }
-
         $profile = Profile::find($id);
 
         if (!$profile) {
