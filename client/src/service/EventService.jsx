@@ -11,6 +11,10 @@ export const EventService = {
     return axios.get(urlEvents);
   },
 
+  getEvent: (eventId) => {
+    return axios.get(`${urlEvents}/${eventId}`);
+  },
+
   createEvent: (formData) => {
     return axios.post(urlEventsAdmin, formData, {
       headers: {
@@ -29,5 +33,9 @@ export const EventService = {
 
   destroyEvent: (eventId) => {
     return axios.delete(`${urlEventsAdmin}/${eventId}`);
+  },
+
+  confirmAttendance: (eventId) => {
+    return axios.post(`${urlEvents}/attendance/${eventId}`);
   },
 };

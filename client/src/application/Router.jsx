@@ -10,6 +10,9 @@ import Dashboard from '../pages/admin/Dashboard';
 import DashboardEvents from '../pages/admin/DashboardEvents';
 import MatchCard from '../components/matchCard/MatchCard';
 import AdminLoginPage from '../pages/admin/AdminLoginPage';
+import EventsPage from '../pages/events/EventsPage';
+import EventDetail from '../pages/events/EventDetail';
+import PaymentPage from '../pages/payment/PaymentPage';
 
 
 const router = createBrowserRouter([
@@ -57,6 +60,18 @@ const router = createBrowserRouter([
   {
     path: '/admin-login',
     element: <AdminLoginPage />
+  },
+  {
+    path: '/event',
+    element: <EventsPage />
+  },
+  {
+    path: '/event/:eventId',
+    element: <EventDetail />
+  },
+  {
+    path: '/payment/:eventId',
+    element: <PaymentPage />
   }
  
 ])
