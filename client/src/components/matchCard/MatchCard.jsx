@@ -59,7 +59,7 @@ function MatchCard() {
         <center>
           {filteredMatches.length === 0 ? (
             <div>
-              <p className="card-text text-center text-danger">
+              <p className="matches-text">
                 Sin coincidencias por ahora... ¡Vuelve a comprobarlo más tarde!
               </p>
               <button
@@ -102,7 +102,6 @@ function MatchCard() {
         </center>
       </div>
       <NavbarLogin />
-      <Footer/>
     </div>
   );
 }

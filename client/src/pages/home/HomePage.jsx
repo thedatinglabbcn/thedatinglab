@@ -26,7 +26,7 @@ useEffect(() =>{
 }, []);
 
   return (
-    <>
+    <div className='home-body'>
       <Navbar />
       <section className="hero">
         <div className="hero-content">
@@ -54,7 +54,7 @@ useEffect(() =>{
             </button>
         </div>
       </section>
-      <section id="event-section">
+      <section className="event-container" id="event-section">
         <h1 className='home-subtitle'>Experiencias</h1>
         {loadingEvents ? ( 
           <p>Cargando experiencias...</p>
@@ -68,7 +68,7 @@ useEffect(() =>{
       </section>
       <NavbarLogin />
 
-    </>
+    </div>
   )
 } 
 

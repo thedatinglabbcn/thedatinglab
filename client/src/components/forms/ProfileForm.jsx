@@ -89,14 +89,14 @@ function ProfileForm() {
   return (
     <div className='body-login'>
       <div className="container">
-        <h1 className='form-title'>¡Ya casi hemos terminado!</h1>
-        <p className="">
+      <h1 className='form-title'>¡Ya casi hemos terminado!</h1>
+        <p className="preference-text">
           Para terminar, sube una foto y cuéntanos algo sobre ti.
         </p>
         <form onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
           <div className="mb-4">
-            <label htmlFor="image" className="form-label">
-              Foto de perfil
+            <label htmlFor="image" className="form-label-profile">
+              Elige la foto de perfil
             </label>
             <input
               type="file"
@@ -112,7 +112,7 @@ function ProfileForm() {
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="description" className="form-label">
+            <label htmlFor="description" className="form-label-profile">
             ¿En qué estado se encuentra tu corazón? ¿Qué tipo de relación te gustaría tener? ¿En qué momento vital estás? ¡Cuéntanos!
             </label>
             <textarea
@@ -127,7 +127,7 @@ function ProfileForm() {
               <div className="text-danger">{validationErrors.description.join(', ')}</div>
             )}
           </div>
-          <div className='login-buttons'>
+          <div className='form-buttons'>
             <button type="submit" className="button-send">
               Enviar
             </button>

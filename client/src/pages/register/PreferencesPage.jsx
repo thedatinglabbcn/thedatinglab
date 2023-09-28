@@ -7,7 +7,7 @@ const RegisterPage = () => {
     <div>
       <Navbar />
       <PreferencesForm />
-      <Footer />
+     
     </div>
   );
 }

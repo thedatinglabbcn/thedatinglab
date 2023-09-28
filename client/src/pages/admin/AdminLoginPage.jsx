@@ -6,7 +6,7 @@ function AdminLoginPage() {
   return (
     <div>
             <LoginAdmin />
-            <Footer />
+          
     </div>
   )
 }

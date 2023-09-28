@@ -5,8 +5,7 @@ background-color: var(--color-beige);
 .body-registration{
     width: 100%;
     background-color: var(--color-beige);
-    
-    font-family: 'Nunito', sans-serif;
+    font-family: 'League Spartan', sans-serif;
     font-weight: 700;
 }
 
@@ -18,26 +17,29 @@ background-color: var(--color-beige);
     border-radius: 0.5rem;
     border: 1px var(--color-borders) solid;
     margin-bottom: 1rem;
+    font-size: 1.4rem;
 }
 
 .form-title{
-    font-size: 1.7rem;
-    font-weight: 900;
-    margin: 2rem;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem 0;
     text-align: center;
 }
 
 .link-help{
     color:var(--color-primary);
-    font-weight: 900;
+    font-weight: 700;
 }
 
 .form-help{
     text-align: center;
     font-size: 1.2rem;
     font-weight: 700;
-
+    color: black;
+    padding: 0;
 }
+
 
 .form-buttons{
   display: flex;
@@ -73,7 +75,10 @@ background-color: var(--color-beige);
     padding: 0.5rem 2rem;
 
 }
-
+.edit-profile-container{
+  padding: 0;
+  margin-bottom: 7rem;
+}
 .error-message {
     color: red;
     font-size: 14px;
@@ -101,39 +106,63 @@ background-color: var(--color-beige);
     font-weight: 300;
     text-align: center;
 }
+.preference-text{
+  color: var(--color-black);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
 
   .input-options {
     display: inline-flex;
     max-width: calc(33.33% - 10px); /* Limita el ancho máximo de cada opción para mostrar 3 en una fila */
     margin-right: 0.5rem; 
     margin-bottom: 0.8rem; 
+    font-size: 1.5rem;
 }
-  
+  .btn-outline-danger{
+ font-weight: 500;
+ font-size: 1.2rem;
+  }
+
   .mb-3{
     text-align: center;
   }
-
+.form-label{
+  font-size: 1.4rem;
+}
   .form-label-form {
    display: block;
    margin: 2rem 0;
-   font-size: 1.4em;
+   font-size: 1.6em;
    text-align: center;
   }
+
+  .form-label-profile{
+    display: block;
+    margin: 1rem 0;
+    font-size: 1.2em;
+    text-align: center;
+   }
  
   .button-group {
     display: flex;
     justify-content: space-between;
     margin-top: 2rem;
     text-align: center;
+    
   }
   
   .button-cancel {
     flex: 1;
     margin-right: 10px; 
+    font-size: 1.3rem;
   }
   
   .button-send {
     flex: 2;
     margin-right: 0;
+    font-size: 1.3rem;
     
   }

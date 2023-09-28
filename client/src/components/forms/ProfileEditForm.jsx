@@ -74,7 +74,7 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
 
   return (
     <div className='body-login'>
-      <div className="container">
+      <div className="edit-profile-container">
         <p className="">
           Edita tus datos:.
         </p>
@@ -97,7 +97,7 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="description" className="form-label">
+            <label htmlFor="description" className="preference-text">
               Descripción
             </label>
             <textarea
@@ -113,7 +113,7 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
               <div className="text-danger">{validationErrors.description.join(', ')}</div>
             )}
           </div>
-          <div className='login-buttons'>
+          <div className='form-buttons'>
             <button type="submit" className="button-send">
               Enviar
             </button>

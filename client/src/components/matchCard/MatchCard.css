@@ -7,8 +7,11 @@
 }
 
 .match-container{
-    background-color: var(--color-beige);
     padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .match-title{
@@ -41,11 +44,18 @@
 }
       
 .match-card {
-        flex: 0 0 auto;
+       flex: 0 0 auto;
         width: 100%;
         padding: 1rem;
         scroll-snap-align: start;
       }
+
+.matches-text{
+  color: var(--color-primary);
+  font-weight: 700px;
+  font-size: 1.5rem;
+  padding: 0;
+}
       
 .match-navigation {
     display: flex;
