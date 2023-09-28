@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function EventCard({event}) {
 
   return (
-    <div className="card event-card" style={{ width: '15rem' }}>
+    <div className="event-card" style={{ width: '15rem' }}>
        <img className="card-img-top" src= {`http://localhost:8000/storage/${event.image}`} alt="sdsad" />
         <div className="card-body">
           <h5 className="card-title">{event.title}</h5>
@@ -16,7 +16,7 @@ function EventCard({event}) {
           </div>
           <Link
           to={`/event/${event.id}`}
-          className="btn btn-primary attend-button">
+          className="detail-button">
           Más Detalles
         </Link>
         </div>

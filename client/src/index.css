@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;400;700;900&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -9,14 +9,14 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 
 :root {
-  --color-primary: #ED696B;
+  --color-primary: #E94445;
   --color-secondary: #EFDAE2;
   --color-beige: #FFF5E0;
   --color-borders: #C23373;
