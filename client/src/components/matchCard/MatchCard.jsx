@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './MatchCard.css';
 import Navbar from '../navbar/Navbar';
-import NavbarLogin from '../navbar/NavbarLogin';
+
+
 import Footer from '../footer/Footer';
 import { MatchingService } from '../../service/MatchingService';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import NavbarLogin from '../navbar/NavbarLogin';
 
 function MatchCard() {
   const [matchingUsers, setMatchingUsers] = useState([]);
@@ -37,7 +39,7 @@ function MatchCard() {
     }
   };
 
-  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= 70);
+  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= 30);
 
   const navigateToPreviousMatch = () => {
     if (currentMatchIndex > 0) {
@@ -87,7 +89,7 @@ function MatchCard() {
                       alt={`Tu match: ${user.name}`}
                     />
                     <h5 className="card-title text-center">{user.name}</h5>
-                    <h6 className="card-text text-center text-muted">Coincidencia: {user.matchingPercentage}%</h6>
+                    <h6 className="porcentage-match">Coincidencia: {user.matchingPercentage}%</h6>
                     <p className="card-text text-center"><small>{user.description}</small></p>
                   </div>
                 ))}
@@ -101,7 +103,7 @@ function MatchCard() {
           )}
         </center>
       </div>
-      <NavbarLogin />
+   <NavbarLogin/>
     </div>
   );
 }

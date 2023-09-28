@@ -32,7 +32,7 @@ function ProfilePage() {
 const userName = profile && profile.user ? profile.user.name : '';
 
   return (
-    <div>
+    <div className='profile-container'>
       <Navbar />
       <div className='match-container'>
         <h1 className='match-title'>¡Hola, {userName}!</h1>

@@ -7,7 +7,5 @@ const Button = (props) => {
     );
 };
 
-//Para usar el botón en un componente adaptar la siguiente línea:
-//<Button backgroundColorClass="bttn-primary" text="¿Te apuntas?" />
 
 export default Button;

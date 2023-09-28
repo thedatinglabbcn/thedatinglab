@@ -133,8 +133,7 @@ class EventController extends Controller
     {
         $user = Auth::user();
 
-        $confirmedDate = $user->confirmAttendance; // Ajusta esto según tu relación en el modelo User
-
+        $confirmedDate = $user->confirmAttendance; 
         return response()->json($confirmedDate);
     }
 }

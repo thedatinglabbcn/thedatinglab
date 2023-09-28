@@ -1,11 +1,11 @@
 /* Estilo general */
 
 .hero {
-    background-image: url('../../assets/images/Slider.png'); 
+    background-image: url('../../assets/images/slider-dating-lab.jpg'); 
     background-size: cover;
     color:var(--color-white);
     text-align: left;
-    padding: 70px 30px;
+    padding: 130px 30px;
 }
 
 .hero-content {
@@ -28,10 +28,10 @@ color: var(--color-primary);
 } */
 
 p {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: white;
-    padding-right: 7rem;
+    padding-right: 2rem;
     margin-bottom: 2rem;
  
 }
@@ -43,7 +43,7 @@ p {
     padding: 0.5rem 2rem;
     font-size: 1.3rem;
     font-weight: 700;
-    margin: 1rem;
+    margin: 1rem 0;
     
 
 }

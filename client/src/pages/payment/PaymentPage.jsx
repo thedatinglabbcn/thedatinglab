@@ -15,8 +15,7 @@ function PaymentPage() {
   };
 
   const handlePaymentAndAttendance = () => {
-    // Simular el proceso de pago (puedes agregar lógica adicional aquí)
-    // ...
+  
 
     axios
       .post(`api/event/attendance/${eventId}`, { option: selectedOption })

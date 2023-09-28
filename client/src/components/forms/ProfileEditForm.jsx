@@ -97,7 +97,7 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="description" className="preference-text">
+            <label htmlFor="description" className="form-label">
               Descripción
             </label>
             <textarea
