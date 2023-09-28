@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ProfilePage.css';
 import Navbar from '../../components/navbar/Navbar';
+import NavbarLogin from '../../components/navbar/NavbarLogin';
 import Footer from '../../components/footer/Footer';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { ProfileService } from '../../service/ProfileService';
@@ -54,6 +55,7 @@ const userName = profile && profile.user ? profile.user.name : '';
           <ProfileEditForm profile={profile} id={id} setIsEditing={setIsEditing} />
         )}
       </div>
+      <NavbarLogin />
       <Footer />
     </div>
   );

@@ -2,6 +2,7 @@ import { EventService } from '../../service/EventService';
 import React, { useState, useEffect } from 'react';
 import EventCard from "../../components/eventCard/EventCard";
 import Navbar from '../../components/navbar/Navbar';
+import NavbarLogin from '../../components/navbar/NavbarLogin';
 import Footer from '../../components/footer/Footer';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
@@ -64,6 +65,7 @@ useEffect(() =>{
           </div>
         )}
       </section>
+      <NavbarLogin />
     <Footer/>
     </>
   )
