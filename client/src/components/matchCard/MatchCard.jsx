@@ -7,44 +7,37 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-
 function MatchCard() {
   const [matchingUsers, setMatchingUsers] = useState([]);
-  const [error, setError] = useState(null);
-  const [noPreferencesError, setNoPreferencesError] = useState(false);
-  const [noMatchesError, setNoMatchesError] = useState(false);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
   const navigate = useNavigate();
-
-  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= 60);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const matches = MatchingService();
         const response = await matches.getAllMatches();
-        // console.log(response.data);
 
         if (Array.isArray(response.data.matches)) {
           setMatchingUsers(response.data.matches);
-        } else {
-          setError('La respuesta no es un arreglo válido');
         }
       } catch (error) {
         console.error(error);
-        if (error.response.status === 404 && error.response.data.type === 'preferences') {
-          setNoPreferencesError(true);
-        } else if (error.response.status === 404 && error.response.data.type === 'matches') {
-          setNoMatchesError(true);
-        } else {
-          setError(error.response.data.message);
-        }
+        handleFetchError(error);
       }
     };
 
     fetchData();
   }, []);
- 
+
+  const handleFetchError = (error) => {
+    if (error.response.status === 404 && error.response.data.type === 'preferences') {
+      navigate('/preferences');
+    }
+  };
+
+  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= 70);
+
   const navigateToPreviousMatch = () => {
     if (currentMatchIndex > 0) {
       setCurrentMatchIndex(currentMatchIndex - 1);
@@ -52,7 +45,7 @@ function MatchCard() {
   };
 
   const navigateToNextMatch = () => {
-    if (currentMatchIndex < matchingUsers.length - 1) {
+    if (currentMatchIndex < filteredMatches.length - 1) {
       setCurrentMatchIndex(currentMatchIndex + 1);
     }
   };
@@ -64,19 +57,19 @@ function MatchCard() {
         <h1 className='match-title'>¡Tus matches!</h1>
         <center>
           {filteredMatches.length === 0 ? (
-            <h3 className="card-text text-center text-danger">
-              Sin coincidencias por ahora... ¡Vuelve a comprobarlo más tarde!
-              <p>
-                <button
-                  type="button"
-                  className="button-cancel"
-                  style={{ marginTop: '10px' }}
-                  onClick={() => navigate('/')}
-                >
-                  Eventos
-                </button>
+            <div>
+              <p className="card-text text-center text-danger">
+                Sin coincidencias por ahora... ¡Vuelve a comprobarlo más tarde!
               </p>
-            </h3>
+              <button
+                type="button"
+                className="button-cancel"
+                style={{ marginTop: '10px' }}
+                onClick={() => navigate('/')}
+              >
+                Eventos
+              </button>
+            </div>
           ) : (
             <div className="match-carousel-container">
               <FontAwesomeIcon
