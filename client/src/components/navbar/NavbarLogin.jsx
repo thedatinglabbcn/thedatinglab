@@ -1,11 +1,12 @@
 import React from 'react';
 import './NavbarLogin.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faCalendar, faUser, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 const NavbarLogin = () => {
   const location = useLocation();
+  const {profileId} = useParams();
 
   const isActive = (path) => {
     return location.pathname === path;
@@ -30,7 +31,7 @@ const NavbarLogin = () => {
           <FontAwesomeIcon icon={faCalendar} />
         </div>
       </Link>
-      <Link to="/profile">
+      <Link to={`/profile/${profileId}`}>
         <div className={`nav-icon ${isActive('/profile') ? 'active' : ''}`}>
           <FontAwesomeIcon icon={faUser} />
         </div>
