@@ -29,13 +29,51 @@ class MatchingController extends Controller
 
             $userGender = $userPreferences->gender;
             $userLooksFor = $userPreferences->looksFor;
+            $userHasChildren = $userPreferences->hasChildren;
+            $userDatesParents = $userPreferences->datesParents;
 
-            $matches = User::whereHas('preferences', function ($query) use ($userGender, $userLooksFor) {
+            // Define los pesos para cada campo de preferencias
+            $weights = [
+                'gender' => 0,
+                'looksFor' => 0,
+                'hasChildren' => 0,
+                'datesParents' => 0,
+                'sexoAffective' => 3,
+                'heartState' => 2,
+                'topValue' => 2,
+                'preferences1' => 2,
+                'preferences2' => 0.5,
+                'catsDogs' => 0.5,
+            ];
+
+            $matches = User::whereHas('preferences', function ($query) use ($userGender, $userLooksFor, $userHasChildren, $userDatesParents) {
                 $query->where('gender', $userLooksFor)
-                    ->where('looksFor', $userGender);
+                    ->where('looksFor', $userGender)
+                    ->where(function ($subQuery) use ($userHasChildren, $userDatesParents) {
+                        if ($userHasChildren === 'Sí' && ($userDatesParents === 'Sí' || $userDatesParents === 'Tanto faz')) {
+                            // El usuario tiene hijos y está dispuesto a salir con padres, se muestran usuarios con y sin hijos que estén dispuestos a salir con usuarios con hijos.
+                            $subQuery->whereIn('hasChildren', ['Sí', 'No']);
+                            $subQuery->where('datesParents', 'Sí');
+                        } elseif ($userHasChildren === 'No') {
+                            // El usuario no tiene hijos y está dispuesto a salir con padres, se muestran usuarios CON Y SIN hijos que no quieren salir con usuarios con hijos.
+                            $subQuery->where('datesParents', 'Sí');
+                            $subQuery->where(function ($subSubQuery) {
+                                $subSubQuery->where('hasChildren', 'No')
+                                    ->orWhereNull('hasChildren');
+                            });
+                        } elseif ($userHasChildren === 'Sí' && $userDatesParents === 'No') {
+                            // El usuario tiene hijos y no está dispuesto a salir con padres, se muestran usuarios SIN hijos DISPUESTOS A SALIR CON USUARIOS CON HIJOS.
+                            $subQuery->where('hasChildren', 'No');
+                            $subQuery->where('datesParents', 'Sí');
+                        } elseif ($userHasChildren === 'No' && $userDatesParents === 'No') {
+                            // El usuario no tiene hijos y no está dispuesto a salir con padres, se muestran usuarios SIN hijos que no quieren salir con usuarios con hijos.
+                            $subQuery->where('hasChildren', 'No');
+                            $subQuery->where('datesParents', 'No');
+                        }
+                    });
             })
-                ->where('id', '!=', $user->id)
-                ->get();
+            ->where('id', '!=', $user->id)
+            ->get();
 
             $response = [];
 
@@ -44,7 +82,7 @@ class MatchingController extends Controller
             }
 
             foreach ($matches as $match) {
-                $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreferences, $match->preferences));
+                $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreferences, $match->preferences, $weights));
 
                 $response[] = [
                     'name' => $match->name,
@@ -67,25 +105,25 @@ class MatchingController extends Controller
         $fields = array_keys($userPreferences->getAttributes());
 
         // Elimina los campos que no quieres incluir en el cálculo
-        $fieldsToExclude = ['id', 'user_id', 'created_at', 'updated_at', 'gender', 'looksFor'];
+        $fieldsToExclude = ['id', 'user_id', 'created_at', 'updated_at', 'gender', 'looksFor', 'hasChildren', 'datesParents'];
         $fields = array_diff($fields, $fieldsToExclude);
 
         return $fields;
     }
 
-    private function calculateMatchingPercentage($userPreferences, $matchPreferences)
+    private function calculateMatchingPercentage($userPreferences, $matchPreferences, $weights)
     {
         $totalFields = count($this->getPreferenceFields($userPreferences));
         $matchingFields = 0;
 
-        // Itera a través de los campos de preferencias y verifica si coinciden
+        // Itera a través de los campos de preferencias y verifica si coinciden, considerando los pesos
         foreach ($this->getPreferenceFields($userPreferences) as $field) {
             if ($userPreferences->$field === $matchPreferences->$field) {
-                $matchingFields++;
+                $matchingFields += $weights[$field]; // Suma el peso correspondiente
             }
         }
 
-        $matchingPercentage = ($matchingFields / $totalFields) * 100;
+        $matchingPercentage = ($matchingFields / ($totalFields * max($weights))) * 100; // Normaliza según el peso máximo
 
         return $matchingPercentage;
     }
