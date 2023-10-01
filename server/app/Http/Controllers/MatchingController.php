@@ -23,7 +23,6 @@ class MatchingController extends Controller
 
             $userPreferences = $user->preferences;
 
-
             if (!$userPreferences) {
                 return response()->json(['type' => 'preferences'], 404);
             }
@@ -62,20 +61,28 @@ class MatchingController extends Controller
         }
     }
 
+    private function getPreferenceFields($userPreferences)
+    {
+        // Obtén dinámicamente la lista de campos de preferencias disponibles
+        $fields = array_keys($userPreferences->getAttributes());
+
+        // Elimina los campos que no quieres incluir en el cálculo
+        $fieldsToExclude = ['id', 'user_id', 'created_at', 'updated_at', 'gender', 'looksFor'];
+        $fields = array_diff($fields, $fieldsToExclude);
+
+        return $fields;
+    }
+
     private function calculateMatchingPercentage($userPreferences, $matchPreferences)
     {
-        $totalFields = 3; 
-        $matchingFields = 0; 
+        $totalFields = count($this->getPreferenceFields($userPreferences));
+        $matchingFields = 0;
 
-      
-        if ($userPreferences->preferences1 === $matchPreferences->preferences1) {
-            $matchingFields++;
-        }
-        if ($userPreferences->preferences2 === $matchPreferences->preferences2) {
-            $matchingFields++;
-        }
-        if ($userPreferences->catsDogs === $matchPreferences->catsDogs) {
-            $matchingFields++;
+        // Itera a través de los campos de preferencias y verifica si coinciden
+        foreach ($this->getPreferenceFields($userPreferences) as $field) {
+            if ($userPreferences->$field === $matchPreferences->$field) {
+                $matchingFields++;
+            }
         }
 
         $matchingPercentage = ($matchingFields / $totalFields) * 100;

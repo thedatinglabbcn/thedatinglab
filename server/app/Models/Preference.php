@@ -19,6 +19,11 @@ class Preference extends Model
     protected $fillable = [
         'gender',
         'looksFor',
+        'hasChildren',
+        'datesParents',
+        'sexoAffective',
+        'heartState',
+        'topValue',
         'preferences1',
         'preferences2',
         'catsDogs',
