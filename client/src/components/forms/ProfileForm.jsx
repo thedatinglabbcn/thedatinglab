@@ -86,6 +86,25 @@ function ProfileForm() {
     setValidationErrors({});
   };
 
+  const handleImageConfirmation = (e) => { // Añade (e) como argumento
+    Swal.fire({
+      title: '¿Te gusta esta imagen de perfil?',
+      text: 'Una vez confirmada, no podrás cambiarla hasta después.',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, confirmar',
+      cancelButtonText: 'No, cambiar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // El usuario confirmó su imagen de perfil, ahora puedes continuar con el envío del formulario.
+        handleSubmit(e); // Pasa (e) como argumento para evitar errores.
+      }
+    });
+  };
+  
+
   return (
     <div className='body-login'>
       <div className="container">
@@ -111,6 +130,18 @@ function ProfileForm() {
               <div className="text-danger">{validationErrors.image.join(', ')}</div>
             )}
           </div>
+            {formDataState.image && (
+            <div className="mb-4">
+            <label className="form-label-profile">Vista previa de la imagen de perfil</label>
+            <center>
+            <img
+            src={URL.createObjectURL(formDataState.image)}
+              alt="Vista previa de la imagen de perfil"
+              className="rounded-circle "
+              />
+            </center>
+            </div>
+            )}
           <div className="mb-4">
             <label htmlFor="description" className="form-label-profile">
             ¿En qué estado se encuentra tu corazón? ¿Qué tipo de relación te gustaría tener? ¿En qué momento vital estás? ¡Cuéntanos!

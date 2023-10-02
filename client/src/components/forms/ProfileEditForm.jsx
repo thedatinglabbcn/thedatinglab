@@ -96,6 +96,18 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
               <div className="text-danger">{validationErrors.image.join(', ')}</div>
             )}
           </div>
+          {formDataState.image && (
+            <div className="mb-4">
+            <label className="form-label-profile">Vista previa de la imagen de perfil</label>
+            <center>
+            <img
+            src={URL.createObjectURL(formDataState.image)}
+              alt="Vista previa de la imagen de perfil"
+              className="rounded-circle "
+              />
+            </center>
+            </div>
+            )}
           <div className="mb-4">
             <label htmlFor="description" className="form-label">
               Descripción
