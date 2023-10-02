@@ -22,9 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'birthdate',
         'preference_id',
-        'profile_id'
+        'profile_id',
     ];
 
     /**
@@ -50,12 +49,12 @@ class User extends Authenticatable
     ];
     
     public function profile() {
-        return $this->belongsTo(Profile::class, 'profile_id');
-    }
-    
-    public function preference() {
-        return $this->belongsTo(Preference::class, 'preference_id');
-    }
+    return $this->belongsTo(Profile::class, 'profile_id');
+}
+
+public function preference() {
+    return $this->belongsTo(Preference::class, 'preference_id');
+}
 
     public function confirmAttendance()
 {

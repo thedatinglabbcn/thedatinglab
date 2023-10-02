@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('preferences', function (Blueprint $table) {
             $table->id();
-            $table->enum('gender', ['Hombre', 'Mujer', 'Fluido', 'Otro']);
-            $table->enum('looksFor', ['Hombre', 'Mujer', 'Fluido', 'Otro']);
+            $table->date('birthdate');
+            $table->enum('ageRange', ['18-25', '26-35', '36-45', '46-55']);
+            $table->enum('gender', ['Hombre', 'Mujer', 'Fluido']);
+            $table->enum('looksFor', ['Hombre', 'Mujer', 'Fluido']);
             $table->enum('hasChildren', ['Sí', 'No']);
+            $table->enum('wantsFamily', ['Sí', 'No']);
             $table->enum('datesParents', ['Sí', 'No', 'No me lo he planteado']);
             $table->enum('sexoAffective', ['Monógama', 'Abierta', 'Amigos con derech@ a roce', 'Lo que surja', 'Casual']);
             $table->enum('heartState', ['Totalmente roto', 'Con ganas de compartir', 'Se siente solo', 'Feliz y palpitante', 'Despechadísimo']);
-            $table->enum('topValue', ['Libertad', 'Honestidad', 'Transparencia', 'Empatía', 'Comunicación', 'Responsabilidad', 'Voluntad', 'Diversión', 'Respeto', 'Gratitud', 'Confianza', 'Amor', 'Bondad', 'Positividad', 'Valentía', 'Cuidado', 'Alegría y sentido del humor']);
             $table->enum('preferences1', ['Netflix', 'Eventos', 'Deporte', 'Escapadas', 'Todas', 'Otras']);
             $table->enum('preferences2', ['Alcohol','Infusiones','NoAlcohol','Según','Ninguna']);
             $table->enum('catsDogs', ['Gatos', 'Perros', 'Todos', 'DeAmigos']);

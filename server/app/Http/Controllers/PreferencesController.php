@@ -13,13 +13,15 @@ class PreferencesController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'gender' => ['required', 'in:Hombre,Mujer,Otro'],
-            'looksFor' => ['required', 'in:Hombre,Mujer,Otro'],
+            'birthdate' => ['required|date|before:2005-01-01'],
+            'ageRange' => ['required', 'in:18-25,26-35,36-45,46-55'],
+            'gender' => ['required', 'in:Hombre,Mujer,Fluido'],
+            'looksFor' => ['required', 'in:Hombre,Mujer,Fluido'],
             'hasChildren' => ['required', 'in:Sí,No'],
+            'wantsFamily' => ['required', 'in:Sí,No'],
             'datesParents' => ['required', 'in:Sí,No,No me lo he planteado'],
             'sexoAffective' => ['required', 'in:Monógama,Abierta,Amigos con derech@ a roce,Lo que surja,Casual'],
             'heartState' => ['required', 'in:Totalmente roto,Con ganas de compartir,Se siente solo,Feliz y palpitante,Despechadísimo'],
-            'topValue' => ['required', 'in:Libertad,Honestidad,Transparencia,Empatía,Comunicación,Responsabilidad,Voluntad,Diversión,Respeto,Gratitud,Confianza,Amor,Bondad,Positividad,Valentía,Cuidado,Alegría y sentido del humor'],
             'preferences1' => ['required', 'in:Netflix,Eventos,Deporte,Escapadas,Todas,Otras'],
             'preferences2' => ['required', 'in:Alcohol,Infusiones,NoAlcohol,Según,Ninguna'],
             'catsDogs' => ['required', 'in:Gatos,Perros,Todos,DeAmigos'],
@@ -33,13 +35,15 @@ class PreferencesController extends Controller
         
         $user = Auth::user();
         $preference = new Preference([
+            'birthdate' => $request->input('birthdate'),
+            'ageRange' => $request->input('ageRange'),
             'gender' => $request->input('gender'),
             'looksFor' => $request->input('looksFor'),
             'hasChildren' => $request->input('hasChildren'),
+            'wantsFamily' => $request->input('wantsFamily'),
             'datesParents' => $request->input('datesParents'),
             'sexoAffective' => $request->input('sexoAffective'),
             'heartState' => $request->input('heartState'),
-            'topValue' => $request->input('topValue'),
             'preferences1' => $request->input('preferences1'),
             'preferences2' => $request->input('preferences2'),
             'catsDogs' => $request->input('catsDogs'),

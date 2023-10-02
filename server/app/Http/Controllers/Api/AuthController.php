@@ -21,7 +21,6 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'birthdate' => 'required|date|before:2005-01-01'
         ]);
 
         if ($validator->fails()) {
@@ -39,18 +38,16 @@ class AuthController extends Controller
         $preference = Preference::find($preferenceId);
         $profile = Profile::find($profileId);
     } else {
-    // Si los campos no están presentes o son nulos, establece las variables en null
-    $preference = null;
-    $profile = null;
+        $preference = null;
+        $profile = null;
     }
 
     $user = new User([
         'name' => $request->input('name'),
         'email' => $request->input('email'),
         'password' => Hash::make($request->input('password')),
-        'birthdate' => $request->input('birthdate'),
-        'profile_id' => $profile ? $profile->id : null, // Usar null si $profile es null
-        'preference_id' => $preference ? $preference->id : null, // Usar null si $preference es null
+        'profile_id' => $profile ? $profile->id : null,
+        'preference_id' => $preference ? $preference->id : null,
     ]);
 
 $user->save();

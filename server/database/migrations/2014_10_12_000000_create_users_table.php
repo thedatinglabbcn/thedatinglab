@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->date('birthdate');
             $table->unsignedBigInteger('preference_id')->nullable();
             $table->foreign('preference_id')->references('id')->on('preferences')->onDelete('cascade');
             $table->unsignedBigInteger('profile_id')->nullable();

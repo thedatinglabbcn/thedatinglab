@@ -17,13 +17,15 @@ class Preference extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'birthdate',
+        'ageRange',
         'gender',
         'looksFor',
         'hasChildren',
+        'wantsFamily',
         'datesParents',
         'sexoAffective',
         'heartState',
-        'topValue',
         'preferences1',
         'preferences2',
         'catsDogs',
