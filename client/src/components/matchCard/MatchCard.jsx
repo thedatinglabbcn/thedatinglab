@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './MatchCard.css';
 import Navbar from '../navbar/Navbar';
-
-
-import Footer from '../footer/Footer';
 import { MatchingService } from '../../service/MatchingService';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
