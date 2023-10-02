@@ -16,10 +16,15 @@ export const ProfileService =  () => {
         return response   
     }
   
-    const getProfile = async (profileId) => {
-        const response = await axios.get(`${urlProfile}/${profileId}`);
-        return response.data;
-    };
+    const getProfile = (profileId) => {
+  return axios.get(`${urlProfile}/${profileId}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error en la solicitud:', error);
+      throw error;
+    });
+};
+
 
 
     const updateProfile = (profileId, profileData) => {

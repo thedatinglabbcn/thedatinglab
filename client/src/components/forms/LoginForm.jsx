@@ -34,8 +34,9 @@ const LoginForm = () => {
       e.preventDefault();
       auth.login(formData).then(res => {
         const { token } = res.data;
-         
+         console.log(res.data.user.id)
         localStorage.setItem('auth_token', token);
+        localStorage.setItem('user_id', res.data.user.id);
         
 
         Swal.fire({
@@ -48,7 +49,7 @@ const LoginForm = () => {
             confirmButton: 'custom-swal-button',
           }
         })  .then(() => {
-          navigate('/matches');
+          navigate('/event');
         });
 
       })

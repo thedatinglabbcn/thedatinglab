@@ -68,6 +68,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'msg' => 'Usuario conectado exitosamente',
+                'user' => $user,
                 'token' => $token
             ], 200)->withCookie($cookie);
         }
