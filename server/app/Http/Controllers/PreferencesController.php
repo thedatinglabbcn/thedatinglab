@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Preference;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,10 +43,13 @@ class PreferencesController extends Controller
             'preferences1' => $request->input('preferences1'),
             'preferences2' => $request->input('preferences2'),
             'catsDogs' => $request->input('catsDogs'),
-            'user_id' => $user->id
         ]);
 
         $preference->save();
+
+        DB::table('users')
+              ->where('id', $user->id)
+              ->update(['preference_id' => $preference->id]);
 
         return response()->json([
             'message' => 'Preferencia creada correctamente'

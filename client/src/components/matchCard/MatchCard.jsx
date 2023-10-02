@@ -35,7 +35,7 @@ function MatchCard() {
 
   const handleFetchError = (error) => {
     if (error.response.status === 404 && error.response.data.type === 'preferences') {
-      navigate('/preferences');
+      console.log(error.response.status);
     }
   };
 

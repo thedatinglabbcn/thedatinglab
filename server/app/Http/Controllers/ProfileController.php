@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -37,6 +38,10 @@ class ProfileController extends Controller
             ]);
 
             $profile->save();
+
+            DB::table('users')
+              ->where('id', $user->id)
+              ->update(['profile_id' => $profile->id]);
 
             return response()->json([
                 'message' => 'Perfil creado con éxito',

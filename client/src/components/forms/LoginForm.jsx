@@ -48,7 +48,7 @@ const LoginForm = () => {
             confirmButton: 'custom-swal-button',
           }
         })  .then(() => {
-          navigate('/matches');
+          navigate('/event');
         });
 
       })

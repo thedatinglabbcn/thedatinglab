@@ -32,28 +32,29 @@ class AuthController extends Controller
 
             $preferenceId = $request->input('preference_id');
             $profileId = $request->input('profile_id');
-            
-            // Verificar si los campos preference_id y profile_id están presentes en la solicitud
-            if ($preferenceId !== null && $profileId !== null) {
-                // Si se proporcionan los IDs, intenta buscar las instancias
-                $preference = Preference::find($preferenceId);
-                $profile = Profile::find($profileId);
-            } else {
-                // Si los campos no están presentes o son nulos, establece las variables en null
-                $preference = null;
-                $profile = null;
-            }
-            
-            $user = new User([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')),
-                'birthdate' => $request->input('birthdate'),
-                'profile_id' => $profile ? $profile->id : null, // Usar null si $profile es null
-                'preference_id' => $preference ? $preference->id : null, // Usar null si $preference es null
-            ]);
-            
-            $user->save();
+
+    // Verificar si los campos preference_id y profile_id están presentes en la solicitud
+    if ($preferenceId !== null && $profileId !== null) {
+    // Si se proporcionan los IDs, intenta buscar las instancias
+        $preference = Preference::find($preferenceId);
+        $profile = Profile::find($profileId);
+    } else {
+    // Si los campos no están presentes o son nulos, establece las variables en null
+    $preference = null;
+    $profile = null;
+    }
+
+    $user = new User([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => Hash::make($request->input('password')),
+        'birthdate' => $request->input('birthdate'),
+        'profile_id' => $profile ? $profile->id : null, // Usar null si $profile es null
+        'preference_id' => $preference ? $preference->id : null, // Usar null si $preference es null
+    ]);
+
+$user->save();
+
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
