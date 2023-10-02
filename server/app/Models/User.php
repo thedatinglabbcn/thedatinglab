@@ -21,7 +21,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'password',
+        'preference_id',
+        'profile_id',
     ];
 
     /**
@@ -45,15 +47,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function preferences() {
-        return $this->hasOne(Preference::class);
-    }
-
-    public function profile() {
-        return $this->hasOne(Profile::class);
-    }
     
+    public function profile() {
+    return $this->belongsTo(Profile::class, 'profile_id');
+}
+
+public function preference() {
+    return $this->belongsTo(Preference::class, 'preference_id');
+}
+
     public function confirmAttendance()
 {
     return $this->belongsToMany(Event::class);

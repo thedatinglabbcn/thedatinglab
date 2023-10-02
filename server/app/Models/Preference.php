@@ -17,12 +17,18 @@ class Preference extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'birthdate',
+        'ageRange',
         'gender',
         'looksFor',
+        'hasChildren',
+        'wantsFamily',
+        'datesParents',
+        'sexoAffective',
+        'heartState',
         'preferences1',
         'preferences2',
         'catsDogs',
-        'user_id',
     ];
 
     protected $hidden = [
@@ -31,6 +37,7 @@ class Preference extends Model
     ];
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class, 'preference_id');
     }
+
 }

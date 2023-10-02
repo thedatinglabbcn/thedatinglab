@@ -12,8 +12,13 @@ const PreferencesForm = () => {
 
   // Define a list of questions and responses
   const questions = [
-    { name: 'gender', question: '¿Con qué género te identificas?', options: ['Hombre', 'Mujer', 'Otro'] },
-    { name: 'looksFor', question: 'Buscas...', options: ['Hombre', 'Mujer', 'Otro'] },
+    { name: 'gender', question: '¿Con qué género te identificas?', options: ['Hombre', 'Mujer', 'Fluido', 'Otro'] },
+    { name: 'looksFor', question: 'Estoy interesad@ en conocer...', options: ['Hombre', 'Mujer', 'Fluido', 'Otro'] },
+    { name: 'hasChildren', question: '¿Tienes hijos', options: ['Sí', 'No'] },
+    { name: 'datesParents', question: '¿Saldrías con alguien que tiene hijos?', options: ['Sí', 'No', 'No me lo he planteado'] },
+    { name: 'sexoAffective', question: '¿Qué tipo de relación sexoafectiva buscas?', options: ['Monógama', 'Abierta', 'Amig@s con derecho a roce', 'Lo que surja', 'Casual'] },
+    { name: 'heartState', question: '¿En qué estado se encuentra tu corazón actualmente?', options: ['Totalmente roto', 'Con ganas de compartir', 'Se siente solo', 'Feliz y palpitante', 'Despechadísmo'] },
+    { name: 'topValue', question: 'Selecciona el valor que más te define', options: ['Libertad', 'Honestidad', 'Transparencia', 'Empatía', 'Comunicación', 'Responsabilidad', 'Voluntad', 'Diversión', 'Respeto', 'Gratitud', 'Confianza', 'Amor', 'Bondad', 'Positividad', 'Valentía', 'Cuidado', 'Alegría y sentido del humor'] },    
     { name: 'preferences1', question: 'Eres más de...', options: ['Netflix', 'Eventos', 'Deporte', 'Escapadas', 'Todas', 'Otras'] },
     { name: 'preferences2', question: 'Eres más de...', options: ['Alcohol', 'Infusiones', 'NoAlcohol', 'Según', 'Ninguna'] },
     { name: 'catsDogs', question: '¿Prefieres los gatos o perros?', options: ['Gatos', 'Perros', 'Todos', 'DeAmigos'] },
