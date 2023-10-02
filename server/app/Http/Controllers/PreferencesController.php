@@ -29,6 +29,7 @@ class PreferencesController extends Controller
                 'validation_errors' => $validator->messages(),
             ], 422);
         } else {
+        
         $user = Auth::user();
         $preference = new Preference([
             'gender' => $request->input('gender'),

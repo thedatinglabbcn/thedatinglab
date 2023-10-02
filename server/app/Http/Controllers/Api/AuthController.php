@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Preference;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +21,7 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'birthdate' => 'required|date|before:2005-01-01'
         ]);
 
         if ($validator->fails()) {
@@ -26,12 +29,30 @@ class AuthController extends Controller
                 'validation_errors' => $validator->messages(),
             ], 422);
         } else {    
+
+            $preferenceId = $request->input('preference_id');
+            $profileId = $request->input('profile_id');
+            
+            // Verificar si los campos preference_id y profile_id están presentes en la solicitud
+            if ($preferenceId !== null && $profileId !== null) {
+                // Si se proporcionan los IDs, intenta buscar las instancias
+                $preference = Preference::find($preferenceId);
+                $profile = Profile::find($profileId);
+            } else {
+                // Si los campos no están presentes o son nulos, establece las variables en null
+                $preference = null;
+                $profile = null;
+            }
+            
             $user = new User([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')), 
+                'password' => Hash::make($request->input('password')),
+                'birthdate' => $request->input('birthdate'),
+                'profile_id' => $profile ? $profile->id : null, // Usar null si $profile es null
+                'preference_id' => $preference ? $preference->id : null, // Usar null si $preference es null
             ]);
-
+            
             $user->save();
             $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -55,6 +76,7 @@ class AuthController extends Controller
                 'validation_errors' => $validator->messages(),
             ], 422);
         } else {    
+
             $user = User::where('email', $request->email)->first();
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([

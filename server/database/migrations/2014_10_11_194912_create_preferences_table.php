@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('preferences', function (Blueprint $table) {
             $table->id();
-            $table->enum('gender', ['Hombre', 'Mujer', 'Otro']);
-            $table->enum('looksFor', ['Hombre', 'Mujer', 'Otro']);
+            $table->enum('gender', ['Hombre', 'Mujer', 'Fluido', 'Otro']);
+            $table->enum('looksFor', ['Hombre', 'Mujer', 'Fluido', 'Otro']);
             $table->enum('hasChildren', ['Sí', 'No']);
             $table->enum('datesParents', ['Sí', 'No', 'No me lo he planteado']);
             $table->enum('sexoAffective', ['Monógama', 'Abierta', 'Amigos con derech@ a roce', 'Lo que surja', 'Casual']);
@@ -23,8 +23,6 @@ return new class extends Migration
             $table->enum('preferences1', ['Netflix', 'Eventos', 'Deporte', 'Escapadas', 'Todas', 'Otras']);
             $table->enum('preferences2', ['Alcohol','Infusiones','NoAlcohol','Según','Ninguna']);
             $table->enum('catsDogs', ['Gatos', 'Perros', 'Todos', 'DeAmigos']);
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -14,7 +14,8 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'description' => 'required|string|max:500',
+            'description' => 'required|string|max:255',
+            'vitalMoment' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
@@ -31,8 +32,8 @@ class ProfileController extends Controller
 
             $profile = new Profile([
                 'description' => $request->input('description'),
+                'vitalMoment' => $request->input('vitalMoment'),
                 'image' => $imageName,
-                'user_id' => $user->id,
             ]);
 
             $profile->save();
@@ -84,6 +85,10 @@ class ProfileController extends Controller
     
         if ($request->has('description')) {
             $profile->description = $request->input('description');
+        }
+
+        if ($request->has('vitalMoment')) {
+            $profile->vitalMoment = $request->input('vitalMoment');
         }
 
         
