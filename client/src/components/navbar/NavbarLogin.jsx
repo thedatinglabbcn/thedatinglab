@@ -6,15 +6,14 @@ import { faHeart, faCalendar, faUser, faHouse } from '@fortawesome/free-solid-sv
 
 const NavbarLogin = () => {
   const location = useLocation();
-  const {profileId} = useParams();
+const id = localStorage.getItem('user_id')
 
   const isActive = (path) => {
     return location.pathname === path;
   };
 
-  return (
 
-    
+  return (
     <div className="navbar-login">
        <Link to="/">
         <div className={`nav-icon ${isActive('/') ? 'active' : ''}`}>
@@ -31,8 +30,8 @@ const NavbarLogin = () => {
           <FontAwesomeIcon icon={faCalendar} />
         </div>
       </Link>
-      <Link to={`/profile/${profileId}`}>
-        <div className={`nav-icon ${isActive('/profile') ? 'active' : ''}`}>
+      <Link to={`/profile/${id}`}>
+        <div className={`nav-icon ${isActive(`/profile/${id}`) ? 'active' : ''}`}>
           <FontAwesomeIcon icon={faUser} />
         </div>
       </Link>

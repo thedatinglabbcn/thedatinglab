@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import '../../components/forms/Forms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../forms/Forms.css';
 
 function EditForm() {
   const navigate = useNavigate();
@@ -120,6 +121,18 @@ function EditForm() {
             onChange={handleFileChange}
           />
         </div>
+         {eventData.image && (
+            <div className="mb-4">
+            <label className="form-label-profile">Vista previa de la imagen de perfil</label>
+            <center>
+            <img
+            src={URL.createObjectURL(eventData.image)}
+              alt="Vista previa de la imagen de perfil"
+              className="rounded-circle "
+              />
+            </center>
+            </div>
+          )}
         <button className='button-send' type="submit">Aceptar</button>
         <Link to="/dashboard/events">
         <button className='button-cancel' type="submit">Cancelar</button>

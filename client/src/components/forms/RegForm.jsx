@@ -38,6 +38,7 @@ const [validationErrors, setValidationErrors] = useState({});
           const { token } = res.data;
            
           localStorage.setItem('auth_token', token);
+          localStorage.setItem('user_id', res.data.user.id);
           
           Swal.fire({
             title: 'Tu cuenta ha sido creada correctamente.',
