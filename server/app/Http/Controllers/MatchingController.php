@@ -15,38 +15,40 @@ class MatchingController extends Controller
     public function getMatches()
     {
         try {
-            $user = auth()->user();
+            $user = Auth::user();
 
-            if (!$user) {
-                throw new \Exception('Usuario no autenticado', 401);
-            }
-
-            $userPreferences = $user->preferences;
-
-            if (!$userPreferences) {
+            if (!$user->preference) {
                 return response()->json(['type' => 'preferences'], 404);
             }
 
-            $userGender = $userPreferences->gender;
-            $userLooksFor = $userPreferences->looksFor;
-            $userHasChildren = $userPreferences->hasChildren;
-            $userDatesParents = $userPreferences->datesParents;
+            $userPreference = $user->preference; 
 
-            // Define los pesos para cada campo de preferencias
+            if (!$userPreference) {
+                return response()->json(['type' => 'preferences'], 404);
+            }
+
+            $userGender = $userPreference->gender;
+            $userLooksFor = $userPreference->looksFor;
+            $userWantsFamily = $userPreference->wantsFamily;
+            $userHasChildren = $userPreference->hasChildren;
+            $userDatesParents = $userPreference->datesParents;
+            
             $weights = [
                 'gender' => 0,
                 'looksFor' => 0,
+                'birthdate' => 0,
+                'ageRange' => 0,
                 'hasChildren' => 0,
+                'wantsFamily' => 0,
                 'datesParents' => 0,
                 'sexoAffective' => 3,
                 'heartState' => 2,
-                'topValue' => 2,
                 'preferences1' => 2,
                 'preferences2' => 0.5,
                 'catsDogs' => 0.5,
             ];
 
-            $matches = User::whereHas('preferences', function ($query) use ($userGender, $userLooksFor, $userHasChildren, $userDatesParents) {
+            $matches = User::whereHas('preference', function ($query) use ($userGender, $userLooksFor, $userHasChildren, $userDatesParents) {
                 $query->where('gender', $userLooksFor)
                     ->where('looksFor', $userGender)
                     ->where(function ($subQuery) use ($userHasChildren, $userDatesParents) {
@@ -82,7 +84,7 @@ class MatchingController extends Controller
             }
 
             foreach ($matches as $match) {
-                $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreferences, $match->preferences, $weights));
+                $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreference, $match->preference, $weights)); // Cambiado de $match->preferences a $match->preference
 
                 $response[] = [
                     'name' => $match->name,
@@ -99,10 +101,10 @@ class MatchingController extends Controller
         }
     }
 
-    private function getPreferenceFields($userPreferences)
+    private function getPreferenceFields($userPreference)
     {
         // Obtén dinámicamente la lista de campos de preferencias disponibles
-        $fields = array_keys($userPreferences->getAttributes());
+        $fields = array_keys($userPreference->getAttributes());
 
         // Elimina los campos que no quieres incluir en el cálculo
         $fieldsToExclude = ['id', 'user_id', 'created_at', 'updated_at', 'gender', 'looksFor', 'hasChildren', 'datesParents'];
@@ -111,14 +113,14 @@ class MatchingController extends Controller
         return $fields;
     }
 
-    private function calculateMatchingPercentage($userPreferences, $matchPreferences, $weights)
+    private function calculateMatchingPercentage($userPreference, $matchPreference, $weights)
     {
-        $totalFields = count($this->getPreferenceFields($userPreferences));
+        $totalFields = count($this->getPreferenceFields($userPreference));
         $matchingFields = 0;
 
         // Itera a través de los campos de preferencias y verifica si coinciden, considerando los pesos
-        foreach ($this->getPreferenceFields($userPreferences) as $field) {
-            if ($userPreferences->$field === $matchPreferences->$field) {
+        foreach ($this->getPreferenceFields($userPreference) as $field) {
+            if ($userPreference->$field === $matchPreference->$field) {
                 $matchingFields += $weights[$field]; // Suma el peso correspondiente
             }
         }
