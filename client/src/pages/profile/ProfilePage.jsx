@@ -29,6 +29,7 @@ function ProfilePage() {
         });
   }, []);
   console.log(profile)
+  
 
   const userName = profile && profile.user ? profile.user.name : '';
   const userDescription = profile && profile.description ? profile.description : '';
