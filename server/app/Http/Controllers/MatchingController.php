@@ -23,12 +23,9 @@ class MatchingController extends Controller
 
             $userPreference = $user->preference; 
 
-            if (!$userPreference) {
-                return response()->json(['type' => 'preferences'], 404);
-            }
-
             $userGender = $userPreference->gender;
             $userLooksFor = $userPreference->looksFor;
+            $userAgeRange = $userPreference->ageRange;
             $userWantsFamily = $userPreference->wantsFamily;
             $userHasChildren = $userPreference->hasChildren;
             $userDatesParents = $userPreference->datesParents;
@@ -44,13 +41,14 @@ class MatchingController extends Controller
                 'sexoAffective' => 3,
                 'heartState' => 2,
                 'preferences1' => 2,
-                'preferences2' => 0.5,
-                'catsDogs' => 0.5,
+                'preferences2' => 1.5,
+                'catsDogs' => 1.5,
             ];
 
-            $matches = User::whereHas('preference', function ($query) use ($userGender, $userLooksFor, $userHasChildren, $userDatesParents) {
+            $matches = User::whereHas('preference', function ($query) use ($userGender, $userLooksFor, $userAgeRange, $userHasChildren, $userDatesParents, $userWantsFamily) {
                 $query->where('gender', $userLooksFor)
                     ->where('looksFor', $userGender)
+                    ->where('ageRange', $userAgeRange)
                     ->where(function ($subQuery) use ($userHasChildren, $userDatesParents) {
                         if ($userHasChildren === 'Sí' && ($userDatesParents === 'Sí' || $userDatesParents === 'Tanto faz')) {
                             // El usuario tiene hijos y está dispuesto a salir con padres, se muestran usuarios con y sin hijos que estén dispuestos a salir con usuarios con hijos.
@@ -72,7 +70,8 @@ class MatchingController extends Controller
                             $subQuery->where('hasChildren', 'No');
                             $subQuery->where('datesParents', 'No');
                         }
-                    });
+                    })
+                    ->where('wantsFamily', $userWantsFamily);
             })
             ->where('id', '!=', $user->id)
             ->get();
@@ -107,7 +106,7 @@ class MatchingController extends Controller
         $fields = array_keys($userPreference->getAttributes());
 
         // Elimina los campos que no quieres incluir en el cálculo
-        $fieldsToExclude = ['id', 'user_id', 'created_at', 'updated_at', 'gender', 'looksFor', 'hasChildren', 'datesParents'];
+        $fieldsToExclude = ['id', 'created_at', 'updated_at', 'gender', 'looksFor', 'birthdate', 'ageRange', 'hasChildren', 'datesParents', 'wantsFamily'];
         $fields = array_diff($fields, $fieldsToExclude);
 
         return $fields;
