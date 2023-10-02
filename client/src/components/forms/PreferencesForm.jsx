@@ -12,16 +12,18 @@ const PreferencesForm = () => {
 
   // Define a list of questions and responses
   const questions = [
-    { name: 'gender', question: '¿Con qué género te identificas?', options: ['Hombre', 'Mujer', 'Fluido', 'Otro'] },
-    { name: 'looksFor', question: 'Estoy interesad@ en conocer...', options: ['Hombre', 'Mujer', 'Fluido', 'Otro'] },
-    { name: 'hasChildren', question: '¿Tienes hijos', options: ['Sí', 'No'] },
+    { name: 'gender', question: '¿Con qué género te identificas?', options: ['Hombre', 'Mujer', 'Fluido'] },
+    { name: 'looksFor', question: 'Estoy interesad@ en conocer...', options: ['Hombre', 'Mujer', 'Fluido'] },
+    { name: 'birthdate', question: 'Introduce tu fecha de nacimiento:'},
+    { name: 'ageRange', question: 'Selecciona un rango de edades:', options: ['18-25', '25-35', '36-45', '46-55'] },
+    { name: 'hasChildren', question: '¿Tienes hijos?', options: ['Sí', 'No'] },
+    { name: 'wantsFamily', question: '¿Quieres formar una familia?', options: ['Sí', 'No'] },
     { name: 'datesParents', question: '¿Saldrías con alguien que tiene hijos?', options: ['Sí', 'No', 'No me lo he planteado'] },
     { name: 'sexoAffective', question: '¿Qué tipo de relación sexoafectiva buscas?', options: ['Monógama', 'Abierta', 'Amig@s con derecho a roce', 'Lo que surja', 'Casual'] },
     { name: 'heartState', question: '¿En qué estado se encuentra tu corazón actualmente?', options: ['Totalmente roto', 'Con ganas de compartir', 'Se siente solo', 'Feliz y palpitante', 'Despechadísmo'] },
-    { name: 'topValue', question: 'Selecciona el valor que más te define', options: ['Libertad', 'Honestidad', 'Transparencia', 'Empatía', 'Comunicación', 'Responsabilidad', 'Voluntad', 'Diversión', 'Respeto', 'Gratitud', 'Confianza', 'Amor', 'Bondad', 'Positividad', 'Valentía', 'Cuidado', 'Alegría y sentido del humor'] },    
     { name: 'preferences1', question: 'Eres más de...', options: ['Netflix', 'Eventos', 'Deporte', 'Escapadas', 'Todas', 'Otras'] },
-    { name: 'preferences2', question: 'Eres más de...', options: ['Alcohol', 'Infusiones', 'NoAlcohol', 'Según', 'Ninguna'] },
-    { name: 'catsDogs', question: '¿Prefieres los gatos o perros?', options: ['Gatos', 'Perros', 'Todos', 'DeAmigos'] },
+    { name: 'preferences2', question: 'Eres más de...', options: ['Alcohol', 'Bebidas calientes', 'Refrescos', 'Según', 'Ninguna'] },
+    { name: 'catsDogs', question: '¿Prefieres los gatos o perros?', options: ['Gatos', 'Perros', 'Todos', 'De amigos'] },
   ];
 
   const [currentStep, setCurrentStep] = useState(0); // Indice de la pregunta actual
@@ -81,21 +83,31 @@ const PreferencesForm = () => {
         <form noValidate>
           <div className="mb-3">
             <label className="form-label-form">{questions[currentStep].question}</label>
-            {questions[currentStep].options.map((option) => (
-              <div className="input-options" key={option}>
-                <input
-                  type="radio"
-                  className='btn-check'
-                  autoComplete='off'
-                  id={option}
-                  name={questions[currentStep].name}
-                  value={option}
-                  checked={formData[questions[currentStep].name] === option}
-                  onChange={() => handleOnChange(questions[currentStep].name, option)}
-                />
-                <label className="btn btn-outline-danger" htmlFor={option}>{option}</label>
-              </div>
-            ))}
+            {questions[currentStep].name === 'birthdate' ? (
+              <input
+                type="date"
+                className="form-control"
+                name={questions[currentStep].name}
+                value={formData[questions[currentStep].name] || ''}
+                onChange={(e) => handleOnChange(questions[currentStep].name, e.target.value)}
+              />
+            ) : (
+              questions[currentStep].options.map((option) => (
+                <div className="input-options" key={option}>
+                  <input
+                    type="radio"
+                    className='btn-check'
+                    autoComplete='off'
+                    id={option}
+                    name={questions[currentStep].name}
+                    value={option}
+                    checked={formData[questions[currentStep].name] === option}
+                    onChange={() => handleOnChange(questions[currentStep].name, option)}
+                  />
+                  <label className="btn btn-outline-danger" htmlFor={option}>{option}</label>
+                </div>
+              ))
+            )}
           </div>
 
           <div className='text-danger'>{validationErrors[questions[currentStep].name]}</div>

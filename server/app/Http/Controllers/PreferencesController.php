@@ -13,7 +13,7 @@ class PreferencesController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'birthdate' => ['required|date|before:2005-01-01'],
+            'birthdate' => ['required', 'date', 'before:2005-01-01'],
             'ageRange' => ['required', 'in:18-25,26-35,36-45,46-55'],
             'gender' => ['required', 'in:Hombre,Mujer,Fluido'],
             'looksFor' => ['required', 'in:Hombre,Mujer,Fluido'],
@@ -23,8 +23,8 @@ class PreferencesController extends Controller
             'sexoAffective' => ['required', 'in:Monógama,Abierta,Amigos con derech@ a roce,Lo que surja,Casual'],
             'heartState' => ['required', 'in:Totalmente roto,Con ganas de compartir,Se siente solo,Feliz y palpitante,Despechadísimo'],
             'preferences1' => ['required', 'in:Netflix,Eventos,Deporte,Escapadas,Todas,Otras'],
-            'preferences2' => ['required', 'in:Alcohol,Infusiones,NoAlcohol,Según,Ninguna'],
-            'catsDogs' => ['required', 'in:Gatos,Perros,Todos,DeAmigos'],
+            'preferences2' => ['required', 'in:Alcohol,Bebidas calientes,Refrescos,Según,Ninguna'],
+            'catsDogs' => ['required', 'in:Gatos,Perros,Todos,De amigos'],
         ]);
 
         if ($validator->fails()) {
