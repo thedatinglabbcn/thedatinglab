@@ -36,4 +36,8 @@ export const EventService = {
   confirmAttendance: (eventId) => {
     return axios.post(`${urlEvents}/attendance/${eventId}`);
   },
+
+  getEventAttendees: (eventId) => {
+    return axios.get(`${urlEvents}/attendance/${eventId}`);
+}
 };

@@ -3,7 +3,7 @@ import './axiosConfig';
 
 export const ProfileService =  () => {
     const urlProfile = '/api/profile';
-    
+    const userId = localStorage.getItem('user_id');
   
     const createProfile = (data) => {
         const config = {
@@ -39,11 +39,18 @@ export const ProfileService =  () => {
     const destroyProfile = (profileId) => {
         return axios.delete(`${urlProfile}/${profileId}`);
     }
+
+    
+    const getRegisteredEvents = () => {
+      return axios.get(`${urlProfile}/events/${userId}`);
+  }
+  
   
   return {
     createProfile,
     getProfile,
     updateProfile,
     destroyProfile,
+    getRegisteredEvents,
   }
   }

@@ -129,7 +129,22 @@ class EventController extends Controller
             'confirmedDate' => $confirmedDate,
         ]);
     }
-        public function userConfirmedDate()
+    
+    // EventController.php
+    public function eventAttendees($id)
+    {
+        $event = Event::find($id);
+
+        if (!$event) {
+            return response()->json(['message' => 'Evento no encontrado'], 404);
+        }
+
+        $attendees = $event->attendees;
+
+        return response()->json(['attendees' => $attendees], 200);
+    }
+
+    public function userConfirmedDate()
     {
         $user = Auth::user();
 
