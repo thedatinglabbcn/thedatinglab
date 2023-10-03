@@ -45,6 +45,21 @@ const PreferencesForm = () => {
 
   const handleNext = () => {
     if (currentStep < questions.length - 1) {
+      if (questions[currentStep].name === 'birthdate') {
+        const birthdate = formData['birthdate'];
+        const today = new Date();
+        const birthDate = new Date(birthdate);
+        const age = today.getFullYear() - birthDate.getFullYear();
+  
+        if (age < 18) {
+          setValidationErrors({
+            ...validationErrors,
+            ['birthdate']: 'Tienes que ser mayor de 18 años para ingresar.',
+          });
+          return;
+        }
+      }
+  
       setCurrentStep(currentStep + 1);
     } else {
       preferences.createPreferences(formData).then((res) => {

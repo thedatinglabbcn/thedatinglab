@@ -21,6 +21,8 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'privacyPolicies' => 'required|accepted',
+            'over18' => 'required|accepted',
         ]);
 
         if ($validator->fails()) {
@@ -32,9 +34,7 @@ class AuthController extends Controller
             $preferenceId = $request->input('preference_id');
             $profileId = $request->input('profile_id');
 
-    // Verificar si los campos preference_id y profile_id están presentes en la solicitud
     if ($preferenceId !== null && $profileId !== null) {
-    // Si se proporcionan los IDs, intenta buscar las instancias
         $preference = Preference::find($preferenceId);
         $profile = Profile::find($profileId);
     } else {

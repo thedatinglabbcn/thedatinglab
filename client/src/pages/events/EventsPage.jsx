@@ -4,7 +4,6 @@ import EventCard from '../../components/eventCard/EventCard';
 import '../home/HomePage.css';
 import Navbar from '../../components/navbar/Navbar';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
-import Footer from '../../components/footer/Footer';
 
 function EventsPage() {
   const [events, setEvents] = useState([]);
