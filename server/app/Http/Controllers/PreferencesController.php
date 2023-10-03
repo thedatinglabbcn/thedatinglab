@@ -20,7 +20,7 @@ class PreferencesController extends Controller
             'hasChildren' => ['required', 'in:Sí,No'],
             'wantsFamily' => ['required', 'in:Sí,No'],
             'datesParents' => ['required', 'in:Sí,No,No me lo he planteado'],
-            'sexoAffective' => ['required', 'in:Monógama,Abierta,Amigos con derech@ a roce,Lo que surja,Casual'],
+            'sexoAffective' => ['required', 'in:Monógama,Abierta,Amigos con derecho a roce,Lo que surja,Casual'],
             'heartState' => ['required', 'in:Totalmente roto,Con ganas de compartir,Se siente solo,Feliz y palpitante,Despechadísimo'],
             'preferences1' => ['required', 'in:Netflix,Eventos,Deporte,Escapadas,Todas,Otras'],
             'preferences2' => ['required', 'in:Alcohol,Bebidas calientes,Refrescos,Según,Ninguna'],
