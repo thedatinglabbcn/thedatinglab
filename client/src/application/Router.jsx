@@ -15,6 +15,7 @@ import AdminLoginPage from '../pages/admin/AdminLoginPage';
 import EventsPage from '../pages/events/EventsPage';
 import EventDetail from '../pages/events/EventDetail';
 import PaymentPage from '../pages/payment/PaymentPage';
+import { PrivateRoutes } from '../utils/PrivateRoutes'
 
 
 const router = createBrowserRouter([
@@ -36,11 +37,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/profile/:id',
-    element: <ProfilePage />,
+    element: <PrivateRoutes><ProfilePage /></PrivateRoutes>
   },
   {
     path: '/matches',
-    element: <MatchCard />
+    element: <PrivateRoutes><MatchCard /></PrivateRoutes>
   },
   {
     path: '/login',
@@ -77,7 +78,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/payment/:eventId',
-    element: <PaymentPage />
+    element: <PrivateRoutes><PaymentPage /></PrivateRoutes>
   }
  
 ])
