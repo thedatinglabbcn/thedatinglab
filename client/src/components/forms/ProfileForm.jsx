@@ -176,12 +176,13 @@ function ProfileForm() {
             )}
           </div>
           <div className='form-buttons'>
+          <button type="button" className="button-cancel" onClick={() => navigate('/preference-edit')}>
+              Atrás
+            </button>
             <button type="submit" className="button-send">
               Enviar
             </button>
-            <button type="button" className="button-cancel" onClick={() => navigate('/preference-edit')}>
-              Atrás
-            </button>
+           
           </div>
         </form>
       </div>

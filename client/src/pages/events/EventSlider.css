@@ -3,8 +3,8 @@
     display: flex;
     overflow-x: auto;
     width: 100%;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 45px;
+  
   }
   
   .event-carousel-container::-webkit-scrollbar {
@@ -13,11 +13,13 @@
   
   .event-carousel-content {
     display: flex;
+    margin: 0 auto;
+    margin-right: 3rem;
   }
   
   .event-carousel-item {
-    flex: 0 0 auto;
-    margin-right: 20px;
+    flex: 1 0 auto;
+    margin-right: 4rem;
     width: 300px;
   }
   

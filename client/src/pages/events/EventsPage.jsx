@@ -21,6 +21,7 @@ function EventsPage() {
 
   return (
     <div>
+    <div>
       <Navbar />
       <section id="event-section">
         <h1 className='home-subtitle'>Experiencias</h1>
@@ -34,7 +35,9 @@ function EventsPage() {
           </div>
         </div>
       </section>
-      <NavbarLogin />
+   
+    </div>
+    <NavbarLogin />
     </div>
   );
 }
