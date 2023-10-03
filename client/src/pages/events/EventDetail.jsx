@@ -59,7 +59,7 @@ function EventDetail() {
         <Navbar/>
       {eventDetails ? (
         <div className="event-detail">
-          <img className="detail-img-top" src={`http://localhost:8000/storage/${eventDetails.image}`} alt="sdsad" />
+          <img className="detail-img-top" src={`http://localhost:8000/storage/${eventDetails?.image}`} alt="sdsad" />
           <div className="detail-body">
             <div className="detail-date">{eventDetails.date} {eventDetails.time}</div>
             <h5 className="detail-title">{eventDetails.title}</h5>
@@ -75,7 +75,7 @@ function EventDetail() {
               {attendees.map((attendee) => (
                 <div key={attendee.id}>
                   <div className="attendee-info">
-                    <img src={`http://localhost:8000/storage/${attendee.profile.image}`} alt={attendee.name} className="attendee-image" />
+                    <img src={`http://localhost:8000/storage/${attendee?.profile?.image}`} alt={attendee.name} className="attendee-image" />
                     <span className="attendee-name">{attendee.name}</span>
                   </div>
                 </div>
