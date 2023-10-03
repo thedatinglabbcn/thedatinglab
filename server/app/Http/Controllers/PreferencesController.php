@@ -13,7 +13,15 @@ class PreferencesController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'birthdate' => ['required', 'date', 'before:2005-01-01'],
+            'birthdate' => [
+                'required','date',
+                function ($attribute, $value, $fail) {
+                    $currentDate = date('Y-m-d');
+                    $birthdate = date_create($value);
+                    $age = date_diff(date_create($currentDate), $birthdate)->y;
+                    if ($age < 18) {
+                        $fail('Tienes que ser mayor de 18 años para ingresar.');
+                    } },],
             'ageRange' => ['required', 'in:18-25,26-35,36-45,46-55'],
             'gender' => ['required', 'in:Hombre,Mujer,Fluido'],
             'looksFor' => ['required', 'in:Hombre,Mujer,Fluido'],
