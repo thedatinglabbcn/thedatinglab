@@ -12,6 +12,14 @@ const NavbarLogin = () => {
     return location.pathname === path;
   };
 
+  const authToken = localStorage.getItem('auth_token');
+  const isLoggedIn = !!authToken;
+
+
+  if (!isLoggedIn) {
+    return null; 
+  }
+
 
   return (
     <div className="navbar-login">
