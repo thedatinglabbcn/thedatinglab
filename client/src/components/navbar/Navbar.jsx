@@ -15,6 +15,7 @@ const Navbar = () => {
 
     auth.logout().then(res => {
       localStorage.removeItem('auth_token');
+      localStorage.removeItem('profile_id');
       Swal.fire({
         title: '¡Sesión cerrada!',
         text: '¡Hasta pronto!',
