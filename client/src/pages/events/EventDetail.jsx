@@ -12,6 +12,7 @@ function EventDetail() {
   const navigate = useNavigate();
   const { eventId } = useParams();
   const [eventDetails, setEventDetails] = useState(null);
+  const [attendees, setAttendees] = useState([]);
   const token = localStorage.getItem('auth_token');
 
   useEffect(() => {
@@ -21,6 +22,14 @@ function EventDetail() {
       })
       .catch((error) => {
         console.error('Error al obtener los detalles del evento:', error);
+      });
+
+      EventService.getEventAttendees(eventId)
+      .then((response) => {
+        setAttendees(response.data.attendees);
+      })
+      .catch((error) => {
+        console.error('Error al obtener la lista de asistentes:', error);
       });
   }, [eventId]);
 
@@ -36,7 +45,7 @@ function EventDetail() {
       }).then((result) => {
         if (result.isConfirmed) {
          
-          navigate('/login');
+          navigate('/register');
         }
       });
     } else {
@@ -59,6 +68,16 @@ function EventDetail() {
               <FontAwesomeIcon icon={faMapMarkerAlt} className='location-icon' /> Barcelona
             </div>
             <a onClick={handleAttendClick} className="detail-button">Quiero Asistir</a>
+          </div>
+          <div className="event-attendees">
+            <h5>Asistentes:</h5>
+            <ul>
+              {attendees.map((attendee) => (
+                <li key={attendee.id}>
+                  {/* <img src={`http://localhost:8000/storage/${attendee.profile.image}`} alt={attendee.name} className="attendee-image" /> */}
+                  {attendee.name}</li>
+              ))}
+            </ul>
           </div>
         </div>
       ) : (

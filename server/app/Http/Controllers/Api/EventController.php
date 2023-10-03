@@ -130,7 +130,6 @@ class EventController extends Controller
         ]);
     }
     
-    // EventController.php
     public function eventAttendees($id)
     {
         $event = Event::find($id);
@@ -140,8 +139,9 @@ class EventController extends Controller
         }
 
         $attendees = $event->attendees;
+       // $attendees = $event->attendees()->with('profile')->get(); // para ver los datos del perfil con foto
 
-        return response()->json(['attendees' => $attendees], 200);
+        return response()->json(['attendees' => $attendees], 200); 
     }
 
     public function userConfirmedDate()
