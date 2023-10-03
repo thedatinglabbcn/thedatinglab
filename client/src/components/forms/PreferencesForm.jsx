@@ -45,7 +45,6 @@ const PreferencesForm = () => {
 
   const handleNext = () => {
     if (currentStep < questions.length - 1) {
-      // Validación personalizada para la fecha de nacimiento
       if (questions[currentStep].name === 'birthdate') {
         const birthdate = formData['birthdate'];
         const today = new Date();
@@ -53,12 +52,11 @@ const PreferencesForm = () => {
         const age = today.getFullYear() - birthDate.getFullYear();
   
         if (age < 18) {
-          // Mostrar mensaje de error si el usuario es menor de 18 años
           setValidationErrors({
             ...validationErrors,
             ['birthdate']: 'Tienes que ser mayor de 18 años para ingresar.',
           });
-          return; // Detener el proceso si no cumple con la validación
+          return;
         }
       }
   
