@@ -32,11 +32,16 @@ function EventsPage() {
                 <EventCard event={event} />
               </div>
             ))}
+            
           </div>
+          
         </div>
+        
       </section>
+      
    
     </div>
+    <p className='swipe-text'>Dezliza a la derecha para ver más eventos</p>
     <NavbarLogin />
     </div>
   );
