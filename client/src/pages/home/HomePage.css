@@ -1,5 +1,3 @@
-/* Estilo general */
-
 .hero {
     background-image: url('../../assets/images/slider-dating-lab.jpg'); 
     background-size: cover;
@@ -11,9 +9,6 @@
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
-    /* text-shadow: 2px 2px 4px black; */
-  
-   
 }
 
 .home-title {
@@ -22,10 +17,6 @@
     color: white;
     margin-bottom: 2rem;
 }
-
-/* .home-bold{
-color: var(--color-primary);
-} */
 
 p {
     font-size: 1.5rem;

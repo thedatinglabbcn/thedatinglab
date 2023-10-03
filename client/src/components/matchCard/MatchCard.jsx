@@ -35,11 +35,11 @@ function MatchCard() {
 
   const handleFetchError = (error) => {
     if (error.response.status === 404 && error.response.data.type === 'preferences') {
-      navigate('/preferences');
+      console.log(error.response.status);
     }
   };
 
-  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= 30);
+  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= 0);
 
   const navigateToPreviousMatch = () => {
     if (currentMatchIndex > 0) {

@@ -10,18 +10,24 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 const PreferencesForm = () => {
   const navigate = useNavigate();
 
-  // Define a list of questions and responses
   const questions = [
-    { name: 'gender', question: '¿Con qué género te identificas?', options: ['Hombre', 'Mujer', 'Otro'] },
-    { name: 'looksFor', question: 'Buscas...', options: ['Hombre', 'Mujer', 'Otro'] },
+    { name: 'gender', question: '¿Con qué género te identificas?', options: ['Hombre', 'Mujer', 'Fluido'] },
+    { name: 'looksFor', question: 'Estoy interesado en conocer...', options: ['Hombre', 'Mujer', 'Fluido'] },
+    { name: 'birthdate', question: 'Introduce tu fecha de nacimiento:'},
+    { name: 'ageRange', question: 'Selecciona un rango de edades:', options: ['18-25', '26-35', '36-45', '46-55'] },
+    { name: 'hasChildren', question: '¿Tienes hijos?', options: ['Sí', 'No'] },
+    { name: 'wantsFamily', question: '¿Quieres formar una familia?', options: ['Sí', 'No'] },
+    { name: 'datesParents', question: '¿Saldrías con alguien que tiene hijos?', options: ['Sí', 'No', 'No me lo he planteado'] },
+    { name: 'sexoAffective', question: '¿Qué tipo de relación sexoafectiva buscas?', options: ['Monógama', 'Abierta', 'Amigos con derecho a roce', 'Lo que surja', 'Casual'] },
+    { name: 'heartState', question: '¿En qué estado se encuentra tu corazón actualmente?', options: ['Totalmente roto', 'Con ganas de compartir', 'Se siente solo', 'Feliz y palpitante', 'Despechadísimo'] },
     { name: 'preferences1', question: 'Eres más de...', options: ['Netflix', 'Eventos', 'Deporte', 'Escapadas', 'Todas', 'Otras'] },
-    { name: 'preferences2', question: 'Eres más de...', options: ['Alcohol', 'Infusiones', 'NoAlcohol', 'Según', 'Ninguna'] },
-    { name: 'catsDogs', question: '¿Prefieres los gatos o perros?', options: ['Gatos', 'Perros', 'Todos', 'DeAmigos'] },
+    { name: 'preferences2', question: 'Eres más de...', options: ['Alcohol', 'Bebidas calientes', 'Refrescos', 'Según', 'Ninguna'] },
+    { name: 'catsDogs', question: '¿Prefieres los gatos o perros?', options: ['Gatos', 'Perros', 'Todos', 'De amigos'] },
   ];
 
-  const [currentStep, setCurrentStep] = useState(0); // Indice de la pregunta actual
-  const [formData, setFormData] = useState({}); // Almacena las respuestas
-  const [validationErrors, setValidationErrors] = useState({}); // Agrega esta línea para definir validationErrors
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState({});
+  const [validationErrors, setValidationErrors] = useState({});
 
   const preferences = PreferencesService();
 
@@ -30,7 +36,7 @@ const PreferencesForm = () => {
       ...formData,
       [name]: value,
     });
-    // Limpia el error del campo específico
+  
     setValidationErrors({
       ...validationErrors,
       [name]: '',
@@ -39,17 +45,29 @@ const PreferencesForm = () => {
 
   const handleNext = () => {
     if (currentStep < questions.length - 1) {
+      if (questions[currentStep].name === 'birthdate') {
+        const birthdate = formData['birthdate'];
+        const today = new Date();
+        const birthDate = new Date(birthdate);
+        const age = today.getFullYear() - birthDate.getFullYear();
+  
+        if (age < 18) {
+          setValidationErrors({
+            ...validationErrors,
+            ['birthdate']: 'Tienes que ser mayor de 18 años para ingresar.',
+          });
+          return;
+        }
+      }
+  
       setCurrentStep(currentStep + 1);
     } else {
-      // Si estamos en la última pregunta, guarda los datos en la base de datos y redirige
       preferences.createPreferences(formData).then((res) => {
         navigate('/profile-form');
       }).catch((err) => {
         console.error(err);
-        // Manejo de errores aquí
         if (err.response && err.response.status === 422) {
           const errors = err.response.data.validation_errors;
-          // Establecer los errores en el estado
           setValidationErrors(errors);
         } else {
           Swal.fire({
@@ -76,21 +94,31 @@ const PreferencesForm = () => {
         <form noValidate>
           <div className="mb-3">
             <label className="form-label-form">{questions[currentStep].question}</label>
-            {questions[currentStep].options.map((option) => (
-              <div className="input-options" key={option}>
-                <input
-                  type="radio"
-                  className='btn-check'
-                  autoComplete='off'
-                  id={option}
-                  name={questions[currentStep].name}
-                  value={option}
-                  checked={formData[questions[currentStep].name] === option}
-                  onChange={() => handleOnChange(questions[currentStep].name, option)}
-                />
-                <label className="btn btn-outline-danger" htmlFor={option}>{option}</label>
-              </div>
-            ))}
+            {questions[currentStep].name === 'birthdate' ? (
+              <input
+                type="date"
+                className="form-control"
+                name={questions[currentStep].name}
+                value={formData[questions[currentStep].name] || ''}
+                onChange={(e) => handleOnChange(questions[currentStep].name, e.target.value)}
+              />
+            ) : (
+              questions[currentStep].options.map((option) => (
+                <div className="input-options" key={option}>
+                  <input
+                    type="radio"
+                    className='btn-check'
+                    autoComplete='off'
+                    id={option}
+                    name={questions[currentStep].name}
+                    value={option}
+                    checked={formData[questions[currentStep].name] === option}
+                    onChange={() => handleOnChange(questions[currentStep].name, option)}
+                  />
+                  <label className="btn btn-outline-danger" htmlFor={option}>{option}</label>
+                </div>
+              ))
+            )}
           </div>
 
           <div className='text-danger'>{validationErrors[questions[currentStep].name]}</div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Preference;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +21,8 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'privacyPolicies' => 'required|accepted',
+            'over18' => 'required|accepted',
         ]);
 
         if ($validator->fails()) {
@@ -26,13 +30,28 @@ class AuthController extends Controller
                 'validation_errors' => $validator->messages(),
             ], 422);
         } else {    
-            $user = new User([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')), 
-            ]);
 
-            $user->save();
+            $preferenceId = $request->input('preference_id');
+            $profileId = $request->input('profile_id');
+
+    if ($preferenceId !== null && $profileId !== null) {
+        $preference = Preference::find($preferenceId);
+        $profile = Profile::find($profileId);
+    } else {
+        $preference = null;
+        $profile = null;
+    }
+
+    $user = new User([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => Hash::make($request->input('password')),
+        'profile_id' => $profile ? $profile->id : null,
+        'preference_id' => $preference ? $preference->id : null,
+    ]);
+
+$user->save();
+
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
@@ -55,6 +74,7 @@ class AuthController extends Controller
                 'validation_errors' => $validator->messages(),
             ], 422);
         } else {    
+
             $user = User::where('email', $request->email)->first();
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([

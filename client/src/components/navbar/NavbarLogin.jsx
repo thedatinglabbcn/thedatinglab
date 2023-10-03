@@ -6,11 +6,19 @@ import { faHeart, faCalendar, faUser, faHouse } from '@fortawesome/free-solid-sv
 
 const NavbarLogin = () => {
   const location = useLocation();
-const id = localStorage.getItem('user_id')
+  const id = localStorage.getItem('profile_id')
 
   const isActive = (path) => {
     return location.pathname === path;
   };
+
+  const authToken = localStorage.getItem('auth_token');
+  const isLoggedIn = !!authToken;
+
+
+  if (!isLoggedIn) {
+    return null; 
+  }
 
 
   return (
