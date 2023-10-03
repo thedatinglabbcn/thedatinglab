@@ -11,10 +11,10 @@ const PreferencesForm = () => {
   const navigate = useNavigate();
 
   const questions = [
-    { name: 'gender', question: '¿Con qué género te identificas?', options: ['Hombre', 'Mujer', 'Fluido'] },
-    { name: 'looksFor', question: 'Estoy interesado en conocer...', options: ['Hombre', 'Mujer', 'Fluido'] },
+    { name: 'gender', question: '¿Con qué género te identificas?', options: ['Hombre', 'Mujer', 'No binario'] },
+    { name: 'looksFor', question: 'Estoy interesado en conocer...', options: ['Hombre', 'Mujer', 'No binario'] },
     { name: 'birthdate', question: 'Introduce tu fecha de nacimiento:'},
-    { name: 'ageRange', question: 'Selecciona un rango de edades:', options: ['18-25', '26-35', '36-45', '46-55'] },
+    { name: 'ageRange', question: 'Selecciona un rango de edades:', options: ['18-25', '26-35', '36-45', 'Más de 45'] },
     { name: 'hasChildren', question: '¿Tienes hijos?', options: ['Sí', 'No'] },
     { name: 'wantsFamily', question: '¿Quieres formar una familia?', options: ['Sí', 'No'] },
     { name: 'datesParents', question: '¿Saldrías con alguien que tiene hijos?', options: ['Sí', 'No', 'No me lo he planteado'] },

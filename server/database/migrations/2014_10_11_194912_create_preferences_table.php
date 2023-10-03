@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('preferences', function (Blueprint $table) {
             $table->id();
             $table->date('birthdate');
-            $table->enum('ageRange', ['18-25', '26-35', '36-45', '46-55']);
-            $table->enum('gender', ['Hombre', 'Mujer', 'Fluido']);
-            $table->enum('looksFor', ['Hombre', 'Mujer', 'Fluido']);
+            $table->enum('ageRange', ['18-25', '26-35', '36-45', 'Más de 45']);
+            $table->enum('gender', ['Hombre', 'Mujer', 'No binario']);
+            $table->enum('looksFor', ['Hombre', 'Mujer', 'No binario']);
             $table->enum('hasChildren', ['Sí', 'No']);
             $table->enum('wantsFamily', ['Sí', 'No']);
             $table->enum('datesParents', ['Sí', 'No', 'No me lo he planteado']);

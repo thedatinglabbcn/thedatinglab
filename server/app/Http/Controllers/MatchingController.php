@@ -26,9 +26,6 @@ class MatchingController extends Controller
             $userGender = $userPreference->gender;
             $userLooksFor = $userPreference->looksFor;
             $userAgeRange = $userPreference->ageRange;
-            $userWantsFamily = $userPreference->wantsFamily;
-            $userHasChildren = $userPreference->hasChildren;
-            $userDatesParents = $userPreference->datesParents;
             
             $weights = [
                 'gender' => 0,
@@ -36,42 +33,19 @@ class MatchingController extends Controller
                 'birthdate' => 0,
                 'ageRange' => 0,
                 'hasChildren' => 0,
-                'wantsFamily' => 0,
-                'datesParents' => 0,
-                'sexoAffective' => 3,
-                'heartState' => 2,
-                'preferences1' => 2,
-                'preferences2' => 1.5,
-                'catsDogs' => 1.5,
+                'datesParents' => 2,
+                'wantsFamily' => 2,
+                'sexoAffective' => 2,
+                'heartState' => 1,
+                'preferences1' => 1,
+                'preferences2' => 0.5,
+                'catsDogs' => 0.5,
             ];
 
-            $matches = User::whereHas('preference', function ($query) use ($userGender, $userLooksFor, $userAgeRange, $userHasChildren, $userDatesParents, $userWantsFamily) {
+            $matches = User::whereHas('preference', function ($query) use ($userGender, $userLooksFor, $userAgeRange) {
                 $query->where('gender', $userLooksFor)
                     ->where('looksFor', $userGender)
-                    ->where('ageRange', $userAgeRange)
-                    ->where(function ($subQuery) use ($userHasChildren, $userDatesParents) {
-                        if ($userHasChildren === 'Sí' && ($userDatesParents === 'Sí' || $userDatesParents === 'Tanto faz')) {
-                            // El usuario tiene hijos y está dispuesto a salir con padres, se muestran usuarios con y sin hijos que estén dispuestos a salir con usuarios con hijos.
-                            $subQuery->whereIn('hasChildren', ['Sí', 'No']);
-                            $subQuery->where('datesParents', 'Sí');
-                        } elseif ($userHasChildren === 'No') {
-                            // El usuario no tiene hijos y está dispuesto a salir con padres, se muestran usuarios CON Y SIN hijos que no quieren salir con usuarios con hijos.
-                            $subQuery->where('datesParents', 'Sí');
-                            $subQuery->where(function ($subSubQuery) {
-                                $subSubQuery->where('hasChildren', 'No')
-                                    ->orWhereNull('hasChildren');
-                            });
-                        } elseif ($userHasChildren === 'Sí' && $userDatesParents === 'No') {
-                            // El usuario tiene hijos y no está dispuesto a salir con padres, se muestran usuarios SIN hijos DISPUESTOS A SALIR CON USUARIOS CON HIJOS.
-                            $subQuery->where('hasChildren', 'No');
-                            $subQuery->where('datesParents', 'Sí');
-                        } elseif ($userHasChildren === 'No' && $userDatesParents === 'No') {
-                            // El usuario no tiene hijos y no está dispuesto a salir con padres, se muestran usuarios SIN hijos que no quieren salir con usuarios con hijos.
-                            $subQuery->where('hasChildren', 'No');
-                            $subQuery->where('datesParents', 'No');
-                        }
-                    })
-                    ->where('wantsFamily', $userWantsFamily);
+                    ->where('ageRange', $userAgeRange);
             })
             ->where('id', '!=', $user->id)
             ->get();
@@ -83,7 +57,7 @@ class MatchingController extends Controller
             }
 
             foreach ($matches as $match) {
-                $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreference, $match->preference, $weights)); // Cambiado de $match->preferences a $match->preference
+                $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreference, $match->preference, $weights));
 
                 $response[] = [
                     'name' => $match->name,
@@ -106,26 +80,29 @@ class MatchingController extends Controller
         $fields = array_keys($userPreference->getAttributes());
 
         // Elimina los campos que no quieres incluir en el cálculo
-        $fieldsToExclude = ['id', 'created_at', 'updated_at', 'gender', 'looksFor', 'birthdate', 'ageRange', 'hasChildren', 'datesParents', 'wantsFamily'];
+        $fieldsToExclude = ['id', 'created_at', 'updated_at', 'gender', 'looksFor', 'birthdate', 'ageRange', 'hasChildren', 'datesParents'];
         $fields = array_diff($fields, $fieldsToExclude);
 
         return $fields;
     }
 
     private function calculateMatchingPercentage($userPreference, $matchPreference, $weights)
-    {
-        $totalFields = count($this->getPreferenceFields($userPreference));
-        $matchingFields = 0;
+{
+    // $totalFields = count($this->getPreferenceFields($userPreference));
+    $matchingFields = 0;
 
-        // Itera a través de los campos de preferencias y verifica si coinciden, considerando los pesos
-        foreach ($this->getPreferenceFields($userPreference) as $field) {
-            if ($userPreference->$field === $matchPreference->$field) {
-                $matchingFields += $weights[$field]; // Suma el peso correspondiente
-            }
+
+    foreach ($this->getPreferenceFields($userPreference) as $field) {
+        if ($userPreference->$field === $matchPreference->$field) {
+            $matchingFields += $weights[$field]; 
         }
-
-        $matchingPercentage = ($matchingFields / ($totalFields * max($weights))) * 100; // Normaliza según el peso máximo
-
-        return $matchingPercentage;
     }
+
+    $maxPossibleScore = array_sum($weights);
+
+    $matchingPercentage = ($matchingFields / $maxPossibleScore) * 100;
+
+    return $matchingPercentage;
+}
+
 }
