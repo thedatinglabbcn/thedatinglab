@@ -81,7 +81,7 @@ class ProfileController extends Controller
 
     
         $user = Auth::user();
-        if ($profile->user_id !== $user->id) {
+        if ($profile->id !== $user->profile->id) {
             return response()->json([
                 'message' => 'No tienes permiso para editar este perfil',
             ], 403);

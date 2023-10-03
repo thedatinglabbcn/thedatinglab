@@ -17,7 +17,7 @@ class EventController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:admin')->except('index', 'confirmAttendance', 'show');
+        $this->middleware('role:admin')->except('index', 'confirmAttendance', 'show', 'eventAttendees');
     }
 //    
     /**
@@ -132,14 +132,16 @@ class EventController extends Controller
     
     public function eventAttendees($id)
     {
+        $user = Auth::user();
+
         $event = Event::find($id);
 
         if (!$event) {
             return response()->json(['message' => 'Evento no encontrado'], 404);
         }
 
-        $attendees = $event->attendees;
-       // $attendees = $event->attendees()->with('profile')->get(); // para ver los datos del perfil con foto
+       // $attendees = $event->attendees;
+        $attendees = $event->confirmAttendance()->with('profile')->get(); // para ver los datos del perfil con foto
 
         return response()->json(['attendees' => $attendees], 200); 
     }

@@ -44,6 +44,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/matching-users', [MatchingController::class, 'getMatches']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/event/attendance/{id}', [EventController::class, 'confirmAttendance']);
-    Route::get('/event/attendees/{id}', [EventController::class, 'eventAttendees']);
+    Route::get('/event/attendance/{id}', [EventController::class, 'eventAttendees']);
 
 });

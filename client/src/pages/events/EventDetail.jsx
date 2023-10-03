@@ -73,9 +73,12 @@ function EventDetail() {
             <h5>Asistentes:</h5>
             <ul>
               {attendees.map((attendee) => (
-                <li key={attendee.id}>
-                  {/* <img src={`http://localhost:8000/storage/${attendee.profile.image}`} alt={attendee.name} className="attendee-image" /> */}
-                  {attendee.name}</li>
+                <div key={attendee.id}>
+                  <div className="attendee-info">
+                    <img src={`http://localhost:8000/storage/${attendee.profile.image}`} alt={attendee.name} className="attendee-image" />
+                    <span className="attendee-name">{attendee.name}</span>
+                  </div>
+                </div>
               ))}
             </ul>
           </div>

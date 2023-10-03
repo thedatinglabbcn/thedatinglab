@@ -12,6 +12,7 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
   const [formDataState, setFormDataState] = useState({
     image: '',
     description: profile ? profile.description : '',
+    vitalMoment: profile ? profile.vitalMoment : '',
   });
 
   const handleOnChange = (e) => {
@@ -44,6 +45,7 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
     const formData = new FormData();
     formData.append('image', formDataState.image);
     formData.append('description', formDataState.description);
+    formData.append('vitalMoment', formDataState.vitalMoment);
 
     profileService
       .updateProfile(id, formData)
@@ -116,13 +118,28 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
               className="form-control"
               id="description"
               name="description"
-              placeholder="Descríbete..."
               onChange={handleOnChange}
               required
               value={formDataState.description}
             />
             {validationErrors.description && (
               <div className="text-danger">{validationErrors.description.join(', ')}</div>
+            )}
+          </div>
+          <div className="mb-4">
+            <label htmlFor="vitalMoment" className="form-label">
+              Momento vital
+            </label>
+            <textarea
+              className="form-control"
+              id="vitalMoment"
+              name="vitalMoment"
+              onChange={handleOnChange}
+              required
+              value={formDataState.vitalMoment}
+            />
+            {validationErrors.vitalMoment && (
+              <div className="text-danger">{validationErrors.vitalMoment.join(', ')}</div>
             )}
           </div>
           <div className='form-buttons'>

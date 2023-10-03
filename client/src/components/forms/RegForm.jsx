@@ -12,7 +12,6 @@ const RegistrationForm = () => {
       name: '',
       email: '',
       password: '',
-      birthdate: '',
     });
 
 const [validationErrors, setValidationErrors] = useState({});
@@ -39,7 +38,7 @@ const [validationErrors, setValidationErrors] = useState({});
           const { token } = res.data;
            
           localStorage.setItem('auth_token', token);
-          localStorage.setItem('user_id', res.data.user.id);
+          // localStorage.setItem('profile_id', res.data.user.profile_id);
           
           Swal.fire({
             title: 'Tu cuenta ha sido creada correctamente.',
@@ -96,23 +95,6 @@ const [validationErrors, setValidationErrors] = useState({});
               />
               {validationErrors.name && (
               <div className="text-danger">{validationErrors.name.join(', ')}</div>
-            )}
-            </div>
-            <div className="mb-4">
-              <label htmlFor="birthdate" className="form-label">
-                Fecha de nacimiento 
-              </label>
-              <input
-                type="date"
-                className="form-control"
-                id="birthdate"
-                name="birthdate"
-                placeholder="Tu fecha de nacimiento"
-                onChange={handleOnChange}
-                required
-              />
-              {validationErrors.birthdate && (
-              <div className="text-danger">{validationErrors.birthdate.join(', ')}</div>
             )}
             </div>
             <div className="mb-4">
