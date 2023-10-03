@@ -31,6 +31,7 @@ function ProfileForm() {
       .createProfile(formData)
       .then((res) => {
         const profileId = res.data.profile_id;
+        localStorage.setItem('profile_id', profileId);
         Swal.fire({
           title: 'Perfil creado',
           text: '¡Ya estás dentro!',
@@ -61,8 +62,10 @@ function ProfileForm() {
           }
           });
         }
-      });
+      });     
   };
+
+
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
