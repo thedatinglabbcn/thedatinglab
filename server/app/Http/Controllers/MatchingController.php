@@ -61,6 +61,7 @@ class MatchingController extends Controller
 
                 $response[] = [
                     'name' => $match->name,
+                    'birthdate' => $match->preference->birthdate,
                     'description' => $match->profile->description,
                     'image' => $match->profile->image,
                     'matchingPercentage' => $matchingPercentage,

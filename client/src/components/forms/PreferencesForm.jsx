@@ -28,6 +28,7 @@ const PreferencesForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [validationErrors, setValidationErrors] = useState({});
+  const [generalError, setGeneralError] = useState('');
 
   const preferences = PreferencesService();
 
@@ -36,32 +37,70 @@ const PreferencesForm = () => {
       ...formData,
       [name]: value,
     });
-  
-    setValidationErrors({
-      ...validationErrors,
-      [name]: '',
-    });
+
+    // Validar el campo en tiempo real aquí
+    if (name === 'birthdate') {
+      const birthdate = value;
+      const today = new Date();
+      const birthDate = new Date(birthdate);
+      const age = today.getFullYear() - birthDate.getFullYear();
+
+      if (age < 18) {
+        setValidationErrors({
+          ...validationErrors,
+          [name]: 'Tienes que ser mayor de 18 años para ingresar.',
+        });
+      } else {
+        setValidationErrors({
+          ...validationErrors,
+          [name]: '', // Limpiar el error si es válido
+        });
+      }
+    } else {
+      setValidationErrors({
+        ...validationErrors,
+        [name]: '', // Limpiar el error para otros campos
+      });
+    }
   };
 
   const handleNext = () => {
     if (currentStep < questions.length - 1) {
-      if (questions[currentStep].name === 'birthdate') {
-        const birthdate = formData['birthdate'];
-        const today = new Date();
-        const birthDate = new Date(birthdate);
-        const age = today.getFullYear() - birthDate.getFullYear();
-  
-        if (age < 18) {
-          setValidationErrors({
-            ...validationErrors,
-            ['birthdate']: 'Tienes que ser mayor de 18 años para ingresar.',
-          });
-          return;
-        }
+      const currentQuestion = questions[currentStep];
+      const currentValue = formData[currentQuestion.name];
+    
+      if (!currentValue && currentQuestion.name !== 'birthdate') {
+        setValidationErrors({
+          ...validationErrors,
+          [currentQuestion.name]: 'Este campo es obligatorio.',
+        });
+        return;
       }
-  
+    
+      setGeneralError('');
       setCurrentStep(currentStep + 1);
     } else {
+      if (!formData['birthdate']) {
+        setValidationErrors({
+          ...validationErrors,
+          ['birthdate']: 'Este campo es obligatorio.',
+        });
+        return;
+      }
+    
+      const birthdate = formData['birthdate'];
+      const today = new Date();
+      const birthDate = new Date(birthdate);
+      const age = today.getFullYear() - birthDate.getFullYear();
+    
+      if (age < 18) {
+        setValidationErrors({
+          ...validationErrors,
+          ['birthdate']: 'Tienes que ser mayor de 18 años para ingresar.',
+        });
+        return;
+      }
+    
       preferences.createPreferences(formData).then((res) => {
         navigate('/profile-form');
       }).catch((err) => {
@@ -70,6 +109,7 @@ const PreferencesForm = () => {
           const errors = err.response.data.validation_errors;
           setValidationErrors(errors);
         } else {
+          setGeneralError('¡Ha habido un error!'); // Mostrar el error general
           Swal.fire({
             title: '¡Error!',
             text: '¡Ha habido un error!',
@@ -84,6 +124,8 @@ const PreferencesForm = () => {
       });
     }
   };
+  
+  
 
   return (
     <div className='body-registration'>
@@ -122,6 +164,8 @@ const PreferencesForm = () => {
           </div>
 
           <div className='text-danger'>{validationErrors[questions[currentStep].name]}</div>
+
+          {generalError && <div className='text-danger'>{generalError}</div>}
 
           <div className="button-group">
             {currentStep > 0 && (
