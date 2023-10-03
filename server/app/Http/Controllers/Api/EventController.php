@@ -140,8 +140,8 @@ class EventController extends Controller
             return response()->json(['message' => 'Evento no encontrado'], 404);
         }
 
-       // $attendees = $event->attendees;
-        $attendees = $event->confirmAttendance()->with('profile')->get(); // para ver los datos del perfil con foto
+       
+        $attendees = $event->confirmAttendance()->with('profile')->get(); 
 
         return response()->json(['attendees' => $attendees], 200); 
     }
