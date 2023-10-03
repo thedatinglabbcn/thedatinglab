@@ -1,0 +1,24 @@
+/* EventPage.css */
+.event-carousel-container {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  .event-carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .event-carousel-content {
+    display: flex;
+  }
+  
+  .event-carousel-item {
+    flex: 0 0 auto;
+    margin-right: 20px;
+    width: 300px;
+  }
+  
+  
