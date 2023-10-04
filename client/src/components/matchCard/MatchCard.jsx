@@ -100,7 +100,7 @@ function MatchCard() {
           )}
         </center>
       </div>
-    
+      <p className='swipe-text'>Dezliza a la derecha para ver más matches</p>
    <NavbarLogin/>
     </div>
   );
