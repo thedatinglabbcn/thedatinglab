@@ -50,6 +50,13 @@ function MatchCard() {
     }
   };
 
+  const calculateAge = (birthdate) => {
+    const birthDate = new Date(birthdate);
+    const today = new Date();
+    const age = today.getFullYear() - birthDate.getFullYear();
+    return age;
+};
+
   return (
     <div>
       <Navbar />
@@ -78,7 +85,7 @@ function MatchCard() {
                       className="rounded-circle"
                       alt={`Tu match: ${user.name}`}
                     />
-                    <h5 className="card-title text-center">{user.name}</h5>
+                    <h5 className="card-title text-center">{user.name}, <small>{calculateAge(user.birthdate)}</small></h5>
                     <h6 className="porcentage-match">Coincidencia: {user.matchingPercentage}%</h6>
                     <p className="card-text text-center"><small>{user.description}</small></p>
                   </div>
