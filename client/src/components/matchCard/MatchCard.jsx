@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './MatchCard.css';
 import Navbar from '../navbar/Navbar';
-
-
-import Footer from '../footer/Footer';
 import { MatchingService } from '../../service/MatchingService';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -64,14 +61,7 @@ function MatchCard() {
               <p className="matches-text">
                 Sin coincidencias por ahora... ¡Vuelve a comprobarlo más tarde!
               </p>
-              <button
-                type="button"
-                className="button-cancel"
-                style={{ marginTop: '10px' }}
-                onClick={() => navigate('/')}
-              >
-                Eventos
-              </button>
+              
             </div>
           ) : (
             <div className="match-carousel-container">
@@ -103,6 +93,7 @@ function MatchCard() {
           )}
         </center>
       </div>
+    
    <NavbarLogin/>
     </div>
   );

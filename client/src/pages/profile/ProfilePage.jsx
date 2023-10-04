@@ -45,10 +45,13 @@ function ProfilePage() {
               <center><img src={`http://localhost:8000/storage/${profile && profile.image ? profile.image : ''}`} className="rounded-circle" alt={`Tu foto de perfil`} /></center>
             </div>
             <div className="match-body">
-              <p className="preference-text">{profile && profile.description}</p>
+            <p className="profile-subtitle">Sobre mí</p>
+              <p className="profile-texts">{profile && profile.description}</p>
             </div>
+            <hr className="separator"/>
             <div className="match-body">
-              <p className="preference-text">Momento vital: <small>{profile && profile.vitalMoment}</small></p>
+              <p className="profile-subtitle">Mi momento vital</p>
+              <p className='profile-texts'><small>{profile && profile.vitalMoment}</small></p>
             </div>
           </div>
         </center>

@@ -54,18 +54,22 @@ useEffect(() =>{
             </button>
         </div>
       </section>
-      <section className="event-container" id="event-section">
+      <section id="event-section">
         <h1 className='home-subtitle'>Experiencias</h1>
-        {loadingEvents ? ( 
-          <p>Cargando experiencias...</p>
-        ) : (
-          <div className='event-space'>
+        <div className="event-carousel-container">
+          <div className="event-carousel-content">
             {events.map((event, index) => (
-              <EventCard key={index} event={event} />
+              <div key={index} className="event-carousel-item">
+                <EventCard event={event} />
+                
+              </div>
             ))}
+          
           </div>
-        )}
+          
+        </div>
       </section>
+      <p className='swipe-text'>Dezliza a la derecha para ver más eventos</p>
       <NavbarLogin />
 
     </div>
