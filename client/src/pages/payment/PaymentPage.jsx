@@ -1,36 +1,42 @@
 import React, { useState } from 'react';
 import './PaymentPage.css';
-import Footer from '../../components/footer/Footer';
 import Navbar from '../../components/navbar/Navbar';
 import axios from '../../service/axiosConfig';
 import Swal from 'sweetalert2';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function PaymentPage() {
   const [selectedOption, setSelectedOption] = useState(null);
   const { eventId } = useParams();
-
+  const navigate = useNavigate();
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
   };
 
   const handlePaymentAndAttendance = () => {
-  
-
     axios
       .post(`api/event/attendance/${eventId}`, { option: selectedOption })
       .then((response) => {
         Swal.fire({
-          title: 'Solicitud exitosa! Ahora debes hacer una transferencia de pago para que tu asistencia sea confirmada.',
+          title: 'Solicitud exitosa! Ahora debes hacer una transferencia de pago a este numero: xxxx, y te llegara un comprobante, para que tu asistencia sea confirmada.',
           text: response.data.message,
           icon: 'success',
           confirmButtonText: 'Ok'
         });
-       
-        console.log('Pago realizado y asistencia confirmada:', response.data.message);
+        
+        navigate(`/event`);
       })
       .catch((error) => {
-        console.error('Error al realizar el pago y confirmar la asistencia:', error);
+       if (error.response && error.response.status === 500) {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Ya estas registrado en este evento',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        } else {
+          console.error(error);
+       }
       });
   };
 
