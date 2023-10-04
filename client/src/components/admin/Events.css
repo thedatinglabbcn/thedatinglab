@@ -1,55 +1,76 @@
 .dashboard-table {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-
-  thead {
-    flex-basis: 100%;
-    background-color: var(--color-beige);
-    padding: 1rem 0 1rem; 
-    text-align: left;
-    margin-top: 1rem;
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  
-.dashboard-row{
- width: 100%;
- text-align: left;
- display: flex;
- justify-content: space-aro;
-
-  }
-  
-  tbody{
-    padding: 1rem 0 1rem; 
-    text-align: left;
-    font-size: 1.4rem;
-  }
-
-  .dashboard-image {
-    width: 50px;
-    height: 50px;
-    margin: 0;
-    border-radius: 50%;
-  }
-.dashboard-actions{
+  width: 100%;
   display: flex;
-  justify-content:right ;
+  flex-wrap: wrap;
 }
-  .delete-button-icon,
-  .edit-button-icon {
-   background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.6rem;
-    font-weight: 500;
-    text-align: right; 
-    margin-left: 10px; 
-    color: #797878;
-  }
 
- 
-  
+thead {
+  flex-basis: 100%;
+  background-color: var(--color-beige);
+  padding: 1rem 0 1rem; 
+  text-align: left;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.dashboard-row {
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0; 
+   /* Cambia space-aro a space-between para alinear a la izquierda y derecha */
+}
+
+tbody {
+  padding: 1rem 0 1rem; 
+  text-align: left;
+  font-size: 1.4rem;
+}
+
+.dashboard-image {
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  border-radius: 50%;
+}
+
+.dashboard-actions {
+  display: flex;
+  justify-content: flex-end; /* Cambia justify-content:right a justify-content:flex-end para alinear a la derecha */
+}
+
+.delete-button-icon,
+.edit-button-icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-align: left; /* Alinea el texto a la izquierda */
+  margin-right: 10px; /* Cambia margin-left a margin-right para espacio a la izquierda */
+  color: #797878;
+}
+
+.dashboard-column {
+  width: 90px; /* Establece el ancho deseado para las columnas */
+  text-align: left; /* Alinea el texto a la izquierda */
+  font-size: 1.3rem;
+}
+
+.dashboard-column-image {
+  width: 80px; /* Establece el ancho deseado para las columnas */
+  text-align: left; /* Alinea el texto a la izquierda */
+  font-size: 1.3rem;
+}
+
+.dashboard-column-id {
+  width: 30px; /* Establece el ancho deseado para las columnas */
+  text-align: left; /* Alinea el texto a la izquierda */
+  font-size: 1.3rem;
+}
+
+
