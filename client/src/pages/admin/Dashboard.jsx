@@ -49,7 +49,7 @@ function Dashboard() {
         </Link>
       </button>
     </div>
-    <div className='admin-div'></div>
+    <div className='admin-footer'></div>
     </>
   )
 } 

@@ -72,11 +72,7 @@ function MatchCard() {
             </div>
           ) : (
             <div className="match-carousel-container">
-              <FontAwesomeIcon
-                icon={faArrowLeft}
-                className="arrow-icon-left"
-                onClick={navigateToPreviousMatch}
-              />
+            
               <div className="match-carousel">
                 {filteredMatches.map((user) => (
                   <div className="match-card" key={user.id}>
@@ -91,11 +87,7 @@ function MatchCard() {
                   </div>
                 ))}
               </div>
-              <FontAwesomeIcon
-                icon={faArrowRight}
-                className="arrow-icon-right"
-                onClick={navigateToNextMatch}
-              />
+             
             </div>
           )}
         </center>

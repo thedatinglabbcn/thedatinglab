@@ -70,22 +70,23 @@ function ProfilePage() {
         )}
       </div>
       <div className="event-title">
+      
         <h3>Eventos a los que asistirás</h3>
         {event && event.length > 0 ? (
           event.map((eventItem) => (
-            <div key={eventItem.id}>
+            <div className='event-preview-container' key={eventItem.id}>
               <Link to={`/event/${eventItem.id}`}>
                 <img
                   src={`http://localhost:8000/storage/${eventItem.image}`}
                   alt={eventItem.title}
-                  className="event-image"
+                  className="event-preview-img"
                 />
-                <span>{eventItem.title}</span>
+                <span className='event-preview-text'>{eventItem.title}</span>
               </Link>
             </div>
           ))
         ) : (
-          <p>No tienes eventos registrados.</p>
+          <p className='card-text'>No tienes eventos registrados.</p>
         )}
       </div>
       <NavbarLogin  profileId={id}/> 

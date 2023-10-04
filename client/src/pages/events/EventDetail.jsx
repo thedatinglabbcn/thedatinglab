@@ -7,6 +7,7 @@ import Navbar from '../../components/navbar/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import './../../components/eventCard/EventCard.css';
+import NavbarLogin from '../../components/navbar/NavbarLogin';
 
 function EventDetail() {
   const navigate = useNavigate();
@@ -69,9 +70,9 @@ function EventDetail() {
             </div>
             <a onClick={handleAttendClick} className="detail-button">Quiero Asistir</a>
           </div>
-          <div className="event-attendees">
+          <div className="attendee-container">
             <h5>Asistentes:</h5>
-            <div className="attendee-container">
+            <div className="attendee-preview">
               {attendees.map((attendee) => (
                 <div key={attendee.id} className="attendee-info">
                   <img
@@ -79,7 +80,7 @@ function EventDetail() {
                     alt={attendee.name}
                     className="attendee-image"
                   />
-                  <span className="attendee-name">{attendee.name}</span>
+                  <span className="attendee-text">{attendee.name}</span>
                 </div>
               ))}
             </div>
@@ -87,8 +88,9 @@ function EventDetail() {
           </div>
         </div>
       ) : (
-        <p>Cargando detalles del evento...</p>
+        <p cal>Cargando detalles del evento...</p>
       )}
+         <NavbarLogin />
     </div>
   );
 }

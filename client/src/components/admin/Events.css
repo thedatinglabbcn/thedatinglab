@@ -1,8 +1,4 @@
-.dashboard-table {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
+
 
 thead {
   flex-basis: 100%;
@@ -40,7 +36,7 @@ tbody {
 
 .dashboard-actions {
   display: flex;
-  justify-content: flex-end; /* Cambia justify-content:right a justify-content:flex-end para alinear a la derecha */
+  justify-content: flex-end; 
 }
 
 .delete-button-icon,
@@ -50,27 +46,35 @@ tbody {
   cursor: pointer;
   font-size: 1.6rem;
   font-weight: 500;
-  text-align: left; /* Alinea el texto a la izquierda */
-  margin-right: 10px; /* Cambia margin-left a margin-right para espacio a la izquierda */
+  text-align: left; 
+  margin-right: 10px; 
   color: #797878;
 }
 
 .dashboard-column {
-  width: 90px; /* Establece el ancho deseado para las columnas */
-  text-align: left; /* Alinea el texto a la izquierda */
+  width: 90px; 
+  text-align: left; 
   font-size: 1.3rem;
 }
 
 .dashboard-column-image {
-  width: 80px; /* Establece el ancho deseado para las columnas */
-  text-align: left; /* Alinea el texto a la izquierda */
+  width: 80px;
+  text-align: left; 
   font-size: 1.3rem;
 }
 
 .dashboard-column-id {
-  width: 30px; /* Establece el ancho deseado para las columnas */
-  text-align: left; /* Alinea el texto a la izquierda */
+  width: 30px; 
+  text-align: left; 
   font-size: 1.3rem;
+}
+.dashboard-column-buttons{
+  display: flex;
+  width: 75px; 
+  justify-content: flex-end;
+  text-align: right; 
+  font-size: 1.3rem;
+
 }
 
 

@@ -86,7 +86,7 @@ function DashboardEvents() {
                 />
               </td>
               <td className='dashboard-column'>{event.title}</td>
-              <td className='dashboard-column'>
+              <td className='dashboard-column-buttons'>
                 <Link to={`/dashboard/edit/${event.id}`}>
                   <button className="edit-button-icon">
                     <FontAwesomeIcon icon={faFilePen} />

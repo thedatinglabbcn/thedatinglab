@@ -155,31 +155,33 @@ const RegistrationForm = () => {
             )}
           </div>
           <div className='form-group'>
-            <label>
+            <label className='checkbox-label'>
               <input
                 type='checkbox'
                 name='privacyPolicies'
+                className='checkbox-input'
                 checked={formData.privacyPolicies}
                 onChange={handleOnChange}
                 required
               />
               Acepto la Política de Privacidad
-            </label>
+            </label >
             {checkboxErrors.privacyPolicies && (
               <div className='text-danger'>{checkboxErrors.privacyPolicies}</div>
             )}
           </div>
           <div className='form-group'>
-            <label>
+            <label className='checkbox-label'>
               <input
                 type='checkbox'
+                className='checkbox-input'
                 name='over18'
                 checked={formData.over18}
                 onChange={handleOnChange}
                 required
               />
               Acepto ser mayor de 18 años
-            </label>
+            </label >
             {checkboxErrors.over18 && (
               <div className='text-danger'>{checkboxErrors.over18}</div>
             )}
