@@ -22,9 +22,9 @@ class PreferencesController extends Controller
                     if ($age < 18) {
                         $fail('Tienes que ser mayor de 18 años para ingresar.');
                     } },],
-            'ageRange' => ['required', 'in:18-25,26-35,36-45,46-55'],
-            'gender' => ['required', 'in:Hombre,Mujer,Fluido'],
-            'looksFor' => ['required', 'in:Hombre,Mujer,Fluido'],
+            'ageRange' => ['required', 'in:18-25,25-36,36-45,Más de 45'],
+            'gender' => ['required', 'in:Hombre,Mujer,No binario'],
+            'looksFor' => ['required', 'in:Hombre,Mujer,No binario'],
             'hasChildren' => ['required', 'in:Sí,No'],
             'wantsFamily' => ['required', 'in:Sí,No'],
             'datesParents' => ['required', 'in:Sí,No,No me lo he planteado'],
