@@ -42,13 +42,7 @@ class MatchingController extends Controller
                 'catsDogs' => 0.5,
             ];
 
-            $matches = User::whereHas('preference', function ($query) use ($userGender, $userLooksFor, $userAgeRange) {
-                $query->where('gender', $userLooksFor)
-                    ->where('looksFor', $userGender)
-                    ->where('ageRange', $userAgeRange);
-            })
-            ->where('id', '!=', $user->id)
-            ->get();
+            $matches = User::findMatchesForUser($user);
 
             $response = [];
 
