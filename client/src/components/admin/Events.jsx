@@ -42,12 +42,12 @@ function Events({event, onDelete}) {
 
             <td className='dashboard-actions'>
             <Link to={`/dashboard/edit/${event.id}`}>
-            <button className="edit-button">
+            <button className="edit-button-icon">
               <FontAwesomeIcon icon={faFilePen} />
             </button>
             </Link>
             <Link to="/dashboard/events">
-            <button className="delete-button" onClick={handleDeleteClick}>
+            <button className="delete-button-icon" onClick={handleDeleteClick}>
               <FontAwesomeIcon icon={faTrash} />
             </button>
             </Link>

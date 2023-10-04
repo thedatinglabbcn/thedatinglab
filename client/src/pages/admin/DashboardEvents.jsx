@@ -35,15 +35,13 @@ function DashboardEvents() {
 
   return (
     <>
-      <div className='admin-nav'>
-        <h1>Panel de Admin</h1>
-      </div>
+      <div className='admin-div'></div>
       <div className='new-event'>
-      <Link to="/dashboard">
-        <button className="back-button">
-        <FontAwesomeIcon icon={faHome} />
-        </button>
-      </Link>
+        <Link to="/dashboard">
+          <button className="back-button">
+            <FontAwesomeIcon icon={faHome} />
+          </button>
+        </Link>
         <Link to="/dashboard/create">
           <button className="create-button">
             <FontAwesomeIcon icon={faPlus} />
@@ -59,11 +57,13 @@ function DashboardEvents() {
             <th>Acciones</th>
           </tr>
         </thead>
+        <tbody>
+          {events.map((event) => (
+            <Events key={event.id} event={event} onDelete={handleDeleteEvent} />
+          ))}
+        </tbody>
       </table>
-
-      {events.map((event) => (
-        <Events key={event.id} event={event} onDelete={handleDeleteEvent} />
-      ))}
+      <div className='admin-footer'></div>
     </>
   );
 }

@@ -6,7 +6,6 @@ import EditForm from '../components/admin/EditForm';
 import LoginPage from '../pages/login/LoginPage'
 import ProfileFormPage from '../pages/register/ProfileFormPage';
 import PreferencesPage from '../pages/register/PreferencesPage';
-import ProfileEditForm from '../components/forms/ProfileEditForm';
 import ProfilePage from '../pages/profile/ProfilePage'
 import Dashboard from '../pages/admin/Dashboard';
 import DashboardEvents from '../pages/admin/DashboardEvents';
@@ -15,6 +14,8 @@ import AdminLoginPage from '../pages/admin/AdminLoginPage';
 import EventsPage from '../pages/events/EventsPage';
 import EventDetail from '../pages/events/EventDetail';
 import PaymentPage from '../pages/payment/PaymentPage';
+import { PrivateRoutes } from '../utils/PrivateRoutes'
+import Faqs from '../pages/faqs/Faqs';
 
 
 const router = createBrowserRouter([
@@ -36,11 +37,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/profile/:id',
-    element: <ProfilePage />,
+    element: <PrivateRoutes><ProfilePage /></PrivateRoutes>
   },
   {
     path: '/matches',
-    element: <MatchCard />
+    element: <PrivateRoutes><MatchCard /></PrivateRoutes>
   },
   {
     path: '/login',
@@ -58,7 +59,6 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: <Dashboard />
   },
-
   {
     path: '/dashboard/events',
     element: <DashboardEvents />
@@ -76,10 +76,13 @@ const router = createBrowserRouter([
     element: <EventDetail />
   },
   {
+    path: '/faqs',
+    element: <Faqs />
+  },
+  {
     path: '/payment/:eventId',
-    element: <PaymentPage />
+    element: <PrivateRoutes><PaymentPage /></PrivateRoutes>
   }
- 
 ])
 
 export default router;

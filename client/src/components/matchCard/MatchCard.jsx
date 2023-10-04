@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './MatchCard.css';
 import Navbar from '../navbar/Navbar';
-
-
-import Footer from '../footer/Footer';
 import { MatchingService } from '../../service/MatchingService';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -53,6 +50,13 @@ function MatchCard() {
     }
   };
 
+  const calculateAge = (birthdate) => {
+    const birthDate = new Date(birthdate);
+    const today = new Date();
+    const age = today.getFullYear() - birthDate.getFullYear();
+    return age;
+};
+
   return (
     <div>
       <Navbar />
@@ -64,14 +68,7 @@ function MatchCard() {
               <p className="matches-text">
                 Sin coincidencias por ahora... ¡Vuelve a comprobarlo más tarde!
               </p>
-              <button
-                type="button"
-                className="button-cancel"
-                style={{ marginTop: '10px' }}
-                onClick={() => navigate('/')}
-              >
-                Eventos
-              </button>
+              
             </div>
           ) : (
             <div className="match-carousel-container">
@@ -88,7 +85,7 @@ function MatchCard() {
                       className="rounded-circle"
                       alt={`Tu match: ${user.name}`}
                     />
-                    <h5 className="card-title text-center">{user.name}</h5>
+                    <h5 className="card-title text-center">{user.name}, <small>{calculateAge(user.birthdate)}</small></h5>
                     <h6 className="porcentage-match">Coincidencia: {user.matchingPercentage}%</h6>
                     <p className="card-text text-center"><small>{user.description}</small></p>
                   </div>
@@ -103,6 +100,7 @@ function MatchCard() {
           )}
         </center>
       </div>
+    
    <NavbarLogin/>
     </div>
   );

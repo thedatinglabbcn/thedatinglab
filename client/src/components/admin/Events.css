@@ -16,17 +16,17 @@
   }
   
 .dashboard-row{
-  width: 100%;
- text-align: left;;
+ width: 100%;
+ text-align: left;
+ display: flex;
+ justify-content: space-aro;
 
   }
   
   tbody{
-   
-   
     padding: 1rem 0 1rem; 
     text-align: left;
-   
+    font-size: 1.4rem;
   }
 
   .dashboard-image {
@@ -35,23 +35,21 @@
     margin: 0;
     border-radius: 50%;
   }
-
-  .dashboard-edit,
-  .dashboard-delete {
+.dashboard-actions{
+  display: flex;
+  justify-content:right ;
+}
+  .delete-button-icon,
+  .edit-button-icon {
    background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 500;
     text-align: right; 
     margin-left: 10px; 
+    color: #797878;
   }
 
-  .dashboard-edit{
-    color: var(--color-submit);
-  }
-
-  .dashboard-delete{
-    color: var(--color-primary);
-  }
+ 
   
