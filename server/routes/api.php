@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\MatchingController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\AttendancesController;
 use App\Http\Controllers\PreferencesController;
 use Spatie\Permission\Middleware\RoleMiddleware;
 
@@ -43,6 +44,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/profile/{id}', [ProfileController::class, 'update']);
     Route::get('/matching-users', [MatchingController::class, 'getMatches']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/event/attendance/{id}', [EventController::class, 'confirmAttendance']);
-    Route::get('/event/attendance/{id}', [EventController::class, 'userConfirmedDate']);
+    Route::post('/event/attendance/{id}', [AttendancesController::class, 'confirmAttendance']);
+    Route::get('/event/attendance/{id}', [AttendancesController::class, 'eventAttendees']);
+    Route::get('/event/eventsforuser/{id}', [AttendancesController::class, 'getEventsForUser']);
+    Route::get('profile/events/{user_id}', [AttendancesController::class, 'getRegisteredEvents']);
+
 });

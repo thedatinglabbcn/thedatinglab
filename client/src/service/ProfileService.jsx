@@ -3,7 +3,6 @@ import './axiosConfig';
 
 export const ProfileService =  () => {
     const urlProfile = '/api/profile';
-    
   
     const createProfile = (data) => {
         const config = {

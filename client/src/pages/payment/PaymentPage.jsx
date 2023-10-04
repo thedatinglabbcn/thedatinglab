@@ -4,7 +4,7 @@ import Footer from '../../components/footer/Footer';
 import Navbar from '../../components/navbar/Navbar';
 import axios from '../../service/axiosConfig';
 import Swal from 'sweetalert2';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 function PaymentPage() {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -15,8 +15,6 @@ function PaymentPage() {
   };
 
   const handlePaymentAndAttendance = () => {
-  
-
     axios
       .post(`api/event/attendance/${eventId}`, { option: selectedOption })
       .then((response) => {
@@ -26,8 +24,8 @@ function PaymentPage() {
           icon: 'success',
           confirmButtonText: 'Ok'
         });
-       
-        console.log('Pago realizado y asistencia confirmada:', response.data.message);
+        
+        return <Navigate to={`/event/${eventId}`} />;
       })
       .catch((error) => {
         console.error('Error al realizar el pago y confirmar la asistencia:', error);

@@ -58,7 +58,7 @@ public function preference() {
 
     public function confirmAttendance()
 {
-    return $this->belongsToMany(Event::class);
+    return $this->belongsToMany(Event::class, 'event_user', 'user_id', 'event_id');
 }
 
 }

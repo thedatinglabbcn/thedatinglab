@@ -8,6 +8,7 @@ use App\Models\Event;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 
 
@@ -17,7 +18,7 @@ class EventController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:admin')->except('index', 'confirmAttendance', 'show');
+        $this->middleware('role:admin')->except('index', 'confirmAttendance', 'eventAttendees', 'show', 'getEventsForUser' );
     }
 //    
     /**
@@ -129,12 +130,35 @@ class EventController extends Controller
             'confirmedDate' => $confirmedDate,
         ]);
     }
-        public function userConfirmedDate()
+    public function eventAttendees($id)
     {
         $user = Auth::user();
 
-        $confirmedDate = $user->confirmAttendance; 
-        return response()->json($confirmedDate);
+        $event = Event::find($id);
+
+        if (!$event) {
+            return response()->json(['message' => 'Evento no encontrado'], 404);
+        }
+
+       
+        $attendees = $event->confirmAttendance()->with('profile')->get(); 
+
+        return response()->json(['attendees' => $attendees], 200); 
     }
+
+    public function getEventsForUser($id)
+    {
+        $user = Auth::user();
+
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        $event = $user->confirmAttendance()->with('event')->get();
+
+        return response()->json(['events' => $event], 200);}
+
 }
  
