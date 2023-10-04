@@ -39,18 +39,17 @@ class AttendancesController extends Controller
         return response()->json(['attendees' => $attendees], 200); 
     }
 
-    public function getEventsForUser($id)
+    public function getEventsForUser($event)
     {
-        $user = Auth::user();
 
-        $user = User::find($id);
+        $user = User::find($event);
 
         if (!$user) {
             return response()->json(['message' => 'Usuario no encontrado'], 404);
         }
 
-        $event = $user->confirmAttendance()->with('event')->get();
+        $event = $user->confirmAttendance()->get();
 
-        return response()->json(['events' => $event], 200);
+        return response()->json(['event' => $event], 200);
     }
 }

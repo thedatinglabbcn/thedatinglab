@@ -42,7 +42,7 @@ export const EventService = {
   },
 
   getEventForUser: (id) => {
-    return axios.get(`${urlEvents}/eventsforuser/${id}`);
+    return axios.get(`${urlEvents}/user/${id}`);
   },
 
 };

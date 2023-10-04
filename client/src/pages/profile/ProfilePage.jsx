@@ -2,20 +2,15 @@ import React, { useEffect, useState } from 'react';
 import './ProfilePage.css';
 import Navbar from '../../components/navbar/Navbar';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
-import Footer from '../../components/footer/Footer';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ProfileService } from '../../service/ProfileService';
-import Swal from 'sweetalert2';
 import ProfileEditForm from '../../components/forms/ProfileEditForm';
-import axios from '../../service/axiosConfig';
 import { EventService } from '../../service/EventService';
 
 function ProfilePage() {
-  const { userId } = useParams();
   const { id } = useParams()
-  console.log(id);
   const [profile, setProfile] = useState(null);
-  const [registeredEvents, setRegisteredEvents] = useState([]);
+  const [event, setEvent ] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
@@ -30,15 +25,16 @@ function ProfilePage() {
         .catch(error => {
           console.error(error);
         });
-        // EventService.getEventForUser(id)
-        // .then((response) => {
-        //   setRegisteredEvents(response.data);
-        // })
-        // .catch((error) => {
-        //   console.error('Error al obtener los eventos:', error);
-        // });
+        EventService.getEventForUser(id)
+        .then((response) => {
+          setEvent(response.data.event);
+          console.log('Eventos:', response);
+      })
+        .catch((error) => {
+          console.error('Error al obtener los eventos:', error);
+        });
         
-  }, [id]);
+  }, []);
 
   const userName = profile && profile.user ? profile.user.name : '';
   const userDescription = profile && profile.description ? profile.description : '';
@@ -70,17 +66,26 @@ function ProfilePage() {
           <ProfileEditForm profile={profile} id={id} setIsEditing={setIsEditing} />
         )}
       </div>
-      {/* <div>
-      <ul>
-          {registeredEvents.map(event => (
-              <li key={event.id}>
-                  <Link to={`/event/${event.id}`}>{event.title}</Link>
-              </li>
-          ))}
-      </ul>
-      </div> */}
-      <NavbarLogin  profileId={id}/>
-     
+      <div className="event-title">
+        <h3>Eventos a los que asistirás</h3>
+        {event && event.length > 0 ? (
+          event.map((eventItem) => (
+            <div key={eventItem.id}>
+              <Link to={`/event/${eventItem.id}`}>
+                <img
+                  src={`http://localhost:8000/storage/${eventItem.image}`}
+                  alt={eventItem.title}
+                  className="event-image"
+                />
+                <span>{eventItem.title}</span>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <p>No tienes eventos registrados.</p>
+        )}
+      </div>
+      <NavbarLogin  profileId={id}/> 
     </div>
   );
 }
