@@ -83,7 +83,6 @@ const router = createBrowserRouter([
     path: '/payment/:eventId',
     element: <PrivateRoutes><PaymentPage /></PrivateRoutes>
   }
- 
 ])
 
 export default router;

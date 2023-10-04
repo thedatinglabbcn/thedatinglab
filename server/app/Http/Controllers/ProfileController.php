@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Event;
 
 class ProfileController extends Controller
 {
@@ -109,5 +110,23 @@ class ProfileController extends Controller
             'message' => 'Perfil actualizado con éxito',
         ], 200);
     }
+
+    public function getRegisteredEvents($user_id)
+    {
+        $user = Auth::user();
+        if ($user->id !== $user_id) {
+            return response()->json([
+                'message' => 'No tienes permiso para ver estos eventos',
+            ], 403);
+        }
+
+        $event = Event::whereHas('users', function ($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+        })->get();
+
+    
+        return response()->json(['events' => $event], 200);
+    }
+    
 
 }
