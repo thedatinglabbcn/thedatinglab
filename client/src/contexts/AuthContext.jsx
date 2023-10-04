@@ -3,22 +3,27 @@ import React, { createContext, useContext, useState } from 'react';
 const AuthContext = createContext();
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  const auth = useContext(AuthContext);
+  return auth;
 };
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({ isAuthenticated: false });
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const login = () => {
-    setAuth({ isAuthenticated: true });
+  const login = (email) => {
+    if (email === 'admin@example.com') {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
   };
 
   const logout = () => {
-    setAuth({ isAuthenticated: false });
+    setIsAdmin(false);
   };
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ isAdmin, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

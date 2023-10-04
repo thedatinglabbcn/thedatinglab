@@ -3,10 +3,12 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 const PrivateAdminRoutes = ({ children }) => {
-  const { auth } = useAuth();
-  const isAdmin = auth?.role === 'admin';
+  const { isAdmin } = useAuth();
 
-  return(<div> {isAdmin ? children : <Navigate to={"/admin-login"} />}</div>)
+  if (!isAdmin) {
+    return <Navigate to="/admin-login" />;
+  }
+  return children
 };
 
 export default PrivateAdminRoutes;
