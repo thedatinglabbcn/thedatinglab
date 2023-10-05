@@ -89,36 +89,9 @@ DB_PASSWORD=contraseña
 `http://localhost:3000`
 
 ## Developers
+## Autores
 
-<div style="display: flex; flex-direction:row; align-items:center; justify-content: space-around;">
+| [<img src="https://avatars.githubusercontent.com/u/96080945?v=4" width=115><br><sub>Jeaneth Sánchez Núñez</sub>](https://github.com/jeanethsn) | [<img src="https://avatars.githubusercontent.com/u/977203?v=4" width=115><br><sub>Rosa Rubio</sub>](https://github.com/rosa-rubio) | [<img src="https://avatars.githubusercontent.com/u/132340917?v=4" width=115><br><sub>Denise Khurlopian</sub>](https://github.com/dkhurlop) | [<img src="https://avatars.githubusercontent.com/u/129850727?v=4" width=115><br><sub>Florencia Bordon</sub>](https://github.com/florienborg)
+| :---: | :---: | :---: | :---: |
 
 
-<div align="center" style="display: flex; justify-content: space-around;">
-  <div align="center" style="margin-right: 10px;">
-    <a href="https://github.com/jeanethsn">
-      <img src="https://avatars.githubusercontent.com/u/96080945?v=4" width="100" style="border-radius: 50%"/><br>
-      <sub>Jeaneth Sánchez Núñez</sub>
-    </a>
-  </div>
-
-  <div align="center" style="margin-right: 10px;">
-    <a href="https://github.com/rosa-rubio">
-      <img src="https://avatars.githubusercontent.com/u/132340917?v=4" width="100" style="border-radius: 50%"/><br>
-      <sub>Rosa Rubio</sub>
-    </a>
-  </div>
-
-  <div align="center" style="margin-right: 10px;">
-    <a href="https://github.com/dkhurlop">
-      <img src="https://avatars.githubusercontent.com/u/129850727?v=4" width="100" style="border-radius: 50%"/><br>
-      <sub>Denise Khurlopian</sub>
-    </a>
-  </div>
-
-  <div align="center">
-    <a href="https://github.com/florienborg">
-      <img src="https://avatars.githubusercontent.com/u/131755081?v=4" width="100" style="border-radius: 50%"/><br>
-      <sub>Florencia Bordon</sub>
-    </a>
-  </div>
-</div>
