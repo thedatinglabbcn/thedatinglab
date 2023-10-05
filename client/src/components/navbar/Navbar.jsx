@@ -15,6 +15,7 @@ const Navbar = () => {
 
     auth.logout().then(res => {
       localStorage.removeItem('auth_token');
+      localStorage.removeItem('profile_id');
       Swal.fire({
         title: '¡Sesión cerrada!',
         text: '¡Hasta pronto!',
@@ -48,14 +49,16 @@ const Navbar = () => {
       <div className={`nav_items ${isOpen && "open"}`}>
         {isLoggedIn ? (
           <>
-            <a href="/event" onClick={closeMenu}>Nuestros eventos</a>
-            <a href="/" onClick={handleLogout}>Cerrar sesión</a>
+            <Link to="/event" onClick={closeMenu}>Nuestros eventos</Link>
+            <Link to="/" onClick={handleLogout}>Cerrar sesión</Link>
+            <Link to="/faqs" onClick={closeMenu}>Preguntas frecuentes</Link>
           </>
         ) : (
           <>
             <Link to="/register">Registrarse</Link>
             <Link to="/login">Iniciar sesión</Link>
             <a href="#event-section" onClick={closeMenu}>Nuestros eventos</a>
+            <Link to="/faqs" onClick={closeMenu}>Preguntas frecuentes</Link>
           </>
         )}
       </div>

@@ -66,6 +66,7 @@ function CreateForm() {
 
   return (
     <div className='container'>
+   
       <h2 className='form-title'>Crear Evento</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
@@ -125,7 +126,7 @@ function CreateForm() {
         </div>
         {eventData.image && (
             <div className="mb-4">
-            <label className="form-label-profile">Vista previa de la imagen de perfil</label>
+            <label className="form-label-profile">Vista previa de la imagen del evento</label>
             <center>
             <img
             src={URL.createObjectURL(eventData.image)}
@@ -135,11 +136,14 @@ function CreateForm() {
             </center>
             </div>
             )}
+            <div className='form-buttons'>
         <button className='button-send' type="submit">Aceptar</button>
         <Link to="/dashboard/events">
         <button className='button-cancel' type="submit">Cancelar</button>
         </Link>
+        </div>
       </form>
+      <div className='admin-footer'></div>
     </div>
   );
 }

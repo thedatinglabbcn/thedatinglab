@@ -17,7 +17,7 @@ class EventController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:admin')->except('index', 'confirmAttendance', 'show');
+        $this->middleware('role:admin')->except('index', 'show' );
     }
 //    
     /**
@@ -110,31 +110,6 @@ class EventController extends Controller
         return response()->json(['message' => 'Event deleted successfully']);
     }
 
-    /**
-     * Confirm attendance to an event.
-     */
 
-    public function confirmAttendance($id)
-    { 
-        $user = Auth::user();
-        
-        $event = Event::find($id);
-        
-        $event->confirmAttendance()->attach($user);
-
-        $confirmedDate = $user->confirmAttendance;
-        
-        return response()->json([
-            'res' => true,
-            'confirmedDate' => $confirmedDate,
-        ]);
-    }
-        public function userConfirmedDate()
-    {
-        $user = Auth::user();
-
-        $confirmedDate = $user->confirmAttendance; 
-        return response()->json($confirmedDate);
-    }
 }
  

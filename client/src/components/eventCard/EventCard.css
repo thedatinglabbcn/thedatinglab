@@ -2,18 +2,18 @@
 .event-card {
     margin: 0 auto;
     background-color:white !important;
-    width: 85% !important;
+    width: 300px !important;
     margin-top: 1rem;
-    margin-bottom: 8rem;
+    margin-bottom: 2rem;
     border-radius: 0.8rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 }
 
 .card-img-top {
     height: 10rem;
     object-fit: cover;
     border-radius: 0.5rem 0.5rem 0 0;
-    margin-bottom: 1rem;
+    
 }
 
 .card-body{
@@ -28,8 +28,8 @@
 
 .card-title {
     font-weight: 700;
-    font-size: 2.2rem;
-    margin-top: 1rem;
+    font-size: 2rem;
+   
 }
 
 .card-text {
@@ -40,7 +40,7 @@
 }
 
 .card-location {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 500;
     margin: 1rem 0 3rem;
 }
@@ -48,7 +48,7 @@
 .location-icon {
     color: var(--color-primary);
     margin-right: 0.5rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     
 }
 
@@ -58,6 +58,6 @@
     border-radius: 0.5rem;
     border: none;
     padding: 1rem 2rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
 }

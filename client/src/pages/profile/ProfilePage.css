@@ -33,8 +33,72 @@
 
 .match-profile{
     Margin-top: 2.5rem;
-    }
+}
 
-    .how-it-works{
-        width: 100%;
-    }
+.how-it-works{
+   width: 100%;}
+
+
+    .separator {
+        border-top: 3px solid black; 
+        margin: 2rem 0; 
+      }
+
+      .profile-subtitle{
+        color: black;
+        font-weight: 700;
+        font-size: 1.8rem;
+        text-align: center;
+        padding: 0;
+        margin: 0.5rem;
+      }
+
+      .profile-texts{
+        color: black;
+        font-weight: 500;
+        font-size: 1.6rem;
+        text-align: center;
+        padding: 0;
+      }
+
+.event-title {
+    text-align: center;
+  }
+  
+  .event-title h3 {
+    font-size: 25px; 
+    margin-bottom: 10px; 
+    color: var(--color-primary);
+  }
+  
+  .event-title img {
+    max-width: 100px;
+    display: block; 
+    margin: 0 auto;
+  }
+  
+  .event-title span {
+    display: block; 
+    font-weight: bold; 
+    margin-top: 5px; 
+  }
+  
+  .event-preview-container{
+    display: inline-block;
+    padding: 2rem;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .event-preview-img{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    
+  }
+
+  .event-preview-text{
+    color: black;
+    font-size: 1.1rem;
+
+  }

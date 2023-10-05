@@ -149,13 +149,20 @@ return [
     'attributes' => [
         'name' => 'nombre',
         'password' => 'contraseña',
-        'preferences1' => '',
-        'preferences2' => '',
-        'catsDogs' => '',
+        'birthdate' => 'fecha de nacimiento',
+        'ageRange' => 'rango de edad',
+        'hasChildren' => 'de selección',
+        'wantsFamily' => 'de selección',
+        'datesParents' => 'de selección',
+        'sexoAffective' => 'de selección',
+        'heartState' => 'de selección',
+        'preferences1' => 'de selección',
+        'preferences2' => 'de selección',
+        'catsDogs' => 'de selección',
         'image' => 'imagen',
         'title' => 'título',
         'location' => 'ubicación',
-        'description' => 'descripción'
+        'description' => 'descripción',
     ],
 
 ];

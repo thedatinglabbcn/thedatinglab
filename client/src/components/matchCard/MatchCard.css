@@ -6,8 +6,7 @@
 }
 
 .match-container{
-    padding: 3rem;
-    display: flex;
+    padding: 2rem 0 1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -34,14 +33,30 @@
 
     /* Slider */
 
-.match-carousel {
-        width: 60%;
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        margin: 0;
-        transition: transform 0.3s ease-in-out;
-}
+    .match-carousel {
+      width: 100%;
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      margin: 0;
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .match-card-container {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      scroll-snap-align: start;
+    }
+    
+    .match-card {
+      padding: 1rem;
+      min-width: 300px; /* Ajustar según tus necesidades */
+      max-width: 80%; /* Ajustar según tus necesidades */
+      text-align: center;
+    }
+    
       
 .porcentage-match{
   color: var(--color-primary);
@@ -50,11 +65,13 @@
   margin: 1rem 0;
 }
 .match-card {
-       flex: 0 0 auto;
-        width: 100%;
-        padding: 1rem;
-        scroll-snap-align: start;
-      }
+  flex: 0 0 auto;
+  padding: 1rem;
+  scroll-snap-align: start;
+  min-width: 300px;
+  max-width: 80%; 
+  text-align: center;
+}
 
 .matches-text{
   color: var(--color-primary);
@@ -70,7 +87,7 @@
 }
 
 .match-carousel::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
   }
   
   .match-carousel::-webkit-scrollbar-thumb {
@@ -86,8 +103,8 @@
   
   .arrow-icon-left,
   .arrow-icon-right {
-    font-size: 15px;
+    font-size: 20px;
     cursor: pointer;
-    color: rgba(128, 132, 136, 0.4);
+    color: rgba(128, 132, 136, 0.6);
   }
   

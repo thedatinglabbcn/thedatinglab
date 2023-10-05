@@ -19,7 +19,7 @@ class Profile extends Model
     protected $fillable = [
         'image',
         'description',
-        'user_id'
+        'vitalMoment'
     ];
 
     protected $hidden = [
@@ -28,6 +28,6 @@ class Profile extends Model
     ];
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class, 'profile_id');
     }
 }

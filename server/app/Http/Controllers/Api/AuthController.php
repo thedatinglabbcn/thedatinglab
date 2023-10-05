@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Preference;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +21,8 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'privacyPolicies' => 'required|accepted',
+            'over18' => 'required|accepted',
         ]);
 
         if ($validator->fails()) {
@@ -26,13 +30,28 @@ class AuthController extends Controller
                 'validation_errors' => $validator->messages(),
             ], 422);
         } else {    
-            $user = new User([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')), 
-            ]);
 
-            $user->save();
+            $preferenceId = $request->input('preference_id');
+            $profileId = $request->input('profile_id');
+
+    if ($preferenceId !== null && $profileId !== null) {
+        $preference = Preference::find($preferenceId);
+        $profile = Profile::find($profileId);
+    } else {
+        $preference = null;
+        $profile = null;
+    }
+
+    $user = new User([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => Hash::make($request->input('password')),
+        'profile_id' => $profile ? $profile->id : null,
+        'preference_id' => $preference ? $preference->id : null,
+    ]);
+
+$user->save();
+
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
@@ -44,35 +63,43 @@ class AuthController extends Controller
     } 
 
     public function login(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' =>'required'
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email',
+        'password' => 'required'
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'validation_errors' => $validator->messages(),
-            ], 422);
-        } else {    
-            $user = User::where('email', $request->email)->first();
-            if (!$user || !Hash::check($request->password, $user->password)) {
-                return response()->json([
-                    'msg' => 'Usuario o contraseña incorrectos'
-                ], 401);
-            }
+    if ($validator->fails()) {
+        return response()->json([
+            'validation_errors' => $validator->messages(),
+        ], 422);
+    }
 
-            $token = $user->createToken('auth_token')->plainTextToken;
+    $user = User::where('email', $request->email)->first();
 
-            $cookie = cookie('token', $token, 60 * 24);
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        return response()->json([
+            'msg' => 'Usuario o contraseña incorrectos'
+        ], 401);
+    }
 
-            return response()->json([
-                'msg' => 'Usuario conectado exitosamente',
-                'user' => $user,
-                'token' => $token
-            ], 200)->withCookie($cookie);
-        }
-    } 
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    $cookie = cookie('token', $token, 60 * 24);
+
+    // Verifica si el usuario tiene el rol "admin" antes de establecer 'isAdmin' => true
+    $isAdmin = $user->hasRole('admin');
+
+    return response()->json([
+        'msg' => 'Usuario conectado exitosamente',
+        'user' => [
+            'email' => $user->email,
+            'isAdmin' => $isAdmin,
+            'profile_id' => $user->profile_id,
+        ],
+        'token' => $token
+    ], 200)->withCookie($cookie);
+}
 
     public function logout(Request $request)
     {

@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('preferences', function (Blueprint $table) {
             $table->id();
-            $table->enum('gender', ['Hombre', 'Mujer', 'Otro']);
-            $table->enum('looksFor', ['Hombre', 'Mujer', 'Otro']);
+            $table->date('birthdate');
+            $table->enum('ageRange', ['18-25', '26-35', '36-45', 'Más de 45']);
+            $table->enum('gender', ['Hombre', 'Mujer', 'No binario']);
+            $table->enum('looksFor', ['Hombre', 'Mujer', 'No binario']);
             $table->enum('hasChildren', ['Sí', 'No']);
+            $table->enum('wantsFamily', ['Sí', 'No']);
             $table->enum('datesParents', ['Sí', 'No', 'No me lo he planteado']);
-            $table->enum('sexoAffective', ['Monógama', 'Abierta', 'Amigos con derech@ a roce', 'Lo que surja', 'Casual']);
+            $table->enum('sexoAffective', ['Monógama', 'Abierta', 'Amigos con derecho a roce', 'Lo que surja', 'Casual']);
             $table->enum('heartState', ['Totalmente roto', 'Con ganas de compartir', 'Se siente solo', 'Feliz y palpitante', 'Despechadísimo']);
-            $table->enum('topValue', ['Libertad', 'Honestidad', 'Transparencia', 'Empatía', 'Comunicación', 'Responsabilidad', 'Voluntad', 'Diversión', 'Respeto', 'Gratitud', 'Confianza', 'Amor', 'Bondad', 'Positividad', 'Valentía', 'Cuidado', 'Alegría y sentido del humor']);
             $table->enum('preferences1', ['Netflix', 'Eventos', 'Deporte', 'Escapadas', 'Todas', 'Otras']);
-            $table->enum('preferences2', ['Alcohol','Infusiones','NoAlcohol','Según','Ninguna']);
-            $table->enum('catsDogs', ['Gatos', 'Perros', 'Todos', 'DeAmigos']);
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->enum('preferences2', ['Alcohol', 'Bebidas calientes', 'Refrescos', 'Según', 'Ninguna']);
+            $table->enum('catsDogs', ['Gatos', 'Perros', 'Todos', 'De amigos']);
             $table->timestamps();
         });
     }

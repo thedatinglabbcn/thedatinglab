@@ -20,16 +20,18 @@ function ProfileForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { image, description } = formDataState;
+    const { image, description, vitalMoment } = formDataState;
 
     const formData = new FormData();
     formData.append('image', image);
     formData.append('description', description);
+    formData.append('vitalMoment', vitalMoment);
 
     profile
       .createProfile(formData)
       .then((res) => {
         const profileId = res.data.profile_id;
+        localStorage.setItem('profile_id', profileId);
         Swal.fire({
           title: 'Perfil creado',
           text: '¡Ya estás dentro!',
@@ -60,8 +62,10 @@ function ProfileForm() {
           }
           });
         }
-      });
+      });     
   };
+
+
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -144,7 +148,7 @@ function ProfileForm() {
             )}
           <div className="mb-4">
             <label htmlFor="description" className="form-label-profile">
-            ¿En qué estado se encuentra tu corazón? ¿Qué tipo de relación te gustaría tener? ¿En qué momento vital estás? ¡Cuéntanos!
+            Cuéntanos algo de ti
             </label>
             <textarea
               className="form-control"
@@ -158,13 +162,30 @@ function ProfileForm() {
               <div className="text-danger">{validationErrors.description.join(', ')}</div>
             )}
           </div>
+          <div className="mb-4">
+            <label htmlFor="vitalMoment" className="form-label-profile">
+            Momento vital en el que te encuentras
+            </label>
+            <textarea
+              className="form-control"
+              id="vitalMoment"
+              name="vitalMoment"
+              placeholder="Momento vital..."
+              onChange={handleOnChange}
+              required
+            />
+            {validationErrors.vitalMoment && (
+              <div className="text-danger">{validationErrors.vitalMoment.join(', ')}</div>
+            )}
+          </div>
           <div className='form-buttons'>
+          <button type="button" className="button-cancel" onClick={() => navigate('/preference-edit')}>
+              Atrás
+            </button>
             <button type="submit" className="button-send">
               Enviar
             </button>
-            <button type="button" className="button-cancel" onClick={() => navigate('/preference-edit')}>
-              Atrás
-            </button>
+           
           </div>
         </form>
       </div>
