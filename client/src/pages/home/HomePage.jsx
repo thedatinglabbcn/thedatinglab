@@ -68,7 +68,7 @@ useEffect(() =>{
           
         </div>
       </section>
-      <p className='swipe-text'>Dezliza a la derecha para ver más eventos</p>
+      <p className='swipe-text'>Desliza a la derecha para ver más eventos</p>
       <NavbarLogin />
 
     </div>
