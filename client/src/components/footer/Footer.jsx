@@ -12,8 +12,8 @@ function Footer() {
     <p className="footer-logo">Movil: 600 000 000</p>
     <div className="footer-links">
       <div className="nav-item"><a href="http://www.instagram.com"><img width="30" height="30" src={Instagram} className="navbar-icons" alt="Instagram icon" /></a></div>
-      <div className="nav-item"><a href="http://www.twitter.com"><img width="30" height="30" src={Twitter} className="navbar-icons" alt="Instagram icon" /></a></div>
-      <div className="nav-item"><a href="http://www.linkedin.com"><img width="30" height="30" src={LinkedIn} className="navbar-icons" alt="Instagram icon" /></a></div>
+      <div className="nav-item"><a href="http://www.twitter.com"><img width="30" height="30" src={Twitter} className="navbar-icons" alt="Twitter icon" /></a></div>
+      <div className="nav-item"><a href="http://www.linkedin.com"><img width="30" height="30" src={LinkedIn} className="navbar-icons" alt="LinkedIn icon" /></a></div>
     </div>
   </footer>
 </div>
