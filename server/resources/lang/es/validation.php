@@ -148,6 +148,8 @@ return [
 
     'attributes' => [
         'name' => 'nombre',
+        'date' => 'fecha',
+        'time' => 'hora',
         'password' => 'contraseña',
         'birthdate' => 'fecha de nacimiento',
         'ageRange' => 'rango de edad',
