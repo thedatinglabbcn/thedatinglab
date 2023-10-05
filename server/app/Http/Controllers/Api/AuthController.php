@@ -96,6 +96,7 @@ $user->save();
             'email' => $user->email,
             'isAdmin' => $isAdmin,
             'profile_id' => $user->profile_id,
+            'id' => $user->id,
         ],
         'token' => $token
     ], 200)->withCookie($cookie);
