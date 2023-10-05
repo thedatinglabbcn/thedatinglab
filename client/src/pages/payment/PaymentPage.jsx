@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './PaymentPage.css';
 import Navbar from '../../components/navbar/Navbar';
 import axios from '../../service/axiosConfig';
-import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
+import Swal from 'sweetalert2';
 
 function PaymentPage() {
   const [selectedOption, setSelectedOption] = useState(null);

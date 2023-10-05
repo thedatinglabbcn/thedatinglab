@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { EventService } from '../../service/EventService';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import '../../components/forms/Forms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../forms/Forms.css';
+import Swal from 'sweetalert2';
 
 function CreateForm() {
   const navigate = useNavigate();
