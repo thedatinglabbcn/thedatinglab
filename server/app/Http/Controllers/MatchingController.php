@@ -20,7 +20,6 @@ class MatchingController extends Controller
 
             $weights = json_decode(file_get_contents(resource_path('config/weights.json')), true);
 
-
             $matches = User::findMatchesForUser($user);
 
             $response = [];
@@ -48,21 +47,36 @@ class MatchingController extends Controller
         }
     }
 
-    private function getPreferenceFields($userPreference)
-    {
-        $fields = array_keys($userPreference->getAttributes());
+    private function getExcludedFields($weights)
+{
+    $excludedFields = [];
 
-        $fieldsToExclude = ['id', 'created_at', 'updated_at', 'gender', 'looksFor', 'birthdate', 'ageRange', 'hasChildren'];
-        $fields = array_diff($fields, $fieldsToExclude);
-
-        return $fields;
+    foreach ($weights as $field => $weight) {
+        if ($weight === 0) {
+            $excludedFields[] = $field;
+        }
     }
 
-    private function calculateMatchingPercentage($userPreference, $matchPreference, $weights)
+    $excludedFields = array_merge($excludedFields, ['id', 'created_at', 'updated_at']);
+
+    return $excludedFields;
+}
+
+private function getPreferenceFields($userPreference, $weights)
+{
+    $excludedFields = $this->getExcludedFields($weights);
+    $fields = array_keys($userPreference->getAttributes());
+
+    $fields = array_diff($fields, $excludedFields);
+
+    return $fields;
+}
+
+private function calculateMatchingPercentage($userPreference, $matchPreference, $weights)
 {
     $matchingFields = 0;
 
-    foreach ($this->getPreferenceFields($userPreference) as $field) {
+    foreach ($this->getPreferenceFields($userPreference, $weights) as $field) {
         if ($userPreference->$field === $matchPreference->$field) {
             $matchingFields += $weights[$field]; 
         }
