@@ -10,7 +10,16 @@ test('should render the text', () => {
         <Footer />
       </Router>
     );
-    expect(getByText('The Dating Lab')).toBeTruthy();
+    expect(getByText('Email: info@examlple.com')).toBeTruthy();
+  });
+
+  test('should render the text', () => {
+    const { getByText } = render(
+      <Router>
+        <Footer />
+      </Router>
+    );
+    expect(getByText('Movil: 600 000 000')).toBeTruthy();
   });
 
   test('should render the links', () => {
