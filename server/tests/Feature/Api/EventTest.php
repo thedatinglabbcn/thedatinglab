@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\Event;
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
+use Illuminate\Support\Facades\Hash;
 
 class EventTest extends TestCase
 {
@@ -51,13 +52,68 @@ class EventTest extends TestCase
 
             
             ->assertStatus(200);
-            // $this->assertDatabaseHas('event_user', [
-            //     'user_id' => $user->id,
-            //     'event_id' => $event->id,
-            // ]);
+            
             $this->assertTrue($event->confirmAttendance->contains($user));
 
 
 
     }
+
+    public function test_user_can_confirm_attendance_to_event(): void
+    {
+        $user = User::factory()->create([
+            'password' => Hash::make('123456789')
+        ]);
+
+        Sanctum::actingAs($user, ['*']);
+
+        $event = Event::factory()->create();
+
+        $response = $this->postJson("api/event/attendance/{$event->id}");
+
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'res' => true
+        ]);
+    }
+            public function test_user_can_get_attendees_for_event(): void
+            {
+                $user = User::factory()->create([
+                    'password' => Hash::make('123456789')
+                ]);
+
+                Sanctum::actingAs($user, ['*']);
+
+                $event = Event::factory()->create();
+
+                $attendees = $event->confirmAttendance->pluck('id')->toArray();
+
+                $response = $this->getJson("api/event/attendance/{$event->id}");
+
+                $response->assertStatus(200);
+                $response->assertJsonFragment([
+                    'attendees' => $attendees
+                ]);
+            }
+
+            public function test_user_can_get_events_for_user(): void
+            {
+                $user = User::factory()->create([
+                    'password' => Hash::make('123456789')
+                ]);
+
+                Sanctum::actingAs($user, ['*']);
+
+                $event = Event::factory()->create();
+
+                $event = $user->confirmAttendance->toArray();
+
+                $response = $this->getJson("api/event/user/{$user->id}");
+
+                $response->assertStatus(200);
+                $response->assertJsonFragment([
+                    'event' => $event
+                ]);
+            }
+
 }
