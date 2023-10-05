@@ -64,6 +64,8 @@ const RegistrationForm = () => {
         const { token } = res.data;
 
         localStorage.setItem('auth_token', token);
+        localStorage.setItem('profile_id', res.data.user.profile_id);
+        
 
         Swal.fire({
           title: 'Tu cuenta ha sido creada correctamente.',

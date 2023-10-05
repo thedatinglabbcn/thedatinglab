@@ -40,8 +40,23 @@
       scroll-snap-type: x mandatory;
       margin: 0;
       transition: transform 0.3s ease-in-out;
-      justify-content: center; /* Centrar horizontalmente */
     }
+    
+    .match-card-container {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      scroll-snap-align: start;
+    }
+    
+    .match-card {
+      padding: 1rem;
+      min-width: 300px; /* Ajustar según tus necesidades */
+      max-width: 80%; /* Ajustar según tus necesidades */
+      text-align: center;
+    }
+    
       
 .porcentage-match{
   color: var(--color-primary);
