@@ -90,6 +90,24 @@ DB_PASSWORD=contraseña
 
 ## Developers
 
-![Jeaneth Sánchez Núñez](https://avatars.githubusercontent.com/u/96080945?v=4) ![Rosa Rubio](https://avatars.githubusercontent.com/u/132340917?v=4) ![Denise Khurlopian](https://avatars.githubusercontent.com/u/129850727?v=4) ![Florencia Bordon](https://avatars.githubusercontent.com/u/131755081?v=4)
+<div style="display: flex; flex-direction:row; align-items:center; justify-content: space-around;">
+  <div align="center" >
+    <img src="https://avatars.githubusercontent.com/u/96080945?v=4" width="100"style="border-radius: 50%"/><br>
+    <sub>Jeaneth Sánchez Núñez</sub>
+  </div>
 
-**Jeaneth Sánchez Núñez** **Rosa Rubio** **Denise Khurlopian** **Florencia Bordon**
+  <div align="center" >
+    <img src="https://avatars.githubusercontent.com/u/132340917?v=4" width="100" style="border-radius: 50%"/><br>
+    <sub>Rosa Rubio</sub>
+  </div>
+
+  <div align="center">
+    <img src="https://avatars.githubusercontent.com/u/129850727?v=4" width="100" style="border-radius: 50%"/><br>
+    <sub>Denise Khurlopian</sub>
+  </div>
+
+  <div align="center">
+    <img src="https://avatars.githubusercontent.com/u/131755081?v=4" width="100" style="border-radius: 50%"/><br>
+    <sub>Florencia Bordon</sub>
+  </div>
+</div>
