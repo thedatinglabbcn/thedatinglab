@@ -90,14 +90,14 @@ DB_PASSWORD=contraseña
 
 ## Developers
 
-<div style="display: flex; justify-content: space-around;">
+<div style="display: flex; flex-direction:row; align-items:center; justify-content: space-around;">
   <div align="center" >
     <img src="https://avatars.githubusercontent.com/u/96080945?v=4" width="100"style="border-radius: 50%"/><br>
     <sub>Jeaneth Sánchez Núñez</sub>
   </div>
 
   <div align="center" >
-    <img src="https://avatars.githubusercontent.com/u/977203?v=4" width="100" style="border-radius: 50%"/><br>
+    <img src="https://avatars.githubusercontent.com/u/132340917?v=4" width="100" style="border-radius: 50%"/><br>
     <sub>Rosa Rubio</sub>
   </div>
 
