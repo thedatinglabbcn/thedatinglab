@@ -7,14 +7,6 @@
   font-weight: 900;
 }
 
-.admin-footer{
-  background-color: var(--color-secondary);
-  position: fixed;
-  bottom: 0;
-  height: 60px;
-  width: 100%;
-}
-
 .admin-nav{
     background-color: var(--color-secondary);
     position: fixed;
@@ -26,6 +18,18 @@
     padding: 1rem;
     font-weight: 900;
 }
+
+.admin-footer{
+  background-color: var(--color-secondary);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  width: 100%;
+
+}
+
 
 .new-event{
     display: flex;
@@ -155,3 +159,5 @@ margin-left: 1rem;
     color: #797878;
     font-size: 1.5rem;
    }
+
+   

@@ -14,7 +14,8 @@ import AdminLoginPage from '../pages/admin/AdminLoginPage';
 import EventsPage from '../pages/events/EventsPage';
 import EventDetail from '../pages/events/EventDetail';
 import PaymentPage from '../pages/payment/PaymentPage';
-import { PrivateRoutes } from '../utils/PrivateRoutes'
+import { PrivateRoutes } from '../utils/PrivateRoutes';
+import PrivateAdminRoutes from '../utils/PrivateAdminRoutes';
 import Faqs from '../pages/faqs/Faqs';
 
 
@@ -49,19 +50,19 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard/create',
-    element: <CreateForm />
+    element: <PrivateAdminRoutes><CreateForm /></PrivateAdminRoutes>
   },
   {
     path: '/dashboard/edit/:eventId',
-    element: <EditForm />
+    element: <PrivateAdminRoutes><EditForm /></PrivateAdminRoutes>
   },
   {
     path: '/dashboard',
-    element: <Dashboard />
+    element: <PrivateAdminRoutes><Dashboard /></PrivateAdminRoutes>
   },
   {
     path: '/dashboard/events',
-    element: <DashboardEvents />
+    element: <PrivateAdminRoutes><DashboardEvents /></PrivateAdminRoutes>
   },
   {
     path: '/admin-login',

@@ -3,8 +3,6 @@ import './MatchCard.css';
 import Navbar from '../navbar/Navbar';
 import { MatchingService } from '../../service/MatchingService';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import NavbarLogin from '../navbar/NavbarLogin';
 
 function MatchCard() {
@@ -36,19 +34,8 @@ function MatchCard() {
     }
   };
 
-  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= 0);
-
-  const navigateToPreviousMatch = () => {
-    if (currentMatchIndex > 0) {
-      setCurrentMatchIndex(currentMatchIndex - 1);
-    }
-  };
-
-  const navigateToNextMatch = () => {
-    if (currentMatchIndex < filteredMatches.length - 1) {
-      setCurrentMatchIndex(currentMatchIndex + 1);
-    }
-  };
+  const minMatchPercentage = 70;
+  const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= minMatchPercentage);
 
   const calculateAge = (birthdate) => {
     const birthDate = new Date(birthdate);
@@ -72,11 +59,7 @@ function MatchCard() {
             </div>
           ) : (
             <div className="match-carousel-container">
-              <FontAwesomeIcon
-                icon={faArrowLeft}
-                className="arrow-icon-left"
-                onClick={navigateToPreviousMatch}
-              />
+            
               <div className="match-carousel">
                 {filteredMatches.map((user) => (
                   <div className="match-card" key={user.id}>
@@ -91,16 +74,12 @@ function MatchCard() {
                   </div>
                 ))}
               </div>
-              <FontAwesomeIcon
-                icon={faArrowRight}
-                className="arrow-icon-right"
-                onClick={navigateToNextMatch}
-              />
+             
             </div>
           )}
         </center>
       </div>
-    
+      <p className='swipe-text'>Desliza a la derecha para ver más matches</p>
    <NavbarLogin/>
     </div>
   );

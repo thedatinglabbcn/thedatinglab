@@ -64,7 +64,9 @@ function EditForm() {
   };
 
   return (
+    
     <div className='container'>
+      
       <h2 className='form-title'>Editar Evento</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
@@ -133,11 +135,14 @@ function EditForm() {
             </center>
             </div>
           )}
+          <div className='form-buttons'>
         <button className='button-send' type="submit">Aceptar</button>
         <Link to="/dashboard/events">
         <button className='button-cancel' type="submit">Cancelar</button>
         </Link>
+        </div>
       </form>
+      <div className='admin-footer'></div>
     </div>
   );
 }

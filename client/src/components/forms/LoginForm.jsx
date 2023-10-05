@@ -34,8 +34,12 @@ const LoginForm = () => {
       e.preventDefault();
       auth.login(formData).then(res => {
         const { token } = res.data;
+        
+       
         localStorage.setItem('auth_token', token);
         localStorage.setItem('profile_id', res.data.user.profile_id);
+        console.log(res.data.user);
+        
         
 
         Swal.fire({

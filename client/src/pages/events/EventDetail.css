@@ -3,6 +3,16 @@
     gap: 2rem;
     padding: 2rem;
 }
+.attendee-container{
+    width: 100%;
+    gap: 2rem;
+    padding: 1rem 0 0 2rem;
+    margin-bottom: 8rem;
+}
+
+.event-attendees{
+    padding: 0 2rem;
+}
 
 .detail-img-top{
     width: 100%;
@@ -24,16 +34,41 @@
 }
 
 .detail-location{
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 500;
     margin-bottom: 1.5rem;
 }
+
 
 .attendee-info img{
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
-    margin-right: 1rem;
+ 
 }
 
+.attendee-preview {
+    display: flex;
+    flex-wrap: wrap; /* Esto permite que los elementos pasen a la siguiente línea si no hay espacio */
+    gap: 1rem; /* Esto añade un espacio entre los elementos */
+  }
+
+  .attendee-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+  }
+
+  .attendee-image {
+    width: 100px; /* Ajusta según tus necesidades */
+    height: 100px; /* Ajusta según tus necesidades */
+    margin-bottom: 5px; /* Añade un pequeño espacio entre la imagen y el texto */
+  }
+  
+  .attendee-text {
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+  }
   

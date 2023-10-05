@@ -63,36 +63,43 @@ $user->save();
     } 
 
     public function login(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' =>'required'
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email',
+        'password' => 'required'
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'validation_errors' => $validator->messages(),
-            ], 422);
-        } else {    
+    if ($validator->fails()) {
+        return response()->json([
+            'validation_errors' => $validator->messages(),
+        ], 422);
+    }
 
-            $user = User::where('email', $request->email)->first();
-            if (!$user || !Hash::check($request->password, $user->password)) {
-                return response()->json([
-                    'msg' => 'Usuario o contraseña incorrectos'
-                ], 401);
-            }
+    $user = User::where('email', $request->email)->first();
 
-            $token = $user->createToken('auth_token')->plainTextToken;
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        return response()->json([
+            'msg' => 'Usuario o contraseña incorrectos'
+        ], 401);
+    }
 
-            $cookie = cookie('token', $token, 60 * 24);
+    $token = $user->createToken('auth_token')->plainTextToken;
 
-            return response()->json([
-                'msg' => 'Usuario conectado exitosamente',
-                'user' => $user,
-                'token' => $token
-            ], 200)->withCookie($cookie);
-        }
-    } 
+    $cookie = cookie('token', $token, 60 * 24);
+
+    // Verifica si el usuario tiene el rol "admin" antes de establecer 'isAdmin' => true
+    $isAdmin = $user->hasRole('admin');
+
+    return response()->json([
+        'msg' => 'Usuario conectado exitosamente',
+        'user' => [
+            'email' => $user->email,
+            'isAdmin' => $isAdmin,
+            'profile_id' => $user->profile_id,
+        ],
+        'token' => $token
+    ], 200)->withCookie($cookie);
+}
 
     public function logout(Request $request)
     {

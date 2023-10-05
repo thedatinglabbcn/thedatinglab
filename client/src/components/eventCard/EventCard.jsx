@@ -8,7 +8,7 @@ function EventCard({event}) {
 
   return (
     <div className="event-card" style={{ width: '15rem' }}>
-       <img className="card-img-top" src= {`http://localhost:8000/storage/${event.image}`} alt="sdsad" />
+       <img className="card-img-top" src= {`http://localhost:8000/storage/${event.image}`} alt={event.title} />
         <div className="card-body">
           <h5 className="card-title">{event.title}</h5>
           <div className="card-location">
