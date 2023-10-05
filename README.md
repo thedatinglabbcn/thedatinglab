@@ -91,7 +91,7 @@ DB_PASSWORD=contraseña
 ## Developers
 ## Autores
 
-| [<img src="https://avatars.githubusercontent.com/u/96080945?v=4" width=115><br><sub>Jeaneth Sánchez Núñez</sub>](https://github.com/jeanethsn) | [<img src="https://avatars.githubusercontent.com/u/977203?v=4" width=115><br><sub>Rosa Rubio</sub>](https://github.com/rosa-rubio) | [<img src="https://avatars.githubusercontent.com/u/132340917?v=4" width=115><br><sub>Denise Khurlopian</sub>](https://github.com/dkhurlop) | [<img src="https://avatars.githubusercontent.com/u/129850727?v=4" width=115><br><sub>Florencia Bordon</sub>](https://github.com/florienborg)
+| [<img src="https://avatars.githubusercontent.com/u/96080945?v=4" width=115><br><sub>Jeaneth Sánchez Núñez</sub>](https://github.com/jeanethsn) | [<img src="https://avatars.githubusercontent.com/u/132340917?v=4" width=115><br><sub>Rosa Rubio</sub>](https://github.com/rosa-rubio) | [<img src="https://avatars.githubusercontent.com/u/129850727?v=4" width=115><br><sub>Denise Khurlopian</sub>](https://github.com/dkhurlop) | [<img src="https://avatars.githubusercontent.com/u/131755081?v=4" width=115><br><sub>Florencia Bordon</sub>](https://github.com/florienborg)
 | :---: | :---: | :---: | :---: |
 
 
