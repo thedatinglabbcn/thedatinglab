@@ -93,25 +93,32 @@ DB_PASSWORD=contraseña
 <div style="display: flex; flex-direction:row; align-items:center; justify-content: space-around;">
 
 
-  <a href="https://github.com/jeanethsn">
-    <img src="https://avatars.githubusercontent.com/u/96080945?v=4" width="100"style="border-radius: 50%"/><br>
-    <sub>Jeaneth Sánchez Núñez</sub>
+<div align="center" style="display: flex; justify-content: space-around;">
+  <div align="center" style="margin-right: 10px;">
+    <a href="https://github.com/jeanethsn">
+      <img src="https://avatars.githubusercontent.com/u/96080945?v=4" width="100" style="border-radius: 50%"/><br>
+      <sub>Jeaneth Sánchez Núñez</sub>
     </a>
+  </div>
 
-   <a href="https://github.com/rosa-rubio">
-    <img src="https://avatars.githubusercontent.com/u/132340917?v=4" width="100" style="border-radius: 50%"/><br>
-    <sub>Rosa Rubio</sub>
-     </a>
-  
- 
-   <a href="https://github.com/dkhurlop">
-    <img src="https://avatars.githubusercontent.com/u/129850727?v=4" width="100" style="border-radius: 50%"/><br>
-    <sub>Denise Khurlopian</sub>
+  <div align="center" style="margin-right: 10px;">
+    <a href="https://github.com/rosa-rubio">
+      <img src="https://avatars.githubusercontent.com/u/132340917?v=4" width="100" style="border-radius: 50%"/><br>
+      <sub>Rosa Rubio</sub>
     </a>
-  
+  </div>
 
-  
-   <a href="https://github.com/florienborg">
-    <img src="https://avatars.githubusercontent.com/u/131755081?v=4" width="100" style="border-radius: 50%"/><br>
-    <sub>Florencia Bordon</sub>
+  <div align="center" style="margin-right: 10px;">
+    <a href="https://github.com/dkhurlop">
+      <img src="https://avatars.githubusercontent.com/u/129850727?v=4" width="100" style="border-radius: 50%"/><br>
+      <sub>Denise Khurlopian</sub>
     </a>
+  </div>
+
+  <div align="center">
+    <a href="https://github.com/florienborg">
+      <img src="https://avatars.githubusercontent.com/u/131755081?v=4" width="100" style="border-radius: 50%"/><br>
+      <sub>Florencia Bordon</sub>
+    </a>
+  </div>
+</div>
