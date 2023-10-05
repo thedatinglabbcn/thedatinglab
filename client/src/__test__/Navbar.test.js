@@ -33,17 +33,44 @@ jest.mock('react-router-dom', () => {
     useNavigate: jest.fn(),
   };
 });
-// test('should navigate to Register when is clicked', () => {
-//   const navigate = jest.fn();
-//   useNavigate.mockImplementation(() => navigate);
-//   const { getByText } = render(
-//     <Router>
-//       <Navbar />
-//     </Router>
-//   );
-//   fireEvent.click(getByText('Registrarse'));
-//   expect(navigate).toHaveBeenCalledWith('/register');
-// });
+
+test('should navigate to Register when is clicked', () => {
+  const navigate = jest.fn();
+  useNavigate.mockImplementation(() => navigate);
+  const { getByText } = render(
+    <Router>
+      <Navbar />
+    </Router>
+  );
+  fireEvent.click(getByText('Registrarse'));
+  expect(window.location.pathname).toBe('/register');
+});
+
+test('should navigate to Login when is clicked', () => {
+  const navigate = jest.fn();
+  useNavigate.mockImplementation(() => navigate);
+  const { getByText } = render(
+    <Router>
+      <Navbar />
+    </Router>
+  );
+  fireEvent.click(getByText('Iniciar sesión'));
+  expect(window.location.pathname).toBe('/login');
+});
+
+test('should navigate to faqs when is clicked', () => {
+  const navigate = jest.fn();
+  useNavigate.mockImplementation(() => navigate);
+  const { getByText } = render(
+    <Router>
+      <Navbar />
+    </Router>
+  );
+  fireEvent.click(getByText('Preguntas frecuentes'));
+  expect(window.location.pathname).toBe('/faqs');
+});
+
+
 test('should navigate to home page when logo is clicked', () => {
   const { getByAltText } = render(
     <Router>
