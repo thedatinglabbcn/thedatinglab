@@ -1,4 +1,8 @@
-# The Dating Lab
+<div align="center">
+  <img src="client/src/assets/images/logo-dating-lab.svg" alt="Logo del proyecto" width="200"/>
+</div>
+
+
 En el bootcamp de fullstack que estamos realizando en FemCoders , se nos brindó la oportunidad de trabajar en un emocionante proyecto junto a un cliente real. Nuestra misión es desarrollar una plataforma web que permitiera a las personas conectarse a través de sus sentidos, explorar eventos y descubrir afinidades compartidas.
 
 ## Sobre este proyecto
@@ -85,6 +89,23 @@ DB_PASSWORD=contraseña
 `http://localhost:3000`
 
 ## Developers
-[<sub>Jeaneth Sánchez Núñez</sub>](https://github.com/jeanethsn) |   [<img src="https://avatars.githubusercontent.com/u/977203?v=4" width=100><br><sub>Rosa Rubio</sub>](https://github.com/rosa-rubio) |  [<img src="https://avatars.githubusercontent.com/u/132340917?v=4" width=100><br><sub>Denise Khurlopian</sub>](https://github.com/dkhurlop) | [<img src="https://avatars.githubusercontent.com/u/129850727?v=4" width=100><br><sub>Florencia Bordon</sub>](https://github.com/florienborg)| [<img src="https://avatars.githubusercontent.com/u/131755081?v=4" width=100><br><sub>Neema </sub>]()|<img src=""><br>
+<div align="center" border-radius="50%">
+  <img src="https://avatars.githubusercontent.com/u/96080945?v=4" width="100"/><br>
+  <sub>Jeaneth Sánchez Núñez</sub>
+</div>
 
-| :---: | :---: | :---: | :---: | :---: | :---: | 
+<div align="center" border-radius="50%">
+  <img src="https://avatars.githubusercontent.com/u/977203?v=4" width="100"/><br>
+  <sub>Rosa Rubio</sub>
+</div>
+
+<div align="center" border-radius="50%">
+  <img src="https://avatars.githubusercontent.com/u/132340917?v=4" width="100"/><br>
+  <sub>Denise Khurlopian</sub>
+</div>
+
+<div align="center" border-radius="50%">
+  <img src="https://avatars.githubusercontent.com/u/129850727?v=4" width="100"/><br>
+  <sub>Florencia Bordon</sub>
+</div>
+
