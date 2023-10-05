@@ -1,4 +1,4 @@
-<div align="center" style="margin-bottom: 1rem">
+<div align="center" style="margin-bottom: 20px">
   <img src="client/src/assets/images/logo-dating-lab-readme.svg" alt="Logo del proyecto" width="100%"/>
 </div>
 
@@ -91,23 +91,23 @@ DB_PASSWORD=contraseña
 ## Developers
 
 <div style="display: flex; justify-content: space-around;">
-  <div align="center" style="border-radius: 50%;">
-    <img src="https://avatars.githubusercontent.com/u/96080945?v=4" width="100"/><br>
+  <div align="center" >
+    <img src="https://avatars.githubusercontent.com/u/96080945?v=4" width="100"style="border-radius: 50%; /><br>
     <sub>Jeaneth Sánchez Núñez</sub>
   </div>
 
-  <div align="center" style="border-radius: 50%;">
-    <img src="https://avatars.githubusercontent.com/u/977203?v=4" width="100"/><br>
+  <div align="center" >
+    <img src="https://avatars.githubusercontent.com/u/977203?v=4" width="100" style="border-radius: 50%;/><br>
     <sub>Rosa Rubio</sub>
   </div>
 
-  <div align="center" style="border-radius: 50%;">
-    <img src="https://avatars.githubusercontent.com/u/132340917?v=4" width="100"/><br>
+  <div align="center">
+    <img src="https://avatars.githubusercontent.com/u/132340917?v=4" width="100" style="border-radius: 50%;/><br>
     <sub>Denise Khurlopian</sub>
   </div>
 
-  <div align="center" style="border-radius: 50%;">
-    <img src="https://avatars.githubusercontent.com/u/129850727?v=4" width="100"/><br>
+  <div align="center">
+    <img src="https://avatars.githubusercontent.com/u/129850727?v=4" width="100" style="border-radius: 50%;/><br>
     <sub>Florencia Bordon</sub>
   </div>
 </div>
