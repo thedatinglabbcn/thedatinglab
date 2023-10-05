@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../../components/navbar/Navbar';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
 import './Faqs.css';
+import Footer from '../../components/footer/Footer';
 
 function Faqs() {
   return (
@@ -57,6 +58,7 @@ function Faqs() {
         </div>
 
       </div>
+      <Footer/>
         <NavbarLogin/>
     </div>
   )
