@@ -35,9 +35,10 @@ const LoginForm = () => {
       auth.login(formData).then(res => {
         const { token } = res.data;
         
-        console.log(res.data);
+       
         localStorage.setItem('auth_token', token);
-        localStorage.getItem('profile_id', res.data.user.profile_id);
+        localStorage.setItem('profile_id', res.data.user.profile_id);
+        console.log(res.data.user);
         
         
 
