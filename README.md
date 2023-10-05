@@ -92,9 +92,12 @@ DB_PASSWORD=contraseña
 
 <div style="display: flex; flex-direction:row; align-items:center; justify-content: space-around;">
   <div align="center" >
+  <a href="https://github.com/jeanethsn">
     <img src="https://avatars.githubusercontent.com/u/96080945?v=4" width="100"style="border-radius: 50%"/><br>
     <sub>Jeaneth Sánchez Núñez</sub>
+    </a>
   </div>
+
 
   <div align="center" >
     <img src="https://avatars.githubusercontent.com/u/132340917?v=4" width="100" style="border-radius: 50%"/><br>
