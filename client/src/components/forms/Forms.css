@@ -77,7 +77,7 @@ background-color: var(--color-beige);
 
 }
 .edit-profile-container{
-  padding: 0;
+  padding: 2rem;
   margin-bottom: 7rem;
 }
 .error-message {

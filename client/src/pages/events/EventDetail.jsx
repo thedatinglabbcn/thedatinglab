@@ -73,16 +73,19 @@ function EventDetail() {
           <div className="attendee-container">
             <h5>Asistentes:</h5>
             <div className="attendee-preview">
-              {attendees.map((attendee) => (
-                <div key={attendee.id} className="attendee-info">
-                  <img
+            {attendees && attendees.length > 0 ? (
+                attendees.map((attendee) => (
+                  <div key={attendee.id} className="attendee-info">
+                    <img
                     src={`http://localhost:8000/storage/${attendee?.profile?.image}`}
                     alt={attendee.name}
                     className="attendee-image"
-                  />
-                  <span className="attendee-text">{attendee.name}</span>
-                </div>
-              ))}
+                    />
+                    <span className="attendee-text">{attendee.name}</span>
+                  </div>
+              ))
+            ):(
+              <p className='card-text'>Todavía no hay asistentes a este evento.</p>)}
             </div>
 
           </div>

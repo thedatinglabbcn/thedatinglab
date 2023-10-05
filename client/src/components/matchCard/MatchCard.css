@@ -34,28 +34,34 @@
     /* Slider */
 
     .match-carousel {
+      
       width: 100%;
       display: flex;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      margin: 0;
+      margin: 0 3rem;
       transition: transform 0.3s ease-in-out;
-    }
+}
     
-    .match-card-container {
-      flex: 0 0 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+.porcentage-match{
+color: var(--color-primary);
+font-size: 1.4rem;
+font-weight: 700;
+margin: 1rem 0;
+}
+.match-card {
+     flex: 0 0 auto;
+      padding: 1rem;
       scroll-snap-align: start;
     }
+
+.matches-text{
+color: var(--color-primary);
+font-weight: 700px;
+font-size: 1.5rem;
+padding: 0;
+}
     
-    .match-card {
-      padding: 1rem;
-      min-width: 300px; /* Ajustar según tus necesidades */
-      max-width: 80%; /* Ajustar según tus necesidades */
-      text-align: center;
-    }
     
       
 .porcentage-match{
