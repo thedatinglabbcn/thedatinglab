@@ -37,7 +37,7 @@ test('should render event card with different data', () => {
   );
 
   expect(getByText('Different Event')).toBeInTheDocument();
-  expect(getByAltText('Different Event')).toBeInTheDocument(); // Corregir el atributo alt
+  expect(getByAltText('Different Event')).toBeInTheDocument();
   expect(getByText('Barcelona')).toBeInTheDocument();
   expect(getByText('Más Detalles')).toBeInTheDocument();
 });
