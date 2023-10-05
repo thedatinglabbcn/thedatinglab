@@ -8,6 +8,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginForm from '../components/forms/LoginForm';
 import HomePage from '../pages/home/HomePage';
+import RegForm from '../components/forms/RegForm';
 
 test('should login successfully and generate a token', async () => {
   const { getByLabelText, getByText } = render(
@@ -44,4 +45,19 @@ test('should redirect to home on Cancel button click', () => {
 
   const homePageText = getByText('¿Te apuntas?');
   expect(homePageText).toBeInTheDocument();
+});
+
+test('should redirect to register on "¿No tienes una cuenta? Regístrate" link click', () => {
+  const { getByText } = render(
+    <Router>
+      <LoginForm />
+      <RegForm />
+    </Router>
+  );
+
+  const registerLink = getByText('Regístrate');
+  fireEvent.click(registerLink);
+
+  const registerPageText = getByText('Acepto ser mayor de 18 años');
+  expect(registerPageText).toBeInTheDocument();
 });

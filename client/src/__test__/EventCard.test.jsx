@@ -18,7 +18,7 @@ test('should render event card with correct data', () => {
   );
 
   expect(getByText('Sample Event')).toBeInTheDocument();
-  expect(getByAltText('Sample Event')).toBeInTheDocument(); // Corregir el atributo alt
+  expect(getByAltText('Sample Event')).toBeInTheDocument();
   expect(getByText('Barcelona')).toBeInTheDocument();
   expect(getByText('Más Detalles')).toBeInTheDocument();
 });
