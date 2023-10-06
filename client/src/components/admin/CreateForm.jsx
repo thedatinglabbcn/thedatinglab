@@ -59,6 +59,11 @@ function CreateForm() {
           title: '¡Creación exitosa!',
           text: 'Tu evento ha sido creado correctamente.',
           icon: 'success',
+          confirmButtonColor: '#18b485',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
         });
 
         console.log('Evento creado exitosamente');

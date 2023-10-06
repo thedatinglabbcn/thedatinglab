@@ -22,7 +22,12 @@ function PaymentPage() {
           title: 'Solicitud exitosa! Ahora debes hacer una transferencia de pago a este numero: xxxx, y te llegara un comprobante, para que tu asistencia sea confirmada.',
           text: response.data.message,
           icon: 'success',
-          confirmButtonText: 'Ok'
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#18b485',
+          customClass: {
+            popup: 'custom-swal-background',
+            confirmButton: 'custom-swal-button',
+          }
         });
         
         navigate(`/event`);
@@ -33,7 +38,13 @@ function PaymentPage() {
             title: 'Error!',
             text: 'Ya estas registrado en este evento',
             icon: 'error',
-            confirmButtonText: 'Ok'
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#18b485',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
+            
           });
         } else {
           console.error(error);

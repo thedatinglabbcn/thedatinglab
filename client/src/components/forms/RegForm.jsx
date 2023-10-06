@@ -190,11 +190,11 @@ const RegistrationForm = () => {
             )}
           </div>
           <div className='form-buttons'>
-            <button type='submit' className='button-send'>
-              Enviar
-            </button>
             <button type='button' className='button-cancel' onClick={() => navigate('/')}>
               Cancelar
+            </button>
+            <button type='submit' className='button-send'>
+              Enviar
             </button>
           </div>
         </form>

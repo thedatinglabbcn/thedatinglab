@@ -39,6 +39,11 @@ const LoginForm = () => {
             title: '¡Inicio de sesión exitoso!',
             text: '¡Bienvenido!',
             icon: 'success',
+            confirmButtonColor: '#18b485',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
           }).then(() => {
             navigate('/dashboard');
           });

@@ -89,7 +89,7 @@ function ProfileForm() {
     setValidationErrors({});
   };
 
-  const handleImageConfirmation = (e) => { // Añade (e) como argumento
+  const handleImageConfirmation = (e) => { 
     Swal.fire({
       title: '¿Te gusta esta imagen de perfil?',
       text: 'Una vez confirmada, no podrás cambiarla hasta después.',
@@ -101,8 +101,7 @@ function ProfileForm() {
       cancelButtonText: 'No, cambiar',
     }).then((result) => {
       if (result.isConfirmed) {
-        // El usuario confirmó su imagen de perfil, ahora puedes continuar con el envío del formulario.
-        handleSubmit(e); // Pasa (e) como argumento para evitar errores.
+        handleSubmit(e); 
       }
     });
   };

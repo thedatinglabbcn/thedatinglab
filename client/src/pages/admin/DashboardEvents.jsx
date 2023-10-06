@@ -3,12 +3,13 @@ import './Dashboard.css';
 import '../../components/admin/Events.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faHome, faFilePen, faTrash } from '@fortawesome/free-solid-svg-icons'; // Agrega los iconos faltantes
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
 import Swal from 'sweetalert2';
 
 function DashboardEvents() {
   const [events, setEvents] = useState([]);
+  const navigate =  useNavigate();
 
   useEffect(() => {
     EventService.getAllEvents()
@@ -30,7 +31,7 @@ function DashboardEvents() {
       console.error('Error al eliminar evento:', error);
     }
   };
-
+  
   const handleDeleteClick = (eventId) => {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -41,10 +42,16 @@ function DashboardEvents() {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#18b485',
+      cancelButtonColor: '#E94445',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
     }).then((result) => {
       if (result.isConfirmed) {
-        handleDeleteEvent(eventId); // Llama a la función para eliminar el evento
-        Swal.fire('Eliminado', 'El evento ha sido eliminado con éxito', 'success');
+        handleDeleteEvent(eventId);
+        navigate('/dashboard/events');
       }
     });
   };
