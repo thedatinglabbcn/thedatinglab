@@ -38,6 +38,7 @@ const LoginForm = () => {
        
         localStorage.setItem('auth_token', token);
         localStorage.setItem('profile_id', res.data.user.profile_id);
+        localStorage.setItem('id', res.data.user.id);
         console.log(res.data.user);
         
         
@@ -118,10 +119,10 @@ const LoginForm = () => {
             )}
           </div>
           <div className='form-buttons'> 
+          <button type="button" className="button-cancel"  onClick={() => navigate('/')}>Cancelar</button>
           <button type="submit" className="button-send">
             Ingresar
           </button>
-          <button type="button" className="button-cancel"  onClick={() => navigate('/')}>Cancelar</button>
           </div>
         </form>
         

@@ -26,7 +26,6 @@ class AttendancesController extends Controller
     }
     public function eventAttendees($id)
     {
-        $user = Auth::user();
 
         $event = Event::find($id);
 

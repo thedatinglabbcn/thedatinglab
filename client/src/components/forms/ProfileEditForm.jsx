@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { ProfileService } from '../../service/ProfileService';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function ProfileEditForm({ profile, id, setIsEditing }) {
   
@@ -77,7 +77,7 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
   return (
     <div className='body-login'>
       <div className="edit-profile-container">
-        <p className="">
+        <p className="profile-texts">
           Edita tus datos:.
         </p>
         <form onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
@@ -143,11 +143,12 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
             )}
           </div>
           <div className='form-buttons'>
-            <button type="submit" className="button-send">
-              Enviar
-            </button>
+           
             <button type="button" className="button-cancel" onClick={() => setIsEditing(false)}>
               Cancelar
+            </button>
+            <button type="submit" className="button-send">
+              Enviar
             </button>
           </div>
         </form>

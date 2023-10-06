@@ -14,21 +14,21 @@
 .home-title {
     font-size: 2.4rem;
     font-weight: 700;
-    color: white;
+    color:var(--color-white);
     margin-bottom: 2rem;
 }
 
 p {
     font-size: 1.5rem;
     font-weight: 500;
-    color: white;
+    color: var(--color-white);
     padding-right: 2rem;
     margin-bottom: 2rem;
  
 }
 .button-start{
     background-color: var(--color-primary);
-    color: white;
+    color: var(--color-white);
     border-radius: 0.5rem;
     border: none;
     padding: 0.5rem 2rem;
@@ -40,7 +40,7 @@ p {
 }
 
 .button-start:hover {
-    background-color: #cc0044;
+    background-color: var(--color-buttoncancel);
   
 }
 
@@ -84,7 +84,7 @@ li {
 }
 .swipe-text{
     color: var(--color-primary);
-    margin-bottom: 8rem;
+    margin-bottom: 3rem;
     text-align: center;
     padding: 0 4rem;
     font-size: 1.2rem;

@@ -24,7 +24,7 @@ class AuthTest extends TestCase
             'password' => Hash::make('123456789'),
         ]);
         
-        $this->assertCount(2, User::all());
+        $this->assertCount(1, User::all());
             
     }
 

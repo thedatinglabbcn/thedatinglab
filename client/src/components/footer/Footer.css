@@ -3,18 +3,22 @@
 .footer {
     background-color: var(--color-text);
     color: var(--color-primary);
-    padding-top: 3rem 0;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
 }
 
 .footer-logo{
     text-align: center;
-    padding: 2rem 0 1rem;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    padding-right: 0;
 }
 
 .footer-links{
     display: flex;
     justify-content: center;
-    padding-bottom: 3rem;
+    margin:1.2rem 0 3rem 0;
     gap: 2rem;
     width: 100%;
 }

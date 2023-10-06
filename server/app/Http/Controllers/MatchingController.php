@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Preference;
-use App\Models\Profile;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
 class MatchingController extends Controller
@@ -17,30 +12,11 @@ class MatchingController extends Controller
         try {
             $user = Auth::user();
 
+            $userPreference = $user->preference; 
+
             if (!$user->preference) {
                 return response()->json(['type' => 'preferences'], 404);
             }
-
-            $userPreference = $user->preference; 
-
-            $userGender = $userPreference->gender;
-            $userLooksFor = $userPreference->looksFor;
-            $userAgeRange = $userPreference->ageRange;
-            
-            $weights = [
-                'gender' => 0,
-                'looksFor' => 0,
-                'birthdate' => 0,
-                'ageRange' => 0,
-                'hasChildren' => 0,
-                'datesParents' => 2,
-                'wantsFamily' => 2,
-                'sexoAffective' => 2,
-                'heartState' => 1,
-                'preferences1' => 1,
-                'preferences2' => 0.5,
-                'catsDogs' => 0.5,
-            ];
 
             $matches = User::findMatchesForUser($user);
 
@@ -49,6 +25,8 @@ class MatchingController extends Controller
             if ($matches->isEmpty()) {
                 return response()->json(['type' => 'matches'], 404);
             }
+
+            $weights = json_decode(file_get_contents(resource_path('config/weights.json')), true);
 
             foreach ($matches as $match) {
                 $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreference, $match->preference, $weights));
@@ -69,25 +47,36 @@ class MatchingController extends Controller
         }
     }
 
-    private function getPreferenceFields($userPreference)
-    {
-        // Obtén dinámicamente la lista de campos de preferencias disponibles
-        $fields = array_keys($userPreference->getAttributes());
+    private function getExcludedFields($weights)
+{
+    $excludedFields = [];
 
-        // Elimina los campos que no quieres incluir en el cálculo
-        $fieldsToExclude = ['id', 'created_at', 'updated_at', 'gender', 'looksFor', 'birthdate', 'ageRange', 'hasChildren', 'datesParents'];
-        $fields = array_diff($fields, $fieldsToExclude);
-
-        return $fields;
+    foreach ($weights as $field => $weight) {
+        if ($weight === 0) {
+            $excludedFields[] = $field;
+        }
     }
 
-    private function calculateMatchingPercentage($userPreference, $matchPreference, $weights)
+    $excludedFields = array_merge($excludedFields, ['id', 'created_at', 'updated_at']);
+
+    return $excludedFields;
+}
+
+private function getPreferenceFields($userPreference, $weights)
 {
-    // $totalFields = count($this->getPreferenceFields($userPreference));
+    $excludedFields = $this->getExcludedFields($weights);
+    $fields = array_keys($userPreference->getAttributes());
+
+    $fields = array_diff($fields, $excludedFields);
+
+    return $fields;
+}
+
+private function calculateMatchingPercentage($userPreference, $matchPreference, $weights)
+{
     $matchingFields = 0;
 
-
-    foreach ($this->getPreferenceFields($userPreference) as $field) {
+    foreach ($this->getPreferenceFields($userPreference, $weights) as $field) {
         if ($userPreference->$field === $matchPreference->$field) {
             $matchingFields += $weights[$field]; 
         }

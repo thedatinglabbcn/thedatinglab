@@ -13,8 +13,9 @@ function ProfilePage() {
   const [event, setEvent ] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
+  const user_id = localStorage.getItem('id');
 
-  useEffect(() => {
+    useEffect(() => {
       ProfileService().getProfile(id)
         .then(response => {
           console.log(response);
@@ -25,7 +26,7 @@ function ProfilePage() {
         .catch(error => {
           console.error(error);
         });
-        EventService.getEventForUser(id)
+        EventService.getEventForUser(user_id)
         .then((response) => {
           setEvent(response.data.event);
           console.log('Eventos:', response);

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { AuthService } from '../../service/AuthService';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -65,6 +65,7 @@ const RegistrationForm = () => {
 
         localStorage.setItem('auth_token', token);
         localStorage.setItem('profile_id', res.data.user.profile_id);
+        localStorage.setItem('id', res.data.user.id);
         
 
         Swal.fire({
@@ -189,11 +190,11 @@ const RegistrationForm = () => {
             )}
           </div>
           <div className='form-buttons'>
-            <button type='submit' className='button-send'>
-              Enviar
-            </button>
             <button type='button' className='button-cancel' onClick={() => navigate('/')}>
               Cancelar
+            </button>
+            <button type='submit' className='button-send'>
+              Enviar
             </button>
           </div>
         </form>

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import '../../components/forms/Forms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../forms/Forms.css';
+import Swal from 'sweetalert2';
 
 function EditForm() {
   const navigate = useNavigate();
@@ -51,6 +51,11 @@ function EditForm() {
             title: '¡Actualización exitosa!',
             text: 'La información del evento ha sido actualizada correctamente.',
             icon: 'success',
+            confirmButtonColor: '#18b485',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
           });
 
           navigate('/dashboard/events');

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
-import Swal from 'sweetalert2';
 import './EventDetail.css';
 import Navbar from '../../components/navbar/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import './../../components/eventCard/EventCard.css';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
+import Swal from 'sweetalert2';
 
 function EventDetail() {
   const navigate = useNavigate();
@@ -37,12 +37,18 @@ function EventDetail() {
   const handleAttendClick = () => {
     if (!token) {
       Swal.fire({
-        title: 'Debes iniciar sesión para asistir',
-        text: '¿Deseas iniciar sesión ahora?',
+        title: 'Debes registrarte para asistir',
+        text: '¿Deseas registrarte sesión ahora?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Sí, iniciar sesión',
+        confirmButtonText: 'Registrarme',
         cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#18b485',
+        cancelButtonColor: '#ED696B',
+        customClass: {
+          popup: 'custom-swal-background',
+          confirmButton: 'custom-swal-button',
+        }
       }).then((result) => {
         if (result.isConfirmed) {
          
@@ -73,16 +79,19 @@ function EventDetail() {
           <div className="attendee-container">
             <h5>Asistentes:</h5>
             <div className="attendee-preview">
-              {attendees.map((attendee) => (
-                <div key={attendee.id} className="attendee-info">
-                  <img
+            {attendees && attendees.length > 0 ? (
+                attendees.map((attendee) => (
+                  <div key={attendee.id} className="attendee-info">
+                    <img
                     src={`http://localhost:8000/storage/${attendee?.profile?.image}`}
                     alt={attendee.name}
                     className="attendee-image"
-                  />
-                  <span className="attendee-text">{attendee.name}</span>
-                </div>
-              ))}
+                    />
+                    <span className="attendee-text">{attendee.name}</span>
+                  </div>
+              ))
+            ):(
+              <p className='card-text'>Todavía no hay asistentes a este evento.</p>)}
             </div>
 
           </div>

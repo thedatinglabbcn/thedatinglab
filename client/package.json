@@ -15,12 +15,13 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
+    "sweetalert2": "^11.7.31",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(axios)/)'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "source-map-loader": "^4.0.1"
   }
 }

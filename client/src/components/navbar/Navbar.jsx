@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './Navbar.css';
-import Swal from 'sweetalert2';
 import { AuthService } from '../../service/AuthService';
 import Logo from '../../assets/images/logo-dating-lab.svg';
 import { useNavigate, Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +16,7 @@ const Navbar = () => {
     auth.logout().then(res => {
       localStorage.removeItem('auth_token');
       localStorage.removeItem('profile_id');
+      localStorage.removeItem('id');
       Swal.fire({
         title: '¡Sesión cerrada!',
         text: '¡Hasta pronto!',
@@ -45,7 +46,7 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <div><Link to="/"><img className='nav_logo' src={Logo} alt="Logo" /></Link></div>
+      <div><Link to="/"><img className='nav_logo' src={Logo} alt="The Dating Lab Logo" /></Link></div>
       <div className={`nav_items ${isOpen && "open"}`}>
         {isLoggedIn ? (
           <>

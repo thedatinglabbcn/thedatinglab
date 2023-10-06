@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Forms.css';
 import { PreferencesService } from '../../service/PreferencesService';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 const PreferencesForm = () => {
   const navigate = useNavigate();
@@ -38,7 +38,6 @@ const PreferencesForm = () => {
       [name]: value,
     });
 
-    // Validar el campo en tiempo real aquí
     if (name === 'birthdate') {
       const birthdate = value;
       const today = new Date();
@@ -53,13 +52,13 @@ const PreferencesForm = () => {
       } else {
         setValidationErrors({
           ...validationErrors,
-          [name]: '', // Limpiar el error si es válido
+          [name]: '',
         });
       }
     } else {
       setValidationErrors({
         ...validationErrors,
-        [name]: '', // Limpiar el error para otros campos
+        [name]: '', 
       });
     }
   };
@@ -109,7 +108,7 @@ const PreferencesForm = () => {
           const errors = err.response.data.validation_errors;
           setValidationErrors(errors);
         } else {
-          setGeneralError('¡Ha habido un error!'); // Mostrar el error general
+          setGeneralError('¡Ha habido un error!'); 
           Swal.fire({
             title: '¡Error!',
             text: '¡Ha habido un error!',

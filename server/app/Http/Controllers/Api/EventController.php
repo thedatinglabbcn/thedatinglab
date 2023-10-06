@@ -2,40 +2,35 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Event;
-use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Models\Role;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
-
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware('role:admin')->except('index', 'show' );
+        $this->middleware('role:admin')->except('index', 'show');
     }
-//    
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       $events = Event::all();
+        $events = Event::all();
         return response()->json($events);
     }
 
-    
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'date' => 'required|date',
             'time' => 'required|date_format:H:i:s',
@@ -43,16 +38,22 @@ class EventController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'validation_errors' => $validator->messages(),
+            ], 422);
+        }
+
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('storage', 'public');
+            $imagePath = $request->file('image')->store('uploads', 'public');
         }
 
         $event = Event::create([
-            'title' => $validatedData['title'],
-            'date' => $validatedData['date'],
-            'time' => $validatedData['time'],
-            'description' => $validatedData['description'],
+            'title' => $request->input('title'),
+            'date' => $request->input('date'),
+            'time' => $request->input('time'),
+            'description' => $request->input('description'),
             'image' => $imagePath,
         ]);
 
@@ -62,7 +63,6 @@ class EventController extends Controller
 
         return response()->json(['message' => 'Event created successfully', 'event' => $event]);
     }
-
 
     /**
      * Display the specified resource.
@@ -109,7 +109,4 @@ class EventController extends Controller
         $event->delete();
         return response()->json(['message' => 'Event deleted successfully']);
     }
-
-
 }
- 
