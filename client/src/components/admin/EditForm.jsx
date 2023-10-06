@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import '../../components/forms/Forms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../forms/Forms.css';
+import Swal from 'sweetalert2';
 
 function EditForm() {
   const navigate = useNavigate();
@@ -50,6 +51,11 @@ function EditForm() {
             title: '¡Actualización exitosa!',
             text: 'La información del evento ha sido actualizada correctamente.',
             icon: 'success',
+            confirmButtonColor: '#18b485',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
           });
 
           navigate('/dashboard/events');
@@ -63,7 +69,9 @@ function EditForm() {
   };
 
   return (
+    
     <div className='container'>
+      
       <h2 className='form-title'>Editar Evento</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
@@ -120,11 +128,26 @@ function EditForm() {
             onChange={handleFileChange}
           />
         </div>
+         {eventData.image && (
+            <div className="mb-4">
+            <label className="form-label-profile">Vista previa de la imagen de perfil</label>
+            <center>
+            <img
+            src={URL.createObjectURL(eventData.image)}
+              alt="Vista previa de la imagen de perfil"
+              className="rounded-circle "
+              />
+            </center>
+            </div>
+          )}
+          <div className='form-buttons'>
         <button className='button-send' type="submit">Aceptar</button>
         <Link to="/dashboard/events">
         <button className='button-cancel' type="submit">Cancelar</button>
         </Link>
+        </div>
       </form>
+      <div className='admin-footer'></div>
     </div>
   );
 }

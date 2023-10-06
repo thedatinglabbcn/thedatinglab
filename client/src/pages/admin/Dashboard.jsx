@@ -4,7 +4,7 @@ import './Dashboard.css';
 import '../../components/admin/Events.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faUser } from '@fortawesome/free-solid-svg-icons';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../service/AuthService';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,12 +27,14 @@ function Dashboard() {
 
   return (
     <>
-    <div className='admin-nav'>
-        <h1 className='dashboard-title'>Panel de Admin</h1>
-          <button className="logout-button" onClick={handleLogout}>
-            <FontAwesomeIcon icon={faSignOutAlt} />
-          </button>
-    </div>
+    <div className='admin-div'></div>
+    <div className='logout-container'>
+    <button className="logout-button" onClick={handleLogout}>
+           <FontAwesomeIcon icon={faArrowRightFromBracket} />
+         </button>
+      </div>
+    <h1 className='form-title'>Panel de Admin</h1>
+
     <div className='dashboard-container'>
     <button className='dashboard-buttons'>
         <Link className='dashboard-links' to="/dashboard/events">
@@ -47,6 +49,7 @@ function Dashboard() {
         </Link>
       </button>
     </div>
+    <div className='admin-footer'></div>
     </>
   )
 } 

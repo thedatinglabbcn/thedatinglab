@@ -30,10 +30,9 @@ class AddAdminUser extends Migration
 
         $adminUser = DB::table('users')->insertGetId([
             'name' => 'Admin',
-            'lastname' => 'Admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('onlyadmin1234'),
-            'image' => '',
+            'email_verified_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

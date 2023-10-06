@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import Events from "../../components/admin/Events";
 import './Dashboard.css';
 import '../../components/admin/Events.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { faPlus, faHome, faFilePen, faTrash } from '@fortawesome/free-solid-svg-icons'; // Agrega los iconos faltantes
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
-
+import Swal from 'sweetalert2';
 
 function DashboardEvents() {
   const [events, setEvents] = useState([]);
+  const navigate =  useNavigate();
 
   useEffect(() => {
     EventService.getAllEvents()
@@ -32,18 +31,40 @@ function DashboardEvents() {
       console.error('Error al eliminar evento:', error);
     }
   };
+  
+  const handleDeleteClick = (eventId) => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el evento permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#18b485',
+      cancelButtonColor: '#E94445',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteEvent(eventId);
+        navigate('/dashboard/events');
+      }
+    });
+  };
 
   return (
     <>
-      <div className='admin-nav'>
-        <h1>Panel de Admin</h1>
-      </div>
+      <div className='admin-div'></div>
       <div className='new-event'>
-      <Link to="/dashboard">
-        <button className="back-button">
-        <FontAwesomeIcon icon={faHome} />
-        </button>
-      </Link>
+        <Link to="/dashboard">
+          <button className="back-button">
+            <FontAwesomeIcon icon={faHome} />
+          </button>
+        </Link>
         <Link to="/dashboard/create">
           <button className="create-button">
             <FontAwesomeIcon icon={faPlus} />
@@ -53,17 +74,42 @@ function DashboardEvents() {
       <table className='dashboard-table'>
         <thead>
           <tr className='dashboard-row'>
-            <th>Id</th>
-            <th>Imagen</th>
-            <th>Título</th>
-            <th>Acciones</th>
+            <th className='dashboard-column-id'>Id</th>
+            <th className='dashboard-column-image'>Imagen</th>
+            <th className='dashboard-column'>Título</th>
+            <th className='dashboard-column'>Acciones</th>
           </tr>
+          
         </thead>
+        <tbody>
+          {events.map((event) => (
+            <tr className='dashboard-row' key={event.id}>
+              <td className='dashboard-column-id'>{event.id}</td>
+              <td className='dashboard-column-image'>
+                <img
+                  className="dashboard-image"
+                  src={`http://localhost:8000/storage/${event.image}`}
+                  alt={event.title}
+                />
+              </td>
+              <td className='dashboard-column'>{event.title}</td>
+              <td className='dashboard-column-buttons'>
+                <Link to={`/dashboard/edit/${event.id}`}>
+                  <button className="edit-button-icon">
+                    <FontAwesomeIcon icon={faFilePen} />
+                  </button>
+                </Link>
+                <button className="delete-button-icon" onClick={() => handleDeleteClick(event.id)}>
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              </td>
+            </tr>
+            
+          ))}
+        </tbody>
+        <hr className='dashboard-line'></hr>
       </table>
-
-      {events.map((event) => (
-        <Events key={event.id} event={event} onDelete={handleDeleteEvent} />
-      ))}
+      <div className='admin-footer'></div>
     </>
   );
 }

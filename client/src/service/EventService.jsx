@@ -1,7 +1,5 @@
 import axios from 'axios';
-
-axios.defaults.baseURL = 'http://localhost:8000/';
-axios.defaults.headers.post['Accept'] = 'application/json';
+import './axiosConfig'
 
 const urlEvents = '/api/event';
 const urlEventsAdmin = '/api/admin/event';
@@ -9,6 +7,10 @@ const urlEventsAdmin = '/api/admin/event';
 export const EventService = {
   getAllEvents: () => {
     return axios.get(urlEvents);
+  },
+
+  getEvent: (eventId) => {
+    return axios.get(`${urlEvents}/${eventId}`);
   },
 
   createEvent: (formData) => {
@@ -30,4 +32,17 @@ export const EventService = {
   destroyEvent: (eventId) => {
     return axios.delete(`${urlEventsAdmin}/${eventId}`);
   },
+
+  confirmAttendance: (eventId) => {
+    return axios.post(`${urlEvents}/attendance/${eventId}`);
+  },
+
+  getEventAttendees: (eventId) => {
+    return axios.get(`${urlEvents}/attendance/${eventId}`);
+  },
+
+  getEventForUser: (id) => {
+    return axios.get(`${urlEvents}/user/${id}`);
+  },
+
 };

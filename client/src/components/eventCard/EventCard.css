@@ -1,24 +1,24 @@
 
 .event-card {
     margin: 0 auto;
-    border: 2px solid var(--color-borders) !important;
-    background-color: var(--color-beige) !important;
-    width: 90% !important;
-    border-radius: 0.8rem !important;
-    margin-top: 2rem;
-    margin-bottom: 4rem;;
-}
-.card-body {
-    font-family: Nunito, sans-serif;
+    background-color:white !important;
+    width: 300px !important;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 0.8rem;
+    padding-bottom: 1rem;
 }
 
 .card-img-top {
     height: 10rem;
     object-fit: cover;
-    border-radius: 0.8rem 0.8rem 0 0;
-    margin-bottom: 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+    
 }
 
+.card-body{
+    padding: 1.8rem;
+}
 .card-date {
     color: var(--color-primary);
     font-weight: bold;
@@ -27,31 +27,37 @@
 }
 
 .card-title {
-    font-weight: 900;
+    font-weight: 700;
     font-size: 2rem;
+   
 }
 
 .card-text {
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: black;
+    padding: 0;
 }
 
 .card-location {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 1rem 0 3rem;
 }
 
 .location-icon {
     color: var(--color-primary);
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+    
 }
 
-.attend-button {
-    border-radius: 25px !important;
-    font-size: 1.3rem !important;
-    font-weight: bolder !important;
-    color: var(--color-beige) !important;
-    background-color: var(--color-submit) !important;
-    border:none !important;
-    margin: 2rem 0 2rem 0;
-    padding: 0.5rem 2rem;
+.detail-button {
+    background-color: var(--color-submit);
+    color: white;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
 }

@@ -23,9 +23,8 @@ class User extends Authenticatable
         'lastname',
         'email',
         'password',
-        'image',
-        // 'acceptsTerms',
-        // 'wantsInfo',
+        'preference_id',
+        'profile_id',
     ];
 
     /**
@@ -49,9 +48,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function preferences() {
-        return $this->hasMany(Preference::class);
-    }
     
+    public function profile() {
+    return $this->belongsTo(Profile::class, 'profile_id');
+}
+
+public function preference() {
+    return $this->belongsTo(Preference::class, 'preference_id');
+}
+
+public static function findMatchesForUser($user)
+    {
+        return self::whereHas('preference', function ($query) use ($user) {
+            $query->where('gender', $user->preference->looksFor)
+                ->where('looksFor', $user->preference->gender)
+                ->where('ageRange', $user->preference->ageRange);
+        })
+        ->where('id', '!=', $user->id)
+        ->get();
+    }
+
+    public function confirmAttendance()
+{
+    return $this->belongsToMany(Event::class);
+}
+
 }

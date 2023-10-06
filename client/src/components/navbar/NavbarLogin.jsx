@@ -1,0 +1,50 @@
+import React from 'react';
+import './NavbarLogin.css';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faCalendar, faUser, faHouse } from '@fortawesome/free-solid-svg-icons';
+
+const NavbarLogin = () => {
+  const location = useLocation();
+  const id = localStorage.getItem('profile_id')
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
+  const authToken = localStorage.getItem('auth_token');
+  const isLoggedIn = !!authToken;
+
+
+  if (!isLoggedIn) {
+    return null; 
+  }
+
+
+  return (
+    <div className="navbar-login">
+       <Link to="/">
+        <div className={`nav-icon ${isActive('/') ? 'active' : ''}`}>
+          <FontAwesomeIcon icon={faHouse} />
+        </div>
+      </Link>
+      <Link to="/matches">
+        <div className={`nav-icon ${isActive('/matches') ? 'active' : ''}`}>
+          <FontAwesomeIcon icon={faHeart} />
+        </div>
+      </Link>
+      <Link to="/event">
+        <div className={`nav-icon ${isActive('/event') ? 'active' : ''}`}>
+          <FontAwesomeIcon icon={faCalendar} />
+        </div>
+      </Link>
+      <Link to={`/profile/${id}`}>
+        <div className={`nav-icon ${isActive(`/profile/${id}`) ? 'active' : ''}`}>
+          <FontAwesomeIcon icon={faUser} />
+        </div>
+      </Link>
+    </div>
+  );
+};
+
+export default NavbarLogin;

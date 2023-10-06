@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../forms/Forms.css';
 import { AuthService } from '../../service/AuthService';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import Swal from 'sweetalert2';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -20,23 +21,40 @@ const LoginForm = () => {
       });
     };
   
+    const { login } = useAuth();
+
     const handleSubmit = (e) => {
       e.preventDefault();
-      auth.login(formData).then(res => {
-        const { token } = res.data;
-         
+      auth.login(formData).then((res) => {
+        const { token, user } = res.data;
+    
         localStorage.setItem('auth_token', token);
-        
-
-        Swal.fire({
-          title: '¡Inicio de sesión exitoso!',
-          text: '¡Bienvenido!',
-          icon: 'success',
-        })  .then(() => {
-          navigate('/dashboard');
-        });
-
-      }).catch(err => {
+    
+        const isAdmin = user.isAdmin;
+    
+        login(user.email);
+    
+        if (isAdmin) {
+          Swal.fire({
+            title: '¡Inicio de sesión exitoso!',
+            text: '¡Bienvenido!',
+            icon: 'success',
+            confirmButtonColor: '#18b485',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
+          }).then(() => {
+            navigate('/dashboard');
+          });
+        } else {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'No tienes permisos de administrador',
+            icon: 'error',
+          });
+        }
+      }).catch((err) => {
         Swal.fire({
           title: '¡Error!',
           text: '¡Usuario o contraseña incorrectos!',
@@ -44,6 +62,7 @@ const LoginForm = () => {
         });
       });
     };
+    
  
     return (
       <div className='body-login'>
