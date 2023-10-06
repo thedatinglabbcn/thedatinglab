@@ -2,9 +2,9 @@ import axios from 'axios';
 import './axiosConfig';
 
 export const AuthService = () => {
-    const urnSignin = 'api/register';
-    const urnLogin = 'api/login';
-    const urnLogout = 'api/logout';
+    const urnSignin = '/api/register';
+    const urnLogin = '/api/login';
+    const urnLogout = '/api/logout';
 
     const register = ($data) => {
        const res = axios.post(urnSignin, $data);
