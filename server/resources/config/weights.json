@@ -3,12 +3,12 @@
     "looksFor": 0,
     "birthdate": 0,
     "ageRange": 0,
-    "hasChildren": 0,
+    "hasChildren": 2,
     "datesParents": 2,
-    "wantsFamily": 2,
+    "wantsFamily": 1,
     "sexoAffective": 2,
-    "heartState": 1.5,
-    "preferences1": 1.5,
+    "heartState": 1,
+    "preferences1": 1,
     "preferences2": 0.5,
     "catsDogs": 0.5
 }

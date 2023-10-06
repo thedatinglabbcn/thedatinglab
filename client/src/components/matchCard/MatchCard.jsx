@@ -34,7 +34,7 @@ function MatchCard() {
     }
   };
 
-  const minMatchPercentage = 50;
+  const minMatchPercentage = 70;
   const filteredMatches = matchingUsers.filter((user) => user.matchingPercentage >= minMatchPercentage);
 
   const calculateAge = (birthdate) => {

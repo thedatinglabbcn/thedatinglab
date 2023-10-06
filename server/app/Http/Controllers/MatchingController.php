@@ -18,8 +18,6 @@ class MatchingController extends Controller
                 return response()->json(['type' => 'preferences'], 404);
             }
 
-            $weights = json_decode(file_get_contents(resource_path('config/weights.json')), true);
-
             $matches = User::findMatchesForUser($user);
 
             $response = [];
@@ -27,6 +25,8 @@ class MatchingController extends Controller
             if ($matches->isEmpty()) {
                 return response()->json(['type' => 'matches'], 404);
             }
+
+            $weights = json_decode(file_get_contents(resource_path('config/weights.json')), true);
 
             foreach ($matches as $match) {
                 $matchingPercentage = ceil($this->calculateMatchingPercentage($userPreference, $match->preference, $weights));
