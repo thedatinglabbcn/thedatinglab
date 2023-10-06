@@ -11,7 +11,7 @@ function Faqs() {
     <div className='faq-container'>
          <h1 className='home-subtitle'>Preguntas Frecuentes</h1>
          <div class="accordion accordion-flush" id="accordionFlushExample">
-         <h2 className='faq-title'>Servicio</h2>
+         <h2 className='faq-title'>Servicios</h2>
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingOne">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
