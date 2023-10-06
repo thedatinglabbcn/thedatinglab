@@ -17,11 +17,18 @@ function CreateForm() {
     image: null,
   });
 
+  const [validationErrors, setValidationErrors] = useState({});
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEventData({
       ...eventData,
       [name]: value,
+    });
+
+    setValidationErrors({
+      ...validationErrors,
+      [name]: '',
     });
   };
 
@@ -31,6 +38,8 @@ function CreateForm() {
       ...eventData,
       image: file,
     });
+
+    setValidationErrors({});
   };
 
   const handleSubmit = async (e) => {
@@ -58,9 +67,14 @@ function CreateForm() {
       } else {
       }
     })
-    .catch((error) => {
-      console.error('Error al crear el evento:', error);
-
+    .catch((err) => {
+      console.error(err);
+      if (err.response && err.response.status === 422) {
+        const errors = err.response.data.validation_errors;
+        setValidationErrors(errors);
+      } else {
+        console.log('Error al crear el evento:', err);
+      }
     });
   };
 
@@ -68,7 +82,7 @@ function CreateForm() {
     <div className='container'>
    
       <h2 className='form-title'>Crear Evento</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <form onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
         <div>
           <label className='form-label' htmlFor="title">Título</label>
           <input
@@ -79,6 +93,9 @@ function CreateForm() {
             onChange={handleInputChange}
             required
           />
+          {validationErrors.title && (
+              <div className="text-danger">{validationErrors.title.join(', ')}</div>
+            )}
         </div>
         <div>
           <label className='form-label' htmlFor="date">Fecha</label>
@@ -90,6 +107,9 @@ function CreateForm() {
             onChange={handleInputChange}
             required
           />
+          {validationErrors.date && (
+              <div className="text-danger">{validationErrors.date.join(', ')}</div>
+            )}
         </div>
         <div>
           <label className='form-label' htmlFor="time">Hora</label>
@@ -102,6 +122,9 @@ function CreateForm() {
             onChange={handleInputChange}
             required
           />
+          {validationErrors.time && (
+              <div className="text-danger">{validationErrors.time.join(', ')}</div>
+            )}
         </div>
         <div>
           <label className='form-label' htmlFor="description">Descripción</label>
@@ -112,6 +135,9 @@ function CreateForm() {
             onChange={handleInputChange}
             required
           ></textarea>
+          {validationErrors.description && (
+              <div className="text-danger">{validationErrors.description.join(', ')}</div>
+            )}
         </div>
         <div>
           <label className='form-label' htmlFor="image">Imagen</label>
@@ -123,6 +149,9 @@ function CreateForm() {
             onChange={handleFileChange}
             required
           />
+          {validationErrors.image && (
+              <div className="text-danger">{validationErrors.image.join(', ')}</div>
+            )}
         </div>
         {eventData.image && (
             <div className="mb-4">
