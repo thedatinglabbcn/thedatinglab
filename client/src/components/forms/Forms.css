@@ -117,7 +117,7 @@ background-color: var(--color-beige);
 
   .input-options {
     display: inline-block;
-    max-width: calc(70.33% - 10px); /* Limita el ancho máximo de cada opción para mostrar 3 en una fila */
+    max-width: calc(70.33% - 10px); 
     margin-right: 0.5rem; 
     margin-bottom: 0.8rem; 
     font-size: 1.5rem;

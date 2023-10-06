@@ -119,10 +119,10 @@ const LoginForm = () => {
             )}
           </div>
           <div className='form-buttons'> 
+          <button type="button" className="button-cancel"  onClick={() => navigate('/')}>Cancelar</button>
           <button type="submit" className="button-send">
             Ingresar
           </button>
-          <button type="button" className="button-cancel"  onClick={() => navigate('/')}>Cancelar</button>
           </div>
         </form>
         

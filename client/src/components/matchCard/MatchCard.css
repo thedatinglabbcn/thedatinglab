@@ -51,12 +51,6 @@ font-weight: 700;
 margin: 1rem 0;
 }
 
-.match-card {
-     flex: 0 0 auto;
-      padding: 1rem;
-      scroll-snap-align: start;
-    }
-
 .matches-text{
 color: var(--color-primary);
 font-weight: 700px;
@@ -100,6 +94,7 @@ padding: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: -1.5rem ;
   }
   
   .arrow-icon-left,

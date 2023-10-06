@@ -51,6 +51,11 @@ function EditForm() {
             title: '¡Actualización exitosa!',
             text: 'La información del evento ha sido actualizada correctamente.',
             icon: 'success',
+            confirmButtonColor: '#18b485',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
           });
 
           navigate('/dashboard/events');

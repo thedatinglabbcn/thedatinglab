@@ -37,12 +37,18 @@ function EventDetail() {
   const handleAttendClick = () => {
     if (!token) {
       Swal.fire({
-        title: 'Debes iniciar sesión para asistir',
-        text: '¿Deseas iniciar sesión ahora?',
+        title: 'Debes registrarte para asistir',
+        text: '¿Deseas registrarte sesión ahora?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Sí, iniciar sesión',
+        confirmButtonText: 'Registrarme',
         cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#18b485',
+        cancelButtonColor: '#ED696B',
+        customClass: {
+          popup: 'custom-swal-background',
+          confirmButton: 'custom-swal-button',
+        }
       }).then((result) => {
         if (result.isConfirmed) {
          
