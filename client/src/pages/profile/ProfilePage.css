@@ -81,24 +81,27 @@
   
   .event-preview-container{
     width: 40%;
+    height: 170px;
     background-color: white;
-    margin: 0 0.5rem;
+    margin: 1rem;
     border-radius: 0.5rem;
     display: inline-block;
     object-fit: cover;
-    padding: 1rem;
+   
     overflow: hidden;
   
   }
 
   .event-preview-img{
-    width: 100%;
+    width: 155px;
+    height: 110px;
 
     
   }
 
   .event-preview-text{
     color: black;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    margin-top: 1rem;
 
   }

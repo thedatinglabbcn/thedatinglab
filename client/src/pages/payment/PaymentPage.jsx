@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './PaymentPage.css';
 import Navbar from '../../components/navbar/Navbar';
 import axios from '../../service/axiosConfig';
-import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
+import Swal from 'sweetalert2';
 
 function PaymentPage() {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -51,25 +51,22 @@ function PaymentPage() {
             className={`payment-option ${selectedOption === 'cita' ? 'selected' : ''}`}
             onClick={() => handleOptionSelect('cita')}
           >
-            <div className="option-title">Cita a ciegas</div>
-            <div className="option-description">Pagar solo un evento</div>
-            <div className="option-price">$X</div>
+            <div className="option-title">3 eventos al mes</div>
+            <div className="option-price">000.00€</div>
           </div>
           <div
             className={`payment-option2 ${selectedOption === '3meses' ? 'selected' : ''}`}
             onClick={() => handleOptionSelect('3meses')}
           >
-            <div className="option-title">Paga por 3 meses</div>
-            <div className="option-description">Para asistir a 6 eventos</div>
-            <div className="option-price">$X</div>
+            <div className="option-title">1 evento</div>
+            <div className="option-price">00.00€</div>
           </div>
           <div
             className={`payment-option ${selectedOption === '6meses' ? 'selected' : ''}`}
             onClick={() => handleOptionSelect('6meses')}
           >
-            <div className="option-title">6 meses Recomendado</div>
-            <div className="option-description">Te aseguramos que encontrarás a tu pareja ideal</div>
-            <div className="option-price">$X</div>
+            <div className="option-title">5 eventos al mes</div>
+            <div className="option-price">00.000€:</div>
           </div>
         </div>
         <div className="continue-button">

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
-import Swal from 'sweetalert2';
 import './EventDetail.css';
 import Navbar from '../../components/navbar/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import './../../components/eventCard/EventCard.css';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
+import Swal from 'sweetalert2';
 
 function EventDetail() {
   const navigate = useNavigate();

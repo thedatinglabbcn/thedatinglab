@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './Navbar.css';
-import Swal from 'sweetalert2';
 import { AuthService } from '../../service/AuthService';
 import Logo from '../../assets/images/logo-dating-lab.svg';
 import { useNavigate, Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

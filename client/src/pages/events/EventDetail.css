@@ -49,8 +49,8 @@
 
 .attendee-preview {
     display: flex;
-    flex-wrap: wrap; /* Esto permite que los elementos pasen a la siguiente línea si no hay espacio */
-    gap: 1rem; /* Esto añade un espacio entre los elementos */
+    flex-wrap: wrap; 
+    gap: 1rem; 
   }
 
   .attendee-info {
@@ -61,9 +61,9 @@
   }
 
   .attendee-image {
-    width: 100px; /* Ajusta según tus necesidades */
-    height: 100px; /* Ajusta según tus necesidades */
-    margin-bottom: 5px; /* Añade un pequeño espacio entre la imagen y el texto */
+    width: 100px; 
+    height: 100px; 
+    margin-bottom: 5px; 
   }
   
   .attendee-text {
