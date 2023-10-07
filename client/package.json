@@ -43,6 +43,15 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-react": "^7.22.15",
+    "axios-mock-adapter": "^1.22.0",
+    "babel-jest": "^29.7.0",
     "source-map-loader": "^4.0.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   }
 }
