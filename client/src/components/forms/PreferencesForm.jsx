@@ -162,9 +162,9 @@ const PreferencesForm = () => {
             )}
           </div>
 
-          <div className='text-danger'>{validationErrors[questions[currentStep].name]}</div>
+          <div className='text-danger match-validation'>{validationErrors[questions[currentStep].name]}</div>
 
-          {generalError && <div className='text-danger'>{generalError}</div>}
+          {generalError && <div className='text-danger match-validation'>{generalError}</div>}
 
           <div className="button-group">
             {currentStep > 0 && (

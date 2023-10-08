@@ -46,7 +46,7 @@ function ProfilePage() {
       <div className='match-container'>
         <h1 className='match-title'>¡Hola, {userName}!</h1>
         <center>
-          <div className="match-profile" style={{ width: '18rem'}}>
+          <div className="match-profile">
             <div className="card-img-top">
               <center><img src={`http://localhost:8000/storage/${profile && profile.image ? profile.image : ''}`} className="rounded-circle" alt={`Tu foto de perfil`} /></center>
             </div>

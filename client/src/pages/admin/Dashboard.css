@@ -33,7 +33,8 @@
 
 .new-event{
     display: flex;
-    justify-content: center;
+    justify-content:space-between;
+    padding:  0 5rem;
     margin-bottom: 2rem;
     gap: 1rem;
     margin-left: 1rem;
@@ -48,6 +49,10 @@
     color: #797878;
     font-size: 2rem;
     border: none;
+}
+
+.create-button{
+  color: var(--color-submit);
 }
 
 .logout-container{

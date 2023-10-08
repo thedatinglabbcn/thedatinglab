@@ -51,8 +51,9 @@ const Navbar = () => {
         {isLoggedIn ? (
           <>
             <Link to="/event" onClick={closeMenu}>Nuestros eventos</Link>
-            <Link to="/" onClick={handleLogout}>Cerrar sesión</Link>
             <Link to="/faqs" onClick={closeMenu}>Preguntas frecuentes</Link>
+            <Link to="/" onClick={handleLogout}>Cerrar sesión</Link>
+           
           </>
         ) : (
           <>
