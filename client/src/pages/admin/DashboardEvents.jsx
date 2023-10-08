@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 import '../../components/admin/Events.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faHome, faFilePen, faTrash } from '@fortawesome/free-solid-svg-icons'; // Agrega los iconos faltantes
+import { faPlus, faHome, faFilePen, faTrash } from '@fortawesome/free-solid-svg-icons'; 
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
 import Swal from 'sweetalert2';

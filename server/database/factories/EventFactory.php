@@ -17,13 +17,13 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'image' => fake()->imageUrl(), // Genera una URL de imagen aleatoria.
+            'image' => fake()->imageUrl(),
             'date' => fake()->date(),
             'time' => fake()->time(),
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(), 
             'user_id' => function () {
-                return \App\Models\User::factory()->create()->id; // Crea un usuario y obtén su ID.
+                return \App\Models\User::factory()->create()->id; 
             },
             'privacy' => $this->faker->randomElement(['public', 'private']),           
         ];
