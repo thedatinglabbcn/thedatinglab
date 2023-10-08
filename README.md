@@ -12,11 +12,11 @@ Al acceder a la página, los usuarios son recibidos con una intrigante introducc
 Una web responsive donde se pueda gestionar usuarios tanto registrados, como no, para que puedan ver de que se trata la pagina, y decidir si les interesa sumergirse en un espacio donde aparte de conocer a tu pareja ideal, podras experimentiar eventos únicos donde pasarla bien y conocer gente con los que compartas tus mismos gustos.
 
 ### Figma
-| | | |
-|---|---|---|---|
-| ![home-preview](client/src/assets/images/home.jpg) | ![preferences-preview](client/src/assets/images/preferences.png) | ![profile-preview](client/src/assets/images/profile.png) | ![events-preview](client/src/assets/images/events.jpg) |
+| [<img src="client/src/assets/images/home.jpg">] | [<img src="client/src/assets/images/preferences.png">] | [<img src="client/src/assets/images/profile.png">] | [<img src="client/src/assets/images/preferences.jpg">] | [<img src="client/src/assets/images/events.png">] 
+| :---: | :---: | :---: | :---: |
 
-<div align="center" style="margin-bottom: 20px">
+
+<div style="margin-bottom: 20px">
   <img src="client/src/assets/images/desktop-preview" alt="home-preview-desktop" width="100%"/>
 </div>
 
