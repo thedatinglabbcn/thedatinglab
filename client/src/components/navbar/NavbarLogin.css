@@ -1,4 +1,4 @@
-.navbar-login{ 
+.navbar-login { 
   position: fixed;
   bottom: 0;
   left: 0;
@@ -20,3 +20,20 @@
   .nav-icon.active {
     color: var(--color-primary); 
   }
+
+
+  @media (min-width:800px) {
+    .navbar-login { 
+      width: 2rem;
+      position: fixed;
+      bottom:5%;
+      left: 93%;
+      border-radius: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      background-color: white;
+    
+    }
+     }

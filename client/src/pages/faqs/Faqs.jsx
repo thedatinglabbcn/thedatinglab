@@ -7,57 +7,116 @@ import Footer from '../../components/footer/Footer';
 function Faqs() {
   return (
     <div>
-         <Navbar/>
-         <div className='faq-container'>
+      <div><Navbar/></div>
+    <div className='faq-container'>
          <h1 className='home-subtitle'>Preguntas Frecuentes</h1>
-        <div className='faq-item'>
-          <h2>¿Qué es The Dating Lab?</h2>
-            <h3>The Dating Lab es una plataforma de citas que prioriza la compatibilidad emocional sobre la física, ofreciendo una experiencia única para que los usuarios conozcan a sus posibles parejas de una manera diferente.</h3>
-        </div>
-
-        <div className='faq-item'>
-          <h2>¿Cómo funciona The Dating Lab?</h2>
-            <h3>Funciona mediante un formulario de compatibilidad que los usuarios deben completar. Nuestra plataforma luego les mostrará perfiles de personas con un 70% o más de compatibilidad emocional.</h3>
-        </div>
-
-        <div className='faq-item'>
-          <h2>¿Cómo puedo registrarme en The Dating Lab?</h2>
-            <h3>Para registrarte en The Dating Lab, simplemente crea una cuenta con tu información básica y completa el formulario de compatibilidad emocional.</h3>
-        </div>
-
-            <h2 className='faq-title'>Experiencias</h2>
-        <div className='faq-item'>
-          <h2>¿Qué son las experiencias de The Dating Lab?</h2>
-            <h3>Las experiencias son oportunidades para que los usuarios se encuentren con sus citas compatibles en persona. Estos eventos se anunciarán en nuestra página principal.</h3>
-        </div>
-        <div className='faq-item'>
-          <h2>¿Cómo puedo asistir a una experiencia?</h2>
-            <h3>Para asistir a una experiencia, debes abonar el costo correspondiente y elegir la experiencia que más te guste. Luego, recibirás información detallada sobre el evento.</h3>
-        </div>
-        <div className='faq-item'>
-          <h2>¿Dónde se realizan las experiencias?</h2>
-            <h3>La ubicación de las experiencias puede variar dentro de Barcelona, así que asegúrate de revisar la información proporcionada en la página principal o la invitación al evento.</h3>
-        </div>
-        <h2 className='faq-title'>Pagos y Contacto</h2>
-        <div className='faq-item'>
-          <h2>¿Qué métodos de pago aceptan para las experiencias?</h2>
-            <h3>Aceptamos pagos a través de Bizum. Deberás contactarnos principalmente a través del número de móvil: 111111111 para realizar el pago.</h3>
-        </div>
-        <div className='faq-item'>
-          <h2>¿Cómo puedo obtener más información sobre una experiencia después de realizar el pago?</h2>
-            <h3>Una vez que hayas realizado el pago, te proporcionaremos información detallada sobre la experiencia, incluyendo la ubicación, fecha y hora, y cualquier otra información relevante.</h3>
-        </div>
-            <h2 className='faq-title'>Requisitos de Seguridad</h2>
-        <div className='faq-item'>
-          <h2>¿Por qué se solicita información sobre alergias para asistir a las experiencias?</h2>
-            <h3>Solicitamos información sobre alergias para garantizar la seguridad de todos los asistentes a nuestros eventos. Algunas experiencias pueden incluir alimentos y bebidas, por lo que es importante conocer las alergias de los participantes.</h3>
-        </div>
-        <div className='faq-item'>
-          <h2>¿Cómo se manejarán mis datos personales en The Dating Lab?</h2>
-            <h3>La privacidad y seguridad de tus datos son una prioridad para nosotros. Puedes consultar nuestra política de privacidad para obtener más información sobre cómo manejamos tus datos.</h3>
-        </div>
-
-      </div>
+         <div class="accordion accordion-flush" id="accordionFlushExample">
+         <h2 className='faq-title'>Servicios</h2>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+      ¿Qué es The Dating Lab?
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">The Dating Lab es una plataforma de citas que prioriza la compatibilidad emocional sobre la física, ofreciendo una experiencia única para que los usuarios conozcan a sus posibles parejas de una manera diferente.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+      ¿Cómo funciona The Dating Lab?
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Funciona mediante un formulario de compatibilidad que los usuarios deben completar. Nuestra plataforma luego les mostrará perfiles de personas con un 70% o más de compatibilidad emocional.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+      ¿Cómo puedo registrarme en The Dating Lab?
+      </button>
+    </h2>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Para registrarte en The Dating Lab, simplemente crea una cuenta con tu información básica y completa el formulario de compatibilidad emocional.</div>
+    </div>
+  </div>
+  <h2 className='faq-title'>Experiencias</h2>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingFour">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+      ¿Qué son las experiencias de The Dating Lab?
+      </button>
+    </h2>
+    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Las experiencias son oportunidades para que los usuarios se encuentren con sus citas compatibles en persona. Estos eventos se anunciarán en nuestra página principal.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingFive">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+      ¿Cómo puedo asistir a una experiencia?
+      </button>
+    </h2>
+    <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Para asistir a una experiencia, debes abonar el costo correspondiente y elegir la experiencia que más te guste. Luego, recibirás información detallada sobre el evento.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingSix">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+      ¿Dónde se realizan las experiencias?
+      </button>
+    </h2>
+    <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">La ubicación de las experiencias puede variar dentro de Barcelona, así que asegúrate de revisar la información proporcionada en la página principal o la invitación al evento.</div>
+    </div>
+  </div>
+  <h2 className='faq-title'>Pagos y contacto</h2>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingSeven">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+      ¿Qué métodos de pago aceptan para las experiencias?
+      </button>
+    </h2>
+    <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Aceptamos pagos a través de Bizum. Deberás contactarnos principalmente a través del número de móvil: 111111111 para realizar el pago.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingEight">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+      ¿Cómo puedo obtener más información sobre una experiencia después de realizar el pago?
+      </button>
+    </h2>
+    <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Una vez que hayas realizado el pago, te proporcionaremos información detallada sobre la experiencia, incluyendo la ubicación, fecha y hora, y cualquier otra información relevante.</div>
+    </div>
+  </div>
+  <h2 className='faq-title'>Requisitos de seguridad</h2>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingNine">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+      ¿Por qué se solicita información sobre alergias para asistir a las experiencias?
+      </button>
+    </h2>
+    <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Solicitamos información sobre alergias para garantizar la seguridad de todos los asistentes a nuestros eventos. Algunas experiencias pueden incluir alimentos y bebidas, por lo que es importante conocer las alergias de los participantes.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTen">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+      ¿Cómo se manejarán mis datos personales en The Dating Lab?
+      </button>
+    </h2>
+    <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">La privacidad y seguridad de tus datos son una prioridad para nosotros. Puedes consultar nuestra política de privacidad para obtener más información sobre cómo manejamos tus datos.</div>
+    </div>
+  </div>
+</div>
+</div>
       <Footer/>
         <NavbarLogin/>
     </div>

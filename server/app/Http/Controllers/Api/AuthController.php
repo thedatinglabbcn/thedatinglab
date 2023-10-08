@@ -87,7 +87,6 @@ $user->save();
 
     $cookie = cookie('token', $token, 60 * 24);
 
-    // Verifica si el usuario tiene el rol "admin" antes de establecer 'isAdmin' => true
     $isAdmin = $user->hasRole('admin');
 
     return response()->json([

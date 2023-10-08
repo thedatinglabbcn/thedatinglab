@@ -1,14 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './MatchCard.css';
 import Navbar from '../navbar/Navbar';
 import { MatchingService } from '../../service/MatchingService';
-import { useNavigate } from 'react-router-dom';
 import NavbarLogin from '../navbar/NavbarLogin';
+import SwipeIcon from '../../assets/images/swipe-icon.svg';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function MatchCard() {
   const [matchingUsers, setMatchingUsers] = useState([]);
-  const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
-  const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+  const swipeIconRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      const entry = entries[0];
+      setIsVisible(entry.isIntersecting);
+    });
+
+    if (swipeIconRef.current) {
+      observer.observe(swipeIconRef.current);
+    }
+
+    return () => {
+      if (swipeIconRef.current) {
+        observer.unobserve(swipeIconRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +39,6 @@ function MatchCard() {
           setMatchingUsers(response.data.matches);
         }
       } catch (error) {
-        console.error(error);
         handleFetchError(error);
       }
     };
@@ -29,8 +47,10 @@ function MatchCard() {
   }, []);
 
   const handleFetchError = (error) => {
-    if (error.response.status === 404 && error.response.data.type === 'preferences') {
+    if (error.response && error.response.status === 404 && error.response.data && error.response.data.type === 'preferences') {
       console.log(error.response.status);
+    } else {
+      console.error(error);
     }
   };
 
@@ -78,8 +98,21 @@ function MatchCard() {
             </div>
           )}
         </center>
+        
       </div>
-      <p className='swipe-text'>Desliza a la derecha para ver más matches</p>
+      <div
+        ref={swipeIconRef}
+        className={`swipe-icon-match ${isVisible ? 'visible' : 'hidden'}`}
+      >
+      <img className='swipe-icon' src={SwipeIcon} alt="Mano con flecha hacia izquierda y derecha" />
+      </div>
+      <div className="arrow-left">
+  <FontAwesomeIcon icon={faArrowLeft} />
+</div>
+<div className="arrow-right">
+  <FontAwesomeIcon icon={faArrowRight} />
+</div>
+      <p className='swipe-text'>Desliza para ver más matches</p>
    <NavbarLogin/>
     </div>
   );

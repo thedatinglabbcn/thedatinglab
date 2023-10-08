@@ -6,7 +6,8 @@
 
 .faq-title {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 1.5rem;
+    margin-top: 2rem;
     padding: 15px;
 }
   
@@ -23,3 +24,25 @@
     color: var(--color-text);
 }
   
+.accordion-button {
+    font-size: 1.4rem;
+    padding: 2rem;
+}
+
+.accordion-body {
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+@media (min-width:800px) {
+    .accordion-flush {
+      padding: 0 15rem;
+    }
+
+    .accordion-body {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+  
+    
+     }

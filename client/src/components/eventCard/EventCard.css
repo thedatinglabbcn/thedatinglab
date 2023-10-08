@@ -4,7 +4,6 @@
     background-color:white !important;
     width: 300px !important;
     margin-top: 1rem;
-    margin-bottom: 2rem;
     border-radius: 0.8rem;
     padding-bottom: 1rem;
 }
@@ -61,3 +60,13 @@
     font-size: 1.2rem;
     font-weight: 700;
 }
+
+@media (min-width:800px) {
+    .event-card {
+     width: 500px;
+     margin-right: 5rem;
+    
+    }
+    
+    }
+     

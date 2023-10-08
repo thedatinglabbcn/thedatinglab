@@ -10,6 +10,22 @@ import LoginForm from '../components/forms/LoginForm';
 import HomePage from '../pages/home/HomePage';
 import RegForm from '../components/forms/RegForm';
 
+
+global.IntersectionObserver = class IntersectionObserver {
+  constructor(callback) {
+    this.callback = callback;
+  }
+
+  observe() {
+    // Trigger the callback with an entry that is intersecting
+    this.callback([{ isIntersecting: true }]);
+  }
+
+  unobserve() {}
+  disconnect() {}
+};
+
+
 test('should login successfully and generate a token', async () => {
   const { getByLabelText, getByText } = render(
     <Router>

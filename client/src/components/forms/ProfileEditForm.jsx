@@ -75,7 +75,7 @@ function ProfileEditForm({ profile, id, setIsEditing }) {
   };
 
   return (
-    <div className='body-login'>
+    <div className='container'>
       <div className="edit-profile-container">
         <p className="profile-texts">
           Edita tus datos:.

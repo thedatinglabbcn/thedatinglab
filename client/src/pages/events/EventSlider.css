@@ -23,4 +23,21 @@
     width: 300px;
   }
   
-  
+  @media (min-width:800px) {
+    .event-carousel-container {
+      padding-left: 0%;
+    }
+    .event-carousel-content {
+      display: flex;
+      margin: 0 auto;
+      margin: 3rem;
+    }
+    
+    .event-carousel-item {
+      margin-right: 6rem;
+      width: 300px;
+    }
+
+    
+    
+     }
