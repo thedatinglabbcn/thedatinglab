@@ -1,12 +1,26 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import MatchCard from '../components/MatchCard/MatchCard';
+import MatchCard from '../components/matchCard/MatchCard';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter'; 
 import { BrowserRouter as Router } from 'react-router-dom';
 
 
 const mock = new MockAdapter(axios);
+
+global.IntersectionObserver = class IntersectionObserver {
+  constructor(callback) {
+    this.callback = callback;
+  }
+
+  observe() {
+    // Trigger the callback with an entry that is intersecting
+    this.callback([{ isIntersecting: true }]);
+  }
+
+  unobserve() {}
+  disconnect() {}
+};
 
 describe('MatchCard', () => {
   
@@ -24,7 +38,7 @@ describe('MatchCard', () => {
         const title = await screen.findByText('¡Tus matches!');
         expect(title).toBeInTheDocument();
 
-        const indications = await screen.findByText('Desliza a la derecha para ver más matches')
+        const indications = await screen.findByText('Desliza para ver más matches')
         expect(indications).toBeInTheDocument();
     });
 
