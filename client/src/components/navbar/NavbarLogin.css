@@ -26,8 +26,8 @@
     .navbar-login { 
       width: 2rem;
       position: fixed;
-      bottom: 10%;
-      left: 95%;
+      bottom:5%;
+      left: 93%;
       border-radius: 0.5rem;
       display: flex;
       flex-direction: column;

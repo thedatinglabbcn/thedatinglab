@@ -189,7 +189,13 @@ background-color: var(--color-beige);
    
     }
 .form-title{
-  margin: 3rem;
+  margin-top: 6rem;
+}
+
+.preference-text{
+  margin-top: 0;
+  padding: 0;
+  margin-bottom: 5rem;
 }
 
 
@@ -200,4 +206,15 @@ background-color: var(--color-beige);
   text-align: center;
   
 }
+
+
+
+.btn-outline-danger {
+  font-size: 1.5rem;
+
   }
+
+  .match-validation{
+    text-align: center;;
+  }
+}
