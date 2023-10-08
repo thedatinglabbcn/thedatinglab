@@ -77,7 +77,7 @@ useEffect(() =>{
             </button>
         </div>
       </section>
-      <section  class="event-section" id="event-section">
+      <section  className="event-section" id="event-section">
         <h1 className='home-subtitle'>Experiencias</h1>
         <div className="event-carousel-container">
        <div className="arrow-left">
