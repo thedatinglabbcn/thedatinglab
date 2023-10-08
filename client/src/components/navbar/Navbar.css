@@ -80,3 +80,17 @@
         transform: rotate(-45deg) translate(-5px, 1px);
     }
 }
+
+
+@media (min-width:800px) {
+   .nav_items a {
+    color: #000000;
+    font-weight: 500;
+    font-size: 1.3rem;
+   }
+
+   .nav_items {
+    margin-top: 2rem; 
+    
+   }
+    }

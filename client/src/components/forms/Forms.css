@@ -77,8 +77,7 @@ background-color: var(--color-beige);
 
 }
 .edit-profile-container{
-  padding: 2rem;
-  margin-bottom: 7rem;
+  padding: 1rem;
 }
 .error-message {
     color: red;
@@ -184,3 +183,21 @@ background-color: var(--color-beige);
    justify-content: left;
   }
   
+  @media (min-width: 1024px) {
+    .container {
+    padding: 0 15rem;
+   
+    }
+.form-title{
+  margin: 3rem;
+}
+
+
+.button-group {
+  display: block;
+  justify-content: space-between;
+  margin-top: 2rem;
+  text-align: center;
+  
+}
+  }

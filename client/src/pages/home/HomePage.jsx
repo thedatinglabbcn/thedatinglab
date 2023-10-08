@@ -1,16 +1,39 @@
 import { EventService } from '../../service/EventService';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import EventCard from "../../components/eventCard/EventCard";
 import Navbar from '../../components/navbar/Navbar';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
 import Footer from '../../components/footer/Footer';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
+import SwipeIcon from '../../assets/images/swipe-icon.svg';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function HomePage() {
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [events, setEvents] = useState ([]); 
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+  const swipeIconRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      const entry = entries[0];
+      setIsVisible(entry.isIntersecting);
+    });
+
+    if (swipeIconRef.current) {
+      observer.observe(swipeIconRef.current);
+    }
+
+    return () => {
+      if (swipeIconRef.current) {
+        observer.unobserve(swipeIconRef.current);
+      }
+    };
+  }, []);
+
 
 useEffect(() =>{
   const api = EventService;
@@ -54,9 +77,15 @@ useEffect(() =>{
             </button>
         </div>
       </section>
-      <section id="event-section">
+      <section  class="event-section" id="event-section">
         <h1 className='home-subtitle'>Experiencias</h1>
         <div className="event-carousel-container">
+       <div className="arrow-left">
+  <FontAwesomeIcon icon={faArrowLeft} />
+</div>
+<div className="arrow-right">
+  <FontAwesomeIcon icon={faArrowRight} />
+</div>
           <div className="event-carousel-content">
             {events.map((event, index) => (
               <div key={index} className="event-carousel-item">
@@ -69,7 +98,13 @@ useEffect(() =>{
           
         </div>
       </section>
-      <p className='swipe-text'>Desliza a la derecha para ver más eventos</p>ç
+      <div
+        ref={swipeIconRef}
+        className={`swipe-icon ${isVisible ? 'visible' : 'hidden'}`}
+      >
+      <img className='swipe-icon' src={SwipeIcon} alt="Mano con flecha hacia izquierda y derecha" />
+      </div>
+      <p className='swipe-text'>Desliza para ver más eventos</p>
       <Footer/>
       <NavbarLogin />
 

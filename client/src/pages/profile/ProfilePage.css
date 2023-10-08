@@ -12,6 +12,7 @@
 
 .match-body{
     margin-top: 1rem;
+    padding: 0 0.5rem;
     
 }
 
@@ -33,18 +34,20 @@
 
 .match-profile{
     Margin-top: 2.5rem;
+    padding: 1rem;
 }
 
 .how-it-works{
    width: 100%;}
 
 
-    .separator {
+.separator {
         border-top: 3px solid black; 
         margin: 2rem 0; 
+        width: 70%;
       }
 
-      .profile-subtitle{
+.profile-subtitle{
         color: black;
         font-weight: 700;
         font-size: 1.8rem;
@@ -87,7 +90,6 @@
     border-radius: 0.5rem;
     display: inline-block;
     object-fit: cover;
-   
     overflow: hidden;
   
   }
@@ -95,8 +97,6 @@
   .event-preview-img{
     width: 155px;
     height: 110px;
-
-    
   }
 
   .event-preview-text{
@@ -105,3 +105,39 @@
     margin-top: 1rem;
 
   }
+
+  @media (min-width: 1024px) {
+    .match-body {
+      max-width: 100%;
+    }
+  
+    .match-profile {
+      max-width: 100%;
+    }
+
+    .separator {
+      border-top: 3px solid black; 
+      margin: 2rem 0; 
+      width: 40%;
+    }
+
+  .event-preview-container{
+    width: 200px;
+    height: 170px;
+    background-color: white;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    display: inline-block;
+    object-fit: cover;
+    overflow: hidden;
+  
+  }
+
+  .event-preview-img{
+    width: 200px;
+    height: 110px;
+    margin-bottom: 1rem;
+  }
+
+  }
+  
