@@ -2,13 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './MatchCard.css';
 import Navbar from '../navbar/Navbar';
 import { MatchingService } from '../../service/MatchingService';
-import { useNavigate } from 'react-router-dom';
 import NavbarLogin from '../navbar/NavbarLogin';
 
 function MatchCard() {
   const [matchingUsers, setMatchingUsers] = useState([]);
-  const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +17,6 @@ function MatchCard() {
           setMatchingUsers(response.data.matches);
         }
       } catch (error) {
-        console.error(error);
         handleFetchError(error);
       }
     };
@@ -29,8 +25,10 @@ function MatchCard() {
   }, []);
 
   const handleFetchError = (error) => {
-    if (error.response.status === 404 && error.response.data.type === 'preferences') {
+    if (error.response && error.response.status === 404 && error.response.data && error.response.data.type === 'preferences') {
       console.log(error.response.status);
+    } else {
+      console.error(error);
     }
   };
 
