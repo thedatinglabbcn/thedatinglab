@@ -11,38 +11,40 @@ Al acceder a la página, los usuarios son recibidos con una intrigante introducc
 ## Objetivo del Proyecto
 Una web responsive donde se pueda gestionar usuarios tanto registrados, como no, para que puedan ver de que se trata la pagina, y decidir si les interesa sumergirse en un espacio donde aparte de conocer a tu pareja ideal, podras experimentiar eventos únicos donde pasarla bien y conocer gente con los que compartas tus mismos gustos.
 
+### Figma
+<div align="center" style="margin-bottom: 20px">
+  <img src="client/src/assets/images/logo-dating-lab-readme.svg" alt="Logo del proyecto" width="100%"/>
+</div>
 
-### 🛠 Tecnologías Utilizadas
+
+
+#### 🛠 Tecnologías Utilizadas
 <div>
 
 <img src="https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white" alt="html5">
 <img src="https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=CSS3&logoColor=white" alt="CSS3"/> 
 <img  src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black" alt="JavaScript" /> 
 <img src="https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black" alt="React">
-<img src="https://raw.githubusercontent.com/jmnote/z-icons/master/svg/php.svg" alt="php" width="40" height="40"/>
-<img src="https://profilinator.rishav.dev/skills-assets/mysql-original-wordmark.svg" alt="react" width="40" height="40"/>
-<img src="https://profilinator.rishav.dev/skills-assets/laravel-plain-wordmark.svg" alt="Laravel" width="40" height="40"/>
+<img src="https://img.shields.io/badge/PHP-777BB4.svg?style=for-the-badge&logo=PHP&logoColor=white" alt="php"/>
+<img src="https://img.shields.io/badge/MySQL-4479A1.svg?style=for-the-badge&logo=MySQL&logoColor=white" alt="mysqlt" />
+<img src="https://img.shields.io/badge/Laravel-FF2D20.svg?style=for-the-badge&logo=Laravel&logoColor=white" alt="Laravel"/>
 
 
 </div>
 
-### 🛠 Herramientas Utilizadas
+#### 🛠 Herramientas Utilizadas
 <div>
-<img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/>
-<img src="https://w7.pngwing.com/pngs/512/824/png-transparent-visual-studio-code-hd-logo-thumbnail.png" alt="vscode" width="40" heigth="40"/>
-<img src="https://w7.pngwing.com/pngs/115/721/png-transparent-trello-social-icons-icon.png" alt="trello" width="40" heigth="40"/>
-<img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/>
-<img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="github" width="40" heigth="40"/>
-<img src="https://profilinator.rishav.dev/skills-assets/xampp.png" alt="xampp" width="40" height="40"/>
-<img src="https://www.pngkey.com/png/detail/802-8025481_mamp-mamp-icon.png" alt="mamp" width="40" height="40"/>
-<img src="https://res.cloudinary.com/postman/image/upload/t_team_logo/v1629869194/team/2893aede23f01bfcbd2319326bc96a6ed0524eba759745ed6d73405a3a8b67a8" alt="postman" width="40" height="40"/>
+<img src="https://img.shields.io/badge/Figma-F24E1E.svg?style=for-the-badge&logo=Figma&logoColor=white" alt="figma"/>
+<img src="https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white" alt="vscode"/>
+<img src="https://img.shields.io/badge/XAMPP-FB7A24.svg?style=for-the-badge&logo=XAMPP&logoColor=white" alt="xampp"/>
+<img src="https://img.shields.io/badge/MAMP-02749C.svg?style=for-the-badge&logo=MAMP&logoColor=white" alt="mamp"/>
+<img src="https://img.shields.io/badge/Postman-FF6C37.svg?style=for-the-badge&logo=Postman&logoColor=white" alt="postman"/>
+<img src="https://img.shields.io/badge/Trello-0052CC.svg?style=for-the-badge&logo=Trello&logoColor=white" alt="trello"/>
 </div>
 
-### 🛠 Otros paquetes utilizados
+#### 🛠 Otros paquetes utilizados
 <div>
-<img src="https://miro.medium.com/v2/resize:fit:640/0*r3O0lVqhmhgql4Co.png" alt="Sanctum" width="60" height="40"/>
-<img src="https://spatie.be/images/og-image.jpg" alt="spatie" width="60" height="40"/>
-</div>
+<img src="https://img.shields.io/badge/Bootstrap-7952B3.svg?style=for-the-badge&logo=Bootstrap&logoColor=white" alt="Sanctum" />
 
 ### Instrucciones de Uso
 Para aprovechar al máximo esta versión del proyecto, es fundamental seguir cuidadosamente las instrucciones de instalación tanto para el frontend como para el backend. Antes de continuar, asegúrate de contar con los siguientes requisitos previos:
