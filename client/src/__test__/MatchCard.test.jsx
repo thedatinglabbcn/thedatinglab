@@ -14,7 +14,6 @@ global.IntersectionObserver = class IntersectionObserver {
   }
 
   observe() {
-    // Trigger the callback with an entry that is intersecting
     this.callback([{ isIntersecting: true }]);
   }
 

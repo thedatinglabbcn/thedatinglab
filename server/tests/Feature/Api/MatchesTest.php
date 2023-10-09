@@ -80,57 +80,5 @@ class MatchesTest extends TestCase
         $response->assertStatus(404);
     }
 
-   
-
-//     public function test_user_can_get_matches()
-// {
-   
-//     $user = User::factory()->create([
-//         "name" => "Alice Doe",
-//         "email" => " bob@example.com",
-//         "password" => Hash::make("password"),
-//     ]);
-
-//     $preference = [
-//         'birthdate' => '1990-01-01',
-//         'ageRange' => '18-25',
-//         'gender' => 'Mujer',
-//         'looksFor' => 'Mujer',
-//         'hasChildren' => 'Sí',
-//         'wantsFamily' => 'Sí',
-//         'datesParents' => 'No',
-//         'sexoAffective' => 'Monógama',
-//         'heartState' => 'Con ganas de compartir',
-//         'preferences1' => 'Netflix',
-//         'preferences2' => 'Alcohol',
-//         'catsDogs' => 'Perros',
-//     ];
-
-    
-//     $user->preference()->create($preference);
-
-    
-//     Sanctum::actingAs($user);
-
-    
-//     $response = $this->getJson('api/matches');
-
-   
-//     $response->assertJsonStructure([
-//         'matches' => [
-//             '*' => [
-//                 'name',
-//                 'birthdate',
-//                 'description',
-//                 'image',
-//                 'matchingPercentage',
-//             ],
-//         ],
-//     ]);
-
-    
-//     $response->assertStatus(200);
-// }
-
 
 }
