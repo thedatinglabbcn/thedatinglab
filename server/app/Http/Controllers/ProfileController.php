@@ -27,26 +27,30 @@ class ProfileController extends Controller
             ], 422);
         } else {
             $user = Auth::user();
+            $folder = "image_post";
 
             $imageName = Str::random(32).".".$request->image->getClientOriginalExtension();
 
-            Storage::disk('public')->put($imageName, file_get_contents($request->file('image')));
-
+           //$path =  Storage::disk('public')->put($imageName, file_get_contents($request->file('image')));
+            $path = disk('s3')->put($folder, $imageName, 'public');
             $profile = new Profile([
+                'path' => $path,
                 'description' => $request->input('description'),
                 'vitalMoment' => $request->input('vitalMoment'),
                 'image' => $imageName,
+                'local' => false
             ]);
 
             $profile->save();
-
+//refactorizar, lógica de negocio siempre en el modelo
             DB::table('users')
               ->where('id', $user->id)
               ->update(['profile_id' => $profile->id]);
 
             return response()->json([
                 'message' => 'Perfil creado con éxito',
-                'profile_id' => $profile->id
+                'profile_id' => $profile->id,
+                'path' => $path,
             ], 200);
         }
     }
