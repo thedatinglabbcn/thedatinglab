@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+
 
 class AttendancesController extends Controller
 {
@@ -19,6 +21,8 @@ class AttendancesController extends Controller
 
         $confirmedDate = $user->confirmAttendance;
         
+        Mail::to($user->email)->send(new confirmAttendanceMail($event));
+
         return response()->json([
             'res' => true,
             'confirmedDate' => $confirmedDate,
