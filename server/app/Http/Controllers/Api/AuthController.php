@@ -108,4 +108,13 @@ $user->save();
             'msg' => 'Usuario desconectado exitosamente'	
         ], 200);
     }
+
+    public function getAllUsers()
+{
+    $users = User::all();
+
+    return response()->json([
+        'users' => $users,
+    ], 200);
+}
 }

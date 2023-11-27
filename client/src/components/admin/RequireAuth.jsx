@@ -4,25 +4,18 @@ import useAuth from "../../hooks/useAuth";
 
 const RequireAuth = ({ allowedRoles }) => {
   const { auth } = useAuth();
-  const location = useLocation();
 
- 
   const isAdmin = auth?.roles?.includes("admin");
 
-  console.log("auth:", auth);
-  console.log("isAdmin:", isAdmin);
-
-  if (isAdmin) {
-    console.log("Redirecting to /dashboard");
-    return <Navigate to="/dashboard" state={{ from: location }} replace />;
+  if (isAdmin || (allowedRoles && auth?.roles?.some((role) => allowedRoles.includes(role)))) {
+    return <Outlet />;
   }
 
-  return auth?.roles?.find((role) => allowedRoles?.includes(role)) ? (
-    <Outlet />
-  ) : auth?.user ? (
-    <Navigate to="/admin-login" state={{ from: location }} replace />
-  ) : null; 
+  if (!auth?.user) {
+    return <Navigate to="/admin-login" />;
+  }
+
+  return <Navigate to="/" />;
 };
 
 export default RequireAuth;
-

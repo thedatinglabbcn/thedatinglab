@@ -5,6 +5,7 @@ export const AuthService = () => {
     const urnSignin = '/api/register';
     const urnLogin = '/api/login';
     const urnLogout = '/api/logout';
+    const urnUsers = '/api/admin/users';
 
     const register = ($data) => {
        const res = axios.post(urnSignin, $data);
@@ -28,7 +29,20 @@ export const AuthService = () => {
     });
     }
 
+    const getAllUsers = () => {
+      return axios.get(urnUsers)
+          .then((res) => res.data)
+          .catch((error) => {
+              console.error('Error al obtener la lista de usuarios:', error);
+              throw error;
+          });
+  }
+
     return {
-        register, login, logout
+        register, 
+        login, 
+        logout, 
+        getAllUsers,
     }
 }
+export default AuthService;

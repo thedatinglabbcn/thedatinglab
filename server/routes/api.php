@@ -26,6 +26,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(functi
     Route::post('/event', [EventController::class, 'store']);
     Route::post('/event/{event}', [EventController::class, 'update']);
     Route::delete('event/{event}', [EventController::class, 'destroy']);
+    Route::get('/users', [AuthController::class, 'getAllUsers']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

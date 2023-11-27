@@ -9,6 +9,7 @@ import PreferencesPage from '../pages/register/PreferencesPage';
 import ProfilePage from '../pages/profile/ProfilePage'
 import Dashboard from '../pages/admin/Dashboard';
 import DashboardEvents from '../pages/admin/DashboardEvents';
+import DashboardUsers from '../pages/admin/DashboardUsers';
 import MatchCard from '../components/matchCard/MatchCard';
 import AdminLoginPage from '../pages/admin/AdminLoginPage';
 import EventsPage from '../pages/events/EventsPage';
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
   {
     path: '/dashboard/events',
     element: <PrivateAdminRoutes><DashboardEvents /></PrivateAdminRoutes>
+  },
+  {
+    path: '/dashboard/users',
+    element: <PrivateAdminRoutes><DashboardUsers /></PrivateAdminRoutes>
   },
   {
     path: '/admin-login',

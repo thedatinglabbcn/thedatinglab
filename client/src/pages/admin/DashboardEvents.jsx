@@ -3,7 +3,7 @@ import './Dashboard.css';
 import '../../components/admin/Events.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faHome, faFilePen, faTrash } from '@fortawesome/free-solid-svg-icons'; 
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
 import Swal from 'sweetalert2';
 
@@ -38,8 +38,6 @@ function DashboardEvents() {
       text: 'Esta acción eliminará el evento permanentemente.',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar',
       confirmButtonColor: '#18b485',
@@ -48,7 +46,7 @@ function DashboardEvents() {
               popup: 'custom-swal-background',
               confirmButton: 'custom-swal-button',
             }
-    }).then((result) => {
+      }).then((result) => {
       if (result.isConfirmed) {
         handleDeleteEvent(eventId);
         navigate('/dashboard/events');
@@ -72,43 +70,45 @@ function DashboardEvents() {
         </Link>
       </div>
       <table className='dashboard-table'>
-        <thead>
-          <tr className='dashboard-row'>
-            <th className='dashboard-column-id'>Id</th>
-            <th className='dashboard-column-image'>Imagen</th>
-            <th className='dashboard-column'>Título</th>
-            <th className='dashboard-column'>Acciones</th>
-          </tr>
-          
-        </thead>
-        <tbody>
-          {events.map((event) => (
-            <tr className='dashboard-row' key={event.id}>
-              <td className='dashboard-column-id'>{event.id}</td>
-              <td className='dashboard-column-image'>
-                <img
-                  className="dashboard-image"
-                  src={`http://localhost:8000/storage/${event.image}`}
-                  alt={event.title}
-                />
-              </td>
-              <td className='dashboard-column'>{event.title}</td>
-              <td className='dashboard-column-buttons'>
-                <Link to={`/dashboard/edit/${event.id}`}>
-                  <button className="edit-button-icon">
-                    <FontAwesomeIcon icon={faFilePen} />
-                  </button>
-                </Link>
-                <button className="delete-button-icon" onClick={() => handleDeleteClick(event.id)}>
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </td>
-            </tr>
-            
-          ))}
-        </tbody>
-        <hr className='dashboard-line'></hr>
-      </table>
+  <thead>
+    <tr className='dashboard-row'>
+      <th className='dashboard-column-id'>Id</th>
+      <th className='dashboard-column-image'>Imagen</th>
+      <th className='dashboard-column'>Título</th>
+      <th className='dashboard-column'>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {events.map((event) => (
+      <React.Fragment key={event.id}>
+        <tr className='dashboard-row'>
+          <td className='dashboard-column-id'>{event.id}</td>
+          <td className='dashboard-column-image'>
+            <img
+              className="dashboard-image"
+              src={`http://localhost:8000/storage/${event.image}`}
+              alt={event.title}
+            />
+          </td>
+          <td className='dashboard-column'>{event.title}</td>
+          <td className='dashboard-column-buttons'>
+            <Link to={`/dashboard/edit/${event.id}`}>
+              <button className="edit-button-icon">
+                <FontAwesomeIcon icon={faFilePen} />
+              </button>
+            </Link>
+            <button className="delete-button-icon" onClick={() => handleDeleteClick(event.id)}>
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          </td>
+        </tr>
+        <tr className='dashboard-line'>
+          <td colSpan="4"></td>
+        </tr>
+      </React.Fragment>
+    ))}
+  </tbody>
+</table>
       <div className='admin-footer'></div>
     </>
   );
