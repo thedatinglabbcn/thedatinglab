@@ -21,7 +21,19 @@ class AttendancesController extends Controller
 
         $confirmedDate = $user->confirmAttendance;
         
-        Mail::to($user->email)->send(new confirmAttendanceMail($event));
+        try {
+            // Envío del correo electrónico de confirmación de asistencia
+            Mail::to($user->email)->send(new ConfirmAttendanceMail($event));
+            
+            return response()->json([
+                'message' => 'Correo electrónico de confirmación enviado correctamente',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'res' => false,
+                'message' => 'Error al enviar el correo electrónico: ' . $e->getMessage(),
+            ], 500);
+        }
 
         return response()->json([
             'res' => true,

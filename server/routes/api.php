@@ -47,5 +47,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/event/attendance/{id}', [AttendancesController::class, 'confirmAttendance']);
     Route::get('/event/attendance/{id}', [AttendancesController::class, 'eventAttendees']);
     Route::get('/event/user/{id}', [AttendancesController::class, 'getEventsForUser']);
+    Route::post('/api/send-email/{eventId}', [AttendancesController::class, 'sendConfirmationEmail']);
 
 });

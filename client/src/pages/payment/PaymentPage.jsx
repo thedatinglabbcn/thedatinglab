@@ -29,7 +29,7 @@ function PaymentPage() {
             confirmButton: 'custom-swal-button',
           }
         });
-        
+    
         navigate(`/event`);
       })
       .catch((error) => {
