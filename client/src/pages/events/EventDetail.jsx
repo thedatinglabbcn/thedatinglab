@@ -8,6 +8,8 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import './../../components/eventCard/EventCard.css';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
 import Swal from 'sweetalert2';
+import axios from '../../service/axiosConfig';
+import { StorageService } from '../../service/storageService';
 
 function EventDetail() {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ function EventDetail() {
   const [eventDetails, setEventDetails] = useState(null);
   const [attendees, setAttendees] = useState([]);
   const token = localStorage.getItem('auth_token');
+  
 
   useEffect(() => {
     EventService.getEvent(eventId)
@@ -66,7 +69,7 @@ function EventDetail() {
         <Navbar/>
       {eventDetails ? (
         <div className="event-detail">
-          <img className="detail-img-top" src={`http://localhost:8000/storage/${eventDetails.image}`} alt="sdsad" />
+          <img className="detail-img-top" src={`${StorageService/eventDetails.image}`} alt={eventDetails.title} />
           <div className="detail-body">
             <div className="detail-date">{eventDetails.date} {eventDetails.time}</div>
             <h5 className="detail-title">{eventDetails.title}</h5>
@@ -83,7 +86,7 @@ function EventDetail() {
                 attendees.map((attendee) => (
                   <div key={attendee.id} className="attendee-info">
                     <img
-                    src={`http://localhost:8000/storage/${attendee?.profile?.image}`}
+                    src={`${axios + attendee?.profile?.image}`}
                     alt={attendee.name}
                     className="attendee-image"
                     />
@@ -99,7 +102,7 @@ function EventDetail() {
       ) : (
         <p cal>Cargando detalles del evento...</p>
       )}
-         <NavbarLogin />
+        <NavbarLogin />
     </div>
   );
 }

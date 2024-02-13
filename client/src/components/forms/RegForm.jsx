@@ -201,7 +201,7 @@ const RegistrationForm = () => {
         <p></p>
         <p className='form-help'>
           ¿Ya tienes una cuenta?{' '}
-          <a onClick={() => navigate('/login')} className='link-help' href='#'>
+          <a onClick={() => navigate('/login')} className='link-help'>
             Inicia sesión
           </a>
         </p>

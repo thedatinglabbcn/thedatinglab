@@ -2,10 +2,17 @@ import axios from 'axios';
 import './axiosConfig';
 
 export const AuthService = () => {
-    const urnSignin = '/api/register';
-    const urnLogin = '/api/login';
-    const urnLogout = '/api/logout';
-    const urnUsers = '/api/admin/users';
+    const urnSignin = 'https://api.thedatinglab.es/api/register';
+    const urnLogin = 'https://api.thedatinglab.es/api/login';
+    const urnLogout = 'https://api.thedatinglab.es/api/logout';
+    const urnUsers = 'https://api.thedatinglab.es/api/admin/users';
+  
+
+    // const urnSignin = '/api/register';
+    // const urnLogin = '/api/login';
+    // const urnLogout = '/api/logout';
+    // const urnUsers = '/api/admin/users';
+  
 
     const register = ($data) => {
        const res = axios.post(urnSignin, $data);

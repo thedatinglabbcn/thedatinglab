@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ProfileService } from '../../service/ProfileService';
 import ProfileEditForm from '../../components/forms/ProfileEditForm';
 import { EventService } from '../../service/EventService';
+import { StorageService } from '../../service/storageService';
 
 function ProfilePage() {
   const { id } = useParams()
@@ -48,7 +49,7 @@ function ProfilePage() {
         <center>
           <div className="match-profile">
             <div className="card-img-top">
-              <center><img src={`http://localhost:8000/storage/${profile && profile.image ? profile.image : ''}`} className="rounded-circle" alt={`Tu foto de perfil`} /></center>
+              <center><img src={`${StorageService + profile && profile.image ? profile.image : ''}`} className="rounded-circle" alt={`Foto de ${userName}`} /></center>
             </div>
             <div className="match-body">
             <p className="profile-subtitle">Sobre mí</p>
@@ -78,7 +79,7 @@ function ProfilePage() {
             <div className='event-preview-container' key={eventItem.id}>
               <Link to={`/event/${eventItem.id}`}>
                 <img
-                  src={`http://localhost:8000/storage/${eventItem.image}`}
+                  src={`${StorageService}${eventItem.image}`}
                   alt={eventItem.title}
                   className="event-preview-img"
                 />
