@@ -2,7 +2,8 @@ import axios from 'axios';
 import './axiosConfig';
 
 export const ProfileService =  () => {
-    const urlProfile = '/api/profile';
+  const urlProfile = '/api/profile';
+  const urlStorage = 'https://datinglab-storage.s3.amazonaws.com/public/';
   
     const createProfile = (data) => {
         const config = {
@@ -44,5 +45,6 @@ export const ProfileService =  () => {
     getProfile,
     updateProfile,
     destroyProfile,
+    urlStorage
   }
   }

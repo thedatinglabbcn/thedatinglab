@@ -41,6 +41,7 @@ function ProfilePage() {
   const userName = profile && profile.user ? profile.user.name : '';  
   const userDescription = profile && profile.description ? profile.description : '';
   const userPicture = profile && profile.image ? profile.image : '';
+  const urlStorageS3 = ProfileService().urlStorage;
 
   return (
     <div className='profile-container'>
@@ -50,7 +51,7 @@ function ProfilePage() {
         <center>
           <div className="match-profile">
             <div className="card-img-top">
-              <center><img src={`${StorageService}/${userPicture}`} className="rounded-circle" alt={`Foto de ${userName}`} /></center>
+              <center><img src={`${urlStorageS3}/${userPicture}`} className="rounded-circle" alt={`Foto de ${userName}`} /></center>
             </div>
             <div className="match-body">
             <p className="profile-subtitle">Sobre mí</p>
