@@ -15,8 +15,8 @@ export const AuthService = () => {
   
 
     const register = ($data) => {
-       const res = axios.post(urnSignin, $data);
-         return res;
+        const res = axios.post(urnSignin, $data);
+          return res;
     }
 
     const login = ($data) => {
@@ -36,13 +36,14 @@ export const AuthService = () => {
     });
     }
 
-    const getAllUsers = () => {
-      return axios.get(urnUsers)
-          .then((res) => res.data)
-          .catch((error) => {
-              console.error('Error al obtener la lista de usuarios:', error);
-              throw error;
-          });
+    const getAllUsers = ($data) => {
+      const res = axios.get(urnUsers)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.error('Error al obtener la lista de usuarios:', error);
+        throw error;
+      });
+      return res;
   }
 
     return {

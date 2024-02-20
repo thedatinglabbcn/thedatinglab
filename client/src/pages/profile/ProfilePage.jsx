@@ -6,7 +6,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ProfileService } from '../../service/ProfileService';
 import ProfileEditForm from '../../components/forms/ProfileEditForm';
 import { EventService } from '../../service/EventService';
-import { StorageService } from '../../service/storageService';
+import { StorageService } from '../../service/StorageService';
 
 function ProfilePage() {
   const { id } = useParams()
@@ -38,8 +38,9 @@ function ProfilePage() {
         
   }, []);
 
-  const userName = profile && profile.user ? profile.user.name : '';
+  const userName = profile && profile.user ? profile.user.name : '';  
   const userDescription = profile && profile.description ? profile.description : '';
+  const userPicture = profile && profile.image ? profile.image : '';
 
   return (
     <div className='profile-container'>
@@ -49,11 +50,11 @@ function ProfilePage() {
         <center>
           <div className="match-profile">
             <div className="card-img-top">
-              <center><img src={`${StorageService + profile && profile.image ? profile.image : ''}`} className="rounded-circle" alt={`Foto de ${userName}`} /></center>
+              <center><img src={`${StorageService}/${userPicture}`} className="rounded-circle" alt={`Foto de ${userName}`} /></center>
             </div>
             <div className="match-body">
             <p className="profile-subtitle">Sobre mí</p>
-              <p className="profile-texts">{profile && profile.description}</p>
+              <p className="profile-texts">{userDescription}</p>
             </div>
             <hr className="separator"/>
             <div className="match-body">
@@ -79,7 +80,7 @@ function ProfilePage() {
             <div className='event-preview-container' key={eventItem.id}>
               <Link to={`/event/${eventItem.id}`}>
                 <img
-                  src={`${StorageService}${eventItem.image}`}
+                  src={`${StorageService}/${eventItem.image}`}
                   alt={eventItem.title}
                   className="event-preview-img"
                 />

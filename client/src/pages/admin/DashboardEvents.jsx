@@ -6,7 +6,7 @@ import { faPlus, faHome, faFilePen, faTrash } from '@fortawesome/free-solid-svg-
 import { Link, useNavigate } from 'react-router-dom';
 import { EventService } from '../../service/EventService';
 import Swal from 'sweetalert2';
-import { StorageService } from '../../service/storageService';
+import { StorageService } from '../../service/StorageService';
 
 function DashboardEvents() {
   const [events, setEvents] = useState([]);
@@ -87,7 +87,7 @@ function DashboardEvents() {
           <td className='dashboard-column-image'>
             <img
               className="dashboard-image"
-              src={`${StorageService}${event.image}`}
+              src={`${StorageService}/${event.image}`}
               alt={event.title}
             />
           </td>

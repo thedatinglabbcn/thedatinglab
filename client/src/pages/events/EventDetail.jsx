@@ -9,7 +9,7 @@ import './../../components/eventCard/EventCard.css';
 import NavbarLogin from '../../components/navbar/NavbarLogin';
 import Swal from 'sweetalert2';
 import axios from '../../service/axiosConfig';
-import { StorageService } from '../../service/storageService';
+import { StorageService } from '../../service/StorageService';
 
 function EventDetail() {
   const navigate = useNavigate();
