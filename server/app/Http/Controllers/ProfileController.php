@@ -27,15 +27,14 @@ class ProfileController extends Controller
             ], 422);
         } else {
             $user = Auth::user();
-
-            $imageName = Str::random(32).".".$request->image->getClientOriginalExtension();
-
-            Storage::disk('public')->put($imageName, file_get_contents($request->file('image')));
+            $imageName = Str::random(32).".".$request->image->getClientOriginalExtention();
+            $path = $request->file('image')->storePublicly('arn:aws:s3:::datinglab-storage/public/ProfilePictures');
+            $profile->image = $path.$imageName;
 
             $profile = new Profile([
                 'description' => $request->input('description'),
                 'vitalMoment' => $request->input('vitalMoment'),
-                'image' => $imageName,
+                'image' => $path,
             ]);
 
             $profile->save();
@@ -45,6 +44,7 @@ class ProfileController extends Controller
               ->update(['profile_id' => $profile->id]);
 
             return response()->json([
+                'image' => $path,
                 'message' => 'Perfil creado con éxito',
                 'profile_id' => $profile->id
             ], 200);
@@ -100,8 +100,10 @@ class ProfileController extends Controller
         
         if ($request->hasFile('image')) {
             $imageName = Str::random(32) . "." . $request->file('image')->getClientOriginalExtension();
-            Storage::disk('public')->put($imageName, file_get_contents($request->file('image')));
-            $profile->image = $imageName;
+
+            $path = $request->file('image')->storePublicly('public/ProfilePictures');
+            ('public/ProfilePictures')->put($imageName, file_get_contents($request->file('image')));
+            $profile->image = $path.$imageName;
         }
 
         $profile->save();
