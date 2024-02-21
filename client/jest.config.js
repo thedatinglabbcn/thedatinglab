@@ -4,7 +4,7 @@ module.exports = {
       },
       globals: {
         "process.env": {
-          AXIOS_BASE_URL: "http://localhost:8000/",
+          AXIOS_BASE_URL: "http://52.203.237.18/",
         },
       },
   };

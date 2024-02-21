@@ -5,7 +5,6 @@ import { faTrash, faFilePen } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-
 function Events({event, onDelete}) {
   const handleDeleteClick = () => {
     Swal.fire({
@@ -33,7 +32,7 @@ function Events({event, onDelete}) {
             <td>
               <img
                 className="dashboard-image"
-                src={`http://localhost:8000/storage/${event.image}`}
+                src={`${event.image}`}
                 alt={event.title}
               />
             </td>

@@ -27,27 +27,25 @@ class ProfileController extends Controller
             ], 422);
         } else {
             $user = Auth::user();
-            $folder = "image_post";
+            $imageName = Str::random(32).".".$request->image->getClientOriginalExtention();
+            $path = $request->file('image')->storePublicly('arn:aws:s3:::datinglab-storage/public/ProfilePictures');
+            $profile->image = $path.$imageName;
 
-            $imageName = Str::random(32).".".$request->image->getClientOriginalExtension();
-
-           //$path =  Storage::disk('public')->put($imageName, file_get_contents($request->file('image')));
-            $path = disk('s3')->put($folder, $imageName, 'public');
             $profile = new Profile([
                 'path' => $path,
                 'description' => $request->input('description'),
                 'vitalMoment' => $request->input('vitalMoment'),
-                'image' => $imageName,
-                'local' => false
+                'image' => $path,
             ]);
 
             $profile->save();
 //refactorizar, lógica de negocio siempre en el modelo
             DB::table('users')
-              ->where('id', $user->id)
-              ->update(['profile_id' => $profile->id]);
+                ->where('id', $user->id)
+                ->update(['profile_id' => $profile->id]);
 
             return response()->json([
+                'image' => $path,
                 'message' => 'Perfil creado con éxito',
                 'profile_id' => $profile->id,
                 'path' => $path,
@@ -104,8 +102,10 @@ class ProfileController extends Controller
         
         if ($request->hasFile('image')) {
             $imageName = Str::random(32) . "." . $request->file('image')->getClientOriginalExtension();
-            Storage::disk('public')->put($imageName, file_get_contents($request->file('image')));
-            $profile->image = $imageName;
+
+            $path = $request->file('image')->storePublicly('public/ProfilePictures');
+            ('public/ProfilePictures')->put($imageName, file_get_contents($request->file('image')));
+            $profile->image = $path.$imageName;
         }
 
         $profile->save();
