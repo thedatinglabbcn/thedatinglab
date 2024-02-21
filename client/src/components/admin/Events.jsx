@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faFilePen } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { StorageService } from '../../service/storageService';
 
 function Events({event, onDelete}) {
   const handleDeleteClick = () => {
@@ -33,7 +32,7 @@ function Events({event, onDelete}) {
             <td>
               <img
                 className="dashboard-image"
-                src={`${StorageService/event.image}`}
+                src={`${event.image}`}
                 alt={event.title}
               />
             </td>
