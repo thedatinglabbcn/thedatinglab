@@ -54,7 +54,7 @@ function CreateForm() {
 
     EventService.createEvent(formData)
     .then((response) => {
-      if (response.status === 200) {
+      if (response.status === 200 && user.isAdmin === true) {
         Swal.fire({
           title: '¡Creación exitosa!',
           text: 'Tu evento ha sido creado correctamente.',

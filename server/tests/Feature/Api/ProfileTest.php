@@ -21,7 +21,7 @@ class ProfileTest extends TestCase
 
     public function test_user_can_create_profile(): void
     {
-        Storage::fake('public');
+        Storage::fake('s3');
     
         $user = User::factory()->create();
         Sanctum::actingAs($user);

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import './axiosConfig'
 
-const urlEvents = '/api/event';
-const urlEventsAdmin = '/api/admin/event';
+const urlEvents = 'https://api.thedatinglab.es/api/event';
+const urlEventsAdmin = 'https://api.thedatinglab.es/api/admin/event';
+const urlStorage = 'https://datinglab-storage.s3.amazonaws.com';
 
 export const EventService = {
   getAllEvents: () => {
@@ -44,5 +45,4 @@ export const EventService = {
   getEventForUser: (id) => {
     return axios.get(`${urlEvents}/user/${id}`);
   },
-
 };

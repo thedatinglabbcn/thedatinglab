@@ -112,9 +112,6 @@ $user->save();
     public function getAllUsers()
 {
     $users = User::all();
-
-    return response()->json([
-        'users' => $users,
-    ], 200);
+    return response()->json([$users]);
 }
 }

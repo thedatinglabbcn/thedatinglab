@@ -8,12 +8,6 @@ export const AuthService = () => {
     const urnUsers = 'https://api.thedatinglab.es/api/admin/users';
   
 
-    // const urnSignin = '/api/register';
-    // const urnLogin = '/api/login';
-    // const urnLogout = '/api/logout';
-    // const urnUsers = '/api/admin/users';
-  
-
     const register = ($data) => {
         const res = axios.post(urnSignin, $data);
           return res;
@@ -36,8 +30,8 @@ export const AuthService = () => {
     });
     }
 
-    const getAllUsers = ($data) => {
-      const res = axios.get(urnUsers)
+    const getAllUsers = ($users) => {
+      const res = axios.get(urnUsers, $users)
       .then((res) => res.data)
       .catch((error) => {
         console.error('Error al obtener la lista de usuarios:', error);
@@ -50,7 +44,8 @@ export const AuthService = () => {
         register, 
         login, 
         logout, 
-        getAllUsers,
+      getAllUsers,
+        urnUsers
     }
 }
 export default AuthService;

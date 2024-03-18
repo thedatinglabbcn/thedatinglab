@@ -23,6 +23,7 @@ use Spatie\Permission\Middleware\RoleMiddleware;
 |
 */
 Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
+    Route::get('/events', [EventController::class, 'index']);
     Route::post('/event', [EventController::class, 'store']);
     Route::post('/event/{event}', [EventController::class, 'update']);
     Route::delete('event/{event}', [EventController::class, 'destroy']);

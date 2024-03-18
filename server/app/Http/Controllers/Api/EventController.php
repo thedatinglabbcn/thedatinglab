@@ -30,6 +30,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $adminUser = Auth::user();
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'date' => 'required|date',
@@ -59,7 +60,6 @@ class EventController extends Controller
             'image' => $path,
         ]);
 
-        $adminUser = Auth::user();
         $event->user()->associate($adminUser);
         $event->save();
 

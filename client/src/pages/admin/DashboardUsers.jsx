@@ -11,13 +11,21 @@ function DashboardUsers() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    AuthService().getAllUsers()
-      .then((res) => {
-        setUsers(res.users);
-      })
-      .catch((error) => {
+    const getUsers = async () => {
+      AuthService().getAllUsers()
+      try {
+        const res = await fetch('/api/admin/users');
+        console.log(res);
+        if (!res.ok) {
+          throw new Error('No se pudieron cargar los usuarios');
+        }
+        const users = await res.json();
+        setUsers(users);
+      } catch (error) {
         console.error('Error al cargar los usuarios:', error);
-      });
+      }
+    };
+    getUsers();
   }, []);
   
 
@@ -80,7 +88,8 @@ function DashboardUsers() {
           </tr>
         </thead>
         <tbody>
-            {users.map((user) => (
+          {users.length > 0 ? (
+            users.map(user => (
               <tr className='dashboard-row' key={user.id}>
                 <td className='dashboard-column-id'>{user.id}</td>
                 <td className='dashboard-column'>{user.name}</td>
@@ -96,7 +105,11 @@ function DashboardUsers() {
                   </button>
                 </td>
               </tr>
-            ))}
+            ))
+          ) : (
+                <td className='dashboard-column'>No hay usuarios disponibles</td>
+              
+            )}
             <tr>
               <td colSpan="4"><hr className='dashboard-line' /></td>
             </tr>
