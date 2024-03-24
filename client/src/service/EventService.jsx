@@ -1,48 +1,62 @@
 import axios from 'axios';
 import './axiosConfig'
 
-const urlEvents = 'https://api.thedatinglab.es/api/event';
-const urlEventsAdmin = 'https://api.thedatinglab.es/api/admin/event';
-const urlStorage = 'https://datinglab-storage.s3.amazonaws.com';
+export const EventService = () => {
+  const urlEvents = 'https://api.thedatinglab.es/api/event';
+  const urlEventsAdmin = 'https://api.thedatinglab.es/api/admin/event';
+  const urlStorage = 'https://datinglab-storage.s3.amazonaws.com';
 
-export const EventService = {
-  getAllEvents: () => {
+
+  const getAllEvents = () => {
     return axios.get(urlEvents);
-  },
+  }
 
-  getEvent: (eventId) => {
+  const getEvent = (eventId) => {
     return axios.get(`${urlEvents}/${eventId}`);
-  },
+  }
 
-  createEvent: (formData) => {
-    return axios.post(urlEventsAdmin, formData, {
+  const createEvent = (formData) => {
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+    const response = axios.post(`${urlEventsAdmin}`, formData, config);
+    return response
+  }
+
+  const updateEvent = (eventId, eventData) => {
+    return axios.post(`${urlEventsAdmin}/${eventId}`, eventData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-  },
+  }
 
-  updateEvent: (eventId, eventData) => {
-    return axios.post(`${urlEventsAdmin}/${eventId}`, eventData, {
-      headers: {
-      'Content-Type': 'multipart/form-data',
-      },
-    });
-  },
-
-  destroyEvent: (eventId) => {
+  const destroyEvent = (eventId) => {
     return axios.delete(`${urlEventsAdmin}/${eventId}`);
-  },
+  }
 
-  confirmAttendance: (eventId) => {
+  const confirmAttendance = (eventId) => {
     return axios.post(`${urlEvents}/attendance/${eventId}`);
-  },
+  }
 
-  getEventAttendees: (eventId) => {
+  const getEventAttendees = (eventId) => {
     return axios.get(`${urlEvents}/attendance/${eventId}`);
-  },
+  }
 
-  getEventForUser: (id) => {
+  const getEventForUser = (id) => {
     return axios.get(`${urlEvents}/user/${id}`);
-  },
+  }
+  return {
+    getAllEvents,
+    getEvent,
+    createEvent,
+    updateEvent,
+    destroyEvent,
+    confirmAttendance,
+    getEventAttendees,
+    getEventForUser,
+    urlStorage
+}
 };

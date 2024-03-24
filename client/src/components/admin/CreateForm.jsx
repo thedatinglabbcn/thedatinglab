@@ -6,6 +6,7 @@ import '../../components/forms/Forms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../forms/Forms.css';
 import Swal from 'sweetalert2';
+import { urlStorage } from '../../service/EventService';
 
 function CreateForm() {
   const navigate = useNavigate();
@@ -20,7 +21,8 @@ function CreateForm() {
   const [validationErrors, setValidationErrors] = useState({});
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    e.preventDefault();
+    const { name, value } = eventData;
     setEventData({
       ...eventData,
       [name]: value,
@@ -32,17 +34,19 @@ function CreateForm() {
     });
   };
 
+  const Event = EventService();
+
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+
     setEventData({
       ...eventData,
-      image: file,
+      image: e.target.files[0],
     });
 
     setValidationErrors({});
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -52,36 +56,49 @@ function CreateForm() {
     formData.append('description', eventData.description);
     formData.append('image', eventData.image);
 
-    EventService.createEvent(formData)
-    .then((response) => {
-      if (response.status === 200 && user.isAdmin === true) {
-        Swal.fire({
-          title: '¡Creación exitosa!',
-          text: 'Tu evento ha sido creado correctamente.',
-          icon: 'success',
-          confirmButtonColor: '#18b485',
+    Event
+      .createEvent(formData)
+      .then((response) => {
+        if (response.status === 200) {
+          const eventId = response.data.event_id;
+          localStorage.setItem('event_id', eventId);
+          Swal.fire({
+            title: '¡Creación exitosa!',
+            text: 'Tu evento ha sido creado correctamente.',
+            icon: 'success',
+            confirmButtonColor: '#18b485',
             customClass: {
               popup: 'custom-swal-background',
               confirmButton: 'custom-swal-button',
             }
-        });
+          }).then(() => {
+            navigate('/dashboard/events');
+          });
 
-        console.log('Evento creado exitosamente');
+          // console.log('Evento creado exitosamente');
         
-        navigate('/dashboard/events');
-      } else {
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      if (err.response && err.response.status === 422) {
-        const errors = err.response.data.validation_errors;
-        setValidationErrors(errors);
-      } else {
-        console.log('Error al crear el evento:', err);
-      }
-    });
-  };
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.response && err.response.status === 422) {
+          const errors = err.response.data.validation_errors;
+          setValidationErrors(errors);
+        } else {
+          console.log('Error al crear el evento:', err);
+          Swal.fire({
+            title: '¡Error!',
+            text: '¡Ha habido un error!',
+            icon: 'error',
+            confirmButtonColor: '#ED696B',
+            customClass: {
+              popup: 'custom-swal-background',
+              confirmButton: 'custom-swal-button',
+            }
+          });
+        }
+      });
+  }
 
   return (
     <div className='container'>
@@ -170,11 +187,11 @@ function CreateForm() {
             </center>
             </div>
             )}
-            <div className='form-buttons'>
-        <button className='button-send' type="submit">Aceptar</button>
-        <Link to="/dashboard/events">
-        <button className='button-cancel' type="submit">Cancelar</button>
-        </Link>
+        <div className='form-buttons'>
+          <button className='button-send' type="submit">Aceptar</button>
+          <Link to="/dashboard/events">
+          <button className='button-cancel' type="submit">Cancelar</button>
+          </Link>
         </div>
       </form>
       <div className='admin-footer'></div>

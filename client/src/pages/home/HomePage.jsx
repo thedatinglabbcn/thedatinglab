@@ -37,7 +37,7 @@ function HomePage() {
 
 useEffect(() =>{
   const api = EventService;
-   api.getAllEvents().then(res => {
+   api.getAllEvents.then(res => {
       setEvents(res.data);
       setLoadingEvents(false); 
       })
