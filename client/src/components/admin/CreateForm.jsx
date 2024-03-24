@@ -6,7 +6,6 @@ import '../../components/forms/Forms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../forms/Forms.css';
 import Swal from 'sweetalert2';
-import { urlStorage } from '../../service/EventService';
 
 function CreateForm() {
   const navigate = useNavigate();

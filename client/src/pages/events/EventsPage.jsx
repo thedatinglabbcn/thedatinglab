@@ -8,6 +8,7 @@ import './EventSlider.css';
 import SwipeIcon from '../../assets/images/swipe-icon.svg';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { urlStorage } from '../../service/EventService';
 
 
 function EventsPage() {
@@ -34,7 +35,7 @@ function EventsPage() {
   }, []);
 
   useEffect(() => {
-    EventService.getAllEvents()
+    EventService().getAllEvents
       .then((res) => {
         setEvents(res.data);
       })
