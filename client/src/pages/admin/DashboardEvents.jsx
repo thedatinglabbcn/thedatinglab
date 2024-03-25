@@ -13,7 +13,7 @@ function DashboardEvents() {
   const navigate =  useNavigate();
 
   useEffect(() => {
-    EventService.getAllEvents()
+    EventService().getAllEvents()
       .then((res) => {
         setEvents(res.data);
       })

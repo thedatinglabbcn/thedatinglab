@@ -52,7 +52,7 @@ class EventController extends Controller
             $event->image = $path.$imageName;
         }
 
-        $event = new Event([
+        $event = Event::create([
             'title' => $request->input('title'),
             'date' => $request->input('date'),
             'time' => $request->input('time'),

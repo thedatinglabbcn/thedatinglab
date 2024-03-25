@@ -35,7 +35,7 @@ function EventsPage() {
   }, []);
 
   useEffect(() => {
-    EventService().getAllEvents
+    EventService().getAllEvents()
       .then((res) => {
         setEvents(res.data);
       })

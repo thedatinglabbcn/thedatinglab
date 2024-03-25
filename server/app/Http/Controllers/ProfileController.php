@@ -27,7 +27,6 @@ class ProfileController extends Controller
             ], 422);
         } else {
             $user = Auth::user();
-            $imageName = Str::random(32).".".$request->image->getClientOriginalExtention();
             $path = $request->file('image')->storePublicly('arn:aws:s3:::datinglab-storage/public/ProfilePictures');
             $profile->image = $path.$imageName;
 

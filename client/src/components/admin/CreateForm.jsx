@@ -21,7 +21,7 @@ function CreateForm() {
 
   const handleInputChange = (e) => {
     e.preventDefault();
-    const { name, value } = eventData;
+    const { name, value } = e.target;
     setEventData({
       ...eventData,
       [name]: value,
